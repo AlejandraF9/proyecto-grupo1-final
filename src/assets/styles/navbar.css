@@ -1,0 +1,76 @@
+
+/*aquí está el css provisional de la barra de navegación*/
+@media (min-width: 1024px){
+.first-navbar-container {
+    height: 40px;
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+    padding-right: 20px;
+    justify-items: center;
+    .rrss-icons {
+        height: 35px;
+    }
+}
+.second-navbar-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    background-color: var(--gray-color);
+    padding-left: 30px;
+    padding-right: 30px;
+    .logo-img {
+        height: 58px;
+    }
+    .search-div {
+        width: 50%;
+        border: 1px solid black;
+        display: flex;
+        justify-content: center;
+        .search-box-navbar{
+            display: flex;
+            width: 60%;
+            text-align: right;
+
+
+        }
+        .categories-navbar-button{
+            background-color: black;
+            color: white;
+            width: 40%;
+        }
+    }
+
+}
+.login-div-navbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 25px; 
+
+}
+.login-div-navbar a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login-icon-navbar,
+.cart-icon-navbar {
+  width: 30px;
+  height: 30px;
+}
+.third-navbar-container {
+    height: 40px;
+    background-color: var(--blue-color);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap:60px;
+
+}
+}
