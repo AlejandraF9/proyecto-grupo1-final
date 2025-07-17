@@ -1,3 +1,7 @@
+import { getAllUsers } from "../api/apiUsers";
+import { loginValidations } from "../utils/validations";
+import { goTo } from "../router";
+
 export function userLogin() {
     const app = document.getElementById("app");
 
@@ -48,20 +52,25 @@ export function userLogin() {
         try {
             const loginEmailInput = inputEmail.value.trim();
             const loginPasswordInput = inputPassword.value.trim();
+
+            const validUser = loginValidations(loginEmailInput, loginPasswordInput);
+            if(!validUser) {
+                return;
+            }
             
-            const savedUsers = JSON.parse(localStorage.getItem("users")) || [];
+            const savedUsers = await getAllUsers();
             
             const currentUser = savedUsers.find(user => user.email === loginEmailInput && user.password === loginPasswordInput);
             
             if (currentUser) {
                 localStorage.setItem("current-user", JSON.stringify(currentUser));
-                container.innerHTML = "";
+                app.innerHTML = "";
 
-                //Cambiar ventana a home o profile
+                goTo("/home");
 
                 } else {
-                    alert("Invalid email or password");
-                    //Incluir validaciones y toastify
+                    alert("Correo electrónico o contraseña incorrectos");
+                    //Cambiar por toastify
                 }
         } catch {
             console.error("Login request failed", error);
@@ -82,3 +91,10 @@ export function userLogin() {
     app.innerHTML = "";
     app.appendChild(loginContainer);
 }
+
+export default {
+    init() {
+        console.log("Login init ejecutado");
+        userLogin();
+    }
+};
