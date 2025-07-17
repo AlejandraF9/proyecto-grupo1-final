@@ -78,6 +78,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });*/
 
 import { createNewUser } from "../api/apiUsers";
+import { infoValidations } from "../utils/validations";
+import { goTo } from "../router";
 /*import { navigate } from "../router";*/
 
 export function renderSignupView() {
@@ -102,6 +104,16 @@ export function renderSignupView() {
     inputName.id = 'name';
     inputName.required = true;
     inputName.placeholder = 'Tu nombre';
+
+    //Email field
+    const labelEmail = document.createElement('label');
+    labelEmail.setAttribute('for', 'email');
+    /*labelEmail.textContent = 'Email:';*/
+    const inputEmail = document.createElement('input');
+    inputEmail.type = 'email';
+    inputEmail.id = 'email';
+    inputEmail.required = true;
+    inputEmail.placeholder = 'Tu correo electrónico';
 
     //Password field
     const labelPassword = document.createElement('label');
@@ -131,6 +143,8 @@ export function renderSignupView() {
     //Elements fields
     form.appendChild(labelName);
     form.appendChild(inputName);
+    form.appendChild(inputEmail);
+    form.appendChild(inputEmail);
     form.appendChild(labelPassword);
     form.appendChild(inputPassword);
     form.appendChild(labelConfirm);
@@ -143,22 +157,33 @@ export function renderSignupView() {
     const loginParagraph = document.createElement('p');
     loginParagraph.innerHTML = '¿Ya tienes una cuenta? <a href="/login">Inicia sesión aquí</a>';
     app.appendChild(loginParagraph);
+    // goTo("/login");
 
     //form function
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
 
         const name = inputName.value.trim();
+        const email = inputEmail.value.trim();
         const password = inputPassword.value;
         const confirmPassword = inputConfirm.value;
 
-        if (password !== confirmPassword) {
-            alert('Las contraseñas no coinciden');
-            return;
-        }
+        const validRegister = infoValidations({
+            name: name,
+            email: email,
+            password: password,
+            repeatPassword: confirmPassword
+        });
+        
+        if (!validRegister) return;
+
+        // if (password !== confirmPassword) {
+        //     alert('Las contraseñas no coinciden');
+        //     return;
+        // }
 
         try {
-            const data = await createNewUser({ name, password });
+            const data = await createNewUser({ name, email, password });
             console.log('Usuario registrado:', data);
             alert('¡Te has registrado!');
             /*navigate('/login');*/
@@ -167,5 +192,13 @@ export function renderSignupView() {
             console.error('Error:', error);
             alert('Ocurrió un error en el registro');
         }
+        goTo("/login");
     });
+};
+
+export default {
+    init() {
+        console.log("Login init ejecutado");
+        renderSignupView();
+    }
 };

@@ -1,4 +1,4 @@
-const baseUrl = "https://mockapi.io/projects/6874d617dd06792b9c95731f";
+const baseUrl = "https://6874d617dd06792b9c95731e.mockapi.io";
 
 export async function getAllUsers() {
     const url = `${baseUrl}/users`;
@@ -20,15 +20,15 @@ export async function getAllUsers() {
 
 /*const apiUsers_URL: "https://mockapi.io/projects/6874d617dd06792b9c95731f"*/
 
-export async function createNewUser({ name, password }) {
-    const apiUrl = 'https://6874d617dd06792b9c95731e.mockapi.io/users';
+export async function createNewUser({ name, email, password }) {
+    // const apiUrl = 'https://6874d617dd06792b9c95731e.mockapi.io/users';
 
-    const response = await fetch(apiUrl, {
+    const response = await fetch(`${baseUrl}/users`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',            
         }, 
-        body: JSON.stringify({ name, password }),
+        body: JSON.stringify({ name, email, password }),
     });
 
     if (!response.ok) {
