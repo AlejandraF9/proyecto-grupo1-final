@@ -4,6 +4,8 @@ import { cartIcon } from "../assets/images/icons";
 import bluesky_icon from "../assets/images/bluesky_icon.png"
 import insta_icon from "../assets/images/insta_icon.png"
 import youtube_icon from "../assets/images/youtube_icon.png"
+import { showNewsletterForm } from "../../src/newsletterform";
+
 
 
 //me traigo el div del HTML
@@ -136,3 +138,6 @@ contactNavbar.className = "navbar-text";
 contactNavbar.href = "/contact";
 contactNavbar.textContent = "CONTACTO"
 navbarContainerC.appendChild(contactNavbar);
+
+setTimeout(showNewsletterForm, 2000);
+
