@@ -3,8 +3,8 @@ import { validationEmail } from './utils/validations';
 import { validationChecked } from './utils/validations';
 import emailjs from '@emailjs/browser';
 emailjs.init('nZaP1NAVYfbs2Z14i'); 
-const newsl = document.getElementById("newsl");
 
+const newsl = document.getElementById("newsl");
 export function showNewsletterForm (){
    
 
@@ -21,7 +21,7 @@ newsletterDiv.appendChild(newsletterDivHeader);
 
 const newsletterDivText = document.createElement("p");
 newsletterDivText.className = "newsletter-div-text";
-newsletterDivText.textContent = "Suscríbete a nuestra newsletter y recibirás un descuento del 10% para aplicar en tu primera compra con nosotras. Además, serás la primera/o en conocer nuestras ofertas, promociones, productos del mes y noticias sobre nuestro dulce espacio. Prometemos no bombardearte con spam. No nos gusta el spam... nos gustan los dulces"
+newsletterDivText.textContent = "Obtén un 10% de descuento en tu primera compra. Además, tendrás la exclusiva de nuestras ofertas, promociones, productos del mes y noticias sobre nuestro dulce espacio.Prometemos no bombardearte con spam. No nos gusta el spam... nos gustan los dulces."
 newsletterDiv.appendChild(newsletterDivText);
 
 const newsletterForm = document.createElement("form");
@@ -43,6 +43,8 @@ newsletterFormEmail.placeholder = "Correo electrónico";
 newsletterFormEmail.required = true;
 newsletterFormEmail.name = "email";
 newsletterForm.appendChild(newsletterFormEmail);
+
+
 
 //el checkbox es mejor "envolverlo en un label"
 const newsletterCheckboxLabel = document.createElement("label");
@@ -103,7 +105,18 @@ emailjs.sendForm('service_v2a0nka', 'template_xvh27rf', this, 'nZaP1NAVYfbs2Z14i
       });
   
   });
-};
+//evento del botón de cierre del formulario
+const closeButton = document.createElement("button");
+closeButton.className = "newsletter-close-button";
+closeButton.innerHTML = "&times;"; 
+closeButton.type = "button"; 
+newsletterDiv.appendChild(closeButton);
+
+closeButton.addEventListener("click", () => {
+  newsletterDiv.remove(); 
+});
+}
+
 
 
 
