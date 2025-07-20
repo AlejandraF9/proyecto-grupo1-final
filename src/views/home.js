@@ -1,8 +1,8 @@
 
-import { showNewsletterForm } from "../../src/newsletterform";
+import { renderNewsletterForm } from "../newsletterform";
 
 
 
 
-setTimeout(showNewsletterForm, 2000);
+setTimeout(renderNewsletterForm, 2000);
 

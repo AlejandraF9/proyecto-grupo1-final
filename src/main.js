@@ -14,7 +14,7 @@ generatePaymentForm(container);
 
 //UI navbar y footer
   renderNavbar();
-  console.log("✅ Navbar DOM insertado completamente");
+  console.log("Navbar DOM insertado completamente");
   renderFooter();
 });
 

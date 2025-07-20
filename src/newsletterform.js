@@ -5,7 +5,7 @@ import emailjs from '@emailjs/browser';
 emailjs.init('nZaP1NAVYfbs2Z14i'); 
 
 const newsl = document.getElementById("newsl");
-export function showNewsletterForm (){
+export function renderNewsletterForm (){
    
 
 //creo el div en el que voy a meter el form. Este div que creo es el que anclo a "newsl"
