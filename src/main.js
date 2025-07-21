@@ -1,9 +1,18 @@
-// import { renderSignupView } from './views/signup.js';
+import { renderHero } from "./views/hero.js";
+import { renderCategorys } from "./views/categorys.js";
+import { generatePaymentForm } from "./api/apiPayment.js";
+import { renderShop } from "./views/shop.js";
 
-// document.addEventListener('DOMContentLoaded', () => {
-//     renderSignupView(); // Esta función debe encargarse de montar la vista de registro
-// });
+document.addEventListener("DOMContentLoaded", async () => {
+  //const usuario = JSON.parse(localStorage.getItem("current-user"));
 
-import { userLogin } from "./views/login";
+  //if (usuario && usuario.role === "admin") {
+  //gotTo("/admin");
+  //} else {
+  renderHero();
+  renderCategorys();
+  renderShop();
 
-userLogin();
+  const container = document.getElementById("app");
+  generatePaymentForm(container);
+});
