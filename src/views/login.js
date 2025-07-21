@@ -1,4 +1,5 @@
 import { getAllUsers } from "../api/apiUsers";
+import { closeModal, openModal } from "../utils/modal&overlay";
 import { loginValidations } from "../utils/validations";
 import { goTo } from "../router";
 
@@ -46,6 +47,16 @@ export function userLogin() {
     loginButton.className = "login-button";
     loginButton.textContent = "Iniciar sesión";
 
+    const signupText = document.createElement("p");
+    signupText.innerHTML = '¿No tienes cuenta? <a href="/registro">Regístrate aquí</a>';
+    const signupLink = signupText.querySelector("a");
+
+    signupLink.addEventListener("click", (event) => {
+        event.preventDefault();
+        closeModal();
+        goTo("/signup");
+    });
+
     loginForm.addEventListener("submit", async(event) => {
         event.preventDefault();
 
@@ -66,6 +77,7 @@ export function userLogin() {
                 localStorage.setItem("current-user", JSON.stringify(currentUser));
                 app.innerHTML = "";
 
+                closeModal();
                 goTo("/home");
 
                 } else {
@@ -88,8 +100,10 @@ export function userLogin() {
 
     loginContainer.appendChild(loginForm);
 
-    app.innerHTML = "";
-    app.appendChild(loginContainer);
+    // app.innerHTML = "";
+    // app.appendChild(loginContainer);
+    loginContainer.appendChild(signupText);
+    openModal(loginContainer);
 }
 
 export default {
