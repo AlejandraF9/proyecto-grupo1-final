@@ -14,6 +14,27 @@ export function generatePaymentForm(container) {
   paymentAddress.type = "text";
   paymentAddress.placeholder = "Dirección";
   paymentAddress.required = true;
+
+  const orderMethodSelect = document.createElement("select");
+  orderMethodSelect.className = "order-select";
+  orderMethodSelect.required = true;
+
+  const orderPlaceholder = document.createElement("option");
+  orderPlaceholder.disabled = true;
+  orderPlaceholder.selected = true;
+  orderPlaceholder.textContent = "Selecciona método de entrega";
+
+  const orderStore = document.createElement("option");
+  orderStore.value = "store";
+  orderStore.textContent = "Recogida en tienda";
+
+  const orderHome = document.createElement("option");
+  orderHome.value = "home";
+  orderHome.textContent = "Envío a domicilio";
+
+  orderMethodSelect.appendChild(orderPlaceholder);
+  orderMethodSelect.appendChild(orderStore);
+  orderMethodSelect.appendChild(orderHome);
   
   const paymentCard = document.createElement("input");
   paymentCard.className = "payment-card-number";
@@ -42,6 +63,13 @@ export function generatePaymentForm(container) {
   const paymentSelect = document.createElement("select");
   paymentSelect.className = "payment-select";
   paymentSelect.required = true;
+
+  const paymentPlaceholder = document.createElement("option");
+  paymentPlaceholder.disabled = true;
+  paymentPlaceholder.selected = true;
+  paymentPlaceholder.textContent = "Selecciona método de pago";
+
+
   
   const paymentOptionCard = document.createElement("option");
   paymentOptionCard.className = "payment-option";
@@ -53,6 +81,7 @@ export function generatePaymentForm(container) {
   paymentOptionBizum.value = "bizum";
   paymentOptionBizum.textContent = "Bizum";
   
+  paymentSelect.appendChild(paymentPlaceholder);
   paymentSelect.appendChild(paymentOptionCard);
   paymentSelect.appendChild(paymentOptionBizum);
 
@@ -65,8 +94,9 @@ export function generatePaymentForm(container) {
   function changeFormInputs(paymentMethod) {
     paymentForm.querySelectorAll("input").forEach(input => input.value = ""); //Borra los input al cambiar de tarjeta a bizum
     paymentForm.innerHTML = ""; //Hace que al cambiar de tarjeta a bizum, no aparezcan inputs como número de tarjeta o CVC
+    paymentForm.appendChild(orderMethodSelect);
     paymentForm.appendChild(paymentSelect);
-
+    
     paymentForm.appendChild(paymentName);
     paymentForm.appendChild(paymentAddress); //Inputs comunes
 
