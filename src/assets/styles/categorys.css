@@ -1,0 +1,84 @@
+/* ===========================
+   FUENTE GLOBAL
+=========================== */
+body,
+h1,
+h2,
+p {
+  font-family: var(--font-primary);
+}
+
+/* ===========================
+   CONTENEDOR GENERAL
+=========================== */
+.categorys-container {
+  position: relative;
+  width: 100%;
+  background-color: #f9e3ea;
+  padding: 80px 0 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ===========================
+   TÍTULO: DE TEMPORADA
+=========================== */
+.season-title {
+  font-size: 45px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #111;
+  text-align: center;
+  margin-bottom: 60px;
+  font-family: var(--font-primary);
+}
+
+/* ===========================
+   CATEGORÍAS
+=========================== */
+.category-individual,
+.category-cake,
+.category-combinations,
+.category-drinks {
+  display: inline-block;
+  width: 220px;
+  margin: 0 25px;
+  text-align: center;
+}
+
+/* ===========================
+   IMÁGENES CIRCULARES
+=========================== */
+.individual-image,
+.cake-image,
+.combinations-image,
+.drinks-image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  background-color: #b1b2b5;
+  margin-bottom: 10px;
+}
+
+/* ===========================
+   TEXTOS DE CATEGORÍAS
+=========================== */
+.individual-text,
+.cake-text,
+.combinations-text,
+.drinks-text {
+  font-size: 18px;
+  text-transform: uppercase;
+  color: #111;
+  font-weight: 400;
+  font-family: var(--font-primary);
+}
+
+.categorys-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap; /* para mantener responsividad si la pantalla es estrecha */
+}
