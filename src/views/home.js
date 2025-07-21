@@ -1,9 +1,10 @@
 import logo_tienda from "../assets/images/logo_tienda.webp";
 import { userIcon } from "../assets/images/icons";
 import { cartIcon } from "../assets/images/icons";
-import bluesky_icon from "../assets/images/bluesky_icon.png"
-import insta_icon from "../assets/images/insta_icon.png"
-import youtube_icon from "../assets/images/youtube_icon.png"
+import bluesky_icon from "../assets/images/bluesky_icon.png";
+import insta_icon from "../assets/images/insta_icon.png";
+import youtube_icon from "../assets/images/youtube_icon.png";
+import { goTo } from "../router";
 
 
 //me traigo el div del HTML
@@ -59,7 +60,6 @@ const searchDiv = document.createElement("div");
 searchDiv.className = "search-div";
 navbarContainerB.appendChild(searchDiv);
 
-
 //creo el botón de categorías
 const categoriesnavbar = document.createElement ("button");
 categoriesnavbar.className = "categories-navbar-button"
@@ -81,12 +81,14 @@ navbarContainerB.appendChild(logCartDivNavbar);
 
 //creo el link para el icono de usuario.Tengo que crear el link primero porque el link envuelve el div del svg
 const loginNavbarLink = document.createElement("a");
-loginNavbarLink.href = "/login";
+// loginNavbarLink.href = "/login"; //Esto hace que se recargue la página y no deje que permanezca el modal de login
+loginNavbarLink.href = "#";
 logCartDivNavbar.appendChild(loginNavbarLink);
 
 //creo un div para meter el svg que es la imagen de usuario
 const loginIconNavbar = document.createElement("div");
 loginIconNavbar.className = "login-icon-navbar";
+loginIconNavbar.id = "login-icon";
 loginIconNavbar.innerHTML = userIcon;
 loginNavbarLink.appendChild(loginIconNavbar);
 
@@ -107,7 +109,11 @@ const navbarContainerC = document.createElement("div");
 navbarContainerC.className = "third-navbar-container";
 navbarContainer.appendChild(navbarContainerC);
 
-
+//Verifica si el elemento existe antes de intentar añadirle un addEventListener y se le da el evento click que dirija a login
+document.getElementById("login-icon")?.addEventListener("click", (event) => {
+  event.preventDefault();
+  goTo("/login");
+});
 
 //creo el enlace de Home
 const homeNavbar = document.createElement("a");
