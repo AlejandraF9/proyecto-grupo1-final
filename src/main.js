@@ -1,6 +1,8 @@
 import { renderHero } from "./views/hero.js";
 import { renderCategorys } from "./views/categorys.js";
-import { generatePaymentForm } from "./api/apiPayment.js";
+
+import { generatePaymentForm } from "./views/payment.js";
+
 import { renderShop } from "./views/shop.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
