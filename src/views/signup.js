@@ -78,94 +78,130 @@ document.addEventListener('DOMContentLoaded', () => {
 });*/
 
 import { createNewUser } from "../api/apiUsers";
-/*import { navigate } from "../router";*/
+import { closeModal, openModal } from "../utils/modal&overlay";
+import { infoValidations } from "../utils/validations";
+import { goTo } from "../router";
 
 export function renderSignupView() {
-    const app = document.getElementById('app');
-    app.innerHTML = ''; // clean the last view
+  const app = document.getElementById("app");
+  app.innerHTML = ""; // Limpiar vista anterior
 
-    //Header
-    const heading = document.createElement('h2');
-    heading.textContent = 'Registro';
-    app.appendChild(heading);
+  // Modal
+  const signupContainer = document.createElement("div");
+  signupContainer.id = "signup-container";
 
-    //Sign up form
-    const form = document.createElement('form');
-    form.id = 'signupForm';
+  // Header
+  const heading = document.createElement("h2");
+  heading.textContent = "Registro";
+  signupContainer.appendChild(heading);
 
-    //Name field
-    const labelName = document.createElement('label');
-    labelName.setAttribute('for', 'name');
-    /*labelName.textContent = 'Nombre:';*/
-    const inputName = document.createElement('input');
-    inputName.type = 'text';
-    inputName.id = 'name';
-    inputName.required = true;
-    inputName.placeholder = 'Tu nombre';
+  // Formulario de registro
+  const form = document.createElement("form");
+  form.id = "signupForm";
 
-    //Password field
-    const labelPassword = document.createElement('label');
-    labelPassword.setAttribute('for', 'password');
-    /*labelPassword.textContent = 'Contraseña:';*/
-    const inputPassword = document.createElement('input');
-    inputPassword.type = 'password';
-    inputPassword.id = 'password';
-    inputPassword.required = true;
-    inputPassword.placeholder = 'Contraseña';
+  // Campo nombre
+  const labelName = document.createElement("label");
+  labelName.setAttribute("for", "name");
+  const inputName = document.createElement("input");
+  inputName.type = "text";
+  inputName.id = "name";
+  inputName.required = true;
+  inputName.placeholder = "Tu nombre";
 
-    //Confirm field
-    const labelConfirm = document.createElement('label');
-    labelConfirm.setAttribute('for', 'confirmPassword');
-    /*labelConfirm.textContent = 'Repite la contraseña:';*/
-    const inputConfirm = document.createElement('input');
-    inputConfirm.type = 'password';
-    inputConfirm.id = 'confirmPassword';
-    inputConfirm.required = true;
-    inputConfirm.placeholder = 'Repite la contraseña';
+  // Campo email
+  const labelEmail = document.createElement("label");
+  labelEmail.setAttribute("for", "email");
+  const inputEmail = document.createElement("input");
+  inputEmail.type = "email";
+  inputEmail.id = "email";
+  inputEmail.required = true;
+  inputEmail.placeholder = "Tu correo electrónico";
 
-    //Register buttom
-    const submitBtn = document.createElement('button');
-    submitBtn.type = 'submit';
-    submitBtn.textContent = 'Regístrate';
+  // Campo contraseña
+  const labelPassword = document.createElement("label");
+  labelPassword.setAttribute("for", "password");
+  const inputPassword = document.createElement("input");
+  inputPassword.type = "password";
+  inputPassword.id = "password";
+  inputPassword.required = true;
+  inputPassword.placeholder = "Contraseña";
 
-    //Elements fields
-    form.appendChild(labelName);
-    form.appendChild(inputName);
-    form.appendChild(labelPassword);
-    form.appendChild(inputPassword);
-    form.appendChild(labelConfirm);
-    form.appendChild(inputConfirm);
-    form.appendChild(submitBtn);
+  // Campo confirmar contraseña
+  const labelConfirm = document.createElement("label");
+  labelConfirm.setAttribute("for", "confirmPassword");
+  const inputConfirm = document.createElement("input");
+  inputConfirm.type = "password";
+  inputConfirm.id = "confirmPassword";
+  inputConfirm.required = true;
+  inputConfirm.placeholder = "Repite la contraseña";
 
-    app.appendChild(form);
+  // Botón de envío
+  const submitBtn = document.createElement("button");
+  submitBtn.type = "submit";
+  submitBtn.textContent = "Regístrate";
 
-    //Log in link
-    const loginParagraph = document.createElement('p');
-    loginParagraph.innerHTML = '¿Ya tienes una cuenta? <a href="/login">Inicia sesión aquí</a>';
-    app.appendChild(loginParagraph);
+  // Agregar campos al formulario
+  form.appendChild(labelName);
+  form.appendChild(inputName);
+  form.appendChild(labelEmail);
+  form.appendChild(inputEmail);
+  form.appendChild(labelPassword);
+  form.appendChild(inputPassword);
+  form.appendChild(labelConfirm);
+  form.appendChild(inputConfirm);
+  form.appendChild(submitBtn);
 
-    //form function
-    form.addEventListener('submit', async (event) => {
-        event.preventDefault();
+  // Enlace de login
+  //   const loginParagraph = document.createElement('p');
+  //   loginParagraph.innerHTML = '¿Ya tienes una cuenta? <a href="/login">Inicia sesión aquí</a>';
+  //   const loginLink = loginParagraph.querySelector('a');
+  //   loginLink.addEventListener('click', (event) => {
+  //     event.preventDefault();
+  //     goTo('/login');
+  //   });
 
-        const name = inputName.value.trim();
-        const password = inputPassword.value;
-        const confirmPassword = inputConfirm.value;
+  // Meter form y link dentro del modal
+  signupContainer.appendChild(form);
+  //   signupContainer.appendChild(loginParagraph);
 
-        if (password !== confirmPassword) {
-            alert('Las contraseñas no coinciden');
-            return;
-        }
+  // Mostrar modal
+  openModal(signupContainer);
 
-        try {
-            const data = await createNewUser({ name, password });
-            console.log('Usuario registrado:', data);
-            alert('¡Te has registrado!');
-            /*navigate('/login');*/
-            form.reset();
-        } catch (error) {
-            console.error('Error:', error);
-            alert('Ocurrió un error en el registro');
-        }
+  // Evento submit del formulario
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const name = inputName.value.trim();
+    const email = inputEmail.value.trim();
+    const password = inputPassword.value;
+    const confirmPassword = inputConfirm.value;
+
+    const validRegister = infoValidations({
+      name,
+      email,
+      password,
+      repeatPassword: confirmPassword,
     });
+
+    if (!validRegister) return;
+
+    try {
+      const data = await createNewUser({ name, email, password, role: "user" });
+      console.log("Usuario registrado:", data);
+      alert("¡Te has registrado!");
+      form.reset();
+      closeModal();
+      goTo("/login");
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Ocurrió un error en el registro");
+    }
+  });
+}
+
+export default {
+  init() {
+    console.log("Login init ejecutado");
+    renderSignupView();
+  },
 };

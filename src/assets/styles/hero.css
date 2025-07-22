@@ -1,0 +1,116 @@
+/* ===========================
+   FUENTES BASE
+=========================== */
+body,
+h1,
+h2,
+p,
+button {
+  font-family: var(--font-primary);
+}
+
+/* ===========================
+   HERO CONTAINER
+=========================== */
+.hero-container {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 80px;
+  gap: 30px;
+  overflow: hidden;
+}
+
+.hero-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("https://images.unsplash.com/photo-1715605127473-da686692a801?q=80&w=1009&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+    no-repeat center center / cover;
+  opacity: 0.6;
+  filter: blur(1.5px);
+  z-index: 0;
+}
+
+/* Elementos por encima del fondo */
+.hero-container > *:not(.hero-background-image) {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===========================
+   TEXTO PROMOCIONAL
+=========================== */
+.hero-promo-text {
+  font-size: 36px;
+  color: #111;
+  margin: 0;
+  font-weight: 400;
+  text-transform: none;
+  font-family: var(--font-primary);
+}
+
+/* ===========================
+   TÍTULO PRINCIPAL
+=========================== */
+.hero-eslogan-text {
+  font-size: 150px;
+  font-family: var(--font-secondary);
+  color: #111;
+  font-weight: 400;
+  line-height: 1.1;
+  margin: 0;
+  text-transform: none;
+}
+
+/* ===========================
+   PÁRRAFO DESCRIPTIVO
+=========================== */
+.hero-text {
+  font-size: 36px;
+  color: #111;
+  font-weight: 400;
+  margin: 0;
+  max-width: 1200px;
+  line-height: 1.3;
+  text-transform: none;
+  font-family: var(--font-primary);
+}
+
+/* ===========================
+   BOTÓN CON DIVs ANIDADOS
+=========================== */
+.hero-button-frame {
+  position: relative;
+  margin-top: 30px;
+  width: 221px;
+  height: 70px;
+}
+
+.hero-button-group {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-button-box {
+  background-color: #b1b2b5;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-button-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 36px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-family: var(--font-primary);
+}
