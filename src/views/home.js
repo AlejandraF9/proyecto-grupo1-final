@@ -76,8 +76,15 @@ export function renderNavbar() {
   navbarContainerB.appendChild(logCartDivNavbar);
 
   const loginNavbarLink = document.createElement("a");
-  loginNavbarLink.href = "/login";
+  loginNavbarLink.href = "#";
   logCartDivNavbar.appendChild(loginNavbarLink);
+
+  loginNavbarLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    import("../views/login.js").then((module) => {
+      module.userLogin();
+    });
+  });
 
   const loginIconNavbar = document.createElement("div");
   loginIconNavbar.className = "login-icon-navbar";
