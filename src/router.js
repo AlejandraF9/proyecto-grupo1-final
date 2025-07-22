@@ -11,6 +11,8 @@ export const routes = {
   "/productsDetails": () => import("./views/productsDetails.js"),
   "/profile": () => import("./views/profile.js"),
   "/signup": () => import("./views/signup.js"),
+  "/": () => import("./views/home.js"),
+  "/admin": () => import("./views/admin.js"),
 };
 
 export async function loadView(path) {
