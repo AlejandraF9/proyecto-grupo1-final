@@ -127,7 +127,8 @@ navbarContainerC.appendChild(homeNavbar);
 //creo el enlace del conócenos
 const KnowUsNavbar = document.createElement("a");
 KnowUsNavbar.className = "navbar-text";
-KnowUsNavbar.href = "/conocenos";
+KnowUsNavbar.href = "/bio";
+KnowUsNavbar.setAttribute("data-link", "");
 KnowUsNavbar.textContent = "¿QUIÉNES SOMOS?";
 navbarContainerC.appendChild(KnowUsNavbar);
 

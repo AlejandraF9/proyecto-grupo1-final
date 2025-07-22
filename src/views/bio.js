@@ -120,6 +120,9 @@ export function renderBio() {
     }
 
     function createBioView() {
+        const bioContainer = document.createElement('div');
+        bioContainer.className = 'bio-container';
+
         const bioView = document.createElement('div');
         bioView.className = 'bio-view';
 
@@ -131,11 +134,21 @@ export function renderBio() {
         bioView.appendChild(quienesSomos);
         bioView.appendChild(queTenemos);
         bioView.appendChild(image);
+        bioContainer.appendChild(bioView);
 
-        return bioView;
+        return bioContainer;
     }
 
     return createBioView();
 
-
 }
+
+ export default {
+   init() {
+     const app = document.getElementById("app");
+     app.innerHTML = "";
+     console.log("Bio init ejecutado");
+     const bioContent = renderBio();
+    app.appendChild(bioContent);
+   }
+ };
