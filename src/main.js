@@ -1,18 +1,29 @@
-import { renderHero } from "./views/hero.js";
-import { renderCategorys } from "./views/categorys.js";
-import { generatePaymentForm } from "./api/apiPayment.js";
-import { renderShop } from "./views/shop.js";
+import { loadView, goTo } from "./router.js";
+import { renderNavbar } from "./views/home.js";
 
-document.addEventListener("DOMContentLoaded", async () => {
-  //const usuario = JSON.parse(localStorage.getItem("current-user"));
+document.addEventListener("DOMContentLoaded", () => {
+  const path = window.location.pathname;
+  const usuario = JSON.parse(localStorage.getItem("usuario"));
 
-  //if (usuario && usuario.role === "admin") {
-  //gotTo("/admin");
-  //} else {
-  renderHero();
-  renderCategorys();
-  renderShop();
+  renderNavbar();
 
-  const container = document.getElementById("app");
-  generatePaymentForm(container);
+  if (usuario && usuario.role === "admin" && path !== "/admin") {
+    goTo("/admin");
+  } else {
+    loadView(path);
+  }
+
+  document.body.addEventListener("click", (e) => {
+    const link = e.target.closest("[data-link]");
+    if (link) {
+      e.preventDefault();
+      const href = link.getAttribute("href");
+      goTo(href); //usamos href para cargar la ruta de la view, y en router.js usamos goTo pathname para cargar la view
+    }
+  });
+});
+
+// Botones del navegador (atrás / adelante). El enrutado cambia la url pero no la vista, por eso usamos el popstate (ahora lee URL y carga vista correspondiente)
+window.addEventListener("popstate", () => {
+  loadView(window.location.pathname);
 });

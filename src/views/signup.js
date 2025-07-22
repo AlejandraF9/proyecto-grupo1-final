@@ -77,70 +77,68 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });*/
 
-
-
 import { createNewUser } from "../api/apiUsers";
 import { closeModal, openModal } from "../utils/modal&overlay";
 import { infoValidations } from "../utils/validations";
 import { goTo } from "../router";
 
 export function renderSignupView() {
-  const app = document.getElementById('app');
-  app.innerHTML = ''; // Limpiar vista anterior
+  const app = document.getElementById("app");
+  app.innerHTML = ""; // Limpiar vista anterior
 
   // Modal
   const signupContainer = document.createElement("div");
   signupContainer.id = "signup-container";
 
   // Header
-  const heading = document.createElement('h2');
-  heading.textContent = 'Registro';
+  const heading = document.createElement("h2");
+  heading.textContent = "Registro";
   signupContainer.appendChild(heading);
 
   // Formulario de registro
-  const form = document.createElement('form');
-  form.id = 'signupForm';
+  const form = document.createElement("form");
+  form.id = "signupForm";
 
   // Campo nombre
-  const labelName = document.createElement('label');
-  labelName.setAttribute('for', 'name');
-  const inputName = document.createElement('input');
-  inputName.type = 'text';
-  inputName.id = 'name';
+  const labelName = document.createElement("label");
+  labelName.setAttribute("for", "name");
+  const inputName = document.createElement("input");
+  inputName.type = "text";
+  inputName.id = "name";
   inputName.required = true;
-  inputName.placeholder = 'Tu nombre';
+  inputName.placeholder = "Tu nombre";
 
   // Campo email
-  const labelEmail = document.createElement('label');
-  labelEmail.setAttribute('for', 'email');
-  const inputEmail = document.createElement('input');
-  inputEmail.type = 'email';
-  inputEmail.id = 'email';
+  const labelEmail = document.createElement("label");
+  labelEmail.setAttribute("for", "email");
+  const inputEmail = document.createElement("input");
+  inputEmail.type = "email";
+  inputEmail.id = "email";
   inputEmail.required = true;
-  inputEmail.placeholder = 'Tu correo electrónico';
+  inputEmail.placeholder = "Tu correo electrónico";
 
   // Campo contraseña
-  const labelPassword = document.createElement('label');
-  labelPassword.setAttribute('for', 'password');
-  const inputPassword = document.createElement('input');
-  inputPassword.type = 'password';
-  inputPassword.id = 'password';
+  const labelPassword = document.createElement("label");
+  labelPassword.setAttribute("for", "password");
+  const inputPassword = document.createElement("input");
+  inputPassword.type = "password";
+  inputPassword.id = "password";
   inputPassword.required = true;
-  inputPassword.placeholder = 'Contraseña';
+  inputPassword.placeholder = "Contraseña";
 
   // Campo confirmar contraseña
-  const labelConfirm = document.createElement('label');
-  labelConfirm.setAttribute('for', 'confirmPassword');
-  const inputConfirm = document.createElement('input');
-  inputConfirm.type = 'password';
-  inputConfirm.id = 'confirmPassword';
+  const labelConfirm = document.createElement("label");
+  labelConfirm.setAttribute("for", "confirmPassword");
+  const inputConfirm = document.createElement("input");
+  inputConfirm.type = "password";
+  inputConfirm.id = "confirmPassword";
   inputConfirm.required = true;
-  inputConfirm.placeholder = 'Repite la contraseña';
+  inputConfirm.placeholder = "Repite la contraseña";
 
   // Botón de envío
-  const submitBtn = document.createElement('button');
-  submitBtn.type = 'submit';
-  submitBtn.textContent = 'Regístrate';
+  const submitBtn = document.createElement("button");
+  submitBtn.type = "submit";
+  submitBtn.textContent = "Regístrate";
 
   // Agregar campos al formulario
   form.appendChild(labelName);
@@ -154,23 +152,23 @@ export function renderSignupView() {
   form.appendChild(submitBtn);
 
   // Enlace de login
-//   const loginParagraph = document.createElement('p');
-//   loginParagraph.innerHTML = '¿Ya tienes una cuenta? <a href="/login">Inicia sesión aquí</a>';
-//   const loginLink = loginParagraph.querySelector('a');
-//   loginLink.addEventListener('click', (event) => {
-//     event.preventDefault();
-//     goTo('/login');
-//   });
+  //   const loginParagraph = document.createElement('p');
+  //   loginParagraph.innerHTML = '¿Ya tienes una cuenta? <a href="/login">Inicia sesión aquí</a>';
+  //   const loginLink = loginParagraph.querySelector('a');
+  //   loginLink.addEventListener('click', (event) => {
+  //     event.preventDefault();
+  //     goTo('/login');
+  //   });
 
   // Meter form y link dentro del modal
   signupContainer.appendChild(form);
-//   signupContainer.appendChild(loginParagraph);
+  //   signupContainer.appendChild(loginParagraph);
 
   // Mostrar modal
   openModal(signupContainer);
 
   // Evento submit del formulario
-  form.addEventListener('submit', async (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     const name = inputName.value.trim();
@@ -182,21 +180,21 @@ export function renderSignupView() {
       name,
       email,
       password,
-      repeatPassword: confirmPassword
+      repeatPassword: confirmPassword,
     });
 
     if (!validRegister) return;
 
     try {
-      const data = await createNewUser({ name, email, password });
-      console.log('Usuario registrado:', data);
-      alert('¡Te has registrado!');
+      const data = await createNewUser({ name, email, password, role: "user" });
+      console.log("Usuario registrado:", data);
+      alert("¡Te has registrado!");
       form.reset();
       closeModal();
       goTo("/login");
     } catch (error) {
-      console.error('Error:', error);
-      alert('Ocurrió un error en el registro');
+      console.error("Error:", error);
+      alert("Ocurrió un error en el registro");
     }
   });
 }
@@ -205,5 +203,5 @@ export default {
   init() {
     console.log("Login init ejecutado");
     renderSignupView();
-  }
+  },
 };

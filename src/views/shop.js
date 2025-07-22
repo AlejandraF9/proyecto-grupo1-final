@@ -62,6 +62,8 @@ export async function renderShop() {
   // Mostrar todos al cargar
   const productos = await fetchProductos();
   renderizarProductos(productos, contenedorProductos);
+
+  return seccionTienda;
 }
 
 async function fetchProductos() {

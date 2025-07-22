@@ -1,138 +1,149 @@
+import { renderCategorys } from "./categorys";
+import { renderHero } from "./hero";
+import { renderShop } from "./shop";
+import { renderBlogHome } from "./blog";
 import logo_tienda from "../assets/images/logo_tienda.webp";
-import { userIcon } from "../assets/images/icons";
-import { cartIcon } from "../assets/images/icons";
-import bluesky_icon from "../assets/images/bluesky_icon.png"
-import insta_icon from "../assets/images/insta_icon.png"
-import youtube_icon from "../assets/images/youtube_icon.png"
+import { userIcon, cartIcon } from "../assets/images/icons";
+import bluesky_icon from "../assets/images/bluesky_icon.png";
+import insta_icon from "../assets/images/insta_icon.png";
+import youtube_icon from "../assets/images/youtube_icon.png";
 
+export function renderNavbar() {
+  const navbarContainer = document.getElementById("container-navbar");
+  if (!navbarContainer) {
+    console.error("No se encontró #container-navbar en el DOM.");
+    return;
+  }
 
-//me traigo el div del HTML
-const navbarContainer = document.getElementById("container-navbar");
+  navbarContainer.innerHTML = ""; // Limpia por si ya se había renderizado
 
-//creo el primer div contenedor
-const navbarContainerA = document.createElement ("div");
-navbarContainerA.className = "first-navbar-container";
-navbarContainer.appendChild(navbarContainerA);
+  // Primer contenedor del navbar
+  const navbarContainerA = document.createElement("div");
+  navbarContainerA.className = "first-navbar-container";
+  navbarContainer.appendChild(navbarContainerA);
 
-//creo el enlace de instagram
-const instaNavbar = document.createElement("img");
-instaNavbar.className = "rrss-icons";
-instaNavbar.src = insta_icon;
-instaNavbar.alt = "logo de instagram";
-navbarContainerA.appendChild(instaNavbar);
+  // Íconos de redes sociales
+  const instaNavbar = document.createElement("img");
+  instaNavbar.className = "rrss-icons";
+  instaNavbar.src = insta_icon;
+  instaNavbar.alt = "logo de instagram";
+  navbarContainerA.appendChild(instaNavbar);
 
-//creo el enlace de bluesky
-const blueskykaNavbar = document.createElement("img");
-blueskykaNavbar.className = "rrss-icons";
-blueskykaNavbar.src = bluesky_icon;
-blueskykaNavbar.alt = "logo de Bluesky";
-navbarContainerA.appendChild(blueskykaNavbar);
+  const blueskykaNavbar = document.createElement("img");
+  blueskykaNavbar.className = "rrss-icons";
+  blueskykaNavbar.src = bluesky_icon;
+  blueskykaNavbar.alt = "logo de Bluesky";
+  navbarContainerA.appendChild(blueskykaNavbar);
 
-//creo el enlace de youTube
-const youtubeNavbar = document.createElement("img");
-youtubeNavbar.className = "rrss-icons";
-youtubeNavbar.src = youtube_icon;
-youtubeNavbar.alt = "logo de youTube";
-navbarContainerA.appendChild(youtubeNavbar);
+  const youtubeNavbar = document.createElement("img");
+  youtubeNavbar.className = "rrss-icons";
+  youtubeNavbar.src = youtube_icon;
+  youtubeNavbar.alt = "logo de youTube";
+  navbarContainerA.appendChild(youtubeNavbar);
 
-//creo el segundo contenedor que subdivide el navbar
+  // Segundo contenedor
+  const navbarContainerB = document.createElement("div");
+  navbarContainerB.className = "second-navbar-container";
+  navbarContainer.appendChild(navbarContainerB);
 
-const navbarContainerB = document.createElement ("div");
-navbarContainerB.className = "second-navbar-container";
-navbarContainer.appendChild(navbarContainerB);
+  const logoDiv = document.createElement("div");
+  logoDiv.className = "logo-div";
+  navbarContainerB.appendChild(logoDiv);
 
-//Creo un div para luego meter el logo
-const logoDiv = document.createElement("div");
-logoDiv.className = "logo-div";
-navbarContainerB.appendChild(logoDiv);
+  const logoImg = document.createElement("img");
+  logoImg.className = "logo-img";
+  logoImg.src = logo_tienda;
+  logoImg.alt = "Logo de la tienda";
+  logoDiv.appendChild(logoImg);
 
-//creo la img del logo
+  const searchDiv = document.createElement("div");
+  searchDiv.className = "search-div";
+  navbarContainerB.appendChild(searchDiv);
 
-const logoImg = document.createElement("img");
-logoImg.className = "logo-img";
-logoImg.src=logo_tienda;
-logoImg.alt = "Logo de la tienda";
-logoDiv.append(logoImg);
+  const categoriesnavbar = document.createElement("button");
+  categoriesnavbar.className = "categories-navbar-button";
+  categoriesnavbar.textContent = "TODAS LAS CATEGORÍAS";
+  searchDiv.appendChild(categoriesnavbar);
 
-//creo un div para meter el button categories y el search
-const searchDiv = document.createElement("div");
-searchDiv.className = "search-div";
-navbarContainerB.appendChild(searchDiv);
+  const searchNavbar = document.createElement("input");
+  searchNavbar.className = "search-box-navbar";
+  searchNavbar.type = "search";
+  searchNavbar.placeholder = "BUSCA AQUÍ TU PRODUCTO PREFERIDO";
+  searchDiv.appendChild(searchNavbar);
 
+  const logCartDivNavbar = document.createElement("div");
+  logCartDivNavbar.className = "login-div-navbar";
+  navbarContainerB.appendChild(logCartDivNavbar);
 
-//creo el botón de categorías
-const categoriesnavbar = document.createElement ("button");
-categoriesnavbar.className = "categories-navbar-button"
-categoriesnavbar.textContent= "TODAS LAS CATEGORÍAS";
-//aquí hay que poner un enlace a categorías
-searchDiv.appendChild(categoriesnavbar);
+  const loginNavbarLink = document.createElement("a");
+  loginNavbarLink.href = "/login";
+  logCartDivNavbar.appendChild(loginNavbarLink);
 
-//creo el buscador
-const searchNavbar = document.createElement ("input");
-searchNavbar.className = "search-box-navbar";
-searchNavbar.type = "search"
-searchNavbar.placeholder = "BUSCA AQUÍ TU PRODUCTO PREFERIDO";
-searchDiv.appendChild(searchNavbar);
+  const loginIconNavbar = document.createElement("div");
+  loginIconNavbar.className = "login-icon-navbar";
+  loginIconNavbar.innerHTML = userIcon;
+  loginNavbarLink.appendChild(loginIconNavbar);
 
-//creo un div para meter iconos de usuario y carrito
-const logCartDivNavbar = document.createElement("div");
-logCartDivNavbar.className = "login-div-navbar";
-navbarContainerB.appendChild(logCartDivNavbar);
+  const cartNavbarLink = document.createElement("a");
+  cartNavbarLink.href = "/carrito";
+  logCartDivNavbar.appendChild(cartNavbarLink);
 
-//creo el link para el icono de usuario.Tengo que crear el link primero porque el link envuelve el div del svg
-const loginNavbarLink = document.createElement("a");
-loginNavbarLink.href = "/login";
-logCartDivNavbar.appendChild(loginNavbarLink);
+  const cartIconNavbar = document.createElement("div");
+  cartIconNavbar.className = "cart-icon-navbar";
+  cartIconNavbar.innerHTML = cartIcon;
+  cartNavbarLink.appendChild(cartIconNavbar);
 
-//creo un div para meter el svg que es la imagen de usuario
-const loginIconNavbar = document.createElement("div");
-loginIconNavbar.className = "login-icon-navbar";
-loginIconNavbar.innerHTML = userIcon;
-loginNavbarLink.appendChild(loginIconNavbar);
+  // Tercer contenedor
+  const navbarContainerC = document.createElement("div");
+  navbarContainerC.className = "third-navbar-container";
+  navbarContainer.appendChild(navbarContainerC);
 
-//creo el link para meter el enlace de carrito
-const cartNavbarLink = document.createElement("a");
-cartNavbarLink.href = "/carrito";
-logCartDivNavbar.appendChild(cartNavbarLink);
+  const homeNavbar = document.createElement("a");
+  homeNavbar.className = "navbar-text";
+  homeNavbar.href = "/home";
+  homeNavbar.textContent = "PRODUCTOS";
+  navbarContainerC.appendChild(homeNavbar);
 
-//creo el div para meter el svg del carrito
-const cartIconNavbar = document.createElement("div");
-cartIconNavbar.className = "cart-icon-navbar";
-cartIconNavbar.innerHTML = cartIcon;
-cartNavbarLink.appendChild(cartIconNavbar);
+  const KnowUsNavbar = document.createElement("a");
+  KnowUsNavbar.className = "navbar-text";
+  KnowUsNavbar.href = "/conocenos";
+  KnowUsNavbar.textContent = "¿QUIÉNES SOMOS?";
+  navbarContainerC.appendChild(KnowUsNavbar);
 
-//Creo el tercer container
+  const blogNavbar = document.createElement("a");
+  blogNavbar.className = "navbar-text";
+  blogNavbar.href = "/blog";
+  blogNavbar.setAttribute("data-link", ""); //Añadido por Menchu, a ver si se abre la view del blog así
+  blogNavbar.textContent = "BLOG";
+  navbarContainerC.appendChild(blogNavbar);
 
-const navbarContainerC = document.createElement("div");
-navbarContainerC.className = "third-navbar-container";
-navbarContainer.appendChild(navbarContainerC);
+  const contactNavbar = document.createElement("a");
+  contactNavbar.className = "navbar-text";
+  contactNavbar.href = "/contact";
+  contactNavbar.textContent = "CONTACTO";
+  navbarContainerC.appendChild(contactNavbar);
+}
 
+export default {
+  async init() {
+    const app = document.getElementById("app");
+    app.innerHTML = "";
 
+    console.log("Home view initialized");
 
-//creo el enlace de Home
-const homeNavbar = document.createElement("a");
-homeNavbar.className = "navbar-text";
-homeNavbar.href = "/home";
-homeNavbar.textContent = "PRODUCTOS"
-navbarContainerC.appendChild(homeNavbar);
+    const container = document.createElement("div");
+    container.id = "container";
+    app.appendChild(container);
 
-//creo el enlace del conócenos
-const KnowUsNavbar = document.createElement("a");
-KnowUsNavbar.className = "navbar-text";
-KnowUsNavbar.href = "/conocenos";
-KnowUsNavbar.textContent = "¿QUIÉNES SOMOS?";
-navbarContainerC.appendChild(KnowUsNavbar);
+    renderHero(container);
+    renderCategorys(container);
 
-//creo el enlace del blog
-const blogNavbar = document.createElement("a");
-blogNavbar.className = "navbar-text";
-blogNavbar.href = "/blog";
-blogNavbar.textContent = "BLOG"
-navbarContainerC.appendChild(blogNavbar);
+    const tienda = await renderShop(); // ✅ ya inserta en el DOM
 
-//creo el enlace del contacto
-const contactNavbar = document.createElement("a");
-contactNavbar.className = "navbar-text";
-contactNavbar.href = "/contact";
-contactNavbar.textContent = "CONTACTO"
-navbarContainerC.appendChild(contactNavbar);
+    const blogSection = document.createElement("section");
+    blogSection.id = "blog-section";
+
+    tienda.parentNode.insertBefore(blogSection, tienda.nextSibling); // ✅ insertamos solo el blog
+    renderBlogHome(blogSection);
+  },
+};
