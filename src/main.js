@@ -1,11 +1,14 @@
+
 import { loadView, goTo } from "./router.js";
-import { renderNavbar } from "./views/home.js";
+import { renderNavbar } from "./components/navbar.js";
+import { renderFooter } from "./components/footer.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const path = window.location.pathname;
   const usuario = JSON.parse(localStorage.getItem("usuario"));
 
   renderNavbar();
+  renderFooter();
 
   if (usuario && usuario.role === "admin" && path !== "/admin") {
     goTo("/admin");
