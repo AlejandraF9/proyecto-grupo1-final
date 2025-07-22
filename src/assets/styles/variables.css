@@ -1,5 +1,8 @@
 :root {
     --blue-color: #D4DFE0;
     --gray-color: #E3E1D6;
+    --pink: #f9e3ea;
+    --border-radius: 18px;
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
 }

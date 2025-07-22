@@ -1,8 +1,10 @@
-export function renderHero() {
+export function renderHero(container) {
+  const heroSection = document.createElement("div");
+  heroSection.classList.add("hero-section");
+
   const containerHero = document.createElement("div");
   containerHero.classList.add("hero-container");
 
-  // Contenido textual
   const promoText = document.createElement("h2");
   promoText.classList.add("hero-promo-text");
   promoText.textContent = "¡PROMO #DummieRosquis!";
@@ -37,6 +39,6 @@ export function renderHero() {
   buttonFrame.appendChild(buttonGroup);
   containerHero.appendChild(buttonFrame);
 
-  document.body.appendChild(containerHero);
+  container.appendChild(containerHero);
   return containerHero;
 }

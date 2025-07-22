@@ -1,4 +1,7 @@
-export function renderCategorys() {
+export function renderCategorys(container) {
+  const categorysSection = document.createElement("div");
+  categorysSection.classList.add("categorys-section");
+
   const containerCategorys = document.createElement("div");
   containerCategorys.classList.add("categorys-container");
 
@@ -81,6 +84,6 @@ export function renderCategorys() {
 
   containerCategorys.appendChild(categorysWrapper);
 
-  document.body.appendChild(containerCategorys);
+  container.appendChild(containerCategorys);
   return containerCategorys;
 }
