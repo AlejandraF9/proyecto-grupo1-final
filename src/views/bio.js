@@ -128,12 +128,33 @@ export function renderBio() {
 
         const quienesSomos = createSectionQuienesSomos();
         const queTenemos = createSectionQueTenemos();
+
+
+        //Crear imagen
         const image = document.createElement('div');
         image.className = 'shape rect bio-img';
 
+        const bioImg = document.createElement('img');
+        bioImg.src = "https://img.freepik.com/foto-gratis/primer-plano-sonriente-mujer-joven-tenencia-tazon-mezcla-panaderia_23-2148189077.jpg";
+        bioImg.alt = 'Una mujer trabajando en el obrador de la pastelería';
+        bioImg.style.width = '100%';
+        bioImg.style.height = 'auto';
+
+        image.appendChild(bioImg);
+
+        //NECESITO UN CONTENEDOR NUEVO PARA QUE FUNCIONE EL CSS
+        const imageSectionGroupBio = document.createElement('div');
+        imageSectionGroupBio.className = '';
+
+        imageSectionGroupBio.appendChild(image);
+        imageSectionGroupBio.appendChild(queTenemos);
+
+        
+
         bioView.appendChild(quienesSomos);
-        bioView.appendChild(queTenemos);
-        bioView.appendChild(image);
+        bioView.appendChild(imageSectionGroupBio);
+        //bioView.appendChild(image);
+        //bioView.appendChild(queTenemos);
         bioContainer.appendChild(bioView);
 
         return bioContainer;
