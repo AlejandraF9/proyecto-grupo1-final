@@ -1,4 +1,8 @@
 //container madre
+
+//(me guié estructuralmente por la página de contacto de Decir internacional: dos bloques. por una lado direcciones y por otro formulario. Un div contenedor engloba a esos dos div, que a su vez luego tienen otro pequeños div)
+
+
 const contactContainer = document.getElementById("contactContainer");
 //title común
 const contactTitle = document.createElement("h2");
@@ -109,22 +113,85 @@ icodMap,href = "https://www.google.es/maps/place/Ayuntamiento+de+Icod+de+los+Vin
 contactOneDivIcod.appendChild(icodMap);
 
 
-//div formulario
-const contactOneTwo = document.createElement("div");
-contactOneTwo.className = "secondary-div-contact";
-contactContainer.appendChild(contactOneTwo);
+//div 2 
+const contactTwoDiv = document.createElement("div");
+contactTwoDiv.className = "secondary-div-contact";
+contactContainer.appendChild(contactTwoDiv);
 
+//div para separar la info email
 const emailContactDiv = document.createElement("div");
 emailContactDiv.className = "email-contact-div";
-contactOneTwo.appendChild(emailContactDiv);
-
+contactTwoDiv.appendChild(emailContactDiv);
+//título para email
 const emailContactDivH4 = document.createElement("h4");
 emailContactDivH4.className= "title-h4";
 emailContactDivH4. textContent = "Escríbenos a:";
 emailContactDiv.appendChild(emailContactDivH4);
-
+//texto email
 const emailContactDivText = document.createElement("p");
 emailContactDivText.className ="email-text";
 emailContactDivText.textContent = "dummiebakery@gmail.com";
 emailContactDiv.appendChild(emailContactDivText);
+//título para el formulario
+const contactFormH4 = document.createElement("h4");
+contactForm.className = "contact-form-h4";
+contactFormH4.textContent = "O si lo prefieres, rellena este formulario y nos pondremos en contacto en la mayor brevedad";
+contactTwoDiv.appendChild(contactFormH4);
+//form
+const contactFormFooter = document.createElement("form");
+contactFormFooter.className= "newsletter-form"; //todos los form tienen la misma clase para facilitar el estilado
+contactTwoDiv.appendChild(contactFormFooter);
+//interior del form
+const contactFormFooterName = document.createElement("input");
+contactFormFooterName.className = "newsletter-form-input";
+contactFormFooterName.type = "text";
+contactFormFooterName.placeholder = "Nombre";
+contactFormFooterName.required =true;
+contactFormFooterName.name = "nombre";
+contactFormFooter.appendChild(contactFormFooterName);
+
+const contactFormFooterEmail = document.createElement("input");
+contactFormFooterEmail.className = "newsletter-form-input";
+contactFormFooterEmail.type = "email";
+contactFormFooterEmail.placeholder = "Correo electrónico";
+contactFormFooterEmail.required =true;
+contactFormFooterEmail.name = "email";
+contactFormFooter.appendChild(contactFormFooterEmail);
+
+const contactFormFooterPhone = document.createElement("input");
+contactFormFooterPhone.className = "newsletter-form-input";
+contactFormFooterPhone.type = "tel";
+contactFormFooterPhone.placeholder = "Teléfono";
+contactFormFooterPhone.required =false;
+contactFormFooterPhone.name = "teléfono";
+contactFormFooter.appendChild(contactFormFooterPhone);
+
+const contactFormFooterMessage = document.createElement("textarea");
+contactFormFooterMessage.className = "newsletter-form-input contact-form-footer-message";
+contactFormFooterMessage.id="contact-footer-msj";
+contactFormFooterMessage.rows=5;
+contactFormFooterMessage.placeholder="Escribe aquí tu duda o sugerencia...";
+contactFormFooterMessage.required =true;
+contactFormFooterMessage.name = "mensaje";
+contactFormFooter.appendChild(contactFormFooterMessage);
+//evento para que el text área crezca más si así lo necesita el mensaje
+contactFormFooterMessage.addEventListener("input", function () {
+  this.style.height = "auto"; // Reinicia la altura
+  this.style.height = this.scrollHeight + "px"; // Ajusta a la altura necesaria
+});
+
+//luego en CSS hay que darle una altura máxima para que no se desmadre
+//max-height: loque consideres;
+
+const contactFormFooterButton = document.createElement("button");
+contactFormFooterButton.type = "submit";
+contactFormFooterButton. className = "newsletter-button";
+contactFormFooterButton = "Enviar";
+contactFormFooter.appendChild(contactFormFooterButton);
+
+//me queda hacer el evento del bottón y vincular el formulario con emailjs y las validaciones
+
+
+
+
 
