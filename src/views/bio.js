@@ -140,7 +140,7 @@ export function renderBio() {
         bioImg.style.width = '100%';
         bioImg.style.height = 'auto';
 
-        image.appendChild(bioImg);
+        image.appendChild(bioImg); 
 
         //NECESITO UN CONTENEDOR NUEVO PARA QUE FUNCIONE EL CSS
         const imageSectionGroupBio = document.createElement('div');
