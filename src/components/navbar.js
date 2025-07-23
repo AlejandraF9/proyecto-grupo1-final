@@ -44,6 +44,11 @@ const navbarContainerB = document.createElement ("div");
 navbarContainerB.className = "second-navbar-container";
 navbarContainer.appendChild(navbarContainerB);
 
+//Orden importante para móvil:
+//1. Burger button
+//2. second-navbar-container con logo y login/cart icons
+//3. third-navbar-container (oculto al inicio)
+
 //Creo un div para luego meter el logo
 const logoDiv = document.createElement("div");
 logoDiv.className = "logo-div";
@@ -145,4 +150,32 @@ contactNavbar.className = "navbar-text";
 contactNavbar.href = "/contact";
 contactNavbar.textContent = "CONTACTO"
 navbarContainerC.appendChild(contactNavbar);
+
+///////////////CAROLINA/////////////////
+//MENÚ HAMBURGUESA// => SOLO PARA MÓVIL
+const burgerButton = document.createElement("button");
+burgerButton.className = "burger-button";
+burgerButton.setAttribute("aria-label", "Abrir menú");
+
+burgerButton.innerHTML = `
+<svg width="24" height="24" viewBox="25 42 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M25.40625,42.25L42.59375,42.25M25.40625,48.5L42.59375,48.5M25.40625,54.75L42.59375,54.75" 
+        stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`;
+
+navbarContainer.appendChild(burgerButton);
+
+//Evento para mostrar y ocultar el menú
+burgerButton.addEventListener("click", () => {
+  navbarContainerC.classList.toggle("visible");
+});
+
+navbarContainerC.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    navbarContainerC.classList.remove("visible");
+  });
+});
+
 }
+
