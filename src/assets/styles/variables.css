@@ -2,7 +2,13 @@
     --blue-color: #D4DFE0;
     --gray-color: #E3E1D6;
     --pink: #f9e3ea;
+    --white: #ffffff;
+    --background-color: #ffffff;
+    --color: #111111;
     --border-radius: 18px;
+    --text-font: 'Afacad flux', sans-serif;
+    --text-title: 'Afacad', sans-serif;
+    --text-alternative: 'sourcesanspro';
   --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
 }
