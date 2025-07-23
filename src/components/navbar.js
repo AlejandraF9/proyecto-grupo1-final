@@ -173,9 +173,23 @@ burgerButton.addEventListener("click", () => {
 
 navbarContainerC.querySelectorAll("a").forEach(link => {
   link.addEventListener("click", () => {
+    //Quita la clase 'active' de todos los enlaces del menú
+    navbarContainerC.querySelectorAll("a").forEach(el => el.classList.remove("active"));
+    //Agrega 'active' solo al enlace clicado
+    link.classList.add("active");
+    //Cierra el menú en el móvil
     navbarContainerC.classList.remove("visible");
   });
 });
 
+//Detecta la ubicación actual
+const currentPathNavbar = window.location.pathname;
+
+//Recorre los enlaces del menú y marca como activo el que coincida con la ruta
+navbarContainerC.querySelectorAll("a").forEach(link => {
+  if (link.getAttribute("href") === currentPathNavbar) {
+    link.classList.add("active");
+  }
+});
 }
 

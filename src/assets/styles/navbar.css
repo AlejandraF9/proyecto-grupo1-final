@@ -131,51 +131,86 @@
 /* ==========================
    NAVBAR MONITOR-PEQUEÑO
 ========================== */
-@media screen and (min-width: 761px) and (max-width: 820px) {
+@media screen and (min-width: 761px) and (max-width: 1028px) {
     .burger-button {
         display: none;
     }
 
+    #container-navbar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    /*REDES SOCIALES*/
     .first-navbar-container {
-        height: 40px;
+        display:flex;
+        justify-content: flex-end;
+        width: 100%;
+        gap: 1rem; 
+        background-color: var(--color);
+        height: 1rem;
+        /*height: 40px;
         background-color: black;
         display: flex;
         flex-direction: row;
         justify-content: end;
         align-items: center;
-        padding-right: 20px;
+        padding-right: 20px;*/
     }
 
-    .first-navbar-container .rrss-icons {
-        height: 35px;
+    .rrss-icons {
+        height: 1rem;
+        width: auto;
+        cursor: pointer;
+        padding-right: 0.5rem;
     }
 
+    /*LOGO + SEARCH + (LOGIN/CART) */
     .second-navbar-container {
         display: flex;
-        flex-direction: row;
+        /*flex-direction: row;*/
         justify-content: space-between;
         align-items: center;
-        height: 60px;
+        width: 100%;
+        height: 3%;
+        /*height: 25%;*/
         background-color: var(--gray-color);
-        padding: 0 30px;
     }
 
-    .second-navbar-container .logo-img {
-        height: 58px;
+    .logo-div {
+        flex: 1 1 15rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    .logo-img {
+        height: 5rem;
         width: auto;
-        object-fit: contain;
+        /*object-fit: contain;*/
     }
 
     .search-div {
-        width: 50%;
-        border: 1px solid black;
+        width: 45%;
+        height: 15%;
         display: flex;
+        /*border: 1px solid black;*/
         justify-content: center;
         align-items: center;
+        flex: 2 1 30rem;
+    }
+
+    .categories-navbar-button {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        cursor: pointer;
+        height: 15%;
     }
 
     .search-box-navbar {
-        width: 60%;
+        flex: 1;
+        font-size: 0.9rem;
+        width: 40%;
         text-align: right;
         padding: 0.5rem;
     }
@@ -183,88 +218,164 @@
     .categories-navbar-button {
         background-color: black;
         color: white;
-        width: 40%;
         padding: 0.5rem;
     }
 
     .login-div-navbar {
+        flex: 1 1 15rem;
         display: flex;
+        justify-content: center;
+        gap: 1rem;
         flex-direction: row;
+        flex-wrap: nowrap;
         align-items: center;
         gap: 25px;
     }
 
-    .login-div-navbar a {
+    /*.login-div-navbar a {
         display: flex;
         align-items: center;
         justify-content: center;
-    }
+    }*/
 
     .login-icon-navbar,
     .cart-icon-navbar {
-        width: 30px;
-        height: 30px;
+        width: 2.5rem;
+        height: 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
     }
 
+    /*MENÚ DE NAVEGACIÓN*/
     .third-navbar-container {
-        height: 40px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding: 0rem;
+        width: 100%;
+        background-color: var(--blue-color);
+        text-decoration: none;
+        z-index: 998;
+                
+        /*height: 40px;
         background-color: var(--blue-color);
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        gap: 60px;
+        gap: 60px;*/
+    }
+
+    /*.third-navbar-container:hover {
+        background-color: var(--pink);
+    }*/
+
+    .navbar-text {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        padding: 1rem 1.5rem;
+        text-decoration: none;
+        color:var(--color);
+        background-color: transparent;
+        /*Transición suave para cambio de fondo*/
+        transition: background-color 0.5s ease, color 0.5s ease;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .navbar-text.active {
+        background-color: var(--pink);
     }
 }
 
 /* ==========================
    NAVBAR MONITOR-GRANDE
 ========================== */
-@media screen and (min-width: 821px) {
+@media screen and (min-width: 1029px) {
     .burger-button {
         display: none;
     }
 
+    #container-navbar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    /*REDES SOCIALES*/
     .first-navbar-container {
-        height: 40px;
+        display:flex;
+        justify-content: flex-end;
+        width: 100%;
+        gap: 1rem; 
+        background-color: var(--color);
+        height: 1rem;
+        /*height: 40px;
         background-color: black;
         display: flex;
         flex-direction: row;
         justify-content: end;
         align-items: center;
-        padding-right: 20px;
+        padding-right: 20px;*/
     }
 
-    .first-navbar-container .rrss-icons {
-        height: 35px;
+    .rrss-icons {
+        height: 1rem;
+        width: auto;
+        cursor: pointer;
+        padding-right: 0.5rem;
     }
 
+    /*LOGO + SEARCH + (LOGIN/CART) */
     .second-navbar-container {
         display: flex;
-        flex-direction: row;
+        /*flex-direction: row;*/
         justify-content: space-between;
         align-items: center;
-        height: 60px;
+        width: 100%;
+        height: 3%;
+        /*height: 25%;*/
         background-color: var(--gray-color);
-        padding: 0 30px;
     }
 
-    .second-navbar-container .logo-img {
-        height: 58px;
+    .logo-div {
+        flex: 1 1 15rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    .logo-img {
+        height: 5rem;
         width: auto;
-        object-fit: contain;
+        /*object-fit: contain;*/
     }
 
     .search-div {
-        width: 50%;
-        border: 1px solid black;
+        width: 45%;
+        height: 15%;
         display: flex;
+        /*border: 1px solid black;*/
         justify-content: center;
         align-items: center;
+        flex: 2 1 30rem;
+    }
+
+    .categories-navbar-button {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        cursor: pointer;
+        height: 15%;
     }
 
     .search-box-navbar {
-        width: 60%;
+        flex: 1;
+        font-size: 0.9rem;
+        width: 40%;
         text-align: right;
         padding: 0.5rem;
     }
@@ -272,36 +383,77 @@
     .categories-navbar-button {
         background-color: black;
         color: white;
-        width: 40%;
         padding: 0.5rem;
     }
 
     .login-div-navbar {
+        flex: 1 1 15rem;
         display: flex;
+        justify-content: center;
+        gap: 1rem;
         flex-direction: row;
+        flex-wrap: nowrap;
         align-items: center;
         gap: 25px;
     }
 
-    .login-div-navbar a {
+    /*.login-div-navbar a {
         display: flex;
         align-items: center;
         justify-content: center;
-    }
+    }*/
 
     .login-icon-navbar,
     .cart-icon-navbar {
-        width: 30px;
-        height: 30px;
+        width: 2.5rem;
+        height: 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
     }
 
+    /*MENÚ DE NAVEGACIÓN*/
     .third-navbar-container {
-        height: 40px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding: 0rem;
+        width: 100%;
+        background-color: var(--blue-color);
+        text-decoration: none;
+        z-index: 998;
+                
+        /*height: 40px;
         background-color: var(--blue-color);
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        gap: 60px;
+        gap: 60px;*/
+    }
+
+    /*.third-navbar-container:hover {
+        background-color: var(--pink);
+    }*/
+
+    .navbar-text {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        padding: 1rem 1.5rem;
+        text-decoration: none;
+        color:var(--color);
+        background-color: transparent;
+        /*Transición suave para cambio de fondo*/
+        transition: background-color 0.5s ease, color 0.5s ease;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .navbar-text.active {
+        background-color: var(--pink);
     }
 }
