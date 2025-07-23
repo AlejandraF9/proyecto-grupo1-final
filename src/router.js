@@ -9,6 +9,7 @@ export const routes = {
   "/home": () => import("./views/home.js"),
   "/login": () => import("./views/login.js"),
   "/productsDetails": () => import("./views/productsDetails.js"),
+  "/shoppingCart": () => import("./views/shoppingCart.js"),
   "/profile": () => import("./views/profile.js"),
   "/signup": () => import("./views/signup.js"),
   "/": () => import("./views/home.js"),
