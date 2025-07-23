@@ -1,3 +1,7 @@
+import footerLogo from"../assets/images/dummie-blanco.webp";
+import { renderBio } from "../views/bio";
+
+
 export function renderFooter(){
 
 const footerContainer = document.getElementById("footer");
@@ -9,7 +13,9 @@ const footerDivOneLink = document.createElement("a");
 footerDivOne.appendChild(footerDivOneLink);
 
 const footerDivOneLogo = document.createElement("img");
-//tengoque crear la image
+footerDivOneLogo.className = "footer-logo"
+footerDivOneLogo.src = footerLogo;
+footerDivOneLogo.alt = "logo Dummie bakery";
 footerDivOne.appendChild(footerDivOneLogo);
 
 
@@ -19,8 +25,12 @@ footerContainer.appendChild(footerDivTwo);
 
 const footerDivTwoHeader= document.createElement("h4");
 footerDivTwoHeader.className = "footer-header";
-footerDivTwoHeader.textContent= "REDES SOCIALES";
+footerDivTwoHeader.textContent= "DUMMIE BAKERY";
 footerDivTwo.appendChild(footerDivTwoHeader);
+const contactFooter = document.createElement("a");
+
+contactFooter.className = "footer-link";
+
 
 //div tres
 const footerDivThree = document.createElement ("div");
