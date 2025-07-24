@@ -172,9 +172,9 @@
 }
 
 /* ==========================
-   SECCIÓN DE BIO MONITOR-PEQUEÑO
+   SECCIÓN DE BIO MONITOR-GRANDe
 ========================== */
-@media screen and (min-width: 431px) and (max-width: 1920px) {
+@media screen and (min-width: 821px) and (max-width: 1920px) {
 
    /*Contenedor principal*/
    .bio-container {

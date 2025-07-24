@@ -1,76 +1,459 @@
+/* ==========================
+   NAVBAR MOBILE
+========================== */
+@media screen and (orientation: portrait) and (max-width: 760px) {
+    .first-navbar-container, 
+    .search-div {
+        display: none;
+    }
+    
+    #container-navbar {
+        position: relative;
+        /*display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 1rem;
+        height: 50px;
+        flex-direction: row;*/
+        background-color: var(--white);
+        width: 100%;
+    }
 
-/*aquí está el css provisional de la barra de navegación*/
-@media (min-width: 1024px){
-.first-navbar-container {
-    height: 40px;
-    background-color: black;
-    display: flex;
-    flex-direction: row;
-    justify-content: end;
-    align-items: center;
-    padding-right: 20px;
-    justify-items: center;
-    .rrss-icons {
-        height: 35px;
+    /*Header navbar layout en una sola fila */
+    .second-navbar-container {
+        display: flex;
+        /*flex-direction: row;*/
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 1rem;
+        /*gap: 1rem;
+        flex: 1;*/
+        height: 4rem;
+        width: 85%;
+    }  
+
+
+    .burger-button {
+        flex-shrink: 0;
+        /*display: block;*/
+        background: none;
+        border: none;
+        cursor: pointer;
+        /*padding: 0.5rem;*/
+        /*z-index: 1000;*/
+        width: 5%;
+        height: 5%;
+        opacity: 0.2;
+        margin-top: 0rem;
+        margin-left: 1rem;
+        margin-bottom: 1rem;
+        
+      }
+
+    
+
+    .logo-div {
+        display: flex;
+        justify-content: flex-start;
+        flex: 1;
+        margin-left: 1.5rem;
+    }
+
+    .logo-img {
+        height: 4rem;
+        width: auto;
+        object-fit: contain;
+        opacity: 0.5;
+        padding-top: 4.5rem;
+        margin-left: 1rem;
+    }
+
+    .login-div-navbar {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-shrink: 0;
+        padding-top: 4.5rem;
+    }
+
+    .login-icon-navbar, .cart-icon-navbar {
+        width: auto;
+        height: auto;
+    } 
+
+    
+
+    /*Menú desplegable*/
+    .third-navbar-container {
+        display: flex;
+        flex-direction: column;
+        visibility: hidden;
+        opacity: 0;
+        height: 0;
+        overflow: hidden;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--white);
+        width: 100%;
+        box-shadow: var(--box-shadow);
+        padding: 1.5rem;
+        z-index: 999;
+        transition: all 0.3s ease-in-out;
+        font-size: larger;
+        width: 75%;
+    }
+
+    .third-navbar-container > a {
+        opacity: 0.5;
+    }
+
+    .third-navbar-container.visible {
+        visibility: visible;
+        opacity: 1;
+        height: auto;
+    }
+
+    .first-navbar-container {
+        display: none;
+    }
+
+    .search-div {
+        display: none;
+    }
+
+    .categories-navbar-button, .search-box-navbar {
+        display: none;
     }
 }
-.second-navbar-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height: 60px;
-    background-color: var(--gray-color);
-    padding-left: 30px;
-    padding-right: 30px;
-    .logo-img {
-        height: 58px;
+
+/* ==========================
+   NAVBAR MONITOR-PEQUEÑO
+========================== */
+@media screen and (min-width: 761px) and (max-width: 1028px) {
+    .burger-button {
+        display: none;
     }
-    .search-div {
-        width: 50%;
-        border: 1px solid black;
+
+    #container-navbar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    /*REDES SOCIALES*/
+    .first-navbar-container {
+        display:flex;
+        justify-content: flex-end;
+        width: 100%;
+        gap: 1rem; 
+        background-color: var(--color);
+        height: 1rem;
+        /*height: 40px;
+        background-color: black;
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        align-items: center;
+        padding-right: 20px;*/
+    }
+
+    .rrss-icons {
+        height: 1rem;
+        width: auto;
+        cursor: pointer;
+        padding-right: 0.5rem;
+    }
+
+    /*LOGO + SEARCH + (LOGIN/CART) */
+    .second-navbar-container {
+        display: flex;
+        /*flex-direction: row;*/
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 3%;
+        /*height: 25%;*/
+        background-color: var(--gray-color);
+    }
+
+    .logo-div {
+        flex: 1 1 15rem;
         display: flex;
         justify-content: center;
-        .search-box-navbar{
-            display: flex;
-            width: 60%;
-            text-align: right;
-
-
-        }
-        .categories-navbar-button{
-            background-color: black;
-            color: white;
-            width: 40%;
-        }
     }
 
-}
-.login-div-navbar {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 25px; 
+    .logo-img {
+        height: 5rem;
+        width: auto;
+        /*object-fit: contain;*/
+    }
 
-}
-.login-div-navbar a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.login-icon-navbar,
-.cart-icon-navbar {
-  width: 30px;
-  height: 30px;
-}
-.third-navbar-container {
-    height: 40px;
-    background-color: var(--blue-color);
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap:60px;
+    .search-div {
+        width: 45%;
+        height: 15%;
+        display: flex;
+        /*border: 1px solid black;*/
+        justify-content: center;
+        align-items: center;
+        flex: 2 1 30rem;
+    }
 
+    .categories-navbar-button {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        cursor: pointer;
+        height: 15%;
+    }
+
+    .search-box-navbar {
+        flex: 1;
+        font-size: 0.9rem;
+        width: 40%;
+        text-align: right;
+        padding: 0.5rem;
+    }
+
+    .categories-navbar-button {
+        background-color: black;
+        color: white;
+        padding: 0.5rem;
+    }
+
+    .login-div-navbar {
+        flex: 1 1 15rem;
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 25px;
+    }
+
+    /*.login-div-navbar a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }*/
+
+    .login-icon-navbar,
+    .cart-icon-navbar {
+        width: 2.5rem;
+        height: 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    /*MENÚ DE NAVEGACIÓN*/
+    .third-navbar-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding: 0rem;
+        width: 100%;
+        background-color: var(--blue-color);
+        text-decoration: none;
+        z-index: 998;
+                
+        /*height: 40px;
+        background-color: var(--blue-color);
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 60px;*/
+    }
+
+    /*.third-navbar-container:hover {
+        background-color: var(--pink);
+    }*/
+
+    .navbar-text {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        padding: 1rem 1.5rem;
+        text-decoration: none;
+        color:var(--color);
+        background-color: transparent;
+        /*Transición suave para cambio de fondo*/
+        transition: background-color 0.5s ease, color 0.5s ease;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .navbar-text.active {
+        background-color: var(--pink);
+    }
 }
+
+/* ==========================
+   NAVBAR MONITOR-GRANDE
+========================== */
+@media screen and (min-width: 1029px) {
+    .burger-button {
+        display: none;
+    }
+
+    #container-navbar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    /*REDES SOCIALES*/
+    .first-navbar-container {
+        display:flex;
+        justify-content: flex-end;
+        width: 100%;
+        gap: 1rem; 
+        background-color: var(--color);
+        height: 1rem;
+        /*height: 40px;
+        background-color: black;
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        align-items: center;
+        padding-right: 20px;*/
+    }
+
+    .rrss-icons {
+        height: 1rem;
+        width: auto;
+        cursor: pointer;
+        padding-right: 0.5rem;
+    }
+
+    /*LOGO + SEARCH + (LOGIN/CART) */
+    .second-navbar-container {
+        display: flex;
+        /*flex-direction: row;*/
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 3%;
+        /*height: 25%;*/
+        background-color: var(--gray-color);
+    }
+
+    .logo-div {
+        flex: 1 1 15rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    .logo-img {
+        height: 5rem;
+        width: auto;
+        /*object-fit: contain;*/
+    }
+
+    .search-div {
+        width: 45%;
+        height: 15%;
+        display: flex;
+        /*border: 1px solid black;*/
+        justify-content: center;
+        align-items: center;
+        flex: 2 1 30rem;
+    }
+
+    .categories-navbar-button {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        cursor: pointer;
+        height: 15%;
+    }
+
+    .search-box-navbar {
+        flex: 1;
+        font-size: 0.9rem;
+        width: 40%;
+        text-align: right;
+        padding: 0.5rem;
+    }
+
+    .categories-navbar-button {
+        background-color: black;
+        color: white;
+        padding: 0.5rem;
+    }
+
+    .login-div-navbar {
+        flex: 1 1 15rem;
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 25px;
+    }
+
+    /*.login-div-navbar a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }*/
+
+    .login-icon-navbar,
+    .cart-icon-navbar {
+        width: 2.5rem;
+        height: 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    /*MENÚ DE NAVEGACIÓN*/
+    .third-navbar-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding: 0rem;
+        width: 100%;
+        background-color: var(--blue-color);
+        text-decoration: none;
+        z-index: 998;
+                
+        /*height: 40px;
+        background-color: var(--blue-color);
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 60px;*/
+    }
+
+    /*.third-navbar-container:hover {
+        background-color: var(--pink);
+    }*/
+
+    .navbar-text {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        padding: 1rem 1.5rem;
+        text-decoration: none;
+        color:var(--color);
+        background-color: transparent;
+        /*Transición suave para cambio de fondo*/
+        transition: background-color 0.5s ease, color 0.5s ease;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .navbar-text.active {
+        background-color: var(--pink);
+    }
 }
