@@ -1,12 +1,9 @@
-
-
 import logo_tienda from "../assets/images/logo_tienda.webp";
 import { userIcon } from "../assets/images/icons";
 import { cartIcon } from "../assets/images/icons";
 import bluesky_icon from "../assets/images/bluesky_icon.png"
 import insta_icon from "../assets/images/insta_icon.png"
 import youtube_icon from "../assets/images/youtube_icon.png"
-
 
 export function renderNavbar (){
 //me traigo el div del HTML
@@ -44,11 +41,6 @@ const navbarContainerB = document.createElement ("div");
 navbarContainerB.className = "second-navbar-container";
 navbarContainer.appendChild(navbarContainerB);
 
-//Orden importante para móvil:
-//1. Burger button
-//2. second-navbar-container con logo y login/cart icons
-//3. third-navbar-container (oculto al inicio)
-
 //Creo un div para luego meter el logo
 const logoDiv = document.createElement("div");
 logoDiv.className = "logo-div";
@@ -71,7 +63,6 @@ logoImg.onload = () => {
 const searchDiv = document.createElement("div");
 searchDiv.className = "search-div";
 navbarContainerB.appendChild(searchDiv);
-
 
 //creo el botón de categorías
 const categoriesnavbar = document.createElement ("button");
@@ -105,7 +96,7 @@ loginNavbarLink.appendChild(loginIconNavbar);
 
 //creo el link para meter el enlace de carrito
 const cartNavbarLink = document.createElement("a");
-cartNavbarLink.href = "/carrito";
+cartNavbarLink.href = "/shoppingCart";
 logCartDivNavbar.appendChild(cartNavbarLink);
 
 //creo el div para meter el svg del carrito
@@ -114,13 +105,28 @@ cartIconNavbar.className = "cart-icon-navbar";
 cartIconNavbar.innerHTML = cartIcon;
 cartNavbarLink.appendChild(cartIconNavbar);
 
+// Creo el circulito del número
+const cartCounter = document.createElement("span");
+cartCounter.className = "cart-counter";
+
+// Obtengo los productos del carrito
+const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+const cartProductCounter = cartItems.length;
+
+if (cartProductCounter > 0) {
+  cartCounter.textContent = cartProductCounter;
+  cartCounter.classList.add("visible");
+} else {
+  cartCounter.classList.remove("visible");
+}
+
+cartIconNavbar.appendChild(cartCounter);
+
 //Creo el tercer container
 
 const navbarContainerC = document.createElement("div");
 navbarContainerC.className = "third-navbar-container";
 navbarContainer.appendChild(navbarContainerC);
-
-
 
 //creo el enlace de Home
 const homeNavbar = document.createElement("a");
@@ -150,46 +156,4 @@ contactNavbar.className = "navbar-text";
 contactNavbar.href = "/contact";
 contactNavbar.textContent = "CONTACTO"
 navbarContainerC.appendChild(contactNavbar);
-
-///////////////CAROLINA/////////////////
-//MENÚ HAMBURGUESA// => SOLO PARA MÓVIL
-const burgerButton = document.createElement("button");
-burgerButton.className = "burger-button";
-burgerButton.setAttribute("aria-label", "Abrir menú");
-
-burgerButton.innerHTML = `
-<svg width="24" height="24" viewBox="25 42 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M25.40625,42.25L42.59375,42.25M25.40625,48.5L42.59375,48.5M25.40625,54.75L42.59375,54.75" 
-        stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-`;
-
-navbarContainer.appendChild(burgerButton);
-
-//Evento para mostrar y ocultar el menú
-burgerButton.addEventListener("click", () => {
-  navbarContainerC.classList.toggle("visible");
-});
-
-navbarContainerC.querySelectorAll("a").forEach(link => {
-  link.addEventListener("click", () => {
-    //Quita la clase 'active' de todos los enlaces del menú
-    navbarContainerC.querySelectorAll("a").forEach(el => el.classList.remove("active"));
-    //Agrega 'active' solo al enlace clicado
-    link.classList.add("active");
-    //Cierra el menú en el móvil
-    navbarContainerC.classList.remove("visible");
-  });
-});
-
-//Detecta la ubicación actual
-const currentPathNavbar = window.location.pathname;
-
-//Recorre los enlaces del menú y marca como activo el que coincida con la ruta
-navbarContainerC.querySelectorAll("a").forEach(link => {
-  if (link.getAttribute("href") === currentPathNavbar) {
-    link.classList.add("active");
-  }
-});
 }
-

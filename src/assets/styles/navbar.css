@@ -79,8 +79,37 @@
     .login-icon-navbar, .cart-icon-navbar {
         width: auto;
         height: auto;
-    } 
+    }
 
+    /* Aplica SOLO al icono del carrito */
+    .cart-icon-navbar {
+        position: relative; /* clave para que el contador se posicione respecto a este */
+        width: 2.5rem;
+        height: 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        
+        /* Contador de productos en icono de carrito*/
+        .cart-counter {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background-color: #779ea0;
+            color: white;
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 50%;
+            font-weight: bold;
+            display: none;
+        
+            /* Mostrarlo solo si hay productos */
+            .cart-counter.visible {
+                display: inline-block;
+            }
+        }
+    }
     
 
     /*Menú desplegable*/
@@ -247,6 +276,7 @@
         justify-content: center;
         cursor: pointer;
     }
+
 
     /*MENÚ DE NAVEGACIÓN*/
     .third-navbar-container {
