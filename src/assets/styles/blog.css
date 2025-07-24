@@ -1,146 +1,377 @@
 /* ==========================
-   SECCIÓN DEL BLOG
+   MOBILE (max 760px)
 ========================== */
-#blog-section {
-  background-color: #c0dced; /* Azul pastel */
-  padding: 4rem 3rem;
-  max-width: 960px;
-  margin: 4rem auto;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Título principal del blog */
-.blog-title {
-  font-size: 42px;
-  font-family: var(--font-secondary, "Source Sans Pro");
-  color: #ffffff;
-  margin-bottom: 3rem;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-/* ==========================
-   CARD DEL BLOG
-========================== */
-.blog-card-container {
-  display: flex;
-  background-color: #ffffff; /* Fondo blanco para mejor contraste */
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease;
-  margin-bottom: 2rem;
-  gap: 1.5rem;
-  padding: 1rem;
-}
-
-.blog-card-container:hover {
-  transform: translateY(-5px);
-}
-
-/* Imagen a la izquierda */
-.blog-image-container {
-  flex: 1;
-  min-width: 240px;
-  max-width: 280px;
-  padding: 0.5rem;
-}
-
-.blog-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 10px;
-  display: block;
-}
-
-/* Texto a la derecha */
-.blog-text-container {
-  flex: 2;
-  padding: 1rem;
-  color: #333333;
-  font-family: "Source Sans Pro", sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-/* Título dentro de la tarjeta */
-.blog-title-card {
-  font-size: 24px;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  text-transform: uppercase;
-  color: #0077aa;
-}
-
-/* Contenido resumen */
-.blog-text {
-  font-size: 16px;
-  line-height: 1.6;
-  margin-bottom: 1rem;
-  color: #444;
-}
-
-/* Fecha */
-.blog-text-container span {
-  font-size: 14px;
-  opacity: 0.7;
-  color: #777;
-}
-
-/* ==========================
-   BOTÓN DE VER MÁS
-========================== */
-.blog-button {
-  display: block;
-  margin: 3rem auto 0;
-  padding: 1rem 2.5rem;
-  font-size: 18px;
-  font-weight: 600;
-  background-color: #ffffff;
-  color: #0077aa;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-family: "Source Sans Pro", sans-serif;
-  transition: background-color 0.2s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-}
-
-.blog-button:hover {
-  background-color: #e0f4ff;
-}
-
-/* ==========================
-   RESPONSIVE
-========================== */
-@media (max-width: 768px) {
-  .blog-card-container {
+@media screen and (min-width: 320px) and (max-width: 760px) {
+  #blog-section {
+    display:flex;
     flex-direction: column;
-    padding: 1rem;
+    align-items: center;
+  }
+  
+  .blog-card-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0;
+    margin-bottom: 2rem;
+    box-shadow: 1px solid var(--color);
+    border: 1px solid rgba(0, 0, 0, 0.08);
   }
 
   .blog-image-container {
-    max-height: 200px;
+    width: 50%;
+    max-height: 12rem;
     padding: 0;
   }
 
+  .blog-image {
+    width: 12rem;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+    display: block;
+  }
+
   .blog-text-container {
-    padding: 1rem 0.5rem;
+    padding: 1rem;
+    text-align: center;
+    width: 50%;
+  }
+
+  .blog-title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
   }
 
   .blog-title {
-    font-size: 32px;
+    font-size: 1.5rem;
+    background-color: var(--blue-color);
+    width:10.5rem;
+    padding: 0rem;
+    border-radius: none;
+    text-transform: uppercase;
+    margin-left: 0%;
+    margin-right: 0%;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 400;
+    
   }
 
   .blog-title-card {
-    font-size: 20px;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
   }
 
   .blog-text {
-    font-size: 15px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+
+  .blog-button-text {
+    font-size: 1.25rem;
+  }
+}
+
+/* ==========================
+   MONITOR (761px - 1028px)
+========================== */
+@media screen and (min-width: 761px) and (max-width: 1028px) {
+  /* ==========================
+    SECCIÓN DEL BLOG
+  ========================== */
+  #blog-section {
+    background-color: var(--white);
+    padding: 4rem 3rem;
+    max-width: 60rem;
+    margin: 4rem auto;
+    border-radius: 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: var(--text-font);
+  }
+
+  .blog-title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  /* Título principal del blog */
+  .blog-title {
+    font-size: 2rem;
+    font-family: var(--text-title, sans-serif);
+    color: var(--color);
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background-color: var(--blue-color);
+    font-weight: 400;
+    margin-left: 0%;
+    margin-right: 0%;
+    width: 18rem;
+  }
+
+  /* ==========================
+    CARD DEL BLOG
+  ========================== */
+  .blog-card-container {
+    display: flex;
+    background-color: var(--white);
+    border-radius: 0;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease;
+    margin-bottom: 2rem;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+
+  .blog-card-container:hover {
+    transform: translateY(-5px);
+  }
+
+  /* Imagen a la izquierda */
+  .blog-image-container {
+    flex: 1;
+    min-width: 15rem;
+    max-width: 18rem;
+    padding: 0.5rem;
+  }
+
+  .blog-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+    display: block;
+  }
+
+  /* Texto a la derecha */
+  .blog-text-container {
+    flex: 2;
+    padding: 1rem;
+    color: var(--color);
+    font-family: var(--text-font, sans-serif);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  /* Título dentro de la tarjeta */
+  .blog-title-card {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    color: var(--color);
+  }
+
+  /* Contenido resumen */
+  .blog-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    color: var(--color);
+  }
+
+  /* Fecha */
+  .blog-text-container span {
+    font-size: 0.5rem;
+    opacity: 0.7;
+    color: var(--color);
+  }
+
+  /* ==========================
+    BOTÓN DE VER MÁS
+  ========================== */
+  .blog-button {
+    position: relative;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 2rem auto 5rem;
+    border-radius: 0;
+    overflow: hidden;
+    display: block;
+    font-family: var(--text-font, sans-serif);
+  }
+
+  /*.blog-button:hover {
+    background-color: #e0f4ff;
+  }*/
+
+  .blog-button .blog-button-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: var(--pink);
+    z-index: 1;
+    transition: background-color 0.3s ease;
+  }
+
+  .blog-button-text {
+    position: relative;
+    z-index: 2;
+    color: var(--white);
+    font-weight: 400;
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 1rem 2rem;
+  }
+}
+/* ==========================
+   MONITOR (1029px - 1920px)
+========================== */
+@media screen and (min-width: 1029px) {
+    /* ==========================
+    SECCIÓN DEL BLOG
+  ========================== */
+  #blog-section {
+    background-color: var(--white);
+    padding: 4rem 3rem;
+    max-width: 60rem;
+    margin: 4rem auto;
+    border-radius: 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: var(--text-font);
+
+  }
+
+  .blog-title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  /* Título principal del blog */
+  .blog-title {
+    font-size: 2rem;
+    font-family: var(--text-title, sans-serif);
+    color: var(--color);
+    margin-top: 4rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background-color: var(--blue-color);
+    font-weight: 500;
+    margin-left: 0%;
+    margin-right: 0%;
+    width: 18rem;
+  }
+
+  /* ==========================
+    CARD DEL BLOG
+  ========================== */
+  .blog-card-container {
+    display: flex;
+    background-color: var(--white);
+    border-radius: 0;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease;
+    margin: 2rem 2rem;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+
+  .blog-card-container:hover {
+    transform: translateY(-5px);
+  }
+
+  /* Imagen a la izquierda */
+  .blog-image-container {
+    flex: 1;
+    min-width: 15rem;
+    max-width: 18rem;
+    padding: 0.5rem;
+  }
+
+  .blog-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+    display: block;
+  }
+
+  /* Texto a la derecha */
+  .blog-text-container {
+    flex: 2;
+    padding: 1rem;
+    color: var(--color);
+    font-family: var(--text-font, sans-serif);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  /* Título dentro de la tarjeta */
+  .blog-title-card {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    color: var(--color);
+  }
+
+  /* Contenido resumen */
+  .blog-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    color: var(--color);
+  }
+
+  /* Fecha */
+  .blog-text-container span {
+    font-size: 0.5rem;
+    opacity: 0.7;
+    color: var(--color);
+  }
+
+  /* ==========================
+    BOTÓN DE VER MÁS
+  ========================== */
+  .blog-button {
+    position: relative;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 2rem auto 5rem;
+    border-radius: 0;
+    overflow: hidden;
+    display: block;
+    font-family: var(--text-font, sans-serif);
+  }
+
+  /*.blog-button:hover {
+    background-color: #e0f4ff;
+  }*/
+
+  .blog-button .blog-button-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: var(--pink);
+    z-index: 1;
+    transition: background-color 0.3s ease;
+  }
+
+  .blog-button-text {
+    position: relative;
+    z-index: 2;
+    color: var(--white);
+    font-weight: 400;
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 1rem 2rem;
   }
 }
