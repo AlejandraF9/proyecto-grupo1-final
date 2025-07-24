@@ -1,12 +1,19 @@
 /* ===========================
-   FUENTE GLOBAL
+   MOBILE
 =========================== */
-body,
-h1,
-h2,
-p {
-  font-family: var(--font-primary);
+@media screen and (max-width: 760px) {
+  
 }
+
+
+
+
+
+
+/* ===========================
+   TABLET
+=========================== */
+@media screen and (min-width: 761px) and (max-width: 1028px) {
 
 /* ===========================
    CONTENEDOR GENERAL
@@ -82,3 +89,12 @@ p {
   gap: 50px;
   flex-wrap: wrap; /* para mantener responsividad si la pantalla es estrecha */
 }
+
+}
+/* ===========================
+   PANTALLA GRANDE
+=========================== */
+@media screen and (min-width: 1029px) {
+
+}
+
