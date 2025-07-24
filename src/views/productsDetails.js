@@ -1,5 +1,3 @@
-//Cambiar innerHTML y nombres variables a ingles
-
 async function productDetails() {
   const app = document.getElementById("app");
   app.innerHTML = "";
@@ -101,13 +99,13 @@ async function productDetails() {
     
     sizeButtons.forEach((button) => {
       button.addEventListener("click", () => {
-      sizeButtons.forEach(b => b.classList.remove("selected")); // Visual
-      button.classList.add("selected");
-      selectedSize = button.dataset.size;
-      console.log("Tamaño seleccionado:", selectedSize);
+        sizeButtons.forEach(b => b.classList.remove("selected"));
+        button.classList.add("selected");
+        selectedSize = button.dataset.size;
+        quantitySpan.textContent = "1";
       });
     });
-    }
+  }
     
     const dateContainer = document.createElement("div");
     dateContainer.className = "date-container";
@@ -128,15 +126,18 @@ async function productDetails() {
     dateErrorMessage.style.display = "none";
     dateContainer.appendChild(dateErrorMessage);
 
-    const dateInfoText = document.createElement("p");
-    const infoTextSmall = document.createElement("small");
-    infoTextSmall.textContent = "Disponible para recogida o entrega de lunes a viernes, de 10:00 a 17:00.";
-    dateInfoText.appendChild(infoTextSmall);
-    dateContainer.appendChild(dateInfoText);
-
     productDetailsContainer.appendChild(dateContainer);
     
-    const todayDate = new Date();
+    const nowDateTime = new Date();
+    const todayDate = new Date(); // Clon para manipular sin afectar al original
+
+    const currentHours = nowDateTime.getHours();
+    const currentMinutes = nowDateTime.getMinutes();
+
+    if (currentHours > 16 || (currentHours === 16 && currentMinutes >= 30)) { //Límite para hacer pedidos hasta las 16:30
+      todayDate.setDate(todayDate.getDate() + 1);
+    }
+
     const maxDate = new Date();
     maxDate.setMonth(todayDate.getMonth() + 3);
 
@@ -176,28 +177,52 @@ async function productDetails() {
   }
 });
 
-  const getProductsLimit = () => {
-    const productCategory = product.categoria?.toLowerCase().trim();
-    return productCategory === "tartas" || productCategory === "combinados" ? 5 : 20;
+  const getProductsLimit = (categoria, size = "") => {
+    const cat = categoria?.toLowerCase().trim();
+    if (cat === "tartas") {
+      return 5; // Límite por tamaño
+    }
+    return 20;
   };
 
   const validateQuantity = (quantityToValidate) => {
     const selectedDate = dateInput.value;
     if (!selectedDate) {
       alert("Por favor, selecciona una fecha antes de elegir la cantidad del producto.");
+      //Cambiar por toastify
       return false;
     }
-    
+
+    const sizeKey = selectedSize ? `${product.nombre} - ${selectedSize}` : product.nombre;
     const productsByDate = JSON.parse(localStorage.getItem("productsByDate")) || {};
     const dailyProducts = productsByDate[selectedDate] || {};
-    const productsQuantity = dailyProducts[product.nombre] || 0;
-    const maxProductsUnits = getProductsLimit();
-    
-    if (productsQuantity + quantityToValidate > maxProductsUnits) {
-      alert(`No se pueden agregar más unidades de este producto para el ${selectedDate}.`);
+    const cartCount = dailyProducts[sizeKey] || 0;
+
+    const purchasedProducts = JSON.parse(localStorage.getItem("purchasedProductsByDate")) || {};
+    const alreadyPurchased = purchasedProducts[selectedDate]?.[sizeKey] || 0;
+
+    const maxProductsUnits = getProductsLimit(product.categoria, selectedSize);
+    const currentTotal = cartCount + alreadyPurchased;
+
+    if (currentTotal >= maxProductsUnits) {
+      if (cartCount === 0) {
+        alert(`Ya no quedan unidades disponibles de este producto (${selectedSize}) para el ${selectedDate}. Puedes elegir otro tamaño o fecha.`);
+        //Cambiar por toastify
+      } else {
+        alert(`No puedes agregar más unidades de este producto (${selectedSize}) para el ${selectedDate}.`);
+        //Cambiar por toastify
+      }
       return false;
     }
-    
+  
+    if (currentTotal + quantityToValidate > maxProductsUnits) {
+      const availableUnits = maxProductsUnits - currentTotal;
+      const unitOrUnits = availableUnits === 1 ? "unidad" : "unidades";
+      alert(`Quedan ${availableUnits} ${unitOrUnits} disponibles para este producto${selectedSize ? ` (${selectedSize})` : ""} en la fecha seleccionada (${selectedDate}).`);
+      //Cambiar por toastify
+      return false;
+    }
+  
     return true;
   };
 
@@ -210,37 +235,74 @@ async function productDetails() {
     const quantity = parseInt(quantitySpan.textContent, 10);
     if (!validateQuantity(quantity)) return;
 
+    if (product.categoria?.toLowerCase().trim() === "tartas" && !selectedSize) {
+      alert("Por favor, selecciona un tamaño antes de agregar al carrito.");
+      //Cambiar por toastify
+      return;
+    }
+
     const selectedDate = dateInput.value;
     const quantityByDate = JSON.parse(localStorage.getItem("productsByDate")) || {};
     const dailyQuantity = quantityByDate[selectedDate] || {};
-    const productsQuantity = dailyQuantity[product.nombre] || 0;
 
-    dailyQuantity[product.nombre] = productsQuantity + quantity;
+    const sizeKey = selectedSize ? `${product.nombre} - ${selectedSize}` : product.nombre;
+    const productsQuantity = dailyQuantity[sizeKey] || 0;
+
+    dailyQuantity[sizeKey] = productsQuantity + quantity;
     quantityByDate[selectedDate] = dailyQuantity;
     localStorage.setItem("productsByDate", JSON.stringify(quantityByDate));
 
-    const cartItem = {
-      ...product,
-      quantity,
-      date: selectedDate,
-      ...(selectedSize && { size: selectedSize })
-    };
-
     let shoppingCart = JSON.parse(localStorage.getItem("cartItems")) || [];
-    shoppingCart.push(cartItem);
+
+    const existingIndex = shoppingCart.findIndex(item =>
+      item.nombre === product.nombre &&
+      item.date === selectedDate &&
+      (!item.size || item.size === selectedSize)
+    );
+
+    if (existingIndex !== -1) {
+      shoppingCart[existingIndex].quantity += quantity;
+    } else {
+      const cartItem = {
+        ...product,
+        quantity,
+        date: selectedDate,
+        ...(selectedSize && { size: selectedSize })
+      };
+      shoppingCart.push(cartItem);
+    }
+
     localStorage.setItem("cartItems", JSON.stringify(shoppingCart));
 
-    goTo("/shoppingCart");
+    const cartCounter = document.querySelector(".cart-counter");
+    const cartProductCounter = shoppingCart.length;
+
+    if (cartCounter) {
+      if (cartProductCounter > 0) {
+        cartCounter.textContent = cartProductCounter;
+        cartCounter.style.display = "inline-block";
+      } else {
+        cartCounter.style.display = "none";
+      }
+    }
+
+    alert("¡Producto añadido correctamente al carrito!");
+    //Cambiar por toastify
+    quantitySpan.textContent = "1";
   });
 
   const orderInfoContainer = document.createElement("div");
 
   const orderInfo = document.createElement("p");
-  orderInfo.textContent = "Recogida disponible en local y envío a domicilio en Tenerife.";
+  orderInfo.textContent = "Recogida en local y envíos a domicilio disponibles en Tenerife, de lunes a viernes, en horario de 10:00 a 17:00.";
   orderInfoContainer.appendChild(orderInfo);
 
+  const oderTimeLimit = document.createElement("p");
+  oderTimeLimit.textContent = "*Para garantizar una correcta gestión, los pedidos que se deseen recibir o recoger el mismo día deberán realizarse en nuestra web antes de las 16:30.";
+  orderInfoContainer.appendChild(oderTimeLimit);
+
   const orderDetails = document.createElement("p");
-  orderDetails.textContent = "Los gastos de envío y fecha de entrega se seleccionan en la plataforma de pago.";
+  orderDetails.textContent = "*Los gastos de envío se seleccionan en la plataforma de pago.";
   orderInfoContainer.appendChild(orderDetails);
   productDetailsContainer.appendChild(orderInfoContainer);
 
@@ -249,10 +311,25 @@ async function productDetails() {
   
   increaseButton.addEventListener("click", () => {
     let quantity = parseInt(quantitySpan.textContent, 10);
+
+    // Validación 1: ¿hay fecha seleccionada?
+    if (!dateInput.value) {
+      alert("Por favor, selecciona una fecha antes de elegir la cantidad.");
+      //Cambiar por toastify
+      return;
+    }
+
+    // Validación 2: ¿es una tarta y no tiene tamaño?
+    if (product.categoria?.toLowerCase().trim() === "tartas" && !selectedSize) {
+      alert("Por favor, selecciona un tamaño antes de elegir la cantidad.");
+      //Cambiar por toastify
+      return;
+    }
+
     quantity++;
-    
+
     if (!validateQuantity(quantity)) return;
-  
+
     quantitySpan.textContent = quantity;
   });
   
