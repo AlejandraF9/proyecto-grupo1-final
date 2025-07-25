@@ -99,92 +99,98 @@ async function productDetails() {
     
     sizeButtons.forEach((button) => {
       button.addEventListener("click", () => {
+        const alreadySelected = button.classList.contains("selected");
+
         sizeButtons.forEach(b => b.classList.remove("selected"));
-        button.classList.add("selected");
-        selectedSize = button.dataset.size;
-        quantitySpan.textContent = "1";
+
+        if (alreadySelected) {
+          selectedSize = null;
+          quantitySpan.textContent = "1";
+        } else {
+          button.classList.add("selected");
+          selectedSize = button.dataset.size;
+          quantitySpan.textContent = "1";
+        }
       });
     });
   }
     
-    const dateContainer = document.createElement("div");
-    dateContainer.className = "date-container";
+  const dateContainer = document.createElement("div");
+  dateContainer.className = "date-container";
     
-    const dateLabel = document.createElement("label");
-    dateLabel.setAttribute("for", "delivery-date");
-    dateLabel.textContent = "Selecciona fecha de entrega o recogida:";
-    dateContainer.appendChild(dateLabel);
+  const dateLabel = document.createElement("label");
+  dateLabel.setAttribute("for", "delivery-date");
+  dateLabel.textContent = "Selecciona fecha de entrega o recogida:";
+  dateContainer.appendChild(dateLabel);
 
-    const dateInput = document.createElement("input");
-    dateInput.type = "date";
-    dateInput.id = "delivery-date";
-    dateInput.min = ""; // Se establecerá más adelante
-    dateInput.max = "";
-    dateContainer.appendChild(dateInput);
+  const dateInput = document.createElement("input");
+  dateInput.type = "date";
+  dateInput.id = "delivery-date";
+  dateInput.min = ""; // Se establecerá más adelante
+  dateInput.max = "";
+  dateContainer.appendChild(dateInput);
 
-    const dateErrorMessage = document.createElement("p");
-    dateErrorMessage.style.display = "none";
-    dateContainer.appendChild(dateErrorMessage);
+  const dateErrorMessage = document.createElement("p");
+  dateErrorMessage.style.display = "none";
+  dateContainer.appendChild(dateErrorMessage);
 
-    productDetailsContainer.appendChild(dateContainer);
+  productDetailsContainer.appendChild(dateContainer);
     
-    const nowDateTime = new Date();
-    const todayDate = new Date(); // Clon para manipular sin afectar al original
+  const nowDateTime = new Date();
+  const todayDate = new Date(); // Clon para manipular sin afectar al original
 
-    const currentHours = nowDateTime.getHours();
-    const currentMinutes = nowDateTime.getMinutes();
+  const currentHours = nowDateTime.getHours();
+  const currentMinutes = nowDateTime.getMinutes();
 
-    if (currentHours > 16 || (currentHours === 16 && currentMinutes >= 30)) { //Límite para hacer pedidos hasta las 16:30
-      todayDate.setDate(todayDate.getDate() + 1);
-    }
-
-    const maxDate = new Date();
-    maxDate.setMonth(todayDate.getMonth() + 3);
-
-    function formatDate(date) {
-      let year = date.getFullYear();
-      let month = date.getMonth() + 1;
-      let day = date.getDate();
-      
-      if (month < 10) {
-        month = "0" + month;
-      }
-      
-      if (day < 10) {
-        day = "0" + day;
-      }
-      
-      return year + "-" + month + "-" + day;
-    }
-    
-    dateInput.min = formatDate(todayDate);
-    dateInput.max = formatDate(maxDate);
-
-    dateInput.addEventListener("change", () => {
-  if (!dateInput.value) return;
-
-  const selectedDateInput = new Date(dateInput.value);
-  if (isNaN(selectedDateInput)) return;
-
-  const dayDate = selectedDateInput.getDay();
-
-  if (dayDate === 0 || dayDate === 6) {
-    alert("Solo se pueden seleccionar días laborables (Lunes a Viernes)");
-    dateErrorMessage.style.display = "block";
-    dateInput.value = "";
-  } else {
-    dateErrorMessage.style.display = "none";
+  if (currentHours > 16 || (currentHours === 16 && currentMinutes >= 30)) { //Límite para hacer pedidos hasta las 16:30
+    todayDate.setDate(todayDate.getDate() + 1);
   }
-});
 
+  const maxDate = new Date();
+  maxDate.setMonth(todayDate.getMonth() + 3);
+
+  function formatDate(date) {
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+      
+    if (month < 10) {
+      month = "0" + month;
+    }
+      
+    if (day < 10) {
+      day = "0" + day;
+    }
+      
+    return year + "-" + month + "-" + day;
+  }
+    
+  dateInput.min = formatDate(todayDate);
+  dateInput.max = formatDate(maxDate);
+
+  dateInput.addEventListener("change", () => {
+    if (!dateInput.value) return;
+
+    const selectedDateInput = new Date(dateInput.value);
+    if (isNaN(selectedDateInput)) return;
+
+    const dayDate = selectedDateInput.getDay();
+
+    if (dayDate === 0 || dayDate === 6) {
+      alert("Solo se pueden seleccionar días laborables (Lunes a Viernes)");
+      //Cambiar por toastify
+      dateErrorMessage.style.display = "block";
+      dateInput.value = "";
+    } else {
+      dateErrorMessage.style.display = "none";
+    }
+  });
+    
   const getProductsLimit = (categoria, size = "") => {
     const cat = categoria?.toLowerCase().trim();
-    if (cat === "tartas") {
-      return 5; // Límite por tamaño
-    }
-    return 20;
+    return (cat === "tartas" || cat === "combinados") ? 5 : 20;
   };
-
+    
   const validateQuantity = (quantityToValidate) => {
     const selectedDate = dateInput.value;
     if (!selectedDate) {
@@ -205,16 +211,11 @@ async function productDetails() {
     const currentTotal = cartCount + alreadyPurchased;
 
     if (currentTotal >= maxProductsUnits) {
-      if (cartCount === 0) {
-        alert(`Ya no quedan unidades disponibles de este producto (${selectedSize}) para el ${selectedDate}. Puedes elegir otro tamaño o fecha.`);
-        //Cambiar por toastify
-      } else {
-        alert(`No puedes agregar más unidades de este producto (${selectedSize}) para el ${selectedDate}.`);
-        //Cambiar por toastify
-      }
+      alert(`No quedan unidades disponibles de este producto${selectedSize ? ` (${selectedSize})` : ""} para el ${selectedDate}.`);
+      //Cambiar por toastify
       return false;
     }
-  
+    
     if (currentTotal + quantityToValidate > maxProductsUnits) {
       const availableUnits = maxProductsUnits - currentTotal;
       const unitOrUnits = availableUnits === 1 ? "unidad" : "unidades";
@@ -222,7 +223,6 @@ async function productDetails() {
       //Cambiar por toastify
       return false;
     }
-  
     return true;
   };
 
@@ -232,16 +232,29 @@ async function productDetails() {
   productDetailsContainer.appendChild(addToCartButton);
 
   addToCartButton.addEventListener("click", () => {
+    const selectedDate = dateInput.value;
     const quantity = parseInt(quantitySpan.textContent, 10);
-    if (!validateQuantity(quantity)) return;
-
-    if (product.categoria?.toLowerCase().trim() === "tartas" && !selectedSize) {
-      alert("Por favor, selecciona un tamaño antes de agregar al carrito.");
+    
+    if (!selectedDate || (product.categoria?.toLowerCase().trim() === "tartas" && !selectedSize)) {
+      alert("No has seleccionado los detalles del producto que quieres agregar al carrito.");
       //Cambiar por toastify
       return;
     }
 
-    const selectedDate = dateInput.value;
+    if (!selectedDate) {
+      alert("Por favor, selecciona una fecha antes de agregar el producto al carrito.");
+      //Cambiar por toastify
+      return;
+    }
+
+    if (product.categoria?.toLowerCase().trim() === "tartas" && !selectedSize) {
+      alert("Por favor, selecciona un tamaño antes de agregar el producto al carrito.");
+      //Cambiar por toastify
+      return;
+    }
+
+    if (!validateQuantity(quantity)) return;
+
     const quantityByDate = JSON.parse(localStorage.getItem("productsByDate")) || {};
     const dailyQuantity = quantityByDate[selectedDate] || {};
 
@@ -285,7 +298,6 @@ async function productDetails() {
         cartCounter.style.display = "none";
       }
     }
-
     alert("¡Producto añadido correctamente al carrito!");
     //Cambiar por toastify
     quantitySpan.textContent = "1";
@@ -308,18 +320,16 @@ async function productDetails() {
 
   productSection.appendChild(productDetailsContainer);
   app.appendChild(productSection);
-  
+    
   increaseButton.addEventListener("click", () => {
     let quantity = parseInt(quantitySpan.textContent, 10);
 
-    // Validación 1: ¿hay fecha seleccionada?
     if (!dateInput.value) {
       alert("Por favor, selecciona una fecha antes de elegir la cantidad.");
       //Cambiar por toastify
       return;
     }
 
-    // Validación 2: ¿es una tarta y no tiene tamaño?
     if (product.categoria?.toLowerCase().trim() === "tartas" && !selectedSize) {
       alert("Por favor, selecciona un tamaño antes de elegir la cantidad.");
       //Cambiar por toastify
