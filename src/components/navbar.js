@@ -67,7 +67,7 @@ navbarContainerB.appendChild(searchDiv);
 //creo el botón de categorías
 const categoriesnavbar = document.createElement ("button");
 categoriesnavbar.className = "categories-navbar-button"
-categoriesnavbar.textContent= "TODAS LAS CATEGORÍAS";
+categoriesnavbar.textContent= "Todas las categorías";
 //aquí hay que poner un enlace a categorías
 searchDiv.appendChild(categoriesnavbar);
 
@@ -75,7 +75,7 @@ searchDiv.appendChild(categoriesnavbar);
 const searchNavbar = document.createElement ("input");
 searchNavbar.className = "search-box-navbar";
 searchNavbar.type = "search"
-searchNavbar.placeholder = "BUSCA AQUÍ TU PRODUCTO PREFERIDO";
+searchNavbar.placeholder = "Busca aquí tu producto preferido";
 searchDiv.appendChild(searchNavbar);
 
 //creo un div para meter iconos de usuario y carrito
@@ -132,7 +132,7 @@ navbarContainer.appendChild(navbarContainerC);
 const homeNavbar = document.createElement("a");
 homeNavbar.className = "navbar-text";
 homeNavbar.href = "/home";
-homeNavbar.textContent = "PRODUCTOS"
+homeNavbar.textContent = "Productos"
 navbarContainerC.appendChild(homeNavbar);
 
 //creo el enlace del conócenos
@@ -140,20 +140,43 @@ const KnowUsNavbar = document.createElement("a");
 KnowUsNavbar.className = "navbar-text";
 KnowUsNavbar.href = "/bio";
 KnowUsNavbar.setAttribute("data-link", "");
-KnowUsNavbar.textContent = "¿QUIÉNES SOMOS?";
+KnowUsNavbar.textContent = "¿Quiénes somos?";
 navbarContainerC.appendChild(KnowUsNavbar);
 
 //creo el enlace del blog
 const blogNavbar = document.createElement("a");
 blogNavbar.className = "navbar-text";
 blogNavbar.href = "/blog";
-blogNavbar.textContent = "BLOG"
+blogNavbar.textContent = "Blog"
 navbarContainerC.appendChild(blogNavbar);
 
 //creo el enlace del contacto
 const contactNavbar = document.createElement("a");
 contactNavbar.className = "navbar-text";
 contactNavbar.href = "/contact";
-contactNavbar.textContent = "CONTACTO"
+contactNavbar.textContent = "Contacto"
 navbarContainerC.appendChild(contactNavbar);
+
+
+/////////MENÚ HAMBURGUESA////////////
+const burgerButton = document.createElement("button");
+burgerButton.className = "burger-button";
+burgerButton.setAttribute("aria-label", "Abrir menú");
+burgerButton.innerHTML = `
+  <svg width="25" height="25" viewBox="456.5 142 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g>
+      <rect x="456.5" y="142" width="25" height="25" rx="0" ry="0" fill="none"></rect>
+      <path d="M460.40625,148.25L477.59375,148.25M460.40625,154.5L477.59375,154.5M460.40625,160.75L477.59375,160.75" 
+        stroke="#111111" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </svg>
+`;
+
+//Agrego el botón al navbar
+navbarContainerB.appendChild(burgerButton);
+
+//Función para mostrar/ocultar el tercer contenedor
+burgerButton.addEventListener("click", () => {
+  navbarContainerC.classList.toggle("visible");
+});
 }
