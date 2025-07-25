@@ -7,10 +7,6 @@ body {
     font-family: var(--text-font);
 }
 
-#app {
-  padding: 2rem;
-}
-
 /* Sección principal del producto */
 .product-section-detail {
   display: flex;
@@ -21,7 +17,7 @@ body {
   gap: 2rem;
   box-shadow: 1px solid var(--color);
   border: 1px solid rgba(0, 0, 0, 0.08);
-  padding: 1.5rem;
+  padding: 3.5rem;
   background-color: var(--white);
   margin-bottom: 2rem;
 }
@@ -169,10 +165,6 @@ body {
     font-family: var(--text-font);
 }
 
-#app {
-  padding: 2rem;
-}
-
 /* Sección principal del producto */
 .product-section-detail {
   display: flex;
@@ -183,7 +175,7 @@ body {
   gap: 2rem;
   box-shadow: 1px solid var(--color);
   border: 1px solid rgba(0, 0, 0, 0.08);
-  padding: 1.5rem;
+  padding: 3.5rem;
   background-color: var(--white);
   margin-bottom: 2rem;
 }
@@ -327,10 +319,6 @@ body {
     font-family: var(--text-font);
 }
 
-#app {
-  padding: 2rem;
-}
-
 /* Sección principal del producto */
 .product-section-detail {
   display: flex;
@@ -341,7 +329,7 @@ body {
   gap: 2rem;
   box-shadow: 1px solid var(--color);
   border: 1px solid rgba(0, 0, 0, 0.08);
-  padding: 1.5rem;
+  padding: 3.5rem;
   background-color: var(--white);
   margin-bottom: 2rem;
 }
