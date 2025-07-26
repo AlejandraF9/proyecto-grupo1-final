@@ -19,6 +19,7 @@ export const routes = {
  "/legal-notice": ()=> import ("./legal/legal-notice.js"),
  "/cookie-policy":()=> import ("./legal/policy-cookies.js"),
  "/sales-conditions":()=>import("./legal/sales-conditions.js"),
+ "/privacy-policy":()=> import("./legal/privacy-policy.js"),
 };
 
 export async function loadView(path) {

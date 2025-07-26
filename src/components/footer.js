@@ -71,7 +71,7 @@ rrssFooterDivYoutube.className = "footer-rrss";
 rrssFooterDivYoutube.src = youtubeIcon;
 rrssFooterDivYoutube.alt = "logo de youtube de las redes sociales de Dummie bakery";
 youtubeLinkFooter.appendChild(rrssFooterDivYoutube);
-
+//aciso legal
 const legalNoticeFooter = document.createElement("a");
 legalNoticeFooter.className= "footer-text";
 legalNoticeFooter.textContent = "Aviso legal";
@@ -81,17 +81,27 @@ legalNoticeFooter.addEventListener("click", (e) => {
   goTo("/legal-notice");
 });
 footerDivTwo.append(legalNoticeFooter);
-
+//política de cookies
 const cookiesFooter = document.createElement("a");
 cookiesFooter.className= "footer-text";
 cookiesFooter.textContent = "Política de cookies";
-cookiesFooter.href = "/cookie-policy";
+cookiesFooter.href = "#";
 cookiesFooter.addEventListener("click", (e) => {
   e.preventDefault(); 
   goTo("/cookie-policy");
 });
 footerDivTwo.append(cookiesFooter);
-
+//política de privacidad
+const privacyPolicy = document.createElement("a");
+privacyPolicy.className= "footer-text";
+privacyPolicy.textContent = "Política de privacidad";
+privacyPolicy.href = "/cookie-policy";
+privacyPolicy.addEventListener("click", (e) => {
+  e.preventDefault(); 
+  goTo("/privacy-policy");
+});
+footerDivTwo.append(privacyPolicy);
+//condiciones generales de venta
 const salesConditionsFooter = document.createElement("a");
 salesConditionsFooter.className= "footer-text";
 salesConditionsFooter.textContent = "Condiciones generales de venta";
