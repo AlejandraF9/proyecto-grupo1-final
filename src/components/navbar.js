@@ -65,11 +65,64 @@ searchDiv.className = "search-div";
 navbarContainerB.appendChild(searchDiv);
 
 //creo el botón de categorías
-const categoriesnavbar = document.createElement ("button");
-categoriesnavbar.className = "categories-navbar-button"
-categoriesnavbar.textContent= "Todas las categorías";
+//const categoriesnavbar = document.createElement ("button");
+//categoriesnavbar.className = "categories-navbar-button"
+//categoriesnavbar.textContent= "Todas las categorías";
+
+//Cambiar el botón por una imagen SVG
+const categoriesIcon = document.createElement("div");
+categoriesIcon.className = "categories-icon";
+
+const svgString = `<svg width="22.506" xmlns="http://www.w3.org/2000/svg" height="22.506" id="screenshot-98079989-26a0-806a-8006-8cd218e84281" viewBox="1365.75 115.744 22.506 22.506" style="-webkit-print-color-adjust::exact" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" version="1.1">
+  <g id="shape-98079989-26a0-806a-8006-8cd218e84281" style="fill:#000000" rx="0" ry="0">
+    <g id="shape-98079989-26a0-806a-8006-8cd218e8f5b0">
+      <g class="fills" id="fills-98079989-26a0-806a-8006-8cd218e8f5b0">
+        <path d="M1375.4500732421875,128.5500030517578C1372.5250244140625,125.625,1372.5250244140625,120.87499237060547,1375.4500732421875,117.9375C1378.3748779296875,115.01250457763672,1383.1251220703125,115.01250457763672,1386.0625,117.9375C1388.9874267578125,120.86249542236328,1388.9874267578125,125.61250305175781,1386.0625,128.5500030517578C1383.1375732421875,131.47500610351562,1378.387451171875,131.47500610351562,1375.4500732421875,128.5500030517578Z" fill="none" stroke-linejoin="round" stroke-linecap="round" style="fill:none">
+        </path>
+      </g>
+      <g fill="none" stroke-linejoin="round" stroke-linecap="round" id="strokes-98079989-26a0-806a-8006-8cd313b53768-98079989-26a0-806a-8006-8cd218e8f5b0" class="strokes">
+        <g class="inner-stroke-shape">
+          <defs>
+            <clipPath id="inner-stroke-render-2004-98079989-26a0-806a-8006-8cd218e8f5b0-0">
+              <use href="#stroke-shape-render-2004-98079989-26a0-806a-8006-8cd218e8f5b0-0">
+              </use>
+            </clipPath>
+            <path d="M1375.4500732421875,128.5500030517578C1372.5250244140625,125.625,1372.5250244140625,120.87499237060547,1375.4500732421875,117.9375C1378.3748779296875,115.01250457763672,1383.1251220703125,115.01250457763672,1386.0625,117.9375C1388.9874267578125,120.86249542236328,1388.9874267578125,125.61250305175781,1386.0625,128.5500030517578C1383.1375732421875,131.47500610351562,1378.387451171875,131.47500610351562,1375.4500732421875,128.5500030517578Z" style="fill:none;fill-opacity:none;stroke-width:4;stroke:#ffffff;stroke-opacity:1" id="stroke-shape-render-2004-98079989-26a0-806a-8006-8cd218e8f5b0-0">
+            </path>
+          </defs>
+          <use href="#stroke-shape-render-2004-98079989-26a0-806a-8006-8cd218e8f5b0-0" clip-path="url(&#x27;#inner-stroke-render-2004-98079989-26a0-806a-8006-8cd218e8f5b0-0&#x27;)">
+          </use>
+        </g>
+      </g>
+    </g>
+    <g id="shape-98079989-26a0-806a-8006-8cd218e8f5b1">
+      <g class="fills" id="fills-98079989-26a0-806a-8006-8cd218e8f5b1">
+        <path d="M1375.125,128.875L1365.75,138.25" fill="none" stroke-linejoin="round" stroke-linecap="round" style="fill:none">
+        </path>
+      </g>
+      <g fill="none" stroke-linejoin="round" stroke-linecap="round" id="strokes-98079989-26a0-806a-8006-8cd313b53769-98079989-26a0-806a-8006-8cd218e8f5b1" class="strokes">
+        <g class="stroke-shape">
+          <path d="M1375.125,128.875L1365.75,138.25" style="fill:none;fill-opacity:none;stroke-width:2;stroke:#ffffff;stroke-opacity:1">
+          </path>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
+`;
+
+const parser = new DOMParser();
+const svgDoc = parser.parseFromString(svgString, "image/svg+xml");
+const svgElement = svgDoc.documentElement;
+
+categoriesIcon.appendChild(svgElement);
+searchDiv.appendChild(categoriesIcon);
+
+
+
+
 //aquí hay que poner un enlace a categorías
-searchDiv.appendChild(categoriesnavbar);
+//searchDiv.appendChild(categoriesnavbar);
 
 //creo el buscador
 const searchNavbar = document.createElement ("input");
