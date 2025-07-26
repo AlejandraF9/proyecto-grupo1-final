@@ -1,95 +1,157 @@
-#newsl {
-  width: 100%;
-  max-width: 100%;
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  padding: 1rem;
-  z-index: 1000;
-}
-.newsletter-div {
-  position: relative;
-  width: 90%;
-  display: flex;
-  flex-direction: column;
-  background-color: var(--pink);
-  padding: 22px;
-  margin-right: 20px;
-  border-radius: var(--border-radius);
+/*///////////
+// MOBILE //
+/////////*/
+ @media screen and (max-width: 730px) {
 
-  justify-content: center;
-  border: 1px solid black;
-  .newsletter-form {
-    padding-top: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    .newsletter-form-input,
-    .newsletter-button {
-      height: 30px;
-      border-radius: var(--border-radius);
-      border: none;
-      outline: none;
-      border: 2px solid var(--gray-color);
-    }
-    .newsletter-button {
-      background-color: black;
-      color: white;
-    }
-
-    .newsletter-form-input::placeholder {
-      padding-left: 10px;
-    }
-  }
-}
-.newsletter-close-button {
-  position: absolute;
-  background-color: var(--gray-color);
-  width: 24px;
-  height: 24px;
-  top: 10px;
-  right: 10px;
-  border: none;
-  font-size: 1rem;
-  font-weight: bold;
-  color: #333;
-  cursor: pointer;
-  z-index: 1001;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.newsletter-close-button:hover {
-  color: #fff;
-  background-color: var(--pink);
-}
-
-@media (min-width: 1024px) {
   #newsl {
-    width: 600px;
+    width: 70%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    left: auto;
-    margin: 0;
+    bottom: 3rem;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
     padding: 1rem;
+    margin-bottom: 2rem;
     z-index: 1000;
   }
   .newsletter-div {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
+    position: relative;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--pink);
+    padding: 1.5rem;
+    margin-right: 0.4rem;
+
+    justify-content: center;
+    border: 1px solid var(--pink);
+    .newsletter-form {
+      padding-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      .newsletter-form-input,
+      .newsletter-button {
+        height: 2rem;
+        border: none;
+        outline: none;
+        border: none;
+      }
+      .newsletter-button {
+        background-color: var(--color);
+        color: var(--white);
+      }
+
+      .newsletter-form-input::placeholder {
+        padding-left: 0.6rem;
+      }
+    }
   }
-  .newsletter-button{
-    width: 200px;
-    align-self: center;
-    
+
+  .newsletter-close-button {
+    position: absolute;
+    background-color: var(--gray-color);
+    width: 1.5rem;
+    height: 1.5rem;
+    top: 0.5rem;
+    right: 0.5rem;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--color);
+    cursor: pointer;
+    z-index: 1001;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-}
+
+  .newsletter-close-button:hover {
+    color: var(--white);
+    background-color: var(--pink);
+  }
+}  
+
+/*////////////
+// MONITOR //
+//////////*/
+
+@media screen and (min-width: 731px) {
+  #newsl {
+    width: 50%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: fixed;
+    bottom: 5rem;
+    left: 33rem;
+    margin: 0 auto;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    z-index: 1000;
+  }
+  .newsletter-div {
+    position: relative;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--pink);
+    padding: 1.5rem;
+    margin-right: 0.4rem;
+
+    justify-content: center;
+    border: 1px solid var(--pink);
+    .newsletter-form {
+      padding-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      .newsletter-form-input,
+      .newsletter-button {
+        height: 2rem;
+        border: none;
+        outline: none;
+        border: none;
+      }
+      .newsletter-button {
+        background-color: var(--color);
+        color: var(--white);
+      }
+
+      .newsletter-form-input::placeholder {
+        padding-left: 0.6rem;
+      }
+    }
+  }
+
+  .newsletter-close-button {
+    position: absolute;
+    background-color: var(--gray-color);
+    width: 1.5rem;
+    height: 1.5rem;
+    top: 0.5rem;
+    right: 0.5rem;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--color);
+    cursor: pointer;
+    z-index: 1001;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .newsletter-close-button:hover {
+    color: var(--white);
+    background-color: var(--pink);
+  }
+}  
+
