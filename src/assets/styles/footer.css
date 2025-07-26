@@ -1,0 +1,23 @@
+.footer-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  background-color: var(--dark-gray);
+}
+  .footer-div-one {
+    display: grid;
+    flex-direction: row;
+    align-items: center; 
+    justify-content: center;
+    width: 50%;
+    height: 300px;
+      box-sizing: border-box; 
+    overflow: hidden; 
+  }
+  .footer-logo {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+  
+

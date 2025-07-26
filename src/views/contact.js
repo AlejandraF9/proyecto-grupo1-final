@@ -1,8 +1,9 @@
+import emailjs from '@emailjs/browser';
+emailjs.init('nZaP1NAVYfbs2Z14i'); 
+
+
+//(me guié estructuralmente por la página de contacto de Decor internacional: dos bloques. por una lado direcciones y por otro formulario. Un div contenedor engloba a esos dos div, que a su vez luego tienen otro pequeños div)
 //container madre
-
-//(me guié estructuralmente por la página de contacto de Decir internacional: dos bloques. por una lado direcciones y por otro formulario. Un div contenedor engloba a esos dos div, que a su vez luego tienen otro pequeños div)
-
-
 const contactContainer = document.getElementById("contactContainer");
 //title común
 const contactTitle = document.createElement("h2");
@@ -183,15 +184,59 @@ contactFormFooterMessage.addEventListener("input", function () {
 //luego en CSS hay que darle una altura máxima para que no se desmadre
 //max-height: loque consideres;
 
+//el checkbox es mejor "envolverlo en un label.
+// en algunos mantengo la misma clase que en el newsletter para unificar estilos. Cambié otros por si es necesatrio otro estilo. Si van a ser los mismo estilos mejor unificarlos.
+
+const contactCheckboxLabel = document.createElement("label");
+contactCheckboxLabel.className = "contact-checkbox-label";
+contactFormFooter.appendChild(contactCheckboxLabel);
+
+const checkboxContact = document.createElement("input");
+checkboxContact.type = "checkbox";
+checkboxContact.className = "checkbox-contact-form";
+checkboxContact.required = true;
+checkboxContact.name = "acepta";
+contactCheckboxLabel.appendChild(checkboxContact);
+
+const textCheckboxContact = document.createElement("span"); //mejor span que p
+textCheckboxContact.className = "text-checkbox-contact"
+textCheckboxContact.innerHTML = "He leído y acepto los términos y condiciones";
+//----/hay que poner el enlace------------------------------------
+contactCheckboxLabel.appendChild(textCheckboxContact);
+
 const contactFormFooterButton = document.createElement("button");
 contactFormFooterButton.type = "submit";
 contactFormFooterButton. className = "newsletter-button";
 contactFormFooterButton = "Enviar";
 contactFormFooter.appendChild(contactFormFooterButton);
 
+
 //me queda hacer el evento del bottón y vincular el formulario con emailjs y las validaciones
 
+contactFormFooter.addEventListener('submit', function (event) {
+  event.preventDefault(); 
 
+  const nameContactFormFooter = contactFormFooterName.value.trim();
+  const emailContactFormFooter = contactFormFooterEmail.value.trim();
+  const phoneContactFormFooter = contactFormFooterPhone.value.trim();
+  const messageContactFormFooter = contactFormFooterMessage.value.trim();
+  const checkedContactFormFooter = checkboxContact.value;
+
+})
+
+///me falta meter las validaciones
+
+emailjs.sendForm('service_v2a0nka', 'template_tq0ffyn', this, 'nZaP1NAVYfbs2Z14i')
+      .then(() => {
+        alert('¡Formulario enviado correctamente! Nos pondremos en contacto contigo lo antes posible.');
+        this.reset();
+      })
+      .catch((error) => {
+        console.error('Error al enviar el formulario:', error);
+        alert('Oops, hubo un problema enviando el formulario. Inténtalo de nuevo.');
+      });
+  
+  });
 
 
 
