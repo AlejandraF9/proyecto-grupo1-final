@@ -1,5 +1,6 @@
 import emailjs from '@emailjs/browser';
 emailjs.init('nZaP1NAVYfbs2Z14i'); 
+import { goTo } from '../router';
 
 
 //(me guié estructuralmente por la página de contacto de Decor internacional: dos bloques. por una lado direcciones y por otro formulario. Un div contenedor engloba a esos dos div, que a su vez luego tienen otro pequeños div)
@@ -24,7 +25,7 @@ contactOneDiv.appendChild(contactH3);
 
 //div La laguna
 const contactOneDivLaguna = document.createElement("div");
-contactOneDivLaguna.className"secondary-div-contact";
+contactOneDivLaguna.className = "secondary-div-contact";
 contactOneDiv.appendChild(contactOneDivLaguna);
 //Contenido la Laguna
 const titleLaguna = document.createElement("h4");
@@ -46,7 +47,7 @@ contactOneDivLaguna.appendChild(lagunaMap);
 
 //div Tacoronte
 const contactOneDivTacoronte = document.createElement("div");
-contactOneDivTacoronte.className"secondary-div-contact";
+contactOneDivTacoronte.className = "secondary-div-contact";
 contactOneDiv.appendChild(contactOneDivTacoronte);
 //Contenido Tacoronte
 const titleTacoronte = document.createElement("h4");
@@ -68,7 +69,7 @@ contactOneDivTacoronte.appendChild(tacoronteMap);
 
 //div Santa Úrsula
 const contactOneDivUrsula = document.createElement("div");
-contactOneDivUrsula.className"secondary-div-contact";
+contactOneDivUrsula.className = "secondary-div-contact";
 contactOneDiv.appendChild(contactOneDivUrsula);
 //Contenido Santa Úrsula
 const titleUrsula = document.createElement("h4");
@@ -92,7 +93,7 @@ contactOneDivUrsula.appendChild(ursulaMap);
 
 //div Icod
 const contactOneDivIcod = document.createElement("div");
-contactOneDivIcod.className"secondary-div-contact";
+contactOneDivIcod.className = "secondary-div-contact";
 contactOneDiv.appendChild(contactOneDivIcod);
 //Contenido Icod
 const titleIcod = document.createElement("h4");
@@ -109,8 +110,8 @@ Miércoles a Domingo: 9:30 &ndash; 19:00 <br>
 922 789 123`;
 contactOneDivIcod.appendChild(addressIcod);
 
-const icodMap = document+.createElement("a");
-icodMap,href = "https://www.google.es/maps/place/Ayuntamiento+de+Icod+de+los+Vinos/@28.3676579,-16.7217858,17z/data=!3m1!4b1!4m6!3m5!1s0xc6a7d5500000001:0xfab654561418de8c!8m2!3d28.3676579!4d-16.7192109!16s%2Fg%2F1wk4f9dd?entry=ttu&g_ep=EgoyMDI1MDcyMC4wIKXMDSoASAFQAw%3D%3D"
+const icodMap = document.createElement("a");
+icodMap.href = "https://www.google.es/maps/place/Ayuntamiento+de+Icod+de+los+Vinos/@28.3676579,-16.7217858,17z/data=!3m1!4b1!4m6!3m5!1s0xc6a7d5500000001:0xfab654561418de8c!8m2!3d28.3676579!4d-16.7192109!16s%2Fg%2F1wk4f9dd?entry=ttu&g_ep=EgoyMDI1MDcyMC4wIKXMDSoASAFQAw%3D%3D"
 contactOneDivIcod.appendChild(icodMap);
 
 
@@ -135,7 +136,7 @@ emailContactDivText.textContent = "dummiebakery@gmail.com";
 emailContactDiv.appendChild(emailContactDivText);
 //título para el formulario
 const contactFormH4 = document.createElement("h4");
-contactForm.className = "contact-form-h4";
+contactFormH4.className = "contact-form-h4";
 contactFormH4.textContent = "O si lo prefieres, rellena este formulario y nos pondremos en contacto en la mayor brevedad";
 contactTwoDiv.appendChild(contactFormH4);
 //form
@@ -207,11 +208,9 @@ contactCheckboxLabel.appendChild(textCheckboxContact);
 const contactFormFooterButton = document.createElement("button");
 contactFormFooterButton.type = "submit";
 contactFormFooterButton. className = "newsletter-button";
-contactFormFooterButton = "Enviar";
+contactFormFooterButton.textContent = "Enviar";
 contactFormFooter.appendChild(contactFormFooterButton);
 
-
-//me queda hacer el evento del bottón y vincular el formulario con emailjs y las validaciones
 
 contactFormFooter.addEventListener('submit', function (event) {
   event.preventDefault(); 
@@ -220,23 +219,22 @@ contactFormFooter.addEventListener('submit', function (event) {
   const emailContactFormFooter = contactFormFooterEmail.value.trim();
   const phoneContactFormFooter = contactFormFooterPhone.value.trim();
   const messageContactFormFooter = contactFormFooterMessage.value.trim();
-  const checkedContactFormFooter = checkboxContact.value;
+  const checkedContactFormFooter = checkboxContact.checked;
 
 })
 
 ///me falta meter las validaciones
 
-emailjs.sendForm('service_v2a0nka', 'template_tq0ffyn', this, 'nZaP1NAVYfbs2Z14i')
+emailjs.sendForm('service_v2a0nka', 'template_tq0ffyn', contactFormFooter, 'nZaP1NAVYfbs2Z14i')
       .then(() => {
         alert('¡Formulario enviado correctamente! Nos pondremos en contacto contigo lo antes posible.');
-        this.reset();
+        contactFormFooter.reset();
       })
       .catch((error) => {
         console.error('Error al enviar el formulario:', error);
         alert('Oops, hubo un problema enviando el formulario. Inténtalo de nuevo.');
       });
   
-  });
 
 
 
