@@ -159,7 +159,7 @@
         display: none;
     }
 
-    .categories-navbar-button, .search-box-navbar {
+    .categories-icon, .search-box-navbar {
         display: none;
     }
 
@@ -236,11 +236,13 @@
         /*flex: 2 1 30rem;*/
     }
 
-    .categories-navbar-button {
-        padding: 0.5rem 1rem;
-        font-size: 0.9rem;
-        cursor: pointer;
-        height: 15%;
+    .categories-icon {
+        display: flex;
+        align-items: center;
+        background-color: black;
+        color: white;
+        padding: 1rem 1rem;
+        height: 0.6rem;
     }
 
     .search-box-navbar {
@@ -250,14 +252,6 @@
         width: 40%;
         text-align: right;
         padding: 0.5rem;
-    }
-
-    .categories-navbar-button {
-        display: flex;
-        background-color: black;
-        color: white;
-        padding: 0.5rem;
-        text-transform: uppercase;
     }
 
     .login-div-navbar {
@@ -418,37 +412,30 @@
 
     .search-div {
         display: flex;
+        flex-direction: row;
         width: 45%;
         height: 15%;
-        display: flex;
-        /*border: 1px solid black;*/
         justify-content: center;
         align-items: center;
         flex: 2 1 30rem;
     }
 
-    .categories-navbar-button {
-        padding: 0.5rem 1rem;
-        font-size: 0.9rem;
-        cursor: pointer;
-        height: 15%;
+    .categories-icon {
+        display: flex;
+        align-items: center;
+        background-color: black;
+        color: white;
+        padding: 1rem 1rem;
+        height: 1rem;
     }
 
     .search-box-navbar {
         display: flex;
         flex: 1;
-        font-size: 0.9rem;
+        font-size: 1rem;
         width: 40%;
         text-align: right;
-        padding: 0.5rem;
-    }
-
-    .categories-navbar-button {
-        display: flex;
-        background-color: black;
-        color: white;
-        padding: 0.5rem;
-        text-transform: uppercase;
+        padding: 0.6rem;
     }
 
     .login-div-navbar {
