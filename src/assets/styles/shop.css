@@ -1,103 +1,312 @@
 /* Fuente desde Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap");
 
-body {
-  font-family: "Source Sans Pro", sans-serif;
-  margin: 0;
-  padding: 0;
+
+/* ==========================
+   SHOP MOBILE
+========================== */
+@media screen and (orientation: portrait) and (max-width: 760px) {
+    body {
+        font-family: var(--text-font);
+    }
+
+  /* Contenedor de los filtros */
+  #filtros {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 2rem 0rem;
+
+  }
+
+  /* Botones de filtro */
+  .filtro-btn {
+    background: transparent;
+    border: none;
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 0.5rem 0.5rem;
+    color: rgba(0, 0, 0, 1);
+    text-transform: uppercase;
+    letter-spacing: 0px;
+    transition: border-bottom 0.2s ease;
+  }
+
+  /* Hover y activo */
+  .filtro-btn:hover,
+  .filtro-btn.active {
+    border-bottom: 2px solid var(--pink);
+  }
+
+  /* Contenedor general de productos */
+  #contenedor-productos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    justify-content: center;
+    justify-items: center;
+    padding: 1.2rem;
+    margin: 0 auto;
+  }
+
+  /* Card de producto */
+  .producto {
+    width: 100%;
+    background-color: var(--white);
+    overflow: hidden;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+  }
+
+  .producto:hover {
+    transform: translateY(-4px);
+  }
+
+  /* Imagen del producto */
+  .producto img {
+    width: 100%;
+    height: 15rem;
+    object-fit: cover;
+  }
+
+  /* Nombre */
+  .producto p:first-of-type {
+    font-family: var(--text-title);
+    margin: 0.8rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color);
+    text-transform: uppercase;
+  }
+
+  /* Precio */
+  .producto p:last-of-type {
+    margin-bottom: 1rem;
+    font-size: 16px;
+    color: var(--color);
+  }
+
+  /* Ícono de carrito (si lo agregás después) */
+  .producto .icono-carrito {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 22px;
+    height: 22px;
+    background-image: url("/ruta/al/icono-carrito.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
 }
 
-/* Contenedor de los filtros */
-#filtros {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin: 2rem auto;
+/* ==========================
+   SHOP MONITOR PEQUEÑO
+========================== */
+@media screen and (min-width: 761px) and (max-width: 1028px) {
+    body {
+        font-family: var(--text-font);
+    }
+
+  /* Contenedor de los filtros */
+  #filtros {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0rem;
+  }
+
+  /* Botones de filtro */
+  .filtro-btn {
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    font-weight: 400;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    color: rgba(0, 0, 0, 1);
+    text-transform: uppercase;
+    font-family: "Source Sans Pro", sans-serif;
+    letter-spacing: 0px;
+    transition: border-bottom 0.2s ease;
+  }
+
+  /* Hover y activo */
+  .filtro-btn:hover,
+  .filtro-btn.active {
+    border-bottom: 2px solid black;
+  }
+
+  /* Contenedor general de productos */
+  #contenedor-productos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    justify-content: center;
+    justify-items: center;
+    padding: 2rem;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+
+  /* Card de producto */
+  .producto {
+    width: 100%;
+    background-color: var(--white);
+    overflow: hidden;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+  }
+
+  .producto:hover {
+    transform: translateY(-4px);
+  }
+
+  /* Imagen del producto */
+  .producto img {
+    width: 100%;
+    height: 25rem;
+    object-fit: cover;
+  }
+
+  /* Nombre */
+  .producto p:first-of-type {
+    margin-top: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color);
+    text-transform: uppercase;
+  }
+
+  /* Precio */
+  .producto p:last-of-type {
+    margin-bottom: 1.3rem;
+    font-size: 1rem;
+    color: var(--color);
+  }
+
+  /* Ícono de carrito (si lo agregás después) */
+  .producto .icono-carrito {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 22px;
+    height: 22px;
+    background-image: url("/ruta/al/icono-carrito.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
 }
 
-/* Botones de filtro */
-.filtro-btn {
-  background: transparent;
-  border: none;
-  font-size: 24px;
-  font-weight: 400;
-  cursor: pointer;
-  padding: 0.5rem 1rem;
-  color: rgba(0, 0, 0, 1);
-  text-transform: uppercase;
-  font-family: "Source Sans Pro", sans-serif;
-  letter-spacing: 0px;
-  transition: border-bottom 0.2s ease;
-}
+/* ==========================
+   SHOP MONITOR GRANDE
+========================== */
+@media screen and (mIN-width: 1029px) {
+    body {
+        font-family: var(--text-font);
+    }
 
-/* Hover y activo */
-.filtro-btn:hover,
-.filtro-btn.active {
-  border-bottom: 2px solid black;
-}
+  /* Contenedor de los filtros */
+  #filtros {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0rem;
+  }
 
-/* Contenedor general de productos */
-#contenedor-productos {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  justify-content: center;
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
+  /* Botones de filtro */
+  .filtro-btn {
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    font-weight: 400;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    color: rgba(0, 0, 0, 1);
+    text-transform: uppercase;
+    letter-spacing: 0px;
+    transition: border-bottom 0.2s ease;
+  }
 
-/* Card de producto */
-.producto {
-  width: 100%;
-  background-color: #fff;
-  border-radius: 8px;
-  overflow: hidden;
-  text-align: center;
-  font-family: "Source Sans Pro", sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
-}
+  /* Hover y activo */
+  .filtro-btn:hover,
+  .filtro-btn.active {
+    border-bottom: 2px solid var(--pink);
+  }
 
-.producto:hover {
-  transform: translateY(-4px);
-}
+  /* Contenedor general de productos */
+  #contenedor-productos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    justify-content: center;
+    justify-items: center;
+    padding: 2rem;
+    max-width: 90%;
+    margin: 0 auto;
+  }
 
-/* Imagen del producto */
-.producto img {
-  width: 100%;
-  height: 230px;
-  object-fit: cover;
-}
+  /* Card de producto */
+  .producto {
+    width: 100%;
+    background-color: var(--white);
+    overflow: hidden;
+    text-align: center;
+    font-family: var(--text-title);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+  }
 
-/* Nombre */
-.producto p:first-of-type {
-  margin-top: 0.8rem;
-  font-size: 18px;
-  font-weight: 600;
-  color: #000;
-  text-transform: uppercase;
-}
+  .producto:hover {
+    transform: translateY(-4px);
+  }
 
-/* Precio */
-.producto p:last-of-type {
-  margin-bottom: 1rem;
-  font-size: 16px;
-  color: #333;
-}
+  /* Imagen del producto */
+  .producto img {
+    width: 100%;
+    height: 30rem;
+    object-fit: cover;
+  }
 
-/* Ícono de carrito (si lo agregás después) */
-.producto .icono-carrito {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 22px;
-  height: 22px;
-  background-image: url("/ruta/al/icono-carrito.svg");
-  background-size: contain;
-  background-repeat: no-repeat;
+  /* Nombre */
+  .producto p:first-of-type {
+    margin-top: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color);
+    text-transform: uppercase;
+  }
+
+  /* Precio */
+  .producto p:last-of-type {
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    color: var(--color);
+  }
+
+  /* Ícono de carrito (si lo agregás después) */
+  .producto .icono-carrito {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 22px;
+    height: 22px;
+    background-image: url("/ruta/al/icono-carrito.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
 }
