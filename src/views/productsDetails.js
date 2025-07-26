@@ -78,7 +78,7 @@ async function productDetails() {
     const sizeContainer = document.createElement("div");
  
     const sizeText = document.createElement("p");
-    sizeText.textContent = "Size:";
+    sizeText.textContent = "Tamaño:";
     sizeContainer.appendChild(sizeText);
 
     const sizeOptionButtons = document.createElement("div");
@@ -123,11 +123,17 @@ async function productDetails() {
   dateLabel.textContent = "Selecciona fecha de entrega o recogida:";
   dateContainer.appendChild(dateLabel);
 
+  const orderInfo = document.createElement("small");
+  orderInfo.textContent = "Recogida en local y envíos a domicilio disponibles en Tenerife, de lunes a viernes, en horario de 10:00 a 17:00.";
+  // orderInfoContainer.appendChild(orderInfo);
+  dateContainer.appendChild(orderInfo);
+
   const dateInput = document.createElement("input");
   dateInput.type = "date";
   dateInput.id = "delivery-date";
   dateInput.min = ""; // Se establecerá más adelante
   dateInput.max = "";
+  
   dateContainer.appendChild(dateInput);
 
   const dateErrorMessage = document.createElement("p");
@@ -177,7 +183,7 @@ async function productDetails() {
     const dayDate = selectedDateInput.getDay();
 
     if (dayDate === 0 || dayDate === 6) {
-      alert("Solo se pueden seleccionar días laborables (Lunes a Viernes)");
+      alert("Solo se pueden seleccionar días laborables (lunes a viernes)");
       //Cambiar por toastify
       dateErrorMessage.style.display = "block";
       dateInput.value = "";
@@ -235,14 +241,14 @@ async function productDetails() {
     const selectedDate = dateInput.value;
     const quantity = parseInt(quantitySpan.textContent, 10);
     
-    if (!selectedDate || (product.categoria?.toLowerCase().trim() === "tartas" && !selectedSize)) {
+    if (!selectedDate && (product.categoria?.toLowerCase().trim() === "tartas" && !selectedSize)) {
       alert("No has seleccionado los detalles del producto que quieres agregar al carrito.");
       //Cambiar por toastify
       return;
     }
 
     if (!selectedDate) {
-      alert("Por favor, selecciona una fecha antes de agregar el producto al carrito.");
+      alert("Por favor, selecciona una fecha válida antes de continuar.");
       //Cambiar por toastify
       return;
     }
@@ -305,9 +311,9 @@ async function productDetails() {
 
   const orderInfoContainer = document.createElement("div");
 
-  const orderInfo = document.createElement("p");
-  orderInfo.textContent = "Recogida en local y envíos a domicilio disponibles en Tenerife, de lunes a viernes, en horario de 10:00 a 17:00.";
-  orderInfoContainer.appendChild(orderInfo);
+  // const orderInfo = document.createElement("p");
+  // orderInfo.textContent = "Recogida en local y envíos a domicilio disponibles en Tenerife, de lunes a viernes, en horario de 10:00 a 17:00.";
+  // orderInfoContainer.appendChild(orderInfo);
 
   const oderTimeLimit = document.createElement("p");
   oderTimeLimit.textContent = "*Para garantizar una correcta gestión, los pedidos que se deseen recibir o recoger el mismo día deberán realizarse en nuestra web antes de las 16:30.";
