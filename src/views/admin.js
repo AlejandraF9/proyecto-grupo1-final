@@ -2,10 +2,7 @@ import { goTo } from "../router.js";
 import { renderUsuarios } from "../interfaz-admin/front-usuario.js";
 import { renderProductos } from "../interfaz-admin/front-productos.js";
 import { renderBlog } from "../interfaz-admin/front-blog.js";
-import {
-  renderPedidos,
-  renderPedidosPersonalizados,
-} from "../interfaz-admin/front-pedidos.js";
+import { renderPedidos } from "../interfaz-admin/front-pedidos.js";
 
 const API_BASE = "https://api-bakery-production.up.railway.app";
 
@@ -63,7 +60,7 @@ function crearBanner() {
 
   closeSession.addEventListener("click", () => {
     localStorage.removeItem("current-user");
-    goTo("/home");
+    location.href = "/";
   });
 }
 
