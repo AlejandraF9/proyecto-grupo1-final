@@ -89,6 +89,7 @@ newsletterForm.addEventListener('submit', function (event) {
   if(!validationChecked(checkboxNewsletter)) return;
  
   
+  //ME FALTA CAPTURAR LOS VALORES DEL EVENTO
 
 
 

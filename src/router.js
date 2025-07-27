@@ -14,6 +14,12 @@ export const routes = {
   "/signup": () => import("./views/signup.js"),
   "/": () => import("./views/home.js"),
   "/admin": () => import("./views/admin.js"),
+
+  //añado mis endponit de los link del footer
+ "/legal-notice": ()=> import ("./legal/legal-notice.js"),
+ "/cookie-policy":()=> import ("./legal/policy-cookies.js"),
+ "/sales-conditions":()=>import("./legal/sales-conditions.js"),
+ "/privacy-policy":()=> import("./legal/privacy-policy.js"),
 };
 
 export async function loadView(path) {

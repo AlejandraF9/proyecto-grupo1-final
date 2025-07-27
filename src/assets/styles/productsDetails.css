@@ -119,6 +119,7 @@ body {
   padding: 0.4rem;
   box-shadow: 1px solid var(--color);
   border: 1px solid rgba(0, 0, 0, 0.08);
+  cursor: pointer;
 }
 
 .date-container p {
@@ -130,11 +131,13 @@ body {
 .date-container small {
   color: var(--color);
   opacity: 0.5;
+  display: block;
+  margin-bottom: 0.5rem;
 }
 
 /* Botón agregar al carrito */
 .btn-agregar {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   background-color: var(--pink);
   color: var(--color);
   padding: 0.7rem 1.5rem;
@@ -274,6 +277,7 @@ body {
   padding: 0.4rem;
   box-shadow: 1px solid var(--color);
   border: 1px solid rgba(0, 0, 0, 0.08);
+  cursor: pointer;
 }
 
 .date-container p {
@@ -285,11 +289,13 @@ body {
 .date-container small {
   color: var(--color);
   opacity: 0.5;
+  display: block;
+  margin-bottom: 0.5rem;
 }
 
 /* Botón agregar al carrito */
 .btn-agregar {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   background-color: var(--pink);
   color: var(--color);
   padding: 0.7rem 1.5rem;
@@ -428,6 +434,7 @@ body {
   padding: 0.4rem;
   box-shadow: 1px solid var(--color);
   border: 1px solid rgba(0, 0, 0, 0.08);
+  cursor: pointer;
 }
 
 .date-container p {
@@ -439,11 +446,13 @@ body {
 .date-container small {
   color: var(--color);
   opacity: 0.5;
+  display: block;
+  margin-bottom: 0.5rem;
 }
 
 /* Botón agregar al carrito */
 .btn-agregar {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   background-color: var(--pink);
   color: var(--color);
   padding: 0.7rem 1.5rem;

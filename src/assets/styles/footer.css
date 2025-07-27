@@ -1,0 +1,31 @@
+.footer-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto auto 1fr;
+  gap: 10px;
+  background-color: var(--dark-gray);
+  .footer-div-all {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+  }
+  .footer-header {
+    color: white;
+  }
+  .rrss-footer-div{
+    border: 2px solid green;
+    display: flex;
+    flex-direction: row;
+    gap:8px;
+  }
+  .footer-text{
+    color: white;
+  }
+
+ 
+ 
+
+}
+
+
