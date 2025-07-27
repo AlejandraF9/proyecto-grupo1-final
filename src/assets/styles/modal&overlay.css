@@ -15,10 +15,10 @@
 
 /* Contenedor del modal */
 .modal-container {
-  background-color: #ffffff;
+  background-color: var(--white);
   border-radius: 10px;
-  padding: 2rem;
-  max-width: 500px;
+  padding: 0rem;
+  max-width: 19rem;
   width: 90%;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   z-index: 9999;

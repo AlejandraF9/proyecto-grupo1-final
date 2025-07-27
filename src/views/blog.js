@@ -3,10 +3,19 @@ import { goTo } from "../router.js";
 export async function renderBlogHome(container) {
   container.innerHTML = "";
 
+  // CAROLINA - He añadido un contenedor para el título del blog para el CSS
+  const titleContainer = document.createElement("div");
+  titleContainer.classList.add("blog-title-container");
+
   const title = document.createElement("h2");
   title.classList.add("blog-title");
   title.textContent = "Últimas del Blog";
-  container.appendChild(title);
+
+  titleContainer.appendChild(title);
+  container.appendChild(titleContainer);
+
+  //container.appendChild(title);
+
 
   try {
     const res = await fetch(
@@ -73,10 +82,16 @@ export function createCardBlog(imagen, titulo, texto, fecha) {
 export async function renderBlogView(container) {
   container.innerHTML = "";
 
+  //Contenedor del título añadido para el CSS
+  const titleContainer = document.createElement("div");
+  titleContainer.classList.add("blog-title-container");
+
   const title = document.createElement("h2");
   title.classList.add("blog-title");
-  title.textContent = "Todas las entradas del Blog";
-  container.appendChild(title);
+  title.textContent = "Dummie's Blog";
+
+  titleContainer.appendChild(title);
+  container.appendChild(titleContainer);
 
   try {
     const res = await fetch(
