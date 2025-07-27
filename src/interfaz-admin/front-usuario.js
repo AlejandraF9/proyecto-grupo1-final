@@ -1,14 +1,14 @@
 const API_BASE = "https://api-bakery-production.up.railway.app";
-// Gestión usuarios
 
+// Gestión usuarios
 async function fetchUsuarios() {
-  const res = await fetch(`${API_BASE}/usuarios`);
+  const res = await fetch(`${API_BASE}/users`);
   if (!res.ok) throw new Error("Error al cargar usuarios");
   return await res.json();
 }
 
 async function eliminarUsuario(id) {
-  const res = await fetch(`${API_BASE}/usuarios/${id}`, { method: "DELETE" });
+  const res = await fetch(`${API_BASE}/users/${id}`, { method: "DELETE" });
   if (!res.ok) throw new Error("Error al eliminar usuario");
 }
 
@@ -23,7 +23,7 @@ export async function renderUsuarios(content) {
 
     const thead = document.createElement("thead");
     const headRow = document.createElement("tr");
-    ["ID", "Username", "Role", "Eliminar"].forEach((text) => {
+    ["ID", "Nombre", "Role", "Eliminar"].forEach((text) => {
       const th = document.createElement("th");
       th.textContent = text;
       th.style.borderBottom = "2px solid #ccc";
@@ -39,7 +39,7 @@ export async function renderUsuarios(content) {
       const row = document.createElement("tr");
       row.style.borderBottom = "1px solid #eee";
 
-      [u._id, u.username, u.role].forEach((text) => {
+      [u._id, u.name, u.role].forEach((text) => {
         const td = document.createElement("td");
         td.textContent = text;
         td.style.padding = "8px";
@@ -57,9 +57,9 @@ export async function renderUsuarios(content) {
       btnEliminar.style.cursor = "pointer";
       btnEliminar.style.borderRadius = "4px";
       btnEliminar.onclick = async () => {
-        if (confirm(`¿Eliminar usuario ${u.username}?`)) {
+        if (confirm(`¿Eliminar usuario ${u.name}?`)) {
           await eliminarUsuario(u._id);
-          renderUsuarios();
+          renderUsuarios(content); // ✅ pasamos el parámetro
         }
       };
       tdEliminar.appendChild(btnEliminar);

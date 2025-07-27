@@ -3,7 +3,6 @@ import { goTo } from "../router.js";
 const API_URL = "https://api-bakery-production.up.railway.app";
 
 export async function renderShop() {
-  
   const seccionTienda = document.createElement("section");
   seccionTienda.setAttribute("id", "tienda");
 
@@ -67,6 +66,8 @@ export async function renderShop() {
   // Mostrar todos al cargar
   const productos = await fetchProductos();
   renderizarProductos(productos, contenedorProductos);
+
+  return seccionTienda;
 }
 
 async function fetchProductos() {
@@ -102,7 +103,7 @@ function renderizarProductos(productos, contenedor) {
     nombre.textContent = p.nombre;
 
     const precio = document.createElement("p");
-    precio.textContent = `$${p.precio?.toFixed(2) ?? "0.00"}`;
+    precio.textContent = `€${p.precio?.toFixed(2) ?? "0.00"}`;
 
     // Evento click para acceder a cada producto
     card.addEventListener("click", () => {

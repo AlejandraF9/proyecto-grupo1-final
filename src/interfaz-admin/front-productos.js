@@ -1,3 +1,5 @@
+import { openModal, closeModal } from "../utils/modal&overlay";
+
 const API_BASE = "https://api-bakery-production.up.railway.app";
 
 async function fetchProductos(categoria = "", nombre = "") {
@@ -17,13 +19,11 @@ async function eliminarProducto(id) {
 export async function renderProductos(content) {
   content.innerHTML = "";
 
-  // Filtros
   const filtrosDiv = document.createElement("div");
   filtrosDiv.style.display = "flex";
   filtrosDiv.style.gap = "10px";
   filtrosDiv.style.marginBottom = "15px";
 
-  // Selector de categoría
   const selectCat = document.createElement("select");
   const optionAll = document.createElement("option");
   optionAll.value = "";
@@ -39,7 +39,6 @@ export async function renderProductos(content) {
   });
   filtrosDiv.appendChild(selectCat);
 
-  // Buscador por nombre
   const inputBuscar = document.createElement("input");
   inputBuscar.type = "search";
   inputBuscar.placeholder = "Buscar por nombre...";
@@ -49,13 +48,11 @@ export async function renderProductos(content) {
 
   content.appendChild(filtrosDiv);
 
-  // Tabla productos
   const tabla = document.createElement("table");
   tabla.style.width = "100%";
   tabla.style.borderCollapse = "collapse";
   tabla.style.textAlign = "left";
 
-  // Cabecera
   const thead = document.createElement("thead");
   const headRow = document.createElement("tr");
   [
@@ -132,7 +129,10 @@ export async function renderProductos(content) {
         btnModificar.style.border = "none";
         btnModificar.style.padding = "5px 8px";
         btnModificar.style.borderRadius = "4px";
-        // Aquí puedes añadir funcionalidad para modificar producto
+        btnModificar.onclick = () => {
+          modifyData(p);
+        };
+
         tdAcc.appendChild(btnModificar);
 
         const btnEliminar = document.createElement("button");
@@ -166,12 +166,89 @@ export async function renderProductos(content) {
   filtrarYRenderizar();
 }
 
-// la function debounce sirve para optimizar el rendimiento de las búsquedas, cuando el admin/usuario deja de escribir en el buscador es cuando hace la búsqueda por relación de las letras que haya escrito
-
 function debounce(fn, delay) {
   let timeout;
   return (...args) => {
     clearTimeout(timeout);
     timeout = setTimeout(() => fn(...args), delay);
   };
+}
+
+function modifyData(p) {
+  const containerFormModify = document.createElement("div");
+  containerFormModify.classList.add("containerForm");
+
+  const formModify = document.createElement("form");
+  formModify.classList.add("formModify");
+
+  Object.entries(p).forEach(([key, valor]) => {
+    if (["_id", "__v"].includes(key)) return;
+
+    const fieldWrapper = document.createElement("div");
+
+    const label = document.createElement("label");
+    label.textContent = key;
+    label.htmlFor = key;
+
+    const input = document.createElement("input");
+    input.name = key;
+    input.id = key;
+    input.value = valor;
+
+    fieldWrapper.appendChild(label);
+    fieldWrapper.appendChild(input);
+    formModify.appendChild(fieldWrapper);
+  });
+
+  const btnSave = document.createElement("button");
+  btnSave.classList.add("btnSaveModify");
+  btnSave.type = "submit";
+  btnSave.textContent = "Guardar";
+  formModify.appendChild(btnSave);
+
+  formModify.onsubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(formModify);
+    const dataUpdateRaw = Object.fromEntries(formData.entries());
+
+    const cleanDataUpdate = {};
+    for (const [key, value] of Object.entries(dataUpdateRaw)) {
+      if (["temporal1", "temporal2", "temporal3", "temporal4"].includes(key)) {
+        cleanDataUpdate[key] = value === "true";
+      } else if (key === "precio") {
+        cleanDataUpdate[key] = parseFloat(value);
+      } else {
+        if (value.trim() !== "") {
+          cleanDataUpdate[key] = value;
+        }
+      }
+    }
+
+    try {
+      const response = await fetch(`${API_BASE}/productos/${p._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(cleanDataUpdate),
+      });
+
+      if (!response.ok) {
+        throw new Error("Error al guardar cambios");
+      }
+
+      const dataUpdateNow = await response.json();
+      console.log("Producto actualizado:", dataUpdateNow);
+
+      alert("Producto guardado correctamente");
+      closeModal();
+    } catch (error) {
+      console.error("Error en la actualización:", error);
+      alert("Hubo un problema al guardar los cambios");
+    }
+  };
+
+  containerFormModify.appendChild(formModify);
+  openModal(containerFormModify);
 }

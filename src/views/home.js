@@ -4,11 +4,15 @@ import { renderHero } from "./hero";
 import { renderShop } from "./shop";
 import { renderBlogHome } from "./blog";
 
-setTimeout(renderNewsletterForm, 2000);
-
 export default {
   async init() {
     const app = document.getElementById("app");
+
+    if (!app) {
+      console.error("❌ Elemento con id='app' no encontrado en el DOM.");
+      return;
+    }
+
     app.innerHTML = "";
 
     console.log("Home view initialized");
@@ -20,12 +24,14 @@ export default {
     renderHero(container);
     renderCategorys(container);
 
-    const tienda = await renderShop(); // ✅ ya inserta en el DOM
+    const tienda = await renderShop();
 
     const blogSection = document.createElement("section");
     blogSection.id = "blog-section";
 
-    tienda.parentNode.insertBefore(blogSection, tienda.nextSibling); // ✅ insertamos solo el blog
+    tienda.parentNode.insertBefore(blogSection, tienda.nextSibling);
     renderBlogHome(blogSection);
+
+    setTimeout(renderNewsletterForm, 2000);
   },
 };
