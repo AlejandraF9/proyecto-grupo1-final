@@ -1,4 +1,4 @@
-#contactContainer {
+.contact-container {
   width: 95%;
   display: flex;
   flex-direction: column;
@@ -60,7 +60,7 @@
 }
 
 @media (min-width: 1024px) {
-  #contactContainer {
+  .contact-container {
     width: 100%;
     border: 2px solid green;
     justify-content: center;

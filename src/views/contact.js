@@ -5,19 +5,20 @@ export function renderContact (){
 
 //(me guié estructuralmente por la página de contacto de Decor internacional: dos bloques. por una lado direcciones y por otro formulario. Un div contenedor engloba a esos dos div, que a su vez luego tienen otro pequeños div)
 //container madre
-const contactContainer = document.getElementById("contactContainer");
-contactContainer.innerHTML = "";
+const showContact = document.getElementById("app");
+showContact.className = "contact-container"
+showContact.innerHTML = "";
 
 //title común
 const contactTitle = document.createElement("h2");
 contactTitle.className = "title-h2";
 contactTitle.textContent = "Contacto";
-contactContainer.appendChild(contactTitle);
+showContact.appendChild(contactTitle);
 
 //div que tengrá a los dos 
 const divDivider = document.createElement("div");
 divDivider.className = "div-divider";
-contactContainer.appendChild(divDivider);
+showContact.appendChild(divDivider);
 //div direcciones
 const contactOneDiv = document.createElement("div");
 contactOneDiv.className = "primary-div-contact";
@@ -261,4 +262,9 @@ contactFormFooter.addEventListener("submit", function (event) {
     });
 })
 }
-renderContact ();
+export default {
+  init() {
+    console.log("Contact init ejecutado");
+    renderContact();
+  },
+};
