@@ -1,713 +1,372 @@
-/* ==========================
-   SECCIÓN DE BIO MOBILE
-========================== */
-@media screen and (orientation:portrait) and (max-width: 430px) {
+/*/////////////////////
+// MOBILE          ///
+///////////////////*/
 
-   /*Contenedor principal*/
+@media screen and (orientation: portrait) and (max-width: 760px) {
+   
+   /* Estilos generales */
+   body {
+    font-family: var(--text-font);
+   }
+   
+   /* Contenedor general */
    .bio-container {
-      margin-top: 2rem;
-      margin-left: 0.5rem;
-      margin-right: 0.5rem;
-      margin-bottom: 1rem;
-      padding: 0;
-      background-color: var(--background-color);
-      font-family: 'afacad', sans-serif;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      align-content: stretch;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem;
       color: var(--color);
+      background-color: var(--white);
+      margin-bottom: 2rem;
    }
 
-   /*View general*/
+   /* Vista principal */
    .bio-view {
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      gap: 1.5rem;
    }
 
-   /*Sección ¿Quiénes somos? */
-   .bioSection {
-      background-color: var(--background-color);
-      border-radius: 0;
-      padding: 1rem;
-   }
-
-   .bioSectionGroup001 {
-      display:flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 15px;
-   }
-
-   /*Rectángulo decorativo*/
-   .bio-rectangle-001 {
-      position: absolute;
-      margin-top: 1rem;
-      width: 15rem;
-      height: 4%;
-      background-color: var(--blue-color);
-      border-radius: 0;
-      flex-shrink: 0;
-      z-index: 1;
-   }
-
-   /*Título de sección*/
-   .bio-text-001 {
-      position: relative;
-      z-index: 2;
-      font-size: 24px;
-      font-weight: 400;
-      color: var(--color);
-      text-transform: uppercase;
-            
-   }
-
-   /*Párrafos*/
-      .paragraph-set, .root-0-paragraph-set-0 {
-         display: flex;
-         flex-direction:column;
-         gap: 12px;
-         padding-top: 1rem;
-      
-
-      }
-   
-      .bio-text-002 p > lrt {
-      font-size: 12px;
-      line-height: 1.5;
-      font-weight: 400;
-      color: var(--color);      
-
-   }
-
-   /*Imagen bio*/
-   .bio-img {
-      width: 100%;
-      height: 75%;
-      border-radius: 0;
-      margin-top: 0;
-   }
-
-   /* Sección ¿Qué tenemos para ti? */
+   /* Secciones principales */
+   .bioSection,
    .paraTi {
-      background-color: var(--background-color);
-      border-radius: 0;
-      padding: 1rem;
-   }
-   .paraTi-group {
-      display: flex;
-      flex-direction:column;
-      gap: 0.25rem;
+      background-color: var(--white);
+      padding: 0rem 1.5rem;
    }
 
-   /*Títulos y frases en la sección ¿Qué tenemos para ti? */
-   .bio-text-003  {
-      font-size: 24px;
-      align-self: center;
-   }
-
-   .bio-text-003 > lrt {
-      line-height: 1.5;
-      margin: 0;
-      font-weight: 400;
-      color: var(--color);
-   }
-   .bio-text-004 > lrt {
-      font-size: 14px;
-      line-height: 1.5;
-      margin: 0;
-      font-weight: 400;
-      color: var(--color);
-   }
-   .bio-text-005 > lrt {
-      font-size: 14px;
-      line-height: 1.5;
-      margin: 0;
-      font-weight: 400;
-      color: var(--color);
-   }
-
-   .bio-text-005 p {
-      font-style: italic;
-   }
-
-   .bio-text-006 > lrt {
-      font-size: 14px;
-      line-height: 1.5;
-      margin: 0;
-      font-weight: 400;
-      color: var(--color);
-   }
-
-   
-   /*Botón*/
-   .bio-button {
-      position:relative;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      padding:0;
-      margin-top: 2rem;
-      margin-bottom: 5rem;;
-      border-radius: 0;
+   /* Imagen */
+   .bio-img {
+      width: 20rem;
+      height: 10rem;
+      object-fit: cover;
       overflow: hidden;
+      margin: 0rem 1rem;
    }
 
-   .bio-rectangle-002 {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: var(--pink);
-      border-radius: 0;
-      z-index: 1;
-      transition: background-color 0.3s ease;
+   /* Grupos internos */
+   .bioSectionGroup001 {
+      display: flex;
+      flex-direction: row;
+      gap: 2rem;
+      justify-content: center;
+
+   }
+   .bioSectionGroup002,
+   .paraTi-group {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   flex-wrap: nowrap;
+   align-items: center;
    }
 
-   .bio-text-007 {
-      position: relative;
-      z-index: 2;
-      color: var(--white);
-      font-weight: 400;
-      font-size: 24px;
+   .bioSectionGroup002 {
+      margin-top: 1.5rem;
    }
 
-   
+   .bio-text-001,
+   .bio-text-003 {
+   color: var(--color);
+   background-color: var(--blue-color);
+   }
+
+   .bio-text-001 {
+      text-transform: uppercase;
+      font-size: 1.5rem;
+      font-family: var(--text-title);
+      margin: 1rem;
+
+   }
+
+   .bio-text-001 > p {
+   margin-bottom: 0rem;
+   }
+
+   .bio-text-003 {
+      font-size: 1.2rem;
+      margin: 1rem;
+   }
+
+   /* Texto secundario */
+   .bio-text-002,
+   .bio-text-004 {
+   font-size: 1rem;
+   color: var(--color);
+   }
+
+   .bio-text-002 > .text-node-html > .rich-text > .paragraph-set > p {
+   margin-bottom: 1rem;
+   }
+
+   .bio-text-004 > .text-node-html > .rich-text > .paragraph-set > p {
+   margin-bottom: 1rem;
+   }
+
+
+   /* Botón */
+   .bio-button {
+   padding: 0.75rem 1.5rem;
+   background-color: var(--pink);
+   color: var(--color);
+   font-size: 1rem;
+   border: none;
+   cursor: pointer;
+   align-self: center;
+   }
+
 }
 
-/* ==========================
-   SECCIÓN DE BIO MONITOR-GRANDe
-========================== */
-@media screen and (min-width: 821px) and (max-width: 1920px) {
-
-   /*Contenedor principal*/
-   .bio-container {
-      margin-top: 2rem;
-      margin-left: 10rem;
-      margin-right: 10rem;
-      margin-bottom: 1rem;
-      padding: 0;
-      background-color: var(--background-color);
-      font-family: 'afacad', sans-serif;
-      color: var(--color);
-   }
-
-   /*View general*/
-   .bio-view {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-   }
-
-   /*Sección ¿Quiénes somos? */
-   .bioSection {
-      background-color: var(--background-color);
-      border-radius: 0;
-      padding: 1rem;
-   }
-
-   .bioSectionGroup001 {
-      display:flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 15px;
-   }
-
-   /*Rectángulo decorativo*/
-   .bio-rectangle-001 {
-      position: absolute;
-      margin-top: 1rem;
-      width: 15rem;
-      height: 2.5%;
-      background-color: var(--blue-color);
-      border-radius: 0;
-      flex-shrink: 0;
-      z-index: 1;
-   }
-
-   /*Título de sección*/
-   .bio-text-001 {
-      position: relative;
-      z-index: 2;
-      font-size: 24px;
-      font-weight: 400;
-      color: var(--color);
-      text-transform: uppercase;
-            
-   }
-
-   /*Párrafos*/
-      .paragraph-set, .root-0-paragraph-set-0 {
-         display: flex;
-         flex-direction:column;
-         gap: 12px;
-         padding-top: 1rem;
-      
-
-      }
-   
-      .bio-text-002 p > lrt {
-      font-size: 12px;
-      line-height: 1.5;
-      font-weight: 400;
-      color: var(--color);      
-
-   }
-
-   /*Imagen bio*/
-   .bio-img {
-      width: 100%;
-      height: 75%;
-      border-radius: 0;
-      margin-top: 0;
-      display: flex;
-   }
-
-   /* Sección ¿Qué tenemos para ti? */
-   .paraTi {
-      background-color: var(--background-color);
-      border-radius: 0;
-      padding: 1rem;
-   }
-   .paraTi-group {
-      display: flex;
-      flex-direction:column;
-      gap: 0.25rem;
-   }
-
-   /*Títulos y frases en la sección ¿Qué tenemos para ti? */
-   .bio-text-003  {
-      font-size: 24px;
-      align-self: center;
-   }
-
-   .bio-text-003 > lrt {
-      line-height: 1.5;
-      margin: 0;
-      font-weight: 400;
-      color: var(--color);
-   }
-   .bio-text-004 > lrt {
-      font-size: 14px;
-      line-height: 1.5;
-      margin: 0;
-      font-weight: 400;
-      color: var(--color);
-   }
-   .bio-text-005 > lrt {
-      font-size: 14px;
-      line-height: 1.5;
-      margin: 0;
-      font-weight: 400;
-      color: var(--color);
-   }
-
-   .bio-text-005 p {
-      font-style: italic;
-   }
-
-   .bio-text-006 > lrt {
-      font-size: 14px;
-      line-height: 1.5;
-      margin: 0;
-      font-weight: 400;
-      color: var(--color);
-   }
-
-   
-   /*Botón*/
-   .bio-button {
-      position:relative;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      padding:0;
-      margin-top: 2rem;
-      margin-bottom: 5rem;;
-      border-radius: 0;
-      overflow: hidden;
-   }
-
-   .bio-rectangle-002 {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: var(--pink);
-      border-radius: 0;
-      z-index: 1;
-      transition: background-color 0.3s ease;
-   }
-
-   .bio-text-007 {
-      position: relative;
-      z-index: 2;
-      color: var(--white);
-      font-weight: 400;
-      font-size: 24px;
-   }
-
-   
-}
 
 /* ==========================
    SECCIÓN DE BIO MONITOR-PEQUEÑO
 ========================== */
-@media screen and (min-width: 431px) and (max-width: 820px) {
+@media screen and (min-width: 761px) and (max-width: 1028px) {
 
-   /*Contenedor principal*/
+   /* Estilos generales */
+   body {
+    font-family: var(--text-font);
+   }
+   
+   /* Contenedor general */
    .bio-container {
-      margin-top: 2rem;
-      margin-left: 2rem;
-      margin-right: 2rem;
-      margin-bottom: 1rem;
-      padding: 0;
-      background-color: var(--background-color);
-      font-family: 'afacad', sans-serif;
-      color: var(--color); 
+      gap: 2rem;
+      padding: 2rem;
+      color: var(--color);
+      background-color: var(--white);
+      margin-bottom: 2rem;
    }
 
-   /*View general*/
+   /* Vista principal */
    .bio-view {
       display: flex;
       flex-direction: column;
-      gap: 2rem;
-   }
-
-   /*Sección ¿Quiénes somos? */
-   .bioSection {
-      background-color: var(--background-color);
-      border-radius: 0;
-      padding: 1rem;
-   }
-
-   .bioSectionGroup001 {
-      display:flex;
-      flex-direction: column;
+      flex-wrap: nowrap;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 15px;
+      gap: 1.5rem;
    }
 
-   /*Rectángulo decorativo*/
-   .bio-rectangle-001 {
-      position: absolute;
-      margin-top: 1rem;
-      width: 15rem;
-      height: 2.5%;
-      background-color: var(--blue-color);
-      border-radius: 0;
-      flex-shrink: 0;
-      z-index: 1;
-   }
-
-   /*Título de sección*/
-   .bio-text-001 {
-      position: relative;
-      z-index: 2;
-      font-size: 24px;
-      font-weight: 400;
-      color: var(--color);
-      text-transform: uppercase;
-            
-   }
-
-   /*Párrafos*/
-      .paragraph-set, .root-0-paragraph-set-0 {
-         display: flex;
-         flex-direction:column;
-         gap: 12px;
-         padding-top: 1rem;
-      
-
-      }
-   
-      .bio-text-002 p > lrt {
-      font-size: 12px;
-      line-height: 1.5;
-      font-weight: 400;
-      color: var(--color);      
-
-   }
-
-   .bio-view > .bio-image-text-section-group {
-      display: flex;
-      margin-bottom: 2rem;;
-   }
-
-   /*Imagen bio*/
-   .bio-img {
-      width: 30rem;
-      height: 30rem;
-      border-radius: 0;
-      margin-top: 0;
-   }
-
-   .bio-img > img {
-      object-fit: cover;
-   }
-
-   /* Sección ¿Qué tenemos para ti? */
+   /* Secciones principales */
+   .bioSection,
    .paraTi {
-      background-color: var(--background-color);
-      border-radius: 0;
-      padding: 1rem;
-      width: 50%;
-   }
-   .paraTi-group {
-      display: flex;
-      flex-direction:column;
-      gap: 0.25rem;
+      background-color: var(--white);
+      padding: 0rem 1.5rem;
    }
 
-   /*Títulos y frases en la sección ¿Qué tenemos para ti? */
-   .bio-text-003  {
-      font-size: 24px;
-      align-self: center;
-   }
-
-   .bio-text-003 > lrt {
-      line-height: 1.5;
-      margin: 0;
-      font-weight: 400;
-      color: var(--color);
-   }
-   .bio-text-004 > lrt {
-      font-size: 14px;
-      line-height: 1.5;
-      margin: 0;
-      font-weight: 400;
-      color: var(--color);
-   }
-   .bio-text-005 > lrt {
-      font-size: 14px;
-      line-height: 1.5;
-      margin: 0;
-      font-weight: 400;
-      color: var(--color);
-   }
-
-   .bio-text-005 p {
-      font-style: italic;
-   }
-
-   .bio-text-006 > lrt {
-      font-size: 14px;
-      line-height: 1.5;
-      margin: 0;
-      font-weight: 400;
-      color: var(--color);
-   }
-
-   
-   /*Botón*/
-   .bio-button {
-      position:relative;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      padding:0;
-      margin-top: 2rem;
-      margin-bottom: 5rem;;
-      border-radius: 0;
+   /* Imagen */
+   .bio-img {
+      width: fit-content;
+      height: fit-content;
+      object-fit: cover;
       overflow: hidden;
+      margin: 0rem 1rem;
    }
 
-   .bio-rectangle-002 {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: var(--pink);
-      border-radius: 0;
-      z-index: 1;
-      transition: background-color 0.3s ease;
+   /* Grupos internos */
+   .bioSectionGroup001 {
+      display: flex;
+      flex-direction: row;
+      gap: 2rem;
+      justify-content: center;
+
+   }
+   .bioSectionGroup002,
+   .paraTi-group {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   flex-wrap: nowrap;
+   align-items: center;
    }
 
-   .bio-text-007 {
-      position: relative;
-      z-index: 2;
-      color: var(--white);
-      font-weight: 400;
-      font-size: 24px;
+   .bioSectionGroup002 {
+      margin-top: 1.5rem;
    }
 
+   .bio-text-001,
+   .bio-text-003 {
+   color: var(--color);
+   background-color: var(--blue-color);
+   }
+
+   .bio-text-001 {
+      text-transform: uppercase;
+      font-size: 1.8rem;
+      font-family: var(--text-title);
+      margin: 1rem;
+
+   }
+
+   .bio-text-001 > p {
+   margin-bottom: 0rem;
+   }
+
+   .bio-text-003 {
+      font-size: 1.5rem;
+      margin: 1rem;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+   }
+
+   /* Texto secundario */
+   .bio-text-002,
+   .bio-text-004 {
+   font-size: 1rem;
+   color: var(--color);
+   margin: 0.5rem 0;
+   }
+
+   .bio-text-002 > .text-node-html > .rich-text > .paragraph-set > p {
+   margin-bottom: 1rem;
+   }
+
+   .bio-text-004 > .text-node-html > .rich-text > .paragraph-set > p {
+   margin-bottom: 1rem;
+   }
+
+
+   /* Botón */
+   .bio-button {
+   padding: 0.75rem 1.5rem;
+   background-color: var(--blue-color);
+   color: var(--color);
+   font-size: 1.5rem;
+   border: none;
+   cursor: pointer;
+   align-self: center;
+   transition: background-color 0.3s ease;
+   margin: 1.5rem;
+   }
+
+   .bio-button:hover {
+   background-color: var(--pink);
+   }
    
 }
 
 /* ==========================
    SECCIÓN DE BIO MONITOR-GRANDE
 ========================== */
-@media screen and (min-width: 821px) and (max-width: 1920px) {
+@media screen and (min-width: 1029px) {
 
-   /*Contenedor principal*/
+   /* Estilos generales */
+   body {
+    font-family: var(--text-font);
+   }
+   
+   /* Contenedor general */
    .bio-container {
-      margin-top: 2rem;
-      margin-left: 10rem;
-      margin-right: 10rem;
-      margin-bottom: 1rem;
-      padding: 0;
-      background-color: var(--background-color);
-      font-family: 'afacad', sans-serif;
+      gap: 3rem;
+      padding: 3rem;
       color: var(--color);
+      background-color: var(--white);
+      margin-bottom: 3rem;
    }
 
-   /*View general*/
+   /* Vista principal */
    .bio-view {
       display: flex;
       flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: center;
       gap: 2rem;
    }
 
-   /*Sección ¿Quiénes somos? */
-   .bioSection {
-      background-color: var(--background-color);
-      border-radius: 0;
-      padding: 1rem;
-   }
-
-   .bioSectionGroup001 {
-      display:flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 15px;
-   }
-
-   /*Rectángulo decorativo*/
-   .bio-rectangle-001 {
-      position: absolute;
-      margin-top: 1rem;
-      width: 15rem;
-      height: 2.5%;
-      background-color: var(--blue-color);
-      border-radius: 0;
-      flex-shrink: 0;
-      z-index: 1;
-   }
-
-   /*Título de sección*/
-   .bio-text-001 {
-      position: relative;
-      z-index: 2;
-      font-size: 24px;
-      font-weight: 400;
-      color: var(--color);
-      text-transform: uppercase;
-            
-   }
-
-   /*Párrafos*/
-   .paragraph-set, .root-0-paragraph-set-0 {
-      display: flex;
-      flex-direction:column;
-      gap: 12px;
-      padding-top: 1rem;
-   }
-   
-   .bio-text-002 p > lrt {
-      font-size: 12px;
-      line-height: 1.5;
-      font-weight: 400;
-      color: var(--color);      
-
-   }
-
-   .bio-view > .bio-image-text-section-group {
-      display: flex;
-      margin-bottom: 2rem;
-      align-self: center;
-      align-items: center;
-      justify-content: space-evenly;
-   }
-
-   /*Imagen bio*/
-   .bio-img {
-      width: 25rem;
-      height: 25rem;
-      border-radius: 0;
-      margin-top: 2rem;
-   }
-
-   .bio-img > img {
-      object-fit: cover;
-   }
-
-   /* Sección ¿Qué tenemos para ti? */
+   /* Secciones principales */
+   .bioSection,
    .paraTi {
-      background-color: var(--background-color);
-      border-radius: 0;
-      padding: 2rem;
-      width: 40%;
-   }
-   .paraTi-group {
-      display: flex;
-      flex-direction:column;
-      gap: 0.25rem;
+      background-color: var(--white);
+      padding: 0rem 2rem;
    }
 
-   /*Títulos y frases en la sección ¿Qué tenemos para ti? */
-   .bio-text-003  {
-      font-size: 24px;
-      align-self: center;
-   }
-
-   .bio-text-003 > lrt {
-      line-height: 1.5;
-      margin: 0;
-      font-weight: 400;
-      color: var(--color);
-   }
-   .bio-text-004 > lrt {
-      font-size: 14px;
-      line-height: 1.5;
-      margin: 0;
-      font-weight: 400;
-      color: var(--color);
-   }
-   .bio-text-005 > lrt {
-      font-size: 14px;
-      line-height: 1.5;
-      margin: 0;
-      font-weight: 400;
-      color: var(--color);
-   }
-
-   .bio-text-005 p {
-      font-style: italic;
-   }
-
-   .bio-text-006 > lrt {
-      font-size: 14px;
-      line-height: 1.5;
-      margin: 0;
-      font-weight: 400;
-      color: var(--color);
-   }
-
-   
-   /*Botón*/
-   .bio-button {
-      position:relative;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      padding:0;
-      margin-top: 2rem;
-      margin-bottom: 5rem;;
-      border-radius: 0;
+   /* Imagen */
+   .bio-img {
+      width: fit-content;
+      height: fit-content;
+      object-fit: cover;
       overflow: hidden;
+      margin: 0rem 1.5rem;
    }
 
-   .bio-rectangle-002 {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: var(--pink);
-      border-radius: 0;
-      z-index: 1;
-      transition: background-color 0.3s ease;
+   /* Grupos internos */
+   .bioSectionGroup001 {
+      display: flex;
+      flex-direction: row;
+      gap: 2.5rem;
+      justify-content: center;
+
+   }
+   .bioSectionGroup002,
+   .paraTi-group {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   flex-wrap: nowrap;
+   align-items: center;
    }
 
-   .bio-text-007 {
-      position: relative;
-      z-index: 2;
-      color: var(--white);
-      font-weight: 400;
-      font-size: 24px;
+   .bioSectionGroup002 {
+      margin-top: 2rem;
    }
 
-   
+   .bio-text-001,
+   .bio-text-003 {
+   color: var(--color);
+   background-color: var(--blue-color);
+   }
+
+   .bio-text-001 {
+      text-transform: uppercase;
+      font-size: 1.8rem;
+      font-family: var(--text-title);
+      margin: 1rem;
+
+   }
+
+   .bio-text-001 > p {
+   margin-bottom: 0rem;
+   }
+
+   .bio-text-003 {
+      font-size: 1.6rem;
+      margin: 1rem;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+   }
+
+   /* Texto secundario */
+   .bio-text-002,
+   .bio-text-004 {
+   font-size: 1.3rem;
+   color: var(--color);
+   margin: 0.5rem 0;
+   }
+
+   .bio-text-002 > .text-node-html > .rich-text > .paragraph-set > p {
+   margin-bottom: 1rem;
+   }
+
+   .bio-text-004 > .text-node-html > .rich-text > .paragraph-set > p {
+   margin-bottom: 1rem;
+   }
+
+
+   /* Botón */
+   .bio-button {
+   padding: 0.75rem 1.5rem;
+   background-color: var(--blue-color);
+   color: var(--color);
+   font-size: 1.5rem;
+   border: none;
+   cursor: pointer;
+   align-self: center;
+   transition: background-color 0.3s ease;
+   margin: 1.5rem;
+   }
+
+   .bio-button:hover {
+   background-color: var(--pink);
+   }
 }
