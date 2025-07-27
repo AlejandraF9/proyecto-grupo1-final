@@ -1,5 +1,6 @@
 import emailjs from "@emailjs/browser";
 emailjs.init("nZaP1NAVYfbs2Z14i");
+import { validacteContactform } from "../utils/validations";
 
 export function renderContact (){
 
@@ -239,7 +240,12 @@ contactFormFooter.addEventListener("submit", function (event) {
   const phoneContactFormFooter = contactFormFooterPhone.value.trim();
   const messageContactFormFooter = contactFormFooterMessage.value.trim();
   const checkedContactFormFooter = checkboxContact.checked;
+
   ///me falta meter las validaciones
+
+  if(!validacteContactform(nameContactFormFooter, emailContactFormFooter, phoneContactFormFooter, messageContactFormFooter, checkedContactFormFooter)) return;
+
+
 
   emailjs
     .sendForm(

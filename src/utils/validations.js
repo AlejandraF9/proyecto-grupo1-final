@@ -89,3 +89,38 @@ export function infoValidations({name, email, password, repeatPassword}) {
 
     return true;
     }
+
+    
+//validación del formulario de contacto
+ export function validacteContactform(nameContactFormFooter, emailContactFormFooter, phoneContactFormFooter, messageContactFormFooter, checkedContactFormFooter){
+
+    let formOK = true;
+    if (!/^[a-zA-Z\s]+$/.test(nameContactFormFooter) || nameContactFormFooter === "") {
+    alert("Por favor, introduce un nombre válido (solo letras y espacios).");
+    formOK = false
+    }
+
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+if (!emailRegex.test(emailContactFormFooter)) {
+    alert("Por favor, introduce un correo electrónico con formato correcto.");
+    formOK = false;
+}
+if (phoneContactFormFooter && phoneContactFormFooter !== "") {
+  const phoneRegex = /^[0-9]{9}$/; // Validamos que sea un número de 9 dígitos
+  if (!phoneRegex.test(phoneContactFormFooter)) {
+    alert("Por favor, introduce un número de teléfono válido (9 dígitos).");
+    formOK = false;
+  }
+}
+if (messageContactFormFooter === "" || messageContactFormFooter.length < 10) {
+  alert("Por favor, escribe un mensaje con al menos 10 caracteres.");
+  formOK = false;
+}
+if (!checkedContactFormFooter) {
+    alert("Debes aceptar la política de privacidad");
+    formOK = false;
+}
+return formOK;
+
+}
+
