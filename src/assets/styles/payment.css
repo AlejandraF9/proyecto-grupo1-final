@@ -1,0 +1,88 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-container {
+  background-color: #fff;
+  padding: 2rem;
+  max-width: 500px;
+  width: 90%;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+  max-height: 90vh;
+  font-family: var(--text-font);
+}
+
+.payment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.payment-form input,
+.payment-form select {
+  padding: 0.7rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: var(--text-font);
+}
+
+.order-select {
+  margin-bottom: 0.5rem;
+}
+
+.delivery-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.delivery-info-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* .final-payment-action {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 1rem;
+  width: 100%;
+} */
+
+.total-final-price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  padding: 0.75rem 0 0.5rem;
+  text-align: right;
+  width: 100%;
+}
+
+.payment-button {
+  background-color: var(--pink, #f8c6cd);
+  color: var(--color, #000);
+  font-weight: bold;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: auto;
+  align-self: flex-end;
+}
+
+.payment-button:hover {
+  background-color: #eeb6be;
+}

@@ -3,6 +3,8 @@ async function productDetails() {
   app.innerHTML = "";
 
   const product = JSON.parse(localStorage.getItem("selectedProduct"));
+  const basePrice = product.precio;
+
   if (!product) {
     alert("Producto no encontrado");
     //Cambiar por toastify
@@ -25,7 +27,9 @@ async function productDetails() {
   productDetailsContainer.appendChild(productTitle);
 
   const productPrice = document.createElement("p");
-  productPrice.textContent = `${product.precio?.toFixed(2) || "0,00"}€`;
+  productPrice.className = "product-price";
+  const formatPrice = (price) => `${price.toFixed(2)}€`;
+  productPrice.textContent = formatPrice(basePrice);
   productDetailsContainer.appendChild(productPrice);
 
   const productCategory = document.createElement("p");
@@ -59,7 +63,7 @@ async function productDetails() {
   decreaseButton.textContent = "-";
   quantitySelector.appendChild(decreaseButton);
 
-  const quantitySpan = document.createElement("span"); //Span para que tenga comportamiento en línea, no en bloque
+  const quantitySpan = document.createElement("span");
   quantitySpan.id = "quantity";
   quantitySpan.textContent = "1";
   quantitySelector.appendChild(quantitySpan);
@@ -105,11 +109,23 @@ async function productDetails() {
 
         if (alreadySelected) {
           selectedSize = null;
+          productPrice.textContent = formatPrice(basePrice);
           quantitySpan.textContent = "1";
         } else {
           button.classList.add("selected");
           selectedSize = button.dataset.size;
           quantitySpan.textContent = "1";
+          switch (selectedSize) {
+            case "Pequeña":
+            productPrice.textContent = formatPrice(basePrice);
+            break;
+            case "Mediana":
+            productPrice.textContent = formatPrice(34);
+            break;
+            case "Grande":
+            productPrice.textContent = formatPrice(40);
+            break;
+          }
         }
       });
     });
@@ -125,15 +141,13 @@ async function productDetails() {
 
   const orderInfo = document.createElement("small");
   orderInfo.textContent = "Recogida en local y envíos a domicilio disponibles en Tenerife, de lunes a viernes, en horario de 10:00 a 17:00.";
-  // orderInfoContainer.appendChild(orderInfo);
   dateContainer.appendChild(orderInfo);
 
   const dateInput = document.createElement("input");
   dateInput.type = "date";
   dateInput.id = "delivery-date";
-  dateInput.min = ""; // Se establecerá más adelante
+  dateInput.min = "";
   dateInput.max = "";
-  
   dateContainer.appendChild(dateInput);
 
   const dateErrorMessage = document.createElement("p");
@@ -143,12 +157,12 @@ async function productDetails() {
   productDetailsContainer.appendChild(dateContainer);
     
   const nowDateTime = new Date();
-  const todayDate = new Date(); // Clon para manipular sin afectar al original
+  const todayDate = new Date();
 
   const currentHours = nowDateTime.getHours();
   const currentMinutes = nowDateTime.getMinutes();
 
-  if (currentHours > 16 || (currentHours === 16 && currentMinutes >= 30)) { //Límite para hacer pedidos hasta las 16:30
+  if (currentHours > 16 || (currentHours === 16 && currentMinutes >= 30)) {
     todayDate.setDate(todayDate.getDate() + 1);
   }
 
@@ -261,6 +275,8 @@ async function productDetails() {
 
     if (!validateQuantity(quantity)) return;
 
+    localStorage.setItem("selectedDate", selectedDate);
+
     const quantityByDate = JSON.parse(localStorage.getItem("productsByDate")) || {};
     const dailyQuantity = quantityByDate[selectedDate] || {};
 
@@ -274,16 +290,30 @@ async function productDetails() {
     let shoppingCart = JSON.parse(localStorage.getItem("cartItems")) || [];
 
     const existingIndex = shoppingCart.findIndex(item =>
-      item.nombre === product.nombre &&
-      item.date === selectedDate &&
-      (!item.size || item.size === selectedSize)
-    );
+    item.nombre === product.nombre && item.date === selectedDate && item.size === selectedSize);
 
     if (existingIndex !== -1) {
       shoppingCart[existingIndex].quantity += quantity;
     } else {
+      let finalPrice = basePrice;
+      
+      if (product.categoria?.toLowerCase().trim() === "tartas" && selectedSize) {
+        switch (selectedSize) {
+          case "Pequeña":
+            finalPrice = product.precio;
+            break;
+          case "Mediana":
+            finalPrice = 34;
+            break;
+          case "Grande":
+            finalPrice = 42;
+            break;
+        }
+      }
+
       const cartItem = {
         ...product,
+        precio: finalPrice,
         quantity,
         date: selectedDate,
         ...(selectedSize && { size: selectedSize })
@@ -310,10 +340,6 @@ async function productDetails() {
   });
 
   const orderInfoContainer = document.createElement("div");
-
-  // const orderInfo = document.createElement("p");
-  // orderInfo.textContent = "Recogida en local y envíos a domicilio disponibles en Tenerife, de lunes a viernes, en horario de 10:00 a 17:00.";
-  // orderInfoContainer.appendChild(orderInfo);
 
   const oderTimeLimit = document.createElement("p");
   oderTimeLimit.textContent = "*Para garantizar una correcta gestión, los pedidos que se deseen recibir o recoger el mismo día deberán realizarse en nuestra web antes de las 16:30.";
