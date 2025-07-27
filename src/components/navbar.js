@@ -1,3 +1,75 @@
+//creo las function que van a usarse en el search
+
+async function getAllProducts() {
+  const API_URL = "https://api-bakery-production.up.railway.app";
+  try {
+    const res = await fetch(`${API_URL}/productos`);
+    if (!res.ok) throw new Error("Error al traer productos");
+    return await res.json();
+  } catch (err) {
+    console.error("Error cargando productos:", err);
+    return [];
+  }
+}
+
+//la que pinta las carts
+
+function renderizarProductos(productos, contenedor) {
+  contenedor.innerHTML = "";
+
+  if (productos.length === 0) {
+    const vacio = document.createElement("p");
+    vacio.textContent = "No hay productos disponibles.";
+    contenedor.appendChild(vacio);
+    return;
+  }
+
+  productos.forEach((p) => {
+    const card = document.createElement("div");
+    card.classList.add("producto");
+
+    const img = document.createElement("img");
+    img.src = p.url;
+    img.alt = p.nombre;
+
+    const nombre = document.createElement("p");
+    nombre.textContent = p.nombre;
+
+    const precio = document.createElement("p");
+    precio.textContent = `€${p.precio?.toFixed(2) ?? "0.00"}`;
+
+    card.addEventListener("click", () => {
+      localStorage.setItem("selectedProduct", JSON.stringify(p));
+      window.location.href = "/productsDetails"; // o usa goTo("/productsDetails") si tenés router
+    });
+
+    card.appendChild(img);
+    card.appendChild(nombre);
+    card.appendChild(precio);
+    contenedor.appendChild(card);
+  });
+}
+
+//el retarder
+
+async function getAllProductsDelayed(delay = 2000) {
+  const API_URL = "https://api-bakery-production.up.railway.app";
+
+  // Espera el tiempo que pases como delay
+  await new Promise((resolve) => setTimeout(resolve, delay));
+
+  try {
+    const res = await fetch(`${API_URL}/productos`);
+    if (!res.ok) throw new Error("Error al traer productos");
+    return await res.json();
+  } catch (err) {
+    console.error("Error cargando productos:", err);
+    return [];
+  }
+}
+
+
+
 import logo_tienda from "../assets/images/logo_tienda.webp";
 import { userIcon } from "../assets/images/icons";
 import { cartIcon } from "../assets/images/icons";
@@ -6,6 +78,8 @@ import insta_icon from "../assets/images/insta_icon.png";
 import youtube_icon from "../assets/images/youtube_icon.png";
 import { renderForm } from "../views/profile";
 import { userLogin } from "../views/login";
+//Sintra importa goTo
+import { goTo } from "../router";
 
 export function renderNavbar() {
   //me traigo el div del HTML
@@ -130,6 +204,60 @@ export function renderNavbar() {
   searchNavbar.placeholder = "Busca aquí tu producto preferido";
   searchDiv.appendChild(searchNavbar);
 
+  searchNavbar.addEventListener("input", async (e) => {
+    console.log("Se está escribiendo en el buscador");
+  const query = searchNavbar.value.toLowerCase().trim();
+  console.log(" Query:", query);
+  //______--------------------
+  const appShowHome = document.getElementById("app");
+  appShowHome.innerHTML ="";
+  const appContainer = document.createElement("div");
+  appContainer.className ="search-div-style";
+//carol necesito por fa que este div tenga el mismo estilo de lo que se muestra en la tienda para que no se rompa el estilo
+  appShowHome.appendChild(appContainer);
+  //-------------------
+  
+
+  if (!appContainer){
+          console.warn(" No se encontró el contenedor #app");
+
+    return;
+  }
+
+
+  const productos = await getAllProducts();
+    console.log(" Productos cargados:", productos);
+
+    const productosFiltrados = productos.filter((producto) => {
+  const nombre = String(producto.nombre || "").toLowerCase();
+  let ingredientes = "";
+
+  if (Array.isArray(producto.ingredientes)) {
+    ingredientes = producto.ingredientes.join(", ").toLowerCase();
+  } else {
+    ingredientes = String(producto.ingredientes || "").toLowerCase();
+  }
+
+  const alergeno = String(producto.alergeno || "").toLowerCase();
+
+  return (
+    nombre.includes(query) ||
+    ingredientes.includes(query) ||
+    alergeno.includes(query)
+  );
+});
+
+
+
+   appContainer.innerHTML = "";
+     renderizarProductos(productosFiltrados, appContainer);
+
+  })
+
+
+
+
+//---------------------------------------------------------------------------
   //creo un div para meter iconos de usuario y carrito
   const logCartDivNavbar = document.createElement("div");
   logCartDivNavbar.className = "login-div-navbar";
