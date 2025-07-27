@@ -40,12 +40,12 @@ export function renderBio() {
         const group = document.createElement('div');
         group.className = 'bioSectionGroup001';
 
-        const rectangle = document.createElement('div');
-        rectangle.className = 'shape rect bio-rectangle-001';
+        //const rectangle = document.createElement('div');
+        //rectangle.className = 'shape rect bio-rectangle-001';
 
         const title = createTextDiv('bio-text-001', ['¿Quiénes somos?']);
 
-        const texto = createTextDiv('bio-text-002', [
+        const text = createTextDiv('bio-text-002', [
             'El 10 de julio de 2025 da comienzo la aventura que supone los pilares de Dummie Bakery. Una idea a amasar, un proyecto que atemperar y un sueño que decorar.',
             '',
             'Con una propuesta 100% artesanal, nos presentamos como una pastelería familiar con el objetivo de ofrecer dulces que hagan tu día (y el nuestro) una pizca más especial.',
@@ -57,10 +57,10 @@ export function renderBio() {
             ''
         ]);
 
-        group.appendChild(rectangle);
+        //group.appendChild(rectangle);
         group.appendChild(title);
         section.appendChild(group);
-        section.appendChild(texto);
+        section.appendChild(text);
 
         return section;
     }
@@ -73,9 +73,16 @@ export function renderBio() {
         container.className = 'paraTi-group bioSectionGroup002';
 
         const title = createTextDiv('bio-text-003', ['¿Qué tenemos para ti?']);
-        const phrase1 = createTextDiv('bio-text-004', ['Trabajamos con productos llenos de sabor y calidad.']);
-        const phrase2 = createTextDiv('bio-text-005', ['Contamos con especialidades por temporada,', '¡experiencias únicas e irrepetibles!']);
-        const phrase3 = createTextDiv('bio-text-006', ['Un equipo cercano que te hará sentir como parte de la familia Dummie.']);
+        const text = createTextDiv('bio-text-004', ['Trabajamos con productos llenos de sabor y calidad.',
+        '',
+        'Contamos con especialidades por temporada,', '¡experiencias únicas e irrepetibles!',
+        '',
+        'Un equipo cercano que te hará sentir como parte de la familia Dummie.',
+        '',
+        ''
+        ]);
+        //const phrase2 = createTextDiv('bio-text-005', ['Contamos con especialidades por temporada,', '¡experiencias únicas e irrepetibles!']);
+        //const phrase3 = createTextDiv('bio-text-006', ['Un equipo cercano que te hará sentir como parte de la familia Dummie.']);
 
         const buttonText = document.createElement('span');
         buttonText.className = 'bio-text-007';
@@ -85,11 +92,11 @@ export function renderBio() {
         buttonElement.className = 'group bio-button';
         buttonElement.type = 'button';
 
-        const buttonRect = document.createElement('div');
-        buttonRect.className = 'shape rect bio-rectangle-002';
+        //const buttonRect = document.createElement('div');
+        //buttonRect.className = 'shape rect bio-rectangle-002';
 
         
-        buttonElement.appendChild(buttonRect);
+        //buttonElement.appendChild(buttonRect);
         buttonElement.appendChild(buttonText);
 
         //Accesibilidad botón NO ES NECESARIO AHORA QUE ES UN BUTTON QUE ES ACCESIBLE DE FORMA NATIVA
@@ -110,7 +117,7 @@ export function renderBio() {
         //});
 
         // Agrupar los textos
-        const texts = [title, phrase1, phrase2, phrase3];
+        const texts = [title, text];
         texts.forEach(text => container.appendChild(text));
 
         container.appendChild(buttonElement);
@@ -132,7 +139,7 @@ export function renderBio() {
 
         //Crear imagen
         const image = document.createElement('div');
-        image.className = 'shape rect bio-img';
+        image.className = 'bio-img';
 
         const bioImg = document.createElement('img');
         bioImg.src = "https://img.freepik.com/foto-gratis/primer-plano-sonriente-mujer-joven-tenencia-tazon-mezcla-panaderia_23-2148189077.jpg";
