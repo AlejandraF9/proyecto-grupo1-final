@@ -1,19 +1,27 @@
 import emailjs from "@emailjs/browser";
 emailjs.init("nZaP1NAVYfbs2Z14i");
 
+export function renderContact (){
+
 //(me guié estructuralmente por la página de contacto de Decor internacional: dos bloques. por una lado direcciones y por otro formulario. Un div contenedor engloba a esos dos div, que a su vez luego tienen otro pequeños div)
 //container madre
 const contactContainer = document.getElementById("contactContainer");
+contactContainer.innerHTML = "";
 
 //title común
 const contactTitle = document.createElement("h2");
 contactTitle.className = "title-h2";
 contactTitle.textContent = "Contacto";
 contactContainer.appendChild(contactTitle);
+
+//div que tengrá a los dos 
+const divDivider = document.createElement("div");
+divDivider.className = "div-divider";
+contactContainer.appendChild(divDivider);
 //div direcciones
 const contactOneDiv = document.createElement("div");
 contactOneDiv.className = "primary-div-contact";
-contactContainer.appendChild(contactOneDiv);
+divDivider.appendChild(contactOneDiv);
 
 //subtítulo
 const contactH3 = document.createElement("h3");
@@ -100,7 +108,7 @@ contactOneDiv.appendChild(contactOneDivIcod);
 //Contenido Icod
 const titleIcod = document.createElement("h4");
 titleIcod.className = "title-h4";
-titleIcod.textContent = "IcoD de los Vinos";
+titleIcod.textContent = "Icod de los Vinos";
 contactOneDivIcod.appendChild(titleIcod);
 
 const addressIcod = document.createElement("p");
@@ -119,8 +127,8 @@ contactOneDivIcod.appendChild(icodMap);
 
 //div 2
 const contactTwoDiv = document.createElement("div");
-contactTwoDiv.className = "secondary-div-contact";
-contactContainer.appendChild(contactTwoDiv);
+contactTwoDiv.className = "form-info";
+divDivider.appendChild(contactTwoDiv);
 
 //div para separar la info email
 const emailContactDiv = document.createElement("div");
@@ -144,13 +152,13 @@ contactFormH4.textContent =
   "O si lo prefieres, rellena este formulario y nos pondremos en contacto en la mayor brevedad";
 contactTwoDiv.appendChild(contactFormH4);
 
-//form
+//form (contact-form)
 const contactFormFooter = document.createElement("form");
-contactFormFooter.className = "newsletter-form"; //todos los form tienen la misma clase para facilitar el estilado
+contactFormFooter.className = "contact-form"; //todos los form tienen la misma clase para facilitar el estilado
 contactTwoDiv.appendChild(contactFormFooter);
 //interior del form
 const contactFormFooterName = document.createElement("input");
-contactFormFooterName.className = "newsletter-form-input";
+contactFormFooterName.className = "contact-form-input";
 contactFormFooterName.type = "text";
 contactFormFooterName.placeholder = "Nombre";
 contactFormFooterName.required = true;
@@ -158,7 +166,7 @@ contactFormFooterName.name = "nombre";
 contactFormFooter.appendChild(contactFormFooterName);
 
 const contactFormFooterEmail = document.createElement("input");
-contactFormFooterEmail.className = "newsletter-form-input";
+contactFormFooterEmail.className = "contact-form-input";
 contactFormFooterEmail.type = "email";
 contactFormFooterEmail.placeholder = "Correo electrónico";
 contactFormFooterEmail.required = true;
@@ -166,7 +174,7 @@ contactFormFooterEmail.name = "email";
 contactFormFooter.appendChild(contactFormFooterEmail);
 
 const contactFormFooterPhone = document.createElement("input");
-contactFormFooterPhone.className = "newsletter-form-input";
+contactFormFooterPhone.className = "contact-form-input";
 contactFormFooterPhone.type = "tel";
 contactFormFooterPhone.placeholder = "Teléfono";
 contactFormFooterPhone.required = false;
@@ -175,7 +183,7 @@ contactFormFooter.appendChild(contactFormFooterPhone);
 
 const contactFormFooterMessage = document.createElement("textarea");
 contactFormFooterMessage.className =
-  "newsletter-form-input contact-form-footer-message";
+  "contact-form-input contact-form-footer-message";
 contactFormFooterMessage.id = "contact-footer-msj";
 contactFormFooterMessage.rows = 5;
 contactFormFooterMessage.placeholder = "Escribe aquí tu duda o sugerencia...";
@@ -217,7 +225,7 @@ contactCheckboxLabel.appendChild(termsChedexLink);
 //botón enviar
 const contactFormFooterButton = document.createElement("button");
 contactFormFooterButton.type = "submit";
-contactFormFooterButton.className = "newsletter-button";
+contactFormFooterButton.className = "contact-form-button";
 contactFormFooterButton.textContent = "Enviar";
 contactFormFooter.appendChild(contactFormFooterButton);
 
@@ -251,4 +259,6 @@ contactFormFooter.addEventListener("submit", function (event) {
         "Oops, hubo un problema enviando el formulario. Inténtalo de nuevo."
       );
     });
-});
+})
+}
+renderContact ();
