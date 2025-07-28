@@ -1,4 +1,6 @@
-export async function productDetails() {
+import { showToast } from "../utils/toastify";
+
+async function productDetails() {
   const app = document.getElementById("app");
   app.innerHTML = "";
 
@@ -6,8 +8,7 @@ export async function productDetails() {
   const basePrice = product.precio;
 
   if (!product) {
-    alert("Producto no encontrado");
-    //Cambiar por toastify
+    showToast({text: "Producto no encontrado.", type: "error"});
     return;
   }
 
@@ -33,9 +34,7 @@ export async function productDetails() {
   productDetailsContainer.appendChild(productPrice);
 
   const productCategory = document.createElement("p");
-  productCategory.textContent = `Categoría: ${
-    product.categoria || "No especificada"
-  }`;
+  productCategory.textContent = `Categoría: ${product.categoria || "No especificada"}`;
   productDetailsContainer.appendChild(productCategory);
 
   if (product.ingredientes) {
@@ -51,7 +50,7 @@ export async function productDetails() {
   }
 
   const quantityContainer = document.createElement("div");
-
+  
   const quantityLabel = document.createElement("label");
   quantityLabel.setAttribute("for", "quantity");
   quantityLabel.textContent = "Cantidad:";
@@ -82,7 +81,7 @@ export async function productDetails() {
 
   if (product.categoria?.toLowerCase().trim() === "tartas") {
     const sizeContainer = document.createElement("div");
-
+ 
     const sizeText = document.createElement("p");
     sizeText.textContent = "Tamaño:";
     sizeContainer.appendChild(sizeText);
@@ -91,23 +90,23 @@ export async function productDetails() {
     sizeOptionButtons.className = "size-buttons";
 
     const sizesOptions = ["Pequeña", "Mediana", "Grande"];
-    sizesOptions.forEach((size) => {
+    sizesOptions.forEach(size => {
       const sizesOptionsbutton = document.createElement("button");
       sizesOptionsbutton.dataset.size = size; //Se sabrá la opción que escogió el usuario
       sizesOptionsbutton.textContent = size;
       sizeOptionButtons.appendChild(sizesOptionsbutton);
     });
-
+    
     sizeContainer.appendChild(sizeOptionButtons);
     productDetailsContainer.appendChild(sizeContainer);
 
     const sizeButtons = sizeOptionButtons.querySelectorAll("button");
-
+    
     sizeButtons.forEach((button) => {
       button.addEventListener("click", () => {
         const alreadySelected = button.classList.contains("selected");
 
-        sizeButtons.forEach((b) => b.classList.remove("selected"));
+        sizeButtons.forEach(b => b.classList.remove("selected"));
 
         if (alreadySelected) {
           selectedSize = null;
@@ -132,18 +131,17 @@ export async function productDetails() {
       });
     });
   }
-
+    
   const dateContainer = document.createElement("div");
   dateContainer.className = "date-container";
-
+    
   const dateLabel = document.createElement("label");
   dateLabel.setAttribute("for", "delivery-date");
   dateLabel.textContent = "Selecciona fecha de entrega o recogida:";
   dateContainer.appendChild(dateLabel);
 
   const orderInfo = document.createElement("small");
-  orderInfo.textContent =
-    "Recogida en local y envíos a domicilio disponibles en Tenerife, de lunes a viernes, en horario de 10:00 a 17:00.";
+  orderInfo.textContent = "Recogida en local y envíos a domicilio disponibles en Tenerife, de lunes a viernes, en horario de 10:00 a 17:00.";
   dateContainer.appendChild(orderInfo);
 
   const dateInput = document.createElement("input");
@@ -151,7 +149,6 @@ export async function productDetails() {
   dateInput.id = "delivery-date";
   dateInput.min = "";
   dateInput.max = "";
-
   dateContainer.appendChild(dateInput);
 
   const dateErrorMessage = document.createElement("p");
@@ -159,7 +156,7 @@ export async function productDetails() {
   dateContainer.appendChild(dateErrorMessage);
 
   productDetailsContainer.appendChild(dateContainer);
-
+    
   const nowDateTime = new Date();
   const todayDate = new Date();
 
@@ -177,18 +174,18 @@ export async function productDetails() {
     let year = date.getFullYear();
     let month = date.getMonth() + 1;
     let day = date.getDate();
-
+      
     if (month < 10) {
       month = "0" + month;
     }
-
+      
     if (day < 10) {
       day = "0" + day;
     }
-
+      
     return year + "-" + month + "-" + day;
   }
-
+    
   dateInput.min = formatDate(todayDate);
   dateInput.max = formatDate(maxDate);
 
@@ -201,64 +198,41 @@ export async function productDetails() {
     const dayDate = selectedDateInput.getDay();
 
     if (dayDate === 0 || dayDate === 6) {
-      alert("Solo se pueden seleccionar días laborables (lunes a viernes)");
-      //Cambiar por toastify
+      showToast({text: "Solo se pueden seleccionar días laborables (lunes a viernes).", type: "info"});
       dateErrorMessage.style.display = "block";
       dateInput.value = "";
     } else {
       dateErrorMessage.style.display = "none";
     }
   });
-
+    
   const getProductsLimit = (categoria, size = "") => {
     const cat = categoria?.toLowerCase().trim();
-    return cat === "tartas" || cat === "combinados" ? 5 : 20;
+    return (cat === "tartas" || cat === "combinados") ? 5 : 20;
   };
-
+    
   const validateQuantity = (quantityToValidate) => {
     const selectedDate = dateInput.value;
-    if (!selectedDate) {
-      alert(
-        "Por favor, selecciona una fecha antes de elegir la cantidad del producto."
-      );
-      //Cambiar por toastify
-      return false;
-    }
-
-    const sizeKey = selectedSize
-      ? `${product.nombre} - ${selectedSize}`
-      : product.nombre;
-    const productsByDate =
-      JSON.parse(localStorage.getItem("productsByDate")) || {};
+    const sizeKey = selectedSize ? `${product.nombre} - ${selectedSize}` : product.nombre;
+    const productsByDate = JSON.parse(localStorage.getItem("productsByDate")) || {};
     const dailyProducts = productsByDate[selectedDate] || {};
     const cartCount = dailyProducts[sizeKey] || 0;
 
-    const purchasedProducts =
-      JSON.parse(localStorage.getItem("purchasedProductsByDate")) || {};
+    const purchasedProducts = JSON.parse(localStorage.getItem("purchasedProductsByDate")) || {};
     const alreadyPurchased = purchasedProducts[selectedDate]?.[sizeKey] || 0;
 
     const maxProductsUnits = getProductsLimit(product.categoria, selectedSize);
     const currentTotal = cartCount + alreadyPurchased;
 
     if (currentTotal >= maxProductsUnits) {
-      alert(
-        `No quedan unidades disponibles de este producto${
-          selectedSize ? ` (${selectedSize})` : ""
-        } para el ${selectedDate}.`
-      );
-      //Cambiar por toastify
+      showToast({text: `No quedan unidades disponibles de este producto${selectedSize ? ` (${selectedSize})` : ""} para el ${selectedDate}.`, type: "error"});
       return false;
     }
-
+    
     if (currentTotal + quantityToValidate > maxProductsUnits) {
       const availableUnits = maxProductsUnits - currentTotal;
       const unitOrUnits = availableUnits === 1 ? "unidad" : "unidades";
-      alert(
-        `Quedan ${availableUnits} ${unitOrUnits} disponibles para este producto${
-          selectedSize ? ` (${selectedSize})` : ""
-        } en la fecha seleccionada (${selectedDate}).`
-      );
-      //Cambiar por toastify
+      showToast({text: `Quedan ${availableUnits} ${unitOrUnits} disponibles para este producto${selectedSize ? ` (${selectedSize})` : ""} en la fecha seleccionada (${selectedDate}).`, type: "info"});
       return false;
     }
     return true;
@@ -272,43 +246,30 @@ export async function productDetails() {
   addToCartButton.addEventListener("click", () => {
     const selectedDate = dateInput.value;
     const quantity = parseInt(quantitySpan.textContent, 10);
-
-    if (
-      !selectedDate &&
-      product.categoria?.toLowerCase().trim() === "tartas" &&
-      !selectedSize
-    ) {
-      alert(
-        "No has seleccionado los detalles del producto que quieres agregar al carrito."
-      );
-      //Cambiar por toastify
+    
+    if (!selectedDate && (product.categoria?.toLowerCase().trim() === "tartas" && !selectedSize)) {
+      showToast({text: "Selecciona los detalles del producto antes de agregarlo al carrito.", type: "warning"});
       return;
     }
 
     if (!selectedDate) {
-      alert("Por favor, selecciona una fecha válida antes de continuar.");
-      //Cambiar por toastify
+      showToast({text: "Selecciona una fecha válida antes de continuar.", type: "warning"});
       return;
     }
 
     if (product.categoria?.toLowerCase().trim() === "tartas" && !selectedSize) {
-      alert(
-        "Por favor, selecciona un tamaño antes de agregar el producto al carrito."
-      );
-      //Cambiar por toastify
+      showToast({text: "Selecciona un tamaño antes de agregar el producto al carrito.", type: "warning"});
       return;
     }
 
     if (!validateQuantity(quantity)) return;
 
     localStorage.setItem("selectedDate", selectedDate);
-    
+
     const quantityByDate = JSON.parse(localStorage.getItem("productsByDate")) || {};
     const dailyQuantity = quantityByDate[selectedDate] || {};
 
-    const sizeKey = selectedSize
-      ? `${product.nombre} - ${selectedSize}`
-      : product.nombre;
+    const sizeKey = selectedSize ? `${product.nombre} - ${selectedSize}` : product.nombre;
     const productsQuantity = dailyQuantity[sizeKey] || 0;
 
     dailyQuantity[sizeKey] = productsQuantity + quantity;
@@ -334,7 +295,7 @@ export async function productDetails() {
             finalPrice = 34;
             break;
           case "Grande":
-            finalPrice = 42;
+            finalPrice = 40;
             break;
         }
       }
@@ -344,7 +305,7 @@ export async function productDetails() {
         precio: finalPrice,
         quantity,
         date: selectedDate,
-        ...(selectedSize && { size: selectedSize }),
+        ...(selectedSize && { size: selectedSize })
       };
       shoppingCart.push(cartItem);
     }
@@ -362,39 +323,34 @@ export async function productDetails() {
         cartCounter.style.display = "none";
       }
     }
-    alert("¡Producto añadido correctamente al carrito!");
-    //Cambiar por toastify
+    showToast({text: "¡Producto añadido correctamente al carrito!", type: "success"});
     quantitySpan.textContent = "1";
   });
 
   const orderInfoContainer = document.createElement("div");
 
   const oderTimeLimit = document.createElement("p");
-  oderTimeLimit.textContent =
-    "*Para garantizar una correcta gestión, los pedidos que se deseen recibir o recoger el mismo día deberán realizarse en nuestra web antes de las 16:30.";
+  oderTimeLimit.textContent = "*Para garantizar una correcta gestión, los pedidos que se deseen recibir o recoger el mismo día deberán realizarse en nuestra web antes de las 16:30.";
   orderInfoContainer.appendChild(oderTimeLimit);
 
   const orderDetails = document.createElement("p");
-  orderDetails.textContent =
-    "*Los gastos de envío se seleccionan en la plataforma de pago.";
+  orderDetails.textContent = "*Los gastos de envío se seleccionan en la plataforma de pago.";
   orderInfoContainer.appendChild(orderDetails);
   productDetailsContainer.appendChild(orderInfoContainer);
 
   productSection.appendChild(productDetailsContainer);
   app.appendChild(productSection);
-
+    
   increaseButton.addEventListener("click", () => {
     let quantity = parseInt(quantitySpan.textContent, 10);
 
     if (!dateInput.value) {
-      alert("Por favor, selecciona una fecha antes de elegir la cantidad.");
-      //Cambiar por toastify
+      showToast({text: "Selecciona una fecha antes de elegir la cantidad del producto.", type: "warning"});
       return;
     }
 
     if (product.categoria?.toLowerCase().trim() === "tartas" && !selectedSize) {
-      alert("Por favor, selecciona un tamaño antes de elegir la cantidad.");
-      //Cambiar por toastify
+      showToast({text: "Selecciona un tamaño antes de elegir la cantidad.", type: "warning"});
       return;
     }
 
@@ -404,7 +360,7 @@ export async function productDetails() {
 
     quantitySpan.textContent = quantity;
   });
-
+  
   decreaseButton.addEventListener("click", () => {
     let quantity = parseInt(quantitySpan.textContent, 10);
     if (quantity > 1) {
@@ -418,5 +374,5 @@ export default {
   init() {
     console.log("Product Details init executed");
     productDetails();
-  },
+  }
 };

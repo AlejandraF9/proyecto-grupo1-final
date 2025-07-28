@@ -1,4 +1,5 @@
 import { openModal, closeModal } from "../utils/modal&overlay.js";
+import { showToast } from "../utils/toastify";
 
 const API_BASE = "https://api-bakery-production.up.railway.app";
 
@@ -87,12 +88,12 @@ function modifyDataBlog(entrada, onSuccess) {
 
     try {
       await modificarEntradaBlog(entrada._id, dataUpdate);
-      alert("Entrada modificada con éxito");
+      showToast({text: "Entrada modificada con éxito", type: "success"});
       closeModal();
       onSuccess();
     } catch (error) {
       console.error("Error modificando entrada:", error);
-      alert("No se pudo modificar la entrada");
+      showToast({text: "No se pudo modificar la entrada", type: "error"});
     }
   };
 
@@ -113,7 +114,7 @@ export async function renderBlog(content) {
     const contenido = inputContenido.value.trim();
 
     if (!nombre || !fecha || !contenido) {
-      alert("Rellena nombre, fecha y contenido");
+       showToast({text: "Rellena nombre, fecha y contenido", type: "warning"});
       return;
     }
 
@@ -126,7 +127,7 @@ export async function renderBlog(content) {
       entradasBlog = await fetchEntradasBlog();
       renderBlog(content);
     } catch (error) {
-      alert("Error al guardar la entrada");
+      showToast({text: "Error al guardar la entrada", type: "error"});
       console.error(error);
     }
   };
@@ -218,7 +219,7 @@ export async function renderBlog(content) {
             entradasBlog = await fetchEntradasBlog();
             renderBlog(content);
           } catch (error) {
-            alert("Error al eliminar la entrada");
+            showToast({text: "Error al eliminar la entrada", type: "error"});
           }
         }
       };

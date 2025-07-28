@@ -1,10 +1,11 @@
 import { goTo } from "../router";
 import { openModal, closeModal } from "../utils/modal&overlay";
+import { showToast } from "../utils/toastify";
 
 export async function getOrdersUser() {
   const currentUser = JSON.parse(localStorage.getItem("current-user"));
   if (!currentUser || !currentUser._id) {
-    alert("Usuario no registrado");
+    showToast({text: "Usuario no registrado.", type: "error"});
     return [];
   }
 
@@ -28,7 +29,7 @@ export async function getOrdersUser() {
     return data;
   } catch (error) {
     console.error("Error al buscar el pedido:", error);
-    alert("Hubo un problema al buscar el pedido.");
+    showToast({text: "Hubo un problema al buscar el pedido.", type: "error"});
     return [];
   }
 }

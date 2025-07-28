@@ -1,4 +1,5 @@
 import { openModal, closeModal } from "../utils/modal&overlay";
+import { showToast } from "../utils/toastify";
 
 const API_BASE = "https://api-bakery-production.up.railway.app";
 
@@ -220,11 +221,11 @@ function modifyData(p) {
 
       if (!response.ok) throw new Error("Error al guardar cambios");
 
-      alert("Producto guardado correctamente");
+      showToast({text: "Producto guardado correctamente",type: "success"});
       closeModal();
     } catch (error) {
       console.error("Error en la actualización:", error);
-      alert("Hubo un problema al guardar los cambios");
+      showToast({text: "Hubo un problema al guardar los cambios", type: "error"});
     }
   };
 

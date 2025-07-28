@@ -15,7 +15,6 @@ import { navigate } from "../router";
 </html>
 
 
-
 document.addEventListener('DOMContentLoaded', () => {
     const app = document. getElementById('app');
     
@@ -81,6 +80,7 @@ import { createNewUser } from "../api/apiUsers";
 import { closeModal, openModal } from "../utils/modal&overlay";
 import { infoValidations } from "../utils/validations";
 import { goTo } from "../router";
+import { showToast } from "../utils/toastify";
 
 export function renderSignupView() {
   const app = document.getElementById("app");
@@ -188,13 +188,13 @@ export function renderSignupView() {
     try {
       const data = await createNewUser({ name, email, password, role: "user" });
       console.log("Usuario registrado:", data);
-      alert("¡Te has registrado!");
+      showToast({text: "¡Te has registrado!", type: "success"});
       form.reset();
       closeModal();
       goTo("/login");
     } catch (error) {
       console.error("Error:", error);
-      alert("Ocurrió un error en el registro");
+      showToast({text: "Ocurrió un error en el registro", type: "error"});
     }
   });
 }

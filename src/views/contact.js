@@ -1,6 +1,7 @@
 import emailjs from "@emailjs/browser";
 emailjs.init("nZaP1NAVYfbs2Z14i");
 import { validacteContactform } from "../utils/validations";
+import { showToast } from "../utils/toastify";
 
 export function renderContact (){
 
@@ -255,16 +256,12 @@ contactFormFooter.addEventListener("submit", function (event) {
       "nZaP1NAVYfbs2Z14i"
     )
     .then(() => {
-      alert(
-        "¡Formulario enviado correctamente! Nos pondremos en contacto contigo lo antes posible."
-      );
+      showToast({text: "¡Formulario enviado correctamente! Nos pondremos en contacto contigo lo antes posible.", type: "success"});
       contactFormFooter.reset();
     })
     .catch((error) => {
       console.error("Error al enviar el formulario:", error);
-      alert(
-        "Oops, hubo un problema enviando el formulario. Inténtalo de nuevo."
-      );
+      showToast({text: "Oops, hubo un problema enviando el formulario. Inténtalo de nuevo.", type: "error"});
     });
 })
 }

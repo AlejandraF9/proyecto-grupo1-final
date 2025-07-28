@@ -1,3 +1,5 @@
+import { showToast } from "../utils/toastify";
+
 const API_BASE = "https://api-bakery-production.up.railway.app";
 
 async function fetchOrders() {
@@ -104,10 +106,10 @@ export async function renderPedidos(content) {
           estadoSelect.addEventListener("change", async () => {
             try {
               await updatePedidoStatus(pedido._id, estadoSelect.value);
-              alert("Estado actualizado correctamente");
+              showToast({text: "Estado actualizado correctamente", type: "success"});
             } catch (error) {
               console.error(error);
-              alert("Error al actualizar estado");
+              showToast({text: "Error al actualizar estado", type: "error"});
             }
           });
 

@@ -1,5 +1,6 @@
 import { openModal, closeModal } from "../utils/modal&overlay.js";
 import { goTo } from "../router.js";
+import { showToast } from "../utils/toastify";
 
 export async function renderForm(
   fieldsObj,
@@ -76,12 +77,12 @@ export async function renderForm(
 
         const updatedUser = await response.json();
         localStorage.setItem("current-user", JSON.stringify(updatedUser));
-        alert("Perfil actualizado correctamente");
+        showToast({text: "Perfil actualizado correctamente.", type: "success"});
         closeModal();
       }
     } catch (err) {
       console.error("Error al guardar el perfil:", err);
-      alert("No se pudo actualizar tu perfil");
+      showToast({text: "No se pudo actualizar tu perfil.", type: "error"});
     }
   };
 
