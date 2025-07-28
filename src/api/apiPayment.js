@@ -1,13 +1,17 @@
 export async function sendPaymentRequest(userData, userId) {
   try {
+    const payload = {
+      title: "Payment completed",
+      body: userData,
+      userId: userId,
+    };
+
+    console.log("Enviando datos del pago:", payload);
+
     const response = await fetch("https://dummyjson.com/posts/add", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        title: "Payment completed",
-        body: userData,
-        userId: userId,
-      }),
+      body: JSON.stringify(payload),
     });
 
     if (!response.ok) {
