@@ -180,12 +180,15 @@
   font-weight: bold;
   font-size: 1rem;
   cursor: pointer;
-  margin-bottom: 5px;
+  margin-bottom: 0;
+  padding: 5px;
 }
 
 .admin-blog-contenido {
-  margin-top: 5px;
+  margin-top: 0;
+  padding: 5px;
   font-size: 0.95rem;
+  white-space: pre-line;
 }
 
 .admin-blog-imagen {

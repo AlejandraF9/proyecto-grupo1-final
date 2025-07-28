@@ -3,11 +3,11 @@
 ========================== */
 @media screen and (min-width: 320px) and (max-width: 760px) {
   #blog-section {
-    display:flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
   }
-  
+
   .blog-card-container {
     display: flex;
     flex-direction: row;
@@ -42,13 +42,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
   }
 
   .blog-title {
     font-size: 1.5rem;
     background-color: var(--blue-color);
-    width:10.5rem;
+    width: 10.5rem;
     padding: 0rem;
     border-radius: none;
     text-transform: uppercase;
@@ -57,7 +56,6 @@
     margin-top: 2rem;
     margin-bottom: 1rem;
     font-weight: 400;
-    
   }
 
   .blog-title-card {
@@ -97,7 +95,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
   }
 
   /* Título principal del blog */
@@ -167,7 +164,8 @@
   .blog-title-card {
     font-size: 1.5rem;
     font-weight: 400;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
+    padding-bottom: 0.5rem;
     text-transform: uppercase;
     color: var(--color);
   }
@@ -177,7 +175,10 @@
     font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 1rem;
+    margin-top: 0;
+    padding-top: 0.5rem;
     color: var(--color);
+    white-space: pre-line;
   }
 
   /* Fecha */
@@ -209,7 +210,10 @@
 
   .blog-button .blog-button-bg {
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background-color: var(--pink);
     z-index: 1;
     transition: background-color 0.3s ease;
@@ -229,7 +233,7 @@
    MONITOR (1029px - 1920px)
 ========================== */
 @media screen and (min-width: 1029px) {
-    /* ==========================
+  /* ==========================
     SECCIÓN DEL BLOG
   ========================== */
   #blog-section {
@@ -240,14 +244,12 @@
     border-radius: 0;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     font-family: var(--text-font);
-
   }
 
   .blog-title-container {
     display: flex;
     justify-content: center;
     align-items: center;
-
   }
 
   /* Título principal del blog */
@@ -359,7 +361,10 @@
 
   .blog-button .blog-button-bg {
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background-color: var(--pink);
     z-index: 1;
     transition: background-color 0.3s ease;
