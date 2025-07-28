@@ -2,6 +2,7 @@ import { sendPaymentRequest } from "../api/apiPayment";
 import { shoppingCart } from "../views/shoppingCart";
 import { closeModal } from "../utils/modal&overlay";
 import { paymentValidations } from "../utils/validations";
+import { showToast } from "../utils/toastify";
 
 export function generatePaymentForm(container) {
   const paymentForm = document.createElement("form");
@@ -212,18 +213,10 @@ export function generatePaymentForm(container) {
     const pickupValue = pickupLocationSelect.value;
     const deliveryValue = deliveryLocationSelect.value;
 
-    if (
-      !deliveryMethod || !paymentSelect.value ||
-      (deliveryMethod === "store" && (!pickupValue || pickupValue === pickupPlaceholder.textContent)) ||
-      (deliveryMethod === "home" && (!deliveryValue || deliveryValue === deliveryPlaceholder.textContent)) ||
-      !paymentName.value.trim() || ((deliveryMethod === "home") && !paymentAddress.value.trim()) ||
-      (paymentSelect.value === "card" && (!paymentCard.value.trim() || !paymentExpiryDate.value.trim() || !paymentCvc.value.trim())) ||
-      !paymentPhone.value.trim()
-    ) {
-      alert("Por favor, selecciona e introduce todos los datos necesarios para realizar el pago.");
-      //Cambiar por toastify
-      return;
-    }
+    if (deliveryMethod === orderPlaceholder.textContent || paymentMethod === paymentPlaceholder.textContent || (deliveryMethod === "store" && (!pickupValue || pickupValue === pickupPlaceholder.textContent)) || (deliveryMethod === "home" && (!deliveryValue || deliveryValue === deliveryPlaceholder.textContent)) || !paymentName.value.trim() || (deliveryMethod === "home" && !paymentAddress.value.trim()) || (paymentMethod === "card" && (!paymentCard.value.trim() || !paymentExpiryDate.value.trim() || !paymentCvc.value.trim())) || !paymentPhone.value.trim()) {
+      showToast({text: "Por favor, completa todos los datos necesarios para realizar el pago.", type: "warning"});
+  return;
+}
 
     if (!paymentValidations({
       name: paymentName,
@@ -253,8 +246,7 @@ export function generatePaymentForm(container) {
     try {
       console.log("Pago procesado");
       await sendPaymentRequest(userData, newUserId);
-      alert("Pago realizado con éxito");
-      //Cambiar por toastify
+      showToast({text: "¡Pago realizado con éxito!", type: "success"});
 
       const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
       const purchasedProducts = JSON.parse(localStorage.getItem("purchasedProductsByDate")) || {};
@@ -284,8 +276,7 @@ export function generatePaymentForm(container) {
       closeModal();
       shoppingCart();
     } catch (error) {
-      alert("Hubo un error en el pago");
-      //Cambiar por toastify
+      showToast({text: "Hubo un error al procesar el pago. Intenta de nuevo más tarde.", type: "error"});
     }
   });
 

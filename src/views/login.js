@@ -2,6 +2,7 @@ import { getAllUsers } from "../api/apiUsers";
 import { closeModal, openModal } from "../utils/modal&overlay";
 import { loginValidations } from "../utils/validations";
 import { goTo } from "../router";
+import { showToast } from "../utils/toastify";
 
 export function userLogin() {
   const app = document.getElementById("app");
@@ -79,6 +80,7 @@ export function userLogin() {
 
       if (currentUser) {
         localStorage.setItem("current-user", JSON.stringify(currentUser));
+        showToast({text: "Sesión iniciada correctamente", type: "success"});
         app.innerHTML = "";
 
         closeModal();
@@ -88,8 +90,7 @@ export function userLogin() {
           goTo("/home");
         }
       } else {
-        alert("Correo electrónico o contraseña incorrectos");
-        //Cambiar por toastify
+        showToast({text: "Correo electrónico o contraseña incorrectos", type: "error"});
       }
     } catch {
       console.error("Login request failed", error);
@@ -104,11 +105,7 @@ export function userLogin() {
 
   loginForm.appendChild(loginTitle);
   loginForm.appendChild(formInputsContainer);
-
   loginContainer.appendChild(loginForm);
-
-  // app.innerHTML = "";
-  // app.appendChild(loginContainer);
   loginContainer.appendChild(signupText);
   openModal(loginContainer);
 }

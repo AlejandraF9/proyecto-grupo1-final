@@ -1,6 +1,7 @@
 import { validationName } from './utils/validations';
 import { validationEmail } from './utils/validations';
 import { validationChecked } from './utils/validations';
+import { showToast } from "../utils/toastify";
 import emailjs from '@emailjs/browser';
 emailjs.init('nZaP1NAVYfbs2Z14i'); 
 
@@ -97,12 +98,12 @@ newsletterForm.addEventListener('submit', function (event) {
 
 emailjs.sendForm('service_v2a0nka', 'template_xvh27rf', this, 'nZaP1NAVYfbs2Z14i')
       .then(() => {
-        alert('¡Formulario enviado correctamente! Gracias por suscribirte.');
+        showToast({text: "¡Formulario enviado correctamente! Gracias por suscribirte.", type: "success"});
         this.reset();
       })
       .catch((error) => {
         console.error('Error al enviar el formulario:', error);
-        alert('Oops, hubo un problema enviando el formulario. Inténtalo de nuevo.');
+        showToast({text: "Oops, hubo un problema enviando el formulario. Inténtalo de nuevo.", type: "error"});
       });
   
   });

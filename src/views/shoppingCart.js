@@ -1,5 +1,6 @@
 import { openModal } from "../utils/modal&overlay";
 import { generatePaymentForm } from "../views/payment";
+import { showToast } from "../utils/toastify";
 
 export function shoppingCart() {
   const app = document.getElementById("app");
@@ -37,8 +38,7 @@ export function shoppingCart() {
         cartCounter.textContent = "";
     }
     
-    alert("Tu carrito se ha quedado vacío.");
-    //Cambiar por toastify
+    showToast({text: "Tu carrito se ha quedado vacío.", type: "info"});
     shoppingCart();
   });
 
@@ -125,8 +125,7 @@ export function shoppingCart() {
     const availableUnits = limit - alreadyPurchased - currentInCart;
   
     if (availableUnits <= 0) {
-        alert(`No quedan más unidades disponibles de este producto${item.size ? ` (${item.size})` : ""} para el ${increaseDate}.`);
-        //Cambiar por toastify
+        showToast({text: `“${item.nombre}” ha sido eliminado del carrito.`, type: "info"});
         return;
     }
 
@@ -190,7 +189,7 @@ export function shoppingCart() {
       }
     }
 
-    alert(`\"${item.nombre}\" ha sido eliminado del carrito.`);
+    showToast({text: `“${item.nombre}” ha sido eliminado del carrito.`, type: "info"});
     shoppingCart();
   });
 
@@ -251,33 +250,21 @@ export function shoppingCart() {
     const existingDiscount = localStorage.getItem("discountCode");
         
     if (cartItems.length === 0) {
-        alert("Debes tener productos en el carrito para aplicar un código de descuento.");
-        //Cambiar por toastify
+        showToast({text: "Debes tener productos en el carrito para aplicar un código de descuento.", type: "warning"});
         discountInput.value = "";
         return;
     }
 
     if (code !== "DULCE10" && !existingDiscount) {
-        alert("Código no válido.");
-        //Cambiar por toastify
+        showToast({text: "Código no válido.", type: "error"});
     } else if (code === "DULCE10" && existingDiscount !== "DULCE10") {
         const today = new Date().toISOString().split("T")[0];
-        const usedDate = localStorage.getItem("discountUsedDate");
-
-        if (usedDate === today) {
-            alert("Ya has utilizado este descuento hoy. Solo puede usarse una vez por día.");
-            //Cambiar por toastify
-            return;
-        }
-        
         localStorage.setItem("discountCode", code);
         localStorage.setItem("discountUsedDate", today);
-        alert("¡Descuento aplicado correctamente!");
-        //Cambiar por toastify
+        showToast({text: "¡Descuento aplicado correctamente!", type: "success"});
         shoppingCart();
     } else {
-      alert("Ya has aplicado un código de descuento. No puedes introducir otro.");
-      //Cambiar por toastify
+      showToast({text: "Ya has aplicado un código de descuento. No puedes introducir otro.", type: "warning"});
     }
     discountInput.value = "";
   });
@@ -305,8 +292,7 @@ export function shoppingCart() {
 
   checkoutButton.addEventListener("click", () => {
     if (cartItems.length === 0) {
-      alert("Tu carrito está vacío. Añade productos antes de continuar.");
-      //Cambiar por toastify
+      showToast({text: "Tu carrito está vacío. Añade productos antes de continuar.", type: "warning"});
       return;
     }
 
@@ -343,7 +329,7 @@ export function shoppingCart() {
       cartCounter.classList.remove("visible");
     }
 
-    alert("¡Gracias por tu compra! Tus productos han sido reservados.");
+    showToast({text: "¡Gracias por tu compra! Tus productos han sido reservados.", type: "success"});
 
     const currentUser = JSON.parse(localStorage.getItem("current-user"));
     let userEmail = null;
@@ -351,7 +337,7 @@ export function shoppingCart() {
     if (!currentUser) {
       userEmail = prompt("Introduce tu email para confirmar tu pedido:");
       if (!userEmail || !userEmail.includes("@")) {
-        alert("Por favor introduce un email válido.");
+        showToast({text: "Por favor introduce un email válido.", type: "error"});
         return;
       }
     }
@@ -388,9 +374,7 @@ export function shoppingCart() {
       })
       .catch((error) => {
         console.error("Error al crear el pedido:", error);
-        alert(
-          "Hubo un problema al enviar el pedido. Intenta de nuevo más tarde."
-        );
+        showToast({text: "Hubo un problema al enviar el pedido. Intenta de nuevo más tarde.", type: "error"});
       });
 
     shoppingCart(); // Vuelve a renderizar el carrito vacío
