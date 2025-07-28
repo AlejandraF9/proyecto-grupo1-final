@@ -21,12 +21,11 @@ async function updatePedidoStatus(id, nuevoEstado) {
 }
 
 export async function renderPedidos(content) {
-  content.innerHTML = "<h2>Pedidos</h2>";
+  content.innerHTML = "<h2 class='admin-pedidos-titulo'>Pedidos</h2>";
 
   try {
     let pedidos = await fetchOrders();
 
-    // Ordenar por fecha de creación descendente (más reciente primero)
     pedidos.sort(
       (a, b) =>
         new Date(b.fechaCreacion).getTime() -
@@ -48,13 +47,15 @@ export async function renderPedidos(content) {
 
     const crearTablaPedidos = (titulo, listaPedidos) => {
       const section = document.createElement("section");
+      section.classList.add("admin-pedidos-section");
+
       const heading = document.createElement("h3");
       heading.textContent = titulo;
+      heading.classList.add("admin-pedidos-subtitulo");
       section.appendChild(heading);
 
       const tabla = document.createElement("table");
-      tabla.style.width = "100%";
-      tabla.style.borderCollapse = "collapse";
+      tabla.classList.add("admin-pedidos-tabla");
 
       const thead = document.createElement("thead");
       const headRow = document.createElement("tr");
@@ -62,8 +63,7 @@ export async function renderPedidos(content) {
         (text) => {
           const th = document.createElement("th");
           th.textContent = text;
-          th.style.padding = "8px";
-          th.style.borderBottom = "1px solid #ccc";
+          th.classList.add("admin-pedidos-th");
           headRow.appendChild(th);
         }
       );
@@ -75,6 +75,7 @@ export async function renderPedidos(content) {
       listaPedidos.forEach((pedido) => {
         pedido.productos.forEach((producto) => {
           const row = document.createElement("tr");
+          row.classList.add("admin-pedidos-tr");
 
           const nombre = producto.nombre || "—";
           const precio = producto.precio != null ? `$${producto.precio}` : "—";
@@ -84,8 +85,8 @@ export async function renderPedidos(content) {
             ? new Date(pedido.fechaCreacion).toLocaleDateString()
             : "—";
 
-          // Campo editable para el estado
           const estadoSelect = document.createElement("select");
+          estadoSelect.classList.add("admin-pedidos-select");
           [
             "pendiente",
             "procesando",
@@ -113,12 +114,12 @@ export async function renderPedidos(content) {
           [nombre, precio, cantidad, email, fecha].forEach((text) => {
             const td = document.createElement("td");
             td.textContent = text;
-            td.style.padding = "8px";
+            td.classList.add("admin-pedidos-td");
             row.appendChild(td);
           });
 
           const estadoTd = document.createElement("td");
-          estadoTd.style.padding = "8px";
+          estadoTd.classList.add("admin-pedidos-td");
           estadoTd.appendChild(estadoSelect);
           row.appendChild(estadoTd);
 
@@ -134,7 +135,8 @@ export async function renderPedidos(content) {
     crearTablaPedidos("Pedidos al día", pedidosAlDia);
     crearTablaPedidos("Pedidos por encargo", pedidosPorEncargo);
   } catch (error) {
-    content.innerHTML = "Error cargando pedidos.";
+    content.innerHTML =
+      "<p class='admin-error-texto'>Error cargando pedidos.</p>";
     console.error(error);
   }
 }

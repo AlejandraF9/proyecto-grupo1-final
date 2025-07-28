@@ -1,0 +1,464 @@
+/* Admin Panel - Usuarios Styles */
+
+.admin-content table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-family: var(--text-font);
+  font-size: 0.95rem;
+  color: var(--text-color);
+  margin-top: 1rem;
+}
+
+.admin-content th,
+.admin-content td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.admin-content thead th {
+  border-bottom: 2px solid var(--blue-color);
+  font-weight: 600;
+  color: var(--blue-color);
+}
+
+.admin-content tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+.admin-content button {
+  background-color: var(--pink);
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: var(--text-font);
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.admin-content button:hover {
+  background-color: var(--blue-color);
+}
+
+/* Admin Panel - Productos Styles */
+
+.admin-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+  font-family: var(--text-font);
+}
+
+.admin-productos select,
+.admin-productos input[type="search"] {
+  padding: 6px 10px;
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: var(--text-font);
+}
+
+.admin-productos table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-family: var(--text-font);
+  font-size: 0.95rem;
+  margin-top: 1rem;
+}
+
+.admin-productos th,
+.admin-productos td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.admin-productos thead th {
+  border-bottom: 2px solid var(--blue-color);
+  color: var(--blue-color);
+  font-weight: 600;
+}
+
+.admin-productos tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+.admin-btn-modificar,
+.admin-btn-eliminar {
+  padding: 5px 8px;
+  font-size: 0.85rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #fff;
+  font-family: var(--text-font);
+  margin: 2px 5px 2px 0;
+  display: inline-block;
+}
+
+.admin-btn-modificar {
+  background-color: var(--pink);
+}
+
+.admin-btn-eliminar {
+  background-color: #dc3545;
+}
+
+.admin-btn-modificar:hover {
+  background-color: var(--blue-color);
+}
+
+.admin-btn-eliminar:hover {
+  background-color: #b02a37;
+}
+
+/* Admin Panel - Blog Styles */
+
+.admin-blog-form {
+  margin-bottom: 20px;
+  font-family: var(--text-font);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.admin-input-blog,
+.admin-textarea-blog {
+  width: 100%;
+  padding: 10px;
+  font-family: var(--text-font);
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.admin-textarea-blog {
+  min-height: 200px;
+  resize: vertical;
+}
+
+.admin-btn-guardar-blog {
+  background-color: var(--pink);
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: var(--text-font);
+  font-size: 0.95rem;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.admin-btn-guardar-blog:hover {
+  background-color: var(--blue-color);
+}
+
+.admin-blog-entry {
+  border-bottom: 1px solid #eee;
+  padding: 10px 0;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  box-sizing: border-box;
+}
+
+.admin-blog-titulo {
+  color: var(--blue-color);
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+.admin-blog-contenido {
+  margin-top: 5px;
+  font-size: 0.95rem;
+}
+
+.admin-blog-imagen {
+  max-width: 100%;
+  margin-top: 8px;
+  border-radius: 6px;
+}
+
+.admin-blog-lista {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  box-sizing: border-box;
+}
+
+/* Admin Panel - Pedidos Styles */
+
+.admin-pedidos h2,
+.admin-pedidos h3 {
+  font-family: var(--text-title);
+  color: var(--blue-color);
+  margin-bottom: 1rem;
+}
+
+.admin-pedidos table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--text-font);
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+}
+
+.admin-pedidos th,
+.admin-pedidos td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.admin-pedidos thead th {
+  border-bottom: 2px solid var(--blue-color);
+  font-weight: bold;
+  color: var(--blue-color);
+}
+
+.admin-pedidos tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+.admin-pedidos select {
+  padding: 6px 10px;
+  font-family: var(--text-font);
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.admin-pedidos-section {
+  max-width: 1000px;
+  margin: 30px auto 2rem auto;
+  padding: 20px 30px;
+  background-color: var(--color-blanco);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Admin Panel - Blog Modificar (Modal) */
+
+.containerForm {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 40px 20px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.formModify {
+  background-color: var(--white);
+  border-radius: 10px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  padding: 40px;
+  max-width: 800px;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--text-font);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  animation: fadeInScale 0.3s ease;
+}
+
+.formModify label {
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: var(--blue-color);
+}
+
+.formModify input,
+.formModify textarea {
+  padding: 10px;
+  font-family: var(--text-font);
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.formModify textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.btnSaveModify {
+  background-color: var(--pink);
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: var(--text-font);
+  font-size: 0.95rem;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.btnSaveModify:hover {
+  background-color: var(--blue-color);
+}
+
+/* Contenedor de acciones en entradas del blog */
+
+.admin-blog-acciones {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.modal-close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: #aaa;
+  line-height: 1;
+}
+
+.modal-close-button:hover {
+  color: #000;
+}
+
+/* MODAL PERSONALIZADO - PRODUCTOS */
+
+.modal-productos-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 40px 20px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.modal-productos-form {
+  background-color: var(--white);
+  border-radius: 10px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  padding: 40px;
+  max-width: 900px;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--text-font);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  animation: fadeInScale 0.3s ease;
+}
+
+.modal-productos-form label {
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: var(--blue-color);
+}
+
+.modal-productos-form input {
+  padding: 10px;
+  font-family: var(--text-font);
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* MODAL PERSONALIZADO - BLOG */
+
+.modal-blog-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 40px 20px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.modal-blog-form {
+  background-color: var(--white);
+  border-radius: 10px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  padding: 40px;
+  max-width: 800px;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--text-font);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  animation: fadeInScale 0.3s ease;
+}
+
+.modal-blog-form label {
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: var(--blue-color);
+}
+
+.modal-blog-form input,
+.modal-blog-form textarea {
+  padding: 10px;
+  font-family: var(--text-font);
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.modal-blog-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

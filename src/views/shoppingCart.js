@@ -309,7 +309,92 @@ export function shoppingCart() {
       //Cambiar por toastify
       return;
     }
-    
+
+    const purchasedProducts =
+      JSON.parse(localStorage.getItem("purchasedProductsByDate")) || {};
+
+    cartItems.forEach((item) => {
+      const date = item.date;
+      const sizeKey = item.size ? `${item.nombre} - ${item.size}` : item.nombre;
+
+      if (!purchasedProducts[date]) {
+        purchasedProducts[date] = {};
+      }
+
+      if (!purchasedProducts[date][sizeKey]) {
+        purchasedProducts[date][sizeKey] = 0;
+      }
+
+      purchasedProducts[date][sizeKey] += item.quantity;
+    });
+
+    localStorage.setItem(
+      "purchasedProductsByDate",
+      JSON.stringify(purchasedProducts)
+    );
+
+    localStorage.removeItem("cartItems");
+    localStorage.removeItem("productsByDate");
+    localStorage.removeItem("discountCode");
+
+    const cartCounter = document.querySelector(".cart-counter");
+    if (cartCounter) {
+      cartCounter.textContent = "";
+      cartCounter.classList.remove("visible");
+    }
+
+    alert("¡Gracias por tu compra! Tus productos han sido reservados.");
+
+    const currentUser = JSON.parse(localStorage.getItem("current-user"));
+    let userEmail = null;
+
+    if (!currentUser) {
+      userEmail = prompt("Introduce tu email para confirmar tu pedido:");
+      if (!userEmail || !userEmail.includes("@")) {
+        alert("Por favor introduce un email válido.");
+        return;
+      }
+    }
+
+    const hoy = new Date().toISOString().slice(0, 10);
+    const categoria = cartItems.every((item) => item.date === hoy)
+      ? "al día"
+      : "encargo";
+
+    const order = {
+      productos: cartItems,
+      total: Number((total - discountValue).toFixed(2)),
+      categoria,
+      email: currentUser ? currentUser.email : userEmail,
+      user: currentUser ? currentUser._id : null,
+    };
+    console.log("Productos del carrito:");
+    cartItems.forEach((item) => console.log(item.nombre, item.url));
+    console.log("Pedido a enviar:", order);
+
+    fetch("https://api-bakery-production.up.railway.app/orders", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(order),
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error("Error al enviar el pedido.");
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Pedido enviado correctamente:", data);
+      })
+      .catch((error) => {
+        console.error("Error al crear el pedido:", error);
+        alert(
+          "Hubo un problema al enviar el pedido. Intenta de nuevo más tarde."
+        );
+      });
+
+    shoppingCart(); // Vuelve a renderizar el carrito vacío
+
     // Modal pasarela de pago
     const paymentContainer = document.createElement("div");
     paymentContainer.className = "payment-container";

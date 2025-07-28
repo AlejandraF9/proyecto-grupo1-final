@@ -1,4 +1,5 @@
 import { openModal, closeModal } from "../utils/modal&overlay.js";
+import { goTo } from "../router.js";
 
 export async function renderForm(
   fieldsObj,
@@ -34,6 +35,17 @@ export async function renderForm(
     fieldWrapper.appendChild(input);
     form.appendChild(fieldWrapper);
   });
+
+  const historyOrders = document.createElement("a");
+  historyOrders.href = "#";
+  historyOrders.textContent = "Historial de pedidos";
+  historyOrders.classList.add("link-historyOrders");
+  historyOrders.addEventListener("click", async (e) => {
+    e.preventDefault();
+    closeModal();
+    goTo("/orders");
+  });
+  form.appendChild(historyOrders);
 
   const submitBtn = document.createElement("button");
   submitBtn.type = "submit";

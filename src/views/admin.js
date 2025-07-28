@@ -20,42 +20,22 @@ let app, banner, menu, content;
 
 function crearBanner() {
   banner = document.createElement("div");
-  banner.style.position = "relative";
-  banner.style.height = "250px";
-  banner.style.backgroundImage =
-    "url('https://images.pexels.com/photos/1857157/pexels-photo-1857157.jpeg')";
-  banner.style.backgroundSize = "cover";
-  banner.style.backgroundPosition = "center";
-  banner.style.display = "flex";
-  banner.style.alignItems = "center";
-  banner.style.padding = "0 20px";
-  banner.style.boxSizing = "border-box";
-  banner.style.color = "white";
+  banner.className = "admin-banner";
   app.appendChild(banner);
 
   const logo = document.createElement("img");
   logo.src = "./../../assets/logo_tienda.webp";
-  logo.style.height = "70px";
-  logo.style.width = "auto";
-  logo.style.marginRight = "20px";
+  logo.className = "admin-logo";
   banner.appendChild(logo);
 
   const logoText = document.createElement("div");
   logoText.textContent = "DUMMIE bakery";
-  logoText.style.fontSize = "32px";
-  logoText.style.fontWeight = "700";
-  logoText.style.textShadow = "0 0 6px rgba(0,0,0,0.5)";
+  logoText.className = "admin-logo-text";
   banner.appendChild(logoText);
 
   const closeSession = document.createElement("button");
   closeSession.textContent = "Cerrar sesión";
-  closeSession.style.position = "absolute";
-  closeSession.style.top = "20px";
-  closeSession.style.right = "20px";
-  closeSession.style.background = "#c56e78";
-  closeSession.style.color = "white";
-  closeSession.style.border = "none";
-  closeSession.style.padding = "10px 20px";
+  closeSession.className = "admin-logout-button";
   banner.appendChild(closeSession);
 
   closeSession.addEventListener("click", () => {
@@ -66,12 +46,7 @@ function crearBanner() {
 
 function crearMenu() {
   menu = document.createElement("nav");
-  menu.style.display = "flex";
-  menu.style.justifyContent = "space-around";
-  menu.style.background = "#fff";
-  menu.style.padding = "10px 0";
-  menu.style.marginTop = "10px";
-  menu.style.boxShadow = "0 2px 5px rgba(0,0,0,0.1)";
+  menu.className = "admin-menu";
   app.appendChild(menu);
 
   tabButtons = {};
@@ -79,13 +54,8 @@ function crearMenu() {
   tabs.forEach((tab) => {
     const btn = document.createElement("button");
     btn.textContent = tab;
-    btn.style.background = "none";
-    btn.style.border = "none";
-    btn.style.fontSize = "16px";
-    btn.style.cursor = "pointer";
-    btn.style.padding = "10px 15px";
-    btn.style.transition = "color 0.3s";
-    btn.style.color = tab === currentTab ? "#c56e78" : "#555";
+    btn.className = "admin-tab-button";
+    if (tab === currentTab) btn.classList.add("active");
     btn.addEventListener("click", () => {
       if (currentTab !== tab) {
         currentTab = tab;
@@ -100,15 +70,13 @@ function crearMenu() {
 
 function updateTabStyles() {
   tabs.forEach((tab) => {
-    tabButtons[tab].style.color = tab === currentTab ? "#c56e78" : "#555";
-    tabButtons[tab].style.borderBottom =
-      tab === currentTab ? "2px solid #c56e78" : "none";
+    tabButtons[tab].classList.toggle("active", tab === currentTab);
   });
 }
 
 function crearContenedorContenido() {
   content = document.createElement("div");
-  content.style.marginTop = "20px";
+  content.className = "admin-content";
   app.appendChild(content);
 }
 
@@ -141,15 +109,10 @@ export default {
     }
 
     document.body.innerHTML = "";
-    document.body.style.margin = "0";
-    document.body.style.fontFamily =
-      "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
-    document.body.style.background = "#f9f6f7";
+    document.body.className = "admin-body";
 
     app = document.createElement("div");
-    app.style.maxWidth = "1200px";
-    app.style.margin = "0 auto";
-    app.style.padding = "10px";
+    app.className = "admin-app";
     document.body.appendChild(app);
 
     crearBanner();

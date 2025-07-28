@@ -20,11 +20,10 @@ export async function renderProductos(content) {
   content.innerHTML = "";
 
   const filtrosDiv = document.createElement("div");
-  filtrosDiv.style.display = "flex";
-  filtrosDiv.style.gap = "10px";
-  filtrosDiv.style.marginBottom = "15px";
+  filtrosDiv.classList.add("admin-filtros");
 
   const selectCat = document.createElement("select");
+  selectCat.classList.add("admin-select");
   const optionAll = document.createElement("option");
   optionAll.value = "";
   optionAll.textContent = "Todas las categorías";
@@ -42,16 +41,13 @@ export async function renderProductos(content) {
   const inputBuscar = document.createElement("input");
   inputBuscar.type = "search";
   inputBuscar.placeholder = "Buscar por nombre...";
-  inputBuscar.style.flexGrow = "1";
-  inputBuscar.style.padding = "5px 10px";
+  inputBuscar.classList.add("admin-input-buscar");
   filtrosDiv.appendChild(inputBuscar);
 
   content.appendChild(filtrosDiv);
 
   const tabla = document.createElement("table");
-  tabla.style.width = "100%";
-  tabla.style.borderCollapse = "collapse";
-  tabla.style.textAlign = "left";
+  tabla.classList.add("admin-table");
 
   const thead = document.createElement("thead");
   const headRow = document.createElement("tr");
@@ -66,8 +62,6 @@ export async function renderProductos(content) {
   ].forEach((text) => {
     const th = document.createElement("th");
     th.textContent = text;
-    th.style.borderBottom = "2px solid #ccc";
-    th.style.padding = "8px";
     headRow.appendChild(th);
   });
   thead.appendChild(headRow);
@@ -101,7 +95,6 @@ export async function renderProductos(content) {
 
       productos.forEach((p) => {
         const row = document.createElement("tr");
-        row.style.borderBottom = "1px solid #eee";
 
         [
           "nombre",
@@ -114,21 +107,14 @@ export async function renderProductos(content) {
           const td = document.createElement("td");
           td.textContent =
             prop === "precio" ? `$${p[prop].toFixed(2)}` : p[prop] || "";
-          td.style.padding = "8px";
           row.appendChild(td);
         });
 
         const tdAcc = document.createElement("td");
-        tdAcc.style.padding = "8px";
 
         const btnModificar = document.createElement("button");
         btnModificar.textContent = "Modificar";
-        btnModificar.style.marginRight = "5px";
-        btnModificar.style.backgroundColor = "#c56e78";
-        btnModificar.style.color = "white";
-        btnModificar.style.border = "none";
-        btnModificar.style.padding = "5px 8px";
-        btnModificar.style.borderRadius = "4px";
+        btnModificar.classList.add("admin-btn-modificar");
         btnModificar.onclick = () => {
           modifyData(p);
         };
@@ -137,11 +123,7 @@ export async function renderProductos(content) {
 
         const btnEliminar = document.createElement("button");
         btnEliminar.textContent = "Eliminar";
-        btnEliminar.style.backgroundColor = "#dc3545";
-        btnEliminar.style.color = "white";
-        btnEliminar.style.border = "none";
-        btnEliminar.style.padding = "5px 8px";
-        btnEliminar.style.borderRadius = "4px";
+        btnEliminar.classList.add("admin-btn-eliminar");
         btnEliminar.onclick = async () => {
           if (confirm(`¿Eliminar producto ${p.nombre}?`)) {
             await eliminarProducto(p._id);
@@ -176,10 +158,17 @@ function debounce(fn, delay) {
 
 function modifyData(p) {
   const containerFormModify = document.createElement("div");
-  containerFormModify.classList.add("containerForm");
+  containerFormModify.classList.add("modal-productos-overlay");
 
   const formModify = document.createElement("form");
-  formModify.classList.add("formModify");
+  formModify.classList.add("modal-productos-form");
+
+  const btnClose = document.createElement("button");
+  btnClose.classList.add("modal-close-button");
+  btnClose.type = "button";
+  btnClose.innerHTML = "&times;";
+  btnClose.onclick = closeModal;
+  formModify.appendChild(btnClose);
 
   Object.entries(p).forEach(([key, valor]) => {
     if (["_id", "__v"].includes(key)) return;
@@ -208,7 +197,6 @@ function modifyData(p) {
 
   formModify.onsubmit = async (e) => {
     e.preventDefault();
-
     const formData = new FormData(formModify);
     const dataUpdateRaw = Object.fromEntries(formData.entries());
 
@@ -218,28 +206,19 @@ function modifyData(p) {
         cleanDataUpdate[key] = value === "true";
       } else if (key === "precio") {
         cleanDataUpdate[key] = parseFloat(value);
-      } else {
-        if (value.trim() !== "") {
-          cleanDataUpdate[key] = value;
-        }
+      } else if (value.trim() !== "") {
+        cleanDataUpdate[key] = value;
       }
     }
 
     try {
       const response = await fetch(`${API_BASE}/productos/${p._id}`, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(cleanDataUpdate),
       });
 
-      if (!response.ok) {
-        throw new Error("Error al guardar cambios");
-      }
-
-      const dataUpdateNow = await response.json();
-      console.log("Producto actualizado:", dataUpdateNow);
+      if (!response.ok) throw new Error("Error al guardar cambios");
 
       alert("Producto guardado correctamente");
       closeModal();
