@@ -1,13 +1,13 @@
 import { sendPaymentRequest } from "../api/apiPayment";
 import { shoppingCart } from "../views/shoppingCart";
 import { closeModal } from "../utils/modal&overlay";
+import { paymentValidations } from "../utils/validations";
 
 export function generatePaymentForm(container) {
   const paymentForm = document.createElement("form");
   paymentForm.className = "payment-form";
   paymentForm.id = "paymentForm";
 
-  // Campos generales
   const paymentName = document.createElement("input");
   paymentName.className = "payment-name";
   paymentName.type = "text";
@@ -20,7 +20,6 @@ export function generatePaymentForm(container) {
   paymentAddress.placeholder = "Dirección completa";
   paymentAddress.required = true;
 
-  // Selección método de entrega
   const orderMethodSelect = document.createElement("select");
   orderMethodSelect.className = "order-select";
   orderMethodSelect.required = true;
@@ -42,7 +41,6 @@ export function generatePaymentForm(container) {
   orderMethodSelect.appendChild(orderStore);
   orderMethodSelect.appendChild(orderHome);
 
-  // Select para recogida en tienda
   const pickupLocationSelect = document.createElement("select");
   pickupLocationSelect.className = "pickup-location-select";
   pickupLocationSelect.required = true;
@@ -60,7 +58,6 @@ export function generatePaymentForm(container) {
     pickupLocationSelect.appendChild(option);
   });
 
-  // Select para municipios (envío a domicilio)
   const deliveryLocationSelect = document.createElement("select");
   deliveryLocationSelect.className = "delivery-location-select";
   deliveryLocationSelect.required = true;
@@ -80,7 +77,6 @@ export function generatePaymentForm(container) {
     deliveryLocationSelect.appendChild(option);
   });
 
-  // Campos de pago
   const paymentCard = document.createElement("input");
   paymentCard.className = "payment-card-number";
   paymentCard.type = "text";
@@ -167,14 +163,37 @@ export function generatePaymentForm(container) {
     if (paymentMethod === "card" || paymentMethod === "bizum") {
       paymentForm.appendChild(paymentName);
     }
+
     if ((paymentMethod === "card" || paymentMethod === "bizum") && deliveryMethod === "home") {
       paymentForm.appendChild(paymentAddress);
     }
+
     if (paymentMethod === "card") {
       paymentForm.appendChild(paymentCard);
       paymentForm.appendChild(paymentExpiryDate);
       paymentForm.appendChild(paymentCvc);
-    } else if (paymentMethod === "bizum") {
+    }
+    
+    if (paymentMethod === "card") {
+      paymentForm.appendChild(paymentName);
+
+      if (deliveryMethod === "home") {
+        paymentForm.appendChild(paymentAddress);
+      }
+
+      paymentForm.appendChild(paymentPhone);
+      paymentForm.appendChild(paymentCard);
+      paymentForm.appendChild(paymentExpiryDate);
+      paymentForm.appendChild(paymentCvc);
+    }
+
+    if (paymentMethod === "bizum") {
+      paymentForm.appendChild(paymentName);
+      
+      if (deliveryMethod === "home") {
+        paymentForm.appendChild(paymentAddress);
+      }
+      
       paymentForm.appendChild(paymentPhone);
     }
 
@@ -189,26 +208,43 @@ export function generatePaymentForm(container) {
     event.preventDefault();
 
     const deliveryMethod = orderMethodSelect.value;
+    const paymentMethod = paymentSelect.value;
     const pickupValue = pickupLocationSelect.value;
     const deliveryValue = deliveryLocationSelect.value;
 
-    if (deliveryMethod === "store" && (!pickupValue || pickupValue === pickupPlaceholder.textContent)) {
-      alert("Por favor, selecciona un lugar de recogida.");
-      return;
-    }
-    if (deliveryMethod === "home" && (!deliveryValue || deliveryValue === deliveryPlaceholder.textContent)) {
-      alert("Por favor, selecciona tu municipio de entrega.");
+    if (
+      !deliveryMethod || !paymentSelect.value ||
+      (deliveryMethod === "store" && (!pickupValue || pickupValue === pickupPlaceholder.textContent)) ||
+      (deliveryMethod === "home" && (!deliveryValue || deliveryValue === deliveryPlaceholder.textContent)) ||
+      !paymentName.value.trim() || ((deliveryMethod === "home") && !paymentAddress.value.trim()) ||
+      (paymentSelect.value === "card" && (!paymentCard.value.trim() || !paymentExpiryDate.value.trim() || !paymentCvc.value.trim())) ||
+      !paymentPhone.value.trim()
+    ) {
+      alert("Por favor, selecciona e introduce todos los datos necesarios para realizar el pago.");
+      //Cambiar por toastify
       return;
     }
 
+    if (!paymentValidations({
+      name: paymentName,
+      cardNumber: paymentCard,
+      expiryDate: paymentExpiryDate,
+      cvc: paymentCvc,
+      phone: paymentPhone,
+      address: paymentAddress,
+      deliveryMethod,
+      paymentMethod
+    }))
+    return;
+
     const userData = `
-Método de pago: ${paymentSelect.value}
-Método de entrega: ${deliveryMethod}
-Cliente: ${paymentName.value}
-${deliveryMethod === "home" ? `Dirección: ${paymentAddress.value}, Municipio: ${deliveryValue}` : `Lugar de recogida: ${pickupValue}`}
-${paymentSelect.value === "card"
-      ? `Tarjeta: ${paymentCard.value} Fecha: ${paymentExpiryDate.value} CVC: ${paymentCvc.value}`
-      : `Teléfono: ${paymentPhone.value}`}`;
+    Método de pago: ${paymentSelect.value}
+    Método de entrega: ${deliveryMethod}
+    Cliente: ${paymentName.value}
+    ${deliveryMethod === "home" ? `Dirección: ${paymentAddress.value}, Municipio: ${deliveryValue}` : `Lugar de recogida: ${pickupValue}`}
+    ${paymentSelect.value === "card"
+    ? `Tarjeta: ${paymentCard.value} Fecha: ${paymentExpiryDate.value} CVC: ${paymentCvc.value}`
+    : `Teléfono: ${paymentPhone.value}`}`;
 
     let lastUserId = parseInt(localStorage.getItem("lastUserId")) || 0;
     let newUserId = lastUserId + 1;
@@ -218,6 +254,7 @@ ${paymentSelect.value === "card"
       console.log("Pago procesado");
       await sendPaymentRequest(userData, newUserId);
       alert("Pago realizado con éxito");
+      //Cambiar por toastify
 
       const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
       const purchasedProducts = JSON.parse(localStorage.getItem("purchasedProductsByDate")) || {};
@@ -248,6 +285,7 @@ ${paymentSelect.value === "card"
       shoppingCart();
     } catch (error) {
       alert("Hubo un error en el pago");
+      //Cambiar por toastify
     }
   });
 
