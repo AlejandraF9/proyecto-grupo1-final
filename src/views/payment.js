@@ -5,6 +5,12 @@ import { paymentValidations } from "../utils/validations";
 import { showToast } from "../utils/toastify";
 
 export function generatePaymentForm(container) {
+  const paymentModalOverlay = document.createElement("div");
+  paymentModalOverlay.className = "payment-modal-overlay";
+
+  const paymentModalContainer = document.createElement("div");
+  paymentModalContainer.className = "payment-modal-container";
+
   const paymentForm = document.createElement("form");
   paymentForm.className = "payment-form";
   paymentForm.id = "paymentForm";
@@ -163,39 +169,18 @@ export function generatePaymentForm(container) {
 
     if (paymentMethod === "card" || paymentMethod === "bizum") {
       paymentForm.appendChild(paymentName);
-    }
-
-    if ((paymentMethod === "card" || paymentMethod === "bizum") && deliveryMethod === "home") {
-      paymentForm.appendChild(paymentAddress);
-    }
-
-    if (paymentMethod === "card") {
-      paymentForm.appendChild(paymentCard);
-      paymentForm.appendChild(paymentExpiryDate);
-      paymentForm.appendChild(paymentCvc);
-    }
-    
-    if (paymentMethod === "card") {
-      paymentForm.appendChild(paymentName);
 
       if (deliveryMethod === "home") {
         paymentForm.appendChild(paymentAddress);
       }
 
       paymentForm.appendChild(paymentPhone);
+    }
+
+    if (paymentMethod === "card") {
       paymentForm.appendChild(paymentCard);
       paymentForm.appendChild(paymentExpiryDate);
       paymentForm.appendChild(paymentCvc);
-    }
-
-    if (paymentMethod === "bizum") {
-      paymentForm.appendChild(paymentName);
-      
-      if (deliveryMethod === "home") {
-        paymentForm.appendChild(paymentAddress);
-      }
-      
-      paymentForm.appendChild(paymentPhone);
     }
 
     paymentForm.appendChild(totalFinalPrice);
@@ -281,5 +266,7 @@ export function generatePaymentForm(container) {
   });
 
   renderForm();
-  container.appendChild(paymentForm);
+  paymentModalContainer.appendChild(paymentForm);
+  paymentModalOverlay.appendChild(paymentModalContainer);
+  container.appendChild(paymentModalOverlay);
 }

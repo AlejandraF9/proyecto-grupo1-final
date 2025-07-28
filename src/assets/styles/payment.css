@@ -1,4 +1,4 @@
-/* .modal-overlay {
+.payment-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -11,7 +11,7 @@
   z-index: 1000;
 }
 
-.modal-container {
+.payment-modal-container {
   background-color: #fff;
   padding: 2rem;
   max-width: 500px;
@@ -21,7 +21,7 @@
   overflow-y: auto;
   max-height: 90vh;
   font-family: var(--text-font);
-} */
+}
 
 .payment-form {
   display: flex;
