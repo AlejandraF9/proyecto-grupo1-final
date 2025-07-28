@@ -246,9 +246,11 @@ footerDivFour.appendChild(onlineShop);
 
 //div cinco
 const footerDivFive = document.createElement ("div");
+footerDivFive.className = "footer-full-row";
 footerContainer.appendChild(footerDivFive);
+
 const copyright = document.createElement("P");
 copyright.className = "copyright-footer";
-copyright.textContent= "COPYRIGHT DUMMIE BAKERY";
+copyright.textContent= "© Copyright Dummie Bakery 2025";
 footerDivFive.appendChild(copyright);
 }
