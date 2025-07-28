@@ -204,10 +204,19 @@ export function renderNavbar() {
   searchNavbar.placeholder = "Busca aquí tu producto preferido";
   searchDiv.appendChild(searchNavbar);
 
+  searchNavbar.addEventListener("search", () => {
+  goTo("/home");
+  });
+
   searchNavbar.addEventListener("input", async (e) => {
     console.log("Se está escribiendo en el buscador");
   const query = searchNavbar.value.toLowerCase().trim();
-  console.log(" Query:", query);
+    if (query === "") {
+    goTo("/home");
+    return;
+  }
+
+
   //______--------------------
   const appShowHome = document.getElementById("app");
   appShowHome.innerHTML ="";
@@ -382,3 +391,4 @@ export function renderNavbar() {
     navbarContainerC.classList.toggle("visible");
   });
 }
+
