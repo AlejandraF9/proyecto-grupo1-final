@@ -1,7 +1,7 @@
 import { validationName } from './utils/validations';
 import { validationEmail } from './utils/validations';
 import { validationChecked } from './utils/validations';
-import { showToast } from "../utils/toastify";
+import { showToast } from "./utils/toastify";
 import emailjs from '@emailjs/browser';
 emailjs.init('nZaP1NAVYfbs2Z14i'); 
 
