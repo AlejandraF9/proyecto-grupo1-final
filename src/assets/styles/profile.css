@@ -1,0 +1,148 @@
+/*/////////////
+//   MOBILE  //
+/////////////*/
+
+@media screen and (orientation: portrait) and (max-width: 730px) {
+  .containerForm {
+    width: 100%;
+    min-width: 15rem;
+    margin: auto;
+    padding: 2rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    font-family: var(--text-title);
+    background-color: white;
+  }
+
+  .containerForm h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--color);
+  }
+
+  .formModify > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .formModify label {
+    font-weight: bold;
+    color: var(--color);
+    font-size: 0.9rem;
+  }
+
+  .formModify input {
+    padding: 0.75rem;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+
+  .formModify input:focus {
+    border-color: var(--blue-color);
+  }
+
+  .formModify button[type="submit"] {
+    margin-top: 0.8rem;
+    padding: 0.5rem;
+    background-color: var(--blue-color);
+    color: var(--color);
+    border: none;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+  }
+
+  .formModify button[type="submit"]:hover {
+    background-color: var(--pink);
+  }
+
+  .link-historyOrders {
+    display: inline-block;
+    margin-top: 0.8rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--blue-color);
+    text-decoration: none;
+  }
+
+  .link-historyOrders:hover {
+    text-decoration: underline;
+  }
+}
+
+/*/////////////
+//  MONITOR  //
+/////////////*/
+
+@media screen and (min-width: 731px) {
+  .containerForm {
+    width: 100%;
+    max-width: 15rem;
+    margin: auto;
+    padding: 2rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    font-family: var(--text-font);
+    background-color: white;
+  }
+
+  .containerForm h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--color);
+  }
+
+  .formModify > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .formModify label {
+    font-weight: bold;
+    color: var(--color);
+  }
+
+  .formModify input {
+    padding: 0.75rem;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+
+  .formModify input:focus {
+    border-color: var(--blue-color);
+  }
+
+  .formModify button[type="submit"] {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background-color: var(--blue-color);
+    color: var(--color);
+    border: none;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+
+  .formModify button[type="submit"]:hover {
+    background-color: var(--pink);
+  }
+
+  .link-historyOrders {
+    display: inline-block;
+    margin-top: 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--blue-color);
+    text-decoration: none;
+  }
+
+  .link-historyOrders:hover {
+    text-decoration: underline;
+  }
+}

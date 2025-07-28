@@ -1,6 +1,5 @@
 const API_BASE = "https://api-bakery-production.up.railway.app";
 
-// Gestión usuarios
 async function fetchUsuarios() {
   const res = await fetch(`${API_BASE}/users`);
   if (!res.ok) throw new Error("Error al cargar usuarios");
@@ -17,17 +16,13 @@ export async function renderUsuarios(content) {
   try {
     const usuariosData = await fetchUsuarios();
     const tabla = document.createElement("table");
-    tabla.style.width = "100%";
-    tabla.style.borderCollapse = "collapse";
-    tabla.style.textAlign = "left";
+    tabla.classList.add("admin-content");
 
     const thead = document.createElement("thead");
     const headRow = document.createElement("tr");
     ["ID", "Nombre", "Role", "Eliminar"].forEach((text) => {
       const th = document.createElement("th");
       th.textContent = text;
-      th.style.borderBottom = "2px solid #ccc";
-      th.style.padding = "8px";
       headRow.appendChild(th);
     });
     thead.appendChild(headRow);
@@ -37,29 +32,21 @@ export async function renderUsuarios(content) {
 
     usuariosData.forEach((u) => {
       const row = document.createElement("tr");
-      row.style.borderBottom = "1px solid #eee";
 
       [u._id, u.name, u.role].forEach((text) => {
         const td = document.createElement("td");
         td.textContent = text;
-        td.style.padding = "8px";
         row.appendChild(td);
       });
 
       const tdEliminar = document.createElement("td");
-      tdEliminar.style.padding = "8px";
       const btnEliminar = document.createElement("button");
       btnEliminar.textContent = "Eliminar";
-      btnEliminar.style.backgroundColor = "#c56e78";
-      btnEliminar.style.color = "white";
-      btnEliminar.style.border = "none";
-      btnEliminar.style.padding = "5px 10px";
-      btnEliminar.style.cursor = "pointer";
-      btnEliminar.style.borderRadius = "4px";
+      btnEliminar.classList.add("btnEliminar");
       btnEliminar.onclick = async () => {
         if (confirm(`¿Eliminar usuario ${u.name}?`)) {
           await eliminarUsuario(u._id);
-          renderUsuarios(content); // ✅ pasamos el parámetro
+          renderUsuarios(content);
         }
       };
       tdEliminar.appendChild(btnEliminar);

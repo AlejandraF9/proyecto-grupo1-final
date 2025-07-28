@@ -389,6 +389,8 @@ function shoppingCart() {
       email: currentUser ? currentUser.email : userEmail,
       user: currentUser ? currentUser._id : null,
     };
+    console.log("Productos del carrito:");
+    cartItems.forEach((item) => console.log(item.nombre, item.url));
     console.log("Pedido a enviar:", order);
 
     fetch("https://api-bakery-production.up.railway.app/orders", {
