@@ -1,0 +1,1 @@
+const baseUrl = "https://api-bakery-production.up.railway.app";

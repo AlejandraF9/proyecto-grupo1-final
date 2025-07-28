@@ -50,26 +50,6 @@ function renderizarProductos(productos, contenedor) {
   });
 }
 
-//el retarder
-
-async function getAllProductsDelayed(delay = 2000) {
-  const API_URL = "https://api-bakery-production.up.railway.app";
-
-  // Espera el tiempo que pases como delay
-  await new Promise((resolve) => setTimeout(resolve, delay));
-
-  try {
-    const res = await fetch(`${API_URL}/productos`);
-    if (!res.ok) throw new Error("Error al traer productos");
-    return await res.json();
-  } catch (err) {
-    console.error("Error cargando productos:", err);
-    return [];
-  }
-}
-
-
-
 import logo_tienda from "../assets/images/logo_tienda.webp";
 import { userIcon } from "../assets/images/icons";
 import { cartIcon } from "../assets/images/icons";
@@ -217,7 +197,7 @@ export function renderNavbar() {
   }
 
 
-  //______--------------------
+  //-----------------------------------
   const appShowHome = document.getElementById("app");
   appShowHome.innerHTML ="";
   const appContainer = document.createElement("div");
@@ -262,9 +242,6 @@ export function renderNavbar() {
      renderizarProductos(productosFiltrados, appContainer);
 
   })
-
-
-
 
 //---------------------------------------------------------------------------
   //creo un div para meter iconos de usuario y carrito
