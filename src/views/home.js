@@ -32,13 +32,13 @@ export default {
     tienda.parentNode.insertBefore(blogSection, tienda.nextSibling);
     renderBlogHome(blogSection);
 
-    //setTimeout(renderNewsletterForm, 2000);
+    setTimeout(renderNewsletterForm, 2000);
 
-    if (!localStorage.getItem("newsletterShown")) {
+    /*if (!localStorage.getItem("newsletterShown")) {
       setTimeout(() => {
         renderNewsletterForm();
         localStorage.setItem("newsletterShown", "true");
       }, 8000);
-    }
+    }*/
   },
 };
