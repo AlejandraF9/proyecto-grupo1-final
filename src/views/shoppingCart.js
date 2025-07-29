@@ -100,20 +100,6 @@ export function shoppingCart() {
   const sizeKey = item.size ? `${item.nombre} - ${item.size}` : item.nombre;
   const purchasedProducts = JSON.parse(localStorage.getItem("purchasedProductsByDate")) || {};
   const purchased = purchasedProducts[item.date]?.[sizeKey] || 0;
-  const limit = getProductsLimit(item.categoria);
-  const isFullyPaid = purchased >= limit;
-
-  if (isFullyPaid) {
-    increaseButtonCard.disabled = true;
-    decreaseButtonCard.disabled = true;
-    increaseButtonCard.classList.add("disabled");
-    decreaseButtonCard.classList.add("disabled");
-
-    const notice = document.createElement("p");
-    notice.className = "reserved-notice";
-    notice.textContent = "Este producto ya ha sido reservado por completo para ese día.";
-    itemDetails.appendChild(notice);
-  }
 
   increaseButtonCard.addEventListener("click", () => {
     const increaseDate = item.date;
@@ -331,9 +317,9 @@ export function shoppingCart() {
       JSON.stringify(purchasedProducts)
     );
 
-    localStorage.removeItem("cartItems");
-    localStorage.removeItem("productsByDate");
-    localStorage.removeItem("discountCode");
+    // localStorage.removeItem("cartItems");
+    // localStorage.removeItem("productsByDate");
+    // localStorage.removeItem("discountCode");
 
     const cartCounter = document.querySelector(".cart-counter");
     if (cartCounter) {

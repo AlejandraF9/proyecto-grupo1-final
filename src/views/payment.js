@@ -145,7 +145,7 @@ export function generatePaymentForm(container) {
     let discountCode = localStorage.getItem("discountCode");
     let baseTotal = cartItems.reduce((sum, item) => sum + item.precio * item.quantity, 0);
 
-    if (discountCode === "DULCE10") baseTotal *= 0.9;
+    if (discountCode === "BVNDA10") baseTotal *= 0.9;
 
     const finalOrderTotal = baseTotal + shippingCosts;
     const label = deliveryMethod === "home" ? "Total con envío" : "Total";
