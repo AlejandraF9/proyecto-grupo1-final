@@ -250,7 +250,7 @@ contactFormFooter.addEventListener("submit", function (event) {
 
   emailjs
     .sendForm(
-      "service_v2a0nka",
+      "service_g2s97a6",
       "template_tq0ffyn",
       contactFormFooter,
       "nZaP1NAVYfbs2Z14i"

@@ -1,9 +1,14 @@
 import { validationName } from './utils/validations';
 import { validationEmail } from './utils/validations';
 import { validationChecked } from './utils/validations';
+import {getAllNewsletterEmails} from "./api/apiNewsletter.js";
+import{createUserFromNewsletter} from "./api/apiNewsletter.js";
 import { showToast } from "./utils/toastify";
 import emailjs from '@emailjs/browser';
 emailjs.init('nZaP1NAVYfbs2Z14i'); 
+
+
+
 
 const newsl = document.getElementById("newsl");
 export function renderNewsletterForm (){
@@ -59,10 +64,10 @@ checkboxNewsletter.required = true;
 checkboxNewsletter.name = "acepta";
 newsletterCheckboxLabel.appendChild(checkboxNewsletter);
 
-const textCheckboxNewsletter = document.createElement("span"); //mejor span que p
+const textCheckboxNewsletter = document.createElement("a"); //mejor span que p
 textCheckboxNewsletter.className = "text-checkbox-newsletter"
 textCheckboxNewsletter.innerHTML = "He leído y acepto los términos y condiciones";
-//----/hay que poner el enlace------------------------------------
+textCheckboxNewsletter.href = "/privacy-policy";
 newsletterCheckboxLabel.appendChild(textCheckboxNewsletter);
 
 const newsletterButton = document.createElement("button");
@@ -74,39 +79,64 @@ newsletterForm.appendChild(newsletterButton);
 
 //creamos el evento en el botón
 
-newsletterForm.addEventListener('submit', function (event) {
-  event.preventDefault(); 
-
-  //validaciones de formulario
+newsletterForm.addEventListener('submit', async  (event)=> {
+  event.preventDefault();
  
-    const nameNewsletter= newsletterFormName.value.trim();
-    const emailNewsletter= newsletterFormEmail.value.trim();
-    const aceptNewsletter= checkboxNewsletter.checked;
-    const emailRegexNewsletter = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  
-  
-  if (!validationName(nameNewsletter,newsletterFormName)) return;
-  if (!validationEmail(emailNewsletter,emailRegexNewsletter,newsletterFormEmail)) return;
-  if(!validationChecked(checkboxNewsletter)) return;
- 
-  
-  //ME FALTA CAPTURAR LOS VALORES DEL EVENTO
 
-
-
-  //Para obtener una respuesta automática por parte de emailjs
-
-emailjs.sendForm('service_v2a0nka', 'template_xvh27rf', this, 'nZaP1NAVYfbs2Z14i')
-      .then(() => {
-        showToast({text: "¡Formulario enviado correctamente! Gracias por suscribirte.", type: "success"});
-        this.reset();
-      })
-      .catch((error) => {
-        console.error('Error al enviar el formulario:', error);
-        showToast({text: "Oops, hubo un problema enviando el formulario. Inténtalo de nuevo.", type: "error"});
-      });
+  //-------------------------------------------
   
+
+  const inputs = event.target.querySelectorAll('input');
+  inputs.forEach(input => {
   });
+
+ // validaciones de formulario
+  const nameNewsletter = newsletterFormName.value.trim();
+  const emailNewsletter = newsletterFormEmail.value.trim();
+  const aceptNewsletter = checkboxNewsletter.checked;
+  const emailRegexNewsletter = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!validationName(nameNewsletter, newsletterFormName)) return;
+  if (!validationEmail(emailNewsletter, emailRegexNewsletter, newsletterFormEmail)) return;
+  if (!validationChecked(checkboxNewsletter)) return;
+
+  try {
+    const allSubscribers = await getAllNewsletterEmails();
+    const emailExists = allSubscribers.some(
+    subscriber => subscriber.email.toLowerCase() === emailNewsletter.toLowerCase()
+  );
+
+  if (emailExists) {
+    showToast({ text: "Este correo ya está suscrito", type: "error" });
+    return;
+  }
+  
+  
+  await createUserFromNewsletter({ nombre: nameNewsletter, email: emailNewsletter });
+
+    
+ console.log ("voy a llamar a emailjs.send");
+await emailjs.send(
+  'service_g2s97a6',
+  'template_xvh27rf',
+  {
+    nombre: nameNewsletter,
+    email: emailNewsletter
+  },
+  'nZaP1NAVYfbs2Z14i'  
+);
+
+    showToast({ text: "¡Formulario enviado correctamente! Gracias por suscribirte.", type: "success" });
+    event.target.reset();
+
+  } catch (error) {
+    console.error('Error al enviar el formulario o verificar:', error);
+    showToast({ text: "Oops, hubo un problema enviando el formulario. Inténtalo de nuevo.", type: "error" });
+  }
+});
+
+
+
 //evento del botón de cierre del formulario
 const closeButton = document.createElement("button");
 closeButton.className = "newsletter-close-button";
@@ -118,6 +148,15 @@ closeButton.addEventListener("click", () => {
   newsletterDiv.remove(); 
 });
 }
+
+
+
+
+
+
+
+
+
 
 
 
