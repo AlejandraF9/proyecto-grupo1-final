@@ -1,8 +1,9 @@
 import { sendPaymentRequest } from "../api/apiPayment";
-import { shoppingCart } from "../views/shoppingCart";
+import { shoppingCart } from "./shoppingCart2";
 import { closeModal } from "../utils/modal&overlay";
 import { paymentValidations } from "../utils/validations";
 import { showToast } from "../utils/toastify";
+import { enviarEmailConfirmacion } from "../utils/email";
 
 export function generatePaymentForm(container) {
   const paymentForm = document.createElement("form");
@@ -52,7 +53,12 @@ export function generatePaymentForm(container) {
   pickupPlaceholder.textContent = "Selecciona lugar de recogida";
   pickupLocationSelect.appendChild(pickupPlaceholder);
 
-  ["San Cristóbal de La Laguna", "Tacoronte", "Santa Úrsula", "Icod de los Vinos"].forEach((lugar) => {
+  [
+    "San Cristóbal de La Laguna",
+    "Tacoronte",
+    "Santa Úrsula",
+    "Icod de los Vinos",
+  ].forEach((lugar) => {
     const option = document.createElement("option");
     option.value = lugar;
     option.textContent = lugar;
@@ -69,7 +75,39 @@ export function generatePaymentForm(container) {
   deliveryPlaceholder.textContent = "Selecciona tu municipio";
   deliveryLocationSelect.appendChild(deliveryPlaceholder);
 
-  const municipalities = ["Adeje", "Arafo", "Arico", "Arona", "Buenavista del Norte", "Candelaria", "Fasnia", "Garachico", "Granadilla de Abona", "La Guancha", "Guía de Isora", "Güímar", "Icod de los Vinos", "La Matanza", "La Orotava", "Puerto de la Cruz", "Los Realejos", "El Rosario", "San Cristóbal de La Laguna", "San Juan de la Rambla", "San Miguel de Abona", "Santa Cruz de Tenerife", "Santa Úrsula", "Santiago del Teide", "El Sauzal", "Los Silos", "Tacoronte", "El Tanque", "Tegueste", "La Victoria", "Vilaflor"];
+  const municipalities = [
+    "Adeje",
+    "Arafo",
+    "Arico",
+    "Arona",
+    "Buenavista del Norte",
+    "Candelaria",
+    "Fasnia",
+    "Garachico",
+    "Granadilla de Abona",
+    "La Guancha",
+    "Guía de Isora",
+    "Güímar",
+    "Icod de los Vinos",
+    "La Matanza",
+    "La Orotava",
+    "Puerto de la Cruz",
+    "Los Realejos",
+    "El Rosario",
+    "San Cristóbal de La Laguna",
+    "San Juan de la Rambla",
+    "San Miguel de Abona",
+    "Santa Cruz de Tenerife",
+    "Santa Úrsula",
+    "Santiago del Teide",
+    "El Sauzal",
+    "Los Silos",
+    "Tacoronte",
+    "El Tanque",
+    "Tegueste",
+    "La Victoria",
+    "Vilaflor",
+  ];
 
   municipalities.forEach((municipio) => {
     const option = document.createElement("option");
@@ -134,10 +172,13 @@ export function generatePaymentForm(container) {
 
     paymentForm.innerHTML = "";
 
-    const shippingCosts = (deliveryMethod === "home") ? 3.90 : 0;
+    const shippingCosts = deliveryMethod === "home" ? 3.9 : 0;
     let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     let discountCode = localStorage.getItem("discountCode");
-    let baseTotal = cartItems.reduce((sum, item) => sum + item.precio * item.quantity, 0);
+    let baseTotal = cartItems.reduce(
+      (sum, item) => sum + item.precio * item.quantity,
+      0
+    );
 
     if (discountCode === "DULCE10") baseTotal *= 0.9;
 
@@ -165,7 +206,10 @@ export function generatePaymentForm(container) {
       paymentForm.appendChild(paymentName);
     }
 
-    if ((paymentMethod === "card" || paymentMethod === "bizum") && deliveryMethod === "home") {
+    if (
+      (paymentMethod === "card" || paymentMethod === "bizum") &&
+      deliveryMethod === "home"
+    ) {
       paymentForm.appendChild(paymentAddress);
     }
 
@@ -174,7 +218,7 @@ export function generatePaymentForm(container) {
       paymentForm.appendChild(paymentExpiryDate);
       paymentForm.appendChild(paymentCvc);
     }
-    
+
     if (paymentMethod === "card") {
       paymentForm.appendChild(paymentName);
 
@@ -190,11 +234,11 @@ export function generatePaymentForm(container) {
 
     if (paymentMethod === "bizum") {
       paymentForm.appendChild(paymentName);
-      
+
       if (deliveryMethod === "home") {
         paymentForm.appendChild(paymentAddress);
       }
-      
+
       paymentForm.appendChild(paymentPhone);
     }
 
@@ -213,31 +257,57 @@ export function generatePaymentForm(container) {
     const pickupValue = pickupLocationSelect.value;
     const deliveryValue = deliveryLocationSelect.value;
 
-    if (deliveryMethod === orderPlaceholder.textContent || paymentMethod === paymentPlaceholder.textContent || (deliveryMethod === "store" && (!pickupValue || pickupValue === pickupPlaceholder.textContent)) || (deliveryMethod === "home" && (!deliveryValue || deliveryValue === deliveryPlaceholder.textContent)) || !paymentName.value.trim() || (deliveryMethod === "home" && !paymentAddress.value.trim()) || (paymentMethod === "card" && (!paymentCard.value.trim() || !paymentExpiryDate.value.trim() || !paymentCvc.value.trim())) || !paymentPhone.value.trim()) {
-      showToast({text: "Por favor, completa todos los datos necesarios para realizar el pago.", type: "warning"});
-  return;
-}
+    if (
+      deliveryMethod === orderPlaceholder.textContent ||
+      paymentMethod === paymentPlaceholder.textContent ||
+      (deliveryMethod === "store" &&
+        (!pickupValue || pickupValue === pickupPlaceholder.textContent)) ||
+      (deliveryMethod === "home" &&
+        (!deliveryValue ||
+          deliveryValue === deliveryPlaceholder.textContent)) ||
+      !paymentName.value.trim() ||
+      (deliveryMethod === "home" && !paymentAddress.value.trim()) ||
+      (paymentMethod === "card" &&
+        (!paymentCard.value.trim() ||
+          !paymentExpiryDate.value.trim() ||
+          !paymentCvc.value.trim())) ||
+      !paymentPhone.value.trim()
+    ) {
+      showToast({
+        text: "Por favor, completa todos los datos necesarios para realizar el pago.",
+        type: "warning",
+      });
+      return;
+    }
 
-    if (!paymentValidations({
-      name: paymentName,
-      cardNumber: paymentCard,
-      expiryDate: paymentExpiryDate,
-      cvc: paymentCvc,
-      phone: paymentPhone,
-      address: paymentAddress,
-      deliveryMethod,
-      paymentMethod
-    }))
-    return;
+    if (
+      !paymentValidations({
+        name: paymentName,
+        cardNumber: paymentCard,
+        expiryDate: paymentExpiryDate,
+        cvc: paymentCvc,
+        phone: paymentPhone,
+        address: paymentAddress,
+        deliveryMethod,
+        paymentMethod,
+      })
+    )
+      return;
 
     const userData = `
     Método de pago: ${paymentSelect.value}
     Método de entrega: ${deliveryMethod}
     Cliente: ${paymentName.value}
-    ${deliveryMethod === "home" ? `Dirección: ${paymentAddress.value}, Municipio: ${deliveryValue}` : `Lugar de recogida: ${pickupValue}`}
-    ${paymentSelect.value === "card"
-    ? `Tarjeta: ${paymentCard.value} Fecha: ${paymentExpiryDate.value} CVC: ${paymentCvc.value}`
-    : `Teléfono: ${paymentPhone.value}`}`;
+    ${
+      deliveryMethod === "home"
+        ? `Dirección: ${paymentAddress.value}, Municipio: ${deliveryValue}`
+        : `Lugar de recogida: ${pickupValue}`
+    }
+    ${
+      paymentSelect.value === "card"
+        ? `Tarjeta: ${paymentCard.value} Fecha: ${paymentExpiryDate.value} CVC: ${paymentCvc.value}`
+        : `Teléfono: ${paymentPhone.value}`
+    }`;
 
     let lastUserId = parseInt(localStorage.getItem("lastUserId")) || 0;
     let newUserId = lastUserId + 1;
@@ -246,22 +316,52 @@ export function generatePaymentForm(container) {
     try {
       console.log("Pago procesado");
       await sendPaymentRequest(userData, newUserId);
-      showToast({text: "¡Pago realizado con éxito!", type: "success"});
+      showToast({ text: "¡Pago realizado con éxito!", type: "success" });
+
+      const orderId = localStorage.getItem("pendingOrderId");
+      const email = localStorage.getItem("pendingEmail");
+
+      if (orderId && email) {
+        try {
+          const res = await enviarEmailConfirmacion(orderId, email);
+          console.log("Correo enviado:", res.message);
+          showToast({
+            text: "Te hemos enviado un email con los detalles de tu pedido 📧",
+            type: "success",
+          });
+        } catch (err) {
+          console.error("Error al enviar el correo:", err);
+          showToast({
+            text: "No se pudo enviar el correo de confirmación 😓",
+            type: "warning",
+          });
+        } finally {
+          localStorage.removeItem("pendingOrderId");
+          localStorage.removeItem("pendingEmail");
+        }
+      }
 
       const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-      const purchasedProducts = JSON.parse(localStorage.getItem("purchasedProductsByDate")) || {};
+      const purchasedProducts =
+        JSON.parse(localStorage.getItem("purchasedProductsByDate")) || {};
 
       cartItems.forEach((item) => {
         const date = item.date;
-        const sizeKey = item.size ? `${item.nombre} - ${item.size}` : item.nombre;
+        const sizeKey = item.size
+          ? `${item.nombre} - ${item.size}`
+          : item.nombre;
 
         if (!purchasedProducts[date]) purchasedProducts[date] = {};
-        if (!purchasedProducts[date][sizeKey]) purchasedProducts[date][sizeKey] = 0;
+        if (!purchasedProducts[date][sizeKey])
+          purchasedProducts[date][sizeKey] = 0;
 
         purchasedProducts[date][sizeKey] += item.quantity;
       });
 
-      localStorage.setItem("purchasedProductsByDate", JSON.stringify(purchasedProducts));
+      localStorage.setItem(
+        "purchasedProductsByDate",
+        JSON.stringify(purchasedProducts)
+      );
       localStorage.removeItem("cartItems");
       localStorage.removeItem("productsByDate");
       localStorage.removeItem("discountCode");
@@ -276,7 +376,10 @@ export function generatePaymentForm(container) {
       closeModal();
       shoppingCart();
     } catch (error) {
-      showToast({text: "Hubo un error al procesar el pago. Intenta de nuevo más tarde.", type: "error"});
+      showToast({
+        text: "Hubo un error al procesar el pago. Intenta de nuevo más tarde.",
+        type: "error",
+      });
     }
   });
 

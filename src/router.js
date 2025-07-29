@@ -15,6 +15,7 @@ export const routes = {
   "/": () => import("./views/home.js"),
   "/admin": () => import("./views/admin.js"),
   "/orders": () => import("./views/orders.js"),
+  "/shop": () => import("./views/shop.js"),
 
   //añado mis endponit de los link del footer
   "/legal-notice": () => import("./legal/legal-notice.js"),
