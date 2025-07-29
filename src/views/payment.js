@@ -200,8 +200,8 @@ export function generatePaymentForm(container) {
 
     if (deliveryMethod === orderPlaceholder.textContent || paymentMethod === paymentPlaceholder.textContent || (deliveryMethod === "store" && (!pickupValue || pickupValue === pickupPlaceholder.textContent)) || (deliveryMethod === "home" && (!deliveryValue || deliveryValue === deliveryPlaceholder.textContent)) || !paymentName.value.trim() || (deliveryMethod === "home" && !paymentAddress.value.trim()) || (paymentMethod === "card" && (!paymentCard.value.trim() || !paymentExpiryDate.value.trim() || !paymentCvc.value.trim())) || !paymentPhone.value.trim()) {
       showToast({text: "Por favor, completa todos los datos necesarios para realizar el pago.", type: "warning"});
-  return;
-}
+      return;
+    }
 
     if (!paymentValidations({
       name: paymentName,

@@ -125,7 +125,7 @@ export function shoppingCart() {
     const availableUnits = limit - alreadyPurchased - currentInCart;
   
     if (availableUnits <= 0) {
-        showToast({text: `“${item.nombre}” ha sido eliminado del carrito.`, type: "info"});
+        showToast({text: `No quedan más unidades disponibles de este producto${item.size ? ` (${item.size})` : ""} para el ${increaseDate}.`, type: "warning"});
         return;
     }
 
@@ -228,7 +228,7 @@ export function shoppingCart() {
 
   let discountValue = 0;
   const savedCode = localStorage.getItem("discountCode") || "";
-  if (cartItems.length > 0 && savedCode === "DULCE10") {
+  if (cartItems.length > 0 && savedCode === "BVNDA10") {
     discountValue = total * 0.10;
   }
 
@@ -247,25 +247,37 @@ export function shoppingCart() {
 
   applyDiscountButton.addEventListener("click", () => {
     const code = discountInput.value.trim().toUpperCase();
-    const existingDiscount = localStorage.getItem("discountCode");
-        
+    const alreadyUsed = localStorage.getItem("discountUsed");
+
     if (cartItems.length === 0) {
-        showToast({text: "Debes tener productos en el carrito para aplicar un código de descuento.", type: "warning"});
-        discountInput.value = "";
-        return;
+      showToast({ text: "Debes tener productos en el carrito para aplicar un código de descuento.", type: "warning" });
+      discountInput.value = "";
+      return;
     }
 
-    if (code !== "DULCE10" && !existingDiscount) {
-        showToast({text: "Código no válido.", type: "error"});
-    } else if (code === "DULCE10" && existingDiscount !== "DULCE10") {
-        const today = new Date().toISOString().split("T")[0];
-        localStorage.setItem("discountCode", code);
-        localStorage.setItem("discountUsedDate", today);
-        showToast({text: "¡Descuento aplicado correctamente!", type: "success"});
-        shoppingCart();
-    } else {
-      showToast({text: "Ya has aplicado un código de descuento. No puedes introducir otro.", type: "warning"});
+    if (!code) {
+      showToast({ text: "Introduce un código de descuento.", type: "warning" });
+      return;
     }
+
+    if (alreadyUsed) {
+      showToast({
+        text: "Ya has utilizado un código de descuento en tu primera compra. No puedes aplicar otro.",
+        type: "warning"
+      });
+      discountInput.value = "";
+      return;
+    }
+
+    if (code === "BVNDA10") {
+      localStorage.setItem("discountCode", code);
+      localStorage.setItem("discountUsed", "true");
+      showToast({ text: "¡Descuento aplicado correctamente!", type: "success" });
+      shoppingCart();
+    } else {
+      showToast({ text: "Código no válido.", type: "error" });
+    }
+
     discountInput.value = "";
   });
     
@@ -277,10 +289,10 @@ export function shoppingCart() {
   totalPrice.className = "total-price";
   totalPrice.textContent = `Total: ${(total - discountValue).toFixed(2)}€`;
 
-  if (cartItems.length > 0 && savedCode === "DULCE10") {
+  if (cartItems.length > 0 && savedCode === "BVNDA10") {
     const discountInfo = document.createElement("p");
     discountInfo.className = "discount-info";
-    discountInfo.textContent = "Descuento DULCE10 aplicado (-10%)";
+    discountInfo.textContent = "Descuento BVNDA10 aplicado (-10%)";
     cartSection.appendChild(discountInfo);
   }
 
@@ -329,7 +341,7 @@ export function shoppingCart() {
       cartCounter.classList.remove("visible");
     }
 
-    showToast({text: "¡Gracias por tu compra! Tus productos han sido reservados.", type: "success"});
+    showToast({text: "¡Gracias por tu confianza! Tus productos han sido reservados. Finaliza tu pago para completar la compra.", type: "success"});
 
     const currentUser = JSON.parse(localStorage.getItem("current-user"));
     let userEmail = null;
@@ -377,16 +389,13 @@ export function shoppingCart() {
         showToast({text: "Hubo un problema al enviar el pedido. Intenta de nuevo más tarde.", type: "error"});
       });
 
-    shoppingCart(); // Vuelve a renderizar el carrito vacío
-
-    // Modal pasarela de pago
+    shoppingCart();
+    
     const paymentContainer = document.createElement("div");
     paymentContainer.className = "payment-container";
     localStorage.setItem("selectedDate", cartItems[0].date);
     generatePaymentForm(paymentContainer);
     openModal(paymentContainer);
-
-    // shoppingCart();
   });
         
   cartSection.appendChild(checkoutButton);
