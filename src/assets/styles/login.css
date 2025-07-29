@@ -77,8 +77,10 @@
     }
 
     .login-container a {
-    color: var(--blue-color);
+    color: var(--color);
     text-decoration: none;
+    font-weight: bold;
+
     }
 
     .login-container a:hover {
@@ -169,8 +171,9 @@
     }
 
     .login-container a {
-    color: var(--blue-color);
+    color: var(--color);
     text-decoration: none;
+    font-weight: bold;
     }
 
     .login-container a:hover {
