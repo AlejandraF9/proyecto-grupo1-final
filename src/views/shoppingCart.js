@@ -67,13 +67,62 @@ export function shoppingCart() {
   }
 
   cartItems.forEach((item, index) => {
-    const itemCard = document.createElement("div");
-    itemCard.className = "item-card";
+  const itemCard = document.createElement("div");
+  itemCard.className = "item-card";
 
-    const imgCard = document.createElement("img");
-    imgCard.className = "image-card";
-    imgCard.src = item.url;
-    imgCard.alt = item.nombre;
+  const imgCard = document.createElement("img");
+  imgCard.className = "image-card";
+  imgCard.src = item.url;
+  imgCard.alt = item.nombre;
+
+  const itemDetails = document.createElement("div");
+  itemDetails.className = "item-details";
+
+  const nameCard = document.createElement("p");
+  nameCard.className = "name-card";
+  nameCard.textContent = item.nombre;
+
+  const priceCard = document.createElement("p");
+  priceCard.className = "price-card";
+  priceCard.textContent = `${item.precio.toFixed(2)}€`;
+
+  const quantityContainer = document.createElement("div");
+  quantityContainer.className = "quantity-container";
+
+  const decreaseButtonCard = document.createElement("button");
+  decreaseButtonCard.className = "decrease-button-card";
+  decreaseButtonCard.textContent = "-";
+
+  const quantitySpanCard = document.createElement("span");
+  quantitySpanCard.className = "quantity-span-card";
+  quantitySpanCard.textContent = item.quantity;
+
+  const increaseButtonCard = document.createElement("button");
+  increaseButtonCard.className = "increase-button-card";
+  increaseButtonCard.textContent = "+";
+
+  const getProductsLimit = (categoria) => {
+    const cat = categoria?.toLowerCase().trim();
+    return (cat === "tartas" || cat === "combinados") ? 5 : 20;
+  };
+
+  const sizeKey = item.size ? `${item.nombre} - ${item.size}` : item.nombre;
+  const purchasedProducts = JSON.parse(localStorage.getItem("purchasedProductsByDate")) || {};
+  const purchased = purchasedProducts[item.date]?.[sizeKey] || 0;
+
+  increaseButtonCard.addEventListener("click", () => {
+    const increaseDate = item.date;
+    const limit = getProductsLimit(item.categoria);
+    const dailyProducts = productsByDate[increaseDate] || {};
+    const alreadyPurchased = purchasedProducts[increaseDate]?.[sizeKey] || 0;
+    const currentInCart = cartItems.filter(i => i.date === increaseDate && (i.size ? `${i.nombre} - ${i.size}` : i.nombre) === sizeKey).reduce((sum, i) => sum + i.quantity, 0);
+
+    const availableUnits = limit - alreadyPurchased - currentInCart;
+  
+    if (availableUnits <= 0) {
+        showToast({text: `No quedan más unidades disponibles de este producto${item.size ? ` (${item.size})` : ""} para el ${increaseDate}.`, type: "warning"});
+        return;
+    }
 
     const itemDetails = document.createElement("div");
     itemDetails.className = "item-details";
@@ -254,8 +303,9 @@ export function shoppingCart() {
 
   let discountValue = 0;
   const savedCode = localStorage.getItem("discountCode") || "";
-  if (cartItems.length > 0 && savedCode === "DULCE10") {
-    discountValue = total * 0.1;
+
+  if (cartItems.length > 0 && savedCode === "BVNDA10") {
+    discountValue = total * 0.10;
   }
 
   const discountContainer = document.createElement("div");
@@ -273,33 +323,33 @@ export function shoppingCart() {
 
   applyDiscountButton.addEventListener("click", () => {
     const code = discountInput.value.trim().toUpperCase();
-    const existingDiscount = localStorage.getItem("discountCode");
 
     if (cartItems.length === 0) {
       showToast({
         text: "Debes tener productos en el carrito para aplicar un código de descuento.",
         type: "warning",
-      });
+
+    const alreadyUsed = localStorage.getItem("discountUsed");
+
+    if (cartItems.length === 0) {
+      showToast({ text: "Debes tener productos en el carrito para aplicar un código de descuento.", type: "warning" });
       discountInput.value = "";
       return;
     }
 
-    if (code !== "DULCE10" && !existingDiscount) {
-      showToast({ text: "Código no válido.", type: "error" });
-    } else if (code === "DULCE10" && existingDiscount !== "DULCE10") {
-      const today = new Date().toISOString().split("T")[0];
-      localStorage.setItem("discountCode", code);
-      localStorage.setItem("discountUsedDate", today);
+    if (!code) {
+      showToast({ text: "Introduce un código de descuento.", type: "warning" });
+      return;
+    }
+
+    if (alreadyUsed) {
       showToast({
-        text: "¡Descuento aplicado correctamente!",
-        type: "success",
+        text: "Ya has utilizado un código de descuento en tu primera compra. No puedes aplicar otro.",
+        type: "warning"
       });
-      shoppingCart();
-    } else {
-      showToast({
-        text: "Ya has aplicado un código de descuento. No puedes introducir otro.",
-        type: "warning",
-      });
+      discountInput.value = "";
+      return;
+    }
     }
     discountInput.value = "";
   });
@@ -312,10 +362,10 @@ export function shoppingCart() {
   totalPrice.className = "total-price";
   totalPrice.textContent = `Total: ${(total - discountValue).toFixed(2)}€`;
 
-  if (cartItems.length > 0 && savedCode === "DULCE10") {
+  if (cartItems.length > 0 && savedCode === "BVNDA10") {
     const discountInfo = document.createElement("p");
     discountInfo.className = "discount-info";
-    discountInfo.textContent = "Descuento DULCE10 aplicado (-10%)";
+    discountInfo.textContent = "Descuento BVNDA10 aplicado (-10%)";
     cartSection.appendChild(discountInfo);
   }
 
@@ -357,9 +407,9 @@ export function shoppingCart() {
       JSON.stringify(purchasedProducts)
     );
 
-    localStorage.removeItem("cartItems");
-    localStorage.removeItem("productsByDate");
-    localStorage.removeItem("discountCode");
+    // localStorage.removeItem("cartItems");
+    // localStorage.removeItem("productsByDate");
+    // localStorage.removeItem("discountCode");
 
     const cartCounter = document.querySelector(".cart-counter");
     if (cartCounter) {
@@ -367,23 +417,29 @@ export function shoppingCart() {
       cartCounter.classList.remove("visible");
     }
 
-    showToast({
-      text: "¡Gracias por tu compra! Tus productos han sido reservados.",
-      type: "success",
-    });
+
+    showToast({text: "¡Gracias por tu confianza! Tus productos han sido reservados. Finaliza tu pago para completar la compra.", type: "success"});
+
+    const currentUser = JSON.parse(localStorage.getItem("current-user"));
+    let userEmail = null;
+
+    if (!currentUser) {
+      userEmail = prompt("Introduce tu email para confirmar tu pedido:");
+      if (!userEmail || !userEmail.includes("@")) {
+        showToast({text: "Por favor introduce un email válido.", type: "error"});
+        return;
+      }
+    }
 
     await procesarPedido(cartItems, total, discountValue);
 
-    shoppingCart(); // Vuelve a renderizar el carrito vacío
-
-    // Modal pasarela de pago
+    shoppingCart();
+    
     const paymentContainer = document.createElement("div");
     paymentContainer.className = "payment-container";
     localStorage.setItem("selectedDate", cartItems[0].date);
     generatePaymentForm(paymentContainer);
     openModal(paymentContainer);
-
-    // shoppingCart();
   });
 
   cartSection.appendChild(checkoutButton);
