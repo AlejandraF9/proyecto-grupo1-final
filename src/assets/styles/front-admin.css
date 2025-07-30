@@ -276,14 +276,14 @@
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.5);
-    padding: 40px 20px;
+    padding: 4rem 2rem;
     overflow-y: auto;
     box-sizing: border-box;
+    flex-direction: column;
   }
 
   .formModify {
     background-color: var(--white);
-    border-radius: 10px;
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
     padding: 40px;
     max-width: 800px;
@@ -747,9 +747,10 @@
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.5);
-    padding: 40px 20px;
+    padding: 4rem 2rem;
     overflow-y: auto;
     box-sizing: border-box;
+    flex-direction: column;
   }
 
   .formModify {
@@ -1218,9 +1219,10 @@
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.5);
-    padding: 40px 20px;
+    padding: 4rem 2rem;
     overflow-y: auto;
     box-sizing: border-box;
+    flex-direction: column;
   }
 
   .formModify {
