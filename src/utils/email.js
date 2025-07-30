@@ -102,11 +102,13 @@ export async function procesarPedido(cartItems, total, discountValue) {
       text: "Tu pedido ha sido registrado correctamente 🎉",
       type: "success",
     });
+    return true;
   } catch (error) {
     console.error("Error al crear el pedido:", error);
     showToast({
       text: "Hubo un problema al enviar el pedido. Intenta de nuevo más tarde.",
       type: "error",
     });
+    return false;
   }
 }

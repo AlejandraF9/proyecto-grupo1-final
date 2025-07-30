@@ -103,11 +103,12 @@ export function shoppingCart() {
 
     const getProductsLimit = (categoria) => {
       const cat = categoria?.toLowerCase().trim();
-      return (cat === "tartas" || cat === "combinados") ? 5 : 20;
+      return cat === "tartas" || cat === "combinados" ? 5 : 20;
     };
 
     const sizeKey = item.size ? `${item.nombre} - ${item.size}` : item.nombre;
-    const purchasedProducts = JSON.parse(localStorage.getItem("purchasedProductsByDate")) || {};
+    const purchasedProducts =
+      JSON.parse(localStorage.getItem("purchasedProductsByDate")) || {};
     const purchased = purchasedProducts[item.date]?.[sizeKey] || 0;
 
     increaseButtonCard.addEventListener("click", () => {
@@ -116,19 +117,26 @@ export function shoppingCart() {
 
       const sizeKey = item.size ? `${item.nombre} - ${item.size}` : item.nombre;
 
-      const purchasedProducts = JSON.parse(localStorage.getItem("purchasedProductsByDate")) || {};
+      const purchasedProducts =
+        JSON.parse(localStorage.getItem("purchasedProductsByDate")) || {};
       const alreadyPurchased = purchasedProducts[increaseDate]?.[sizeKey] || 0;
 
       const currentInCart = cartItems
-        .filter(i => i.date === increaseDate && (i.size ? `${i.nombre} - ${i.size}` : i.nombre) === sizeKey)
+        .filter(
+          (i) =>
+            i.date === increaseDate &&
+            (i.size ? `${i.nombre} - ${i.size}` : i.nombre) === sizeKey
+        )
         .reduce((sum, i) => sum + i.quantity, 0);
 
       const availableUnits = limit - alreadyPurchased - currentInCart;
 
       if (availableUnits <= 0) {
         showToast({
-          text: `No quedan más unidades disponibles de este producto${item.size ? ` (${item.size})` : ""} para el ${increaseDate}.`,
-          type: "warning"
+          text: `No quedan más unidades disponibles de este producto${
+            item.size ? ` (${item.size})` : ""
+          } para el ${increaseDate}.`,
+          type: "warning",
         });
         return;
       }
@@ -158,84 +166,90 @@ export function shoppingCart() {
         updateCart(index, item, productsByDate);
       }
     });
-  
-  quantityContainer.appendChild(decreaseButtonCard);
-  quantityContainer.appendChild(quantitySpanCard);
-  quantityContainer.appendChild(increaseButtonCard);
 
-  const productRemoveButton = document.createElement("button");
-  productRemoveButton.className = "remove-button";
-  productRemoveButton.textContent = "✖";
+    quantityContainer.appendChild(decreaseButtonCard);
+    quantityContainer.appendChild(quantitySpanCard);
+    quantityContainer.appendChild(increaseButtonCard);
 
-  productRemoveButton.addEventListener("click", () => {
-    const confirmDelete = confirm(`¿Estás seguro de que quieres eliminar \"${item.nombre}\" del carrito?`);
-    if (!confirmDelete) return;
+    const productRemoveButton = document.createElement("button");
+    productRemoveButton.className = "remove-button";
+    productRemoveButton.textContent = "✖";
 
-    cartItems.splice(index, 1);
+    productRemoveButton.addEventListener("click", () => {
+      const confirmDelete = confirm(
+        `¿Estás seguro de que quieres eliminar \"${item.nombre}\" del carrito?`
+      );
+      if (!confirmDelete) return;
 
-    if (productsByDate[item.date]) {
-      delete productsByDate[item.date][sizeKey];
-    }
+      cartItems.splice(index, 1);
 
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    localStorage.setItem("productsByDate", JSON.stringify(productsByDate));
-
-    const cartCounter = document.querySelector(".cart-counter");
-    const updatedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    const newCount = updatedCartItems.length;
-
-    if (cartCounter) {
-      if (newCount > 0) {
-        cartCounter.textContent = newCount;
-        cartCounter.classList.add("visible");
-      } else {
-        cartCounter.textContent = "";
-        cartCounter.classList.remove("visible");
+      if (productsByDate[item.date]) {
+        delete productsByDate[item.date][sizeKey];
       }
+
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+      localStorage.setItem("productsByDate", JSON.stringify(productsByDate));
+
+      const cartCounter = document.querySelector(".cart-counter");
+      const updatedCartItems =
+        JSON.parse(localStorage.getItem("cartItems")) || [];
+      const newCount = updatedCartItems.length;
+
+      if (cartCounter) {
+        if (newCount > 0) {
+          cartCounter.textContent = newCount;
+          cartCounter.classList.add("visible");
+        } else {
+          cartCounter.textContent = "";
+          cartCounter.classList.remove("visible");
+        }
+      }
+
+      showToast({
+        text: `“${item.nombre}” ha sido eliminado del carrito.`,
+        type: "info",
+      });
+      shoppingCart();
+    });
+
+    itemCard.appendChild(imgCard);
+    itemCard.appendChild(itemDetails);
+    itemDetails.appendChild(nameCard);
+    itemDetails.appendChild(priceCard);
+
+    const deliveryDate = document.createElement("p");
+    deliveryDate.className = "delivery-date";
+    deliveryDate.textContent = `Fecha seleccionada: ${item.date}`;
+    itemDetails.appendChild(deliveryDate);
+
+    if (purchased > 0) {
+      const purchasedInfo = document.createElement("p");
+      purchasedInfo.className = "purchased-info";
+      purchasedInfo.textContent = `Unidades ya reservadas para ese día: ${purchased}`;
+      itemDetails.appendChild(purchasedInfo);
     }
 
-    showToast({text: `“${item.nombre}” ha sido eliminado del carrito.`, type: "info"});
-    shoppingCart();
+    if (item.size) {
+      const size = document.createElement("p");
+      size.className = "cart-item-size";
+      size.textContent = `Tamaño: ${item.size}`;
+      itemDetails.appendChild(size);
+    }
+
+    itemDetails.appendChild(quantityContainer);
+    itemCard.appendChild(productRemoveButton);
+    cartList.appendChild(itemCard);
+
+    total += item.precio * item.quantity;
   });
 
-  itemCard.appendChild(imgCard);
-  itemCard.appendChild(itemDetails);
-  itemDetails.appendChild(nameCard);
-  itemDetails.appendChild(priceCard);
-
-  const deliveryDate = document.createElement("p");
-  deliveryDate.className = "delivery-date";
-  deliveryDate.textContent = `Fecha seleccionada: ${item.date}`;
-  itemDetails.appendChild(deliveryDate);
-
-  if (purchased > 0) {
-    const purchasedInfo = document.createElement("p");
-    purchasedInfo.className = "purchased-info";
-    purchasedInfo.textContent = `Unidades ya reservadas para ese día: ${purchased}`;
-    itemDetails.appendChild(purchasedInfo);
-  }
-
-  if (item.size) {
-    const size = document.createElement("p");
-    size.className = "cart-item-size";
-    size.textContent = `Tamaño: ${item.size}`;
-    itemDetails.appendChild(size);
-  }
-
-  itemDetails.appendChild(quantityContainer);
-  itemCard.appendChild(productRemoveButton);
-  cartList.appendChild(itemCard);
-
-  total += item.precio * item.quantity;
-  });
-  
   cartSection.appendChild(cartList);
 
   let discountValue = 0;
   const savedCode = localStorage.getItem("discountCode") || "";
 
   if (cartItems.length > 0 && savedCode === "BVNDA10") {
-    discountValue = total * 0.10;
+    discountValue = total * 0.1;
   }
 
   const discountContainer = document.createElement("div");
@@ -255,18 +269,21 @@ export function shoppingCart() {
     const code = discountInput.value.trim().toUpperCase();
 
     if (cartItems.length === 0) {
-      showToast({text: "Debes tener productos en el carrito para aplicar un código de descuento.", type: "warning"});
+      showToast({
+        text: "Debes tener productos en el carrito para aplicar un código de descuento.",
+        type: "warning",
+      });
       discountInput.value = "";
       return;
     }
 
     if (!code) {
-      showToast({text: "Introduce un código de descuento.", type: "warning"});
+      showToast({ text: "Introduce un código de descuento.", type: "warning" });
       return;
     }
 
     if (code !== "BVNDA10") {
-      showToast({text: "Código no válido.", type: "error"});
+      showToast({ text: "Código no válido.", type: "error" });
       discountInput.value = "";
       return;
     }
@@ -277,22 +294,29 @@ export function shoppingCart() {
     if (!userEmail) {
       userEmail = prompt("Introduce tu email para aplicar el descuento:");
       if (!userEmail || !userEmail.includes("@")) {
-        showToast({ text: "Por favor introduce un email válido.", type: "error" });
+        showToast({
+          text: "Por favor introduce un email válido.",
+          type: "error",
+        });
         return;
       }
     }
 
-    const usedDiscounts = JSON.parse(localStorage.getItem("usedDiscountsByEmail")) || {};
+    const usedDiscounts =
+      JSON.parse(localStorage.getItem("usedDiscountsByEmail")) || {};
 
     if (usedDiscounts[userEmail]) {
-      showToast({text: "Ya has utilizado un código de descuento en tu primera compra. No puedes aplicar otro.", type: "warning"});
+      showToast({
+        text: "Ya has utilizado un código de descuento en tu primera compra. No puedes aplicar otro.",
+        type: "warning",
+      });
       discountInput.value = "";
       return;
     }
     localStorage.setItem("discountCode", code);
     usedDiscounts[userEmail] = true;
     localStorage.setItem("usedDiscountsByEmail", JSON.stringify(usedDiscounts));
-    showToast({text: "¡Descuento aplicado correctamente!", type: "success"});
+    showToast({ text: "¡Descuento aplicado correctamente!", type: "success" });
     shoppingCart();
   });
 
@@ -326,7 +350,8 @@ export function shoppingCart() {
       return;
     }
 
-    const purchasedProducts = JSON.parse(localStorage.getItem("purchasedProductsByDate")) || {};
+    const purchasedProducts =
+      JSON.parse(localStorage.getItem("purchasedProductsByDate")) || {};
 
     cartItems.forEach((item) => {
       const date = item.date;
@@ -343,7 +368,10 @@ export function shoppingCart() {
       purchasedProducts[date][sizeKey] += item.quantity;
     });
 
-    localStorage.setItem("purchasedProductsByDate", JSON.stringify(purchasedProducts));
+    localStorage.setItem(
+      "purchasedProductsByDate",
+      JSON.stringify(purchasedProducts)
+    );
 
     const cartCounter = document.querySelector(".cart-counter");
     if (cartCounter) {
@@ -351,65 +379,20 @@ export function shoppingCart() {
       cartCounter.classList.remove("visible");
     }
 
-
-    showToast({text: "¡Gracias por tu confianza! Tus productos han sido reservados. Finaliza tu pago para completar la compra.", type: "success"});
-
-    const currentUser = JSON.parse(localStorage.getItem("current-user"));
-    let userEmail = null;
-
-    if (!currentUser) {
-      userEmail = prompt("Introduce tu email para confirmar tu pedido:");
-      if (!userEmail || !userEmail.includes("@")) {
-        showToast({text: "Por favor introduce un email válido.", type: "error"});
-        return;
-      }
-    }
-
-    const hoy = new Date().toISOString().slice(0, 10);
-    const categoria = cartItems.every((item) => item.date === hoy)
-      ? "al día"
-      : "encargo";
-
-    const order = {
-      productos: cartItems,
-      total: Number((total - discountValue).toFixed(2)),
-      categoria,
-      email: currentUser ? currentUser.email : userEmail,
-      user: currentUser ? currentUser._id : null,
-    };
-
-    console.log("Productos del carrito:");
-
-    cartItems.forEach((item) => console.log(item.nombre, item.url));
-    console.log("Pedido a enviar:", order);
-
-    fetch("https://api-bakery-production.up.railway.app/orders", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(order),
-    })
-      .then((response) => {
-        if (!response.ok) throw new Error("Error al enviar el pedido.");
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Pedido enviado correctamente:", data);
-      })
-      .catch((error) => {
-        console.error("Error al crear el pedido:", error);
-        showToast({text: "Hubo un problema al enviar el pedido. Intenta de nuevo más tarde.", type: "error"});
-      });
+    showToast({
+      text: "¡Gracias por tu confianza! Tus productos han sido reservados. Finaliza tu pago para completar la compra.",
+      type: "success",
+    });
 
     await procesarPedido(cartItems, total, discountValue);
-    shoppingCart();
-    
+
     const paymentContainer = document.createElement("div");
     paymentContainer.className = "payment-container";
     localStorage.setItem("selectedDate", cartItems[0].date);
     generatePaymentForm(paymentContainer);
     openModal(paymentContainer);
+
+    shoppingCart();
   });
 
   cartSection.appendChild(checkoutButton);
