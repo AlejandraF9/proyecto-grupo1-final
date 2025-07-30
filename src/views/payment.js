@@ -1,5 +1,5 @@
 import { sendPaymentRequest } from "../api/apiPayment";
-import { shoppingCart } from "./shoppingCart2";
+import { shoppingCart } from "./shoppingCart";
 import { closeModal } from "../utils/modal&overlay";
 import { paymentValidations } from "../utils/validations";
 import { showToast } from "../utils/toastify";
