@@ -132,6 +132,14 @@ export async function renderForm(
       localStorage.removeItem("productsByDate");
       localStorage.removeItem("discountCode");
 
+      const cartCounterProducts = document.querySelector(".cart-counter");
+      if (cartCounterProducts) {
+        cartCounterProducts.classList.remove("visible");
+        cartCounterProducts.textContent = "";
+      }
+
+      showToast({text: "Has cerrado sesión.", type: "success"});
+
       closeModal();
       goTo("/");
     });
