@@ -233,38 +233,47 @@ export function shoppingCart() {
 
   applyDiscountButton.addEventListener("click", () => {
     const code = discountInput.value.trim().toUpperCase();
-    const alreadyUsed = localStorage.getItem("discountUsed");
 
     if (cartItems.length === 0) {
-      showToast({ text: "Debes tener productos en el carrito para aplicar un código de descuento.", type: "warning" });
+      showToast({text: "Debes tener productos en el carrito para aplicar un código de descuento.", type: "warning"});
       discountInput.value = "";
       return;
     }
 
     if (!code) {
-      showToast({ text: "Introduce un código de descuento.", type: "warning" });
+      showToast({text: "Introduce un código de descuento.", type: "warning"});
       return;
     }
 
-    if (alreadyUsed) {
-      showToast({
-        text: "Ya has utilizado un código de descuento en tu primera compra. No puedes aplicar otro.",
-        type: "warning"
-      });
+    if (code !== "BVNDA10") {
+      showToast({text: "Código no válido.", type: "error"});
       discountInput.value = "";
       return;
     }
 
-    if (code === "BVNDA10") {
-      localStorage.setItem("discountCode", code);
-      localStorage.setItem("discountUsed", "true");
-      showToast({ text: "¡Descuento aplicado correctamente!", type: "success" });
-      shoppingCart();
-    } else {
-      showToast({ text: "Código no válido.", type: "error" });
+    const currentUser = JSON.parse(localStorage.getItem("current-user"));
+    let userEmail = currentUser?.email;
+
+    if (!userEmail) {
+      userEmail = prompt("Introduce tu email para aplicar el descuento:");
+      if (!userEmail || !userEmail.includes("@")) {
+        showToast({ text: "Por favor introduce un email válido.", type: "error" });
+        return;
+      }
     }
 
-    discountInput.value = "";
+    const usedDiscounts = JSON.parse(localStorage.getItem("usedDiscountsByEmail")) || {};
+
+    if (usedDiscounts[userEmail]) {
+      showToast({text: "Ya has utilizado un código de descuento en tu primera compra. No puedes aplicar otro.", type: "warning"});
+      discountInput.value = "";
+      return;
+    }
+    localStorage.setItem("discountCode", code);
+    usedDiscounts[userEmail] = true;
+    localStorage.setItem("usedDiscountsByEmail", JSON.stringify(usedDiscounts));
+    showToast({text: "¡Descuento aplicado correctamente!", type: "success"});
+    shoppingCart();
   });
     
   discountContainer.appendChild(discountInput);
@@ -294,8 +303,7 @@ export function shoppingCart() {
       return;
     }
 
-    const purchasedProducts =
-      JSON.parse(localStorage.getItem("purchasedProductsByDate")) || {};
+    const purchasedProducts = JSON.parse(localStorage.getItem("purchasedProductsByDate")) || {};
 
     cartItems.forEach((item) => {
       const date = item.date;
@@ -312,14 +320,7 @@ export function shoppingCart() {
       purchasedProducts[date][sizeKey] += item.quantity;
     });
 
-    localStorage.setItem(
-      "purchasedProductsByDate",
-      JSON.stringify(purchasedProducts)
-    );
-
-    // localStorage.removeItem("cartItems");
-    // localStorage.removeItem("productsByDate");
-    // localStorage.removeItem("discountCode");
+    localStorage.setItem("purchasedProductsByDate", JSON.stringify(purchasedProducts));
 
     const cartCounter = document.querySelector(".cart-counter");
     if (cartCounter) {
@@ -352,7 +353,9 @@ export function shoppingCart() {
       email: currentUser ? currentUser.email : userEmail,
       user: currentUser ? currentUser._id : null,
     };
+
     console.log("Productos del carrito:");
+
     cartItems.forEach((item) => console.log(item.nombre, item.url));
     console.log("Pedido a enviar:", order);
 

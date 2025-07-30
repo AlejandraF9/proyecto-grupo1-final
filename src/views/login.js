@@ -83,16 +83,35 @@ export function userLogin() {
         showToast({text: "Sesión iniciada correctamente", type: "success"});
         app.innerHTML = "";
 
+        const user = currentUser;
+        if (user) {
+          const userCart = JSON.parse(localStorage.getItem(`cart-${user._id}`)) || [];
+          localStorage.setItem("cartItems", JSON.stringify(userCart));
+
+          const cartCounter = document.querySelector(".cart-counter");
+          if (cartCounter) {
+            if (userCart.length > 0) {
+              cartCounter.textContent = userCart.length;
+              cartCounter.classList.add("visible");
+            } else {
+              cartCounter.textContent = "";
+              cartCounter.classList.remove("visible");
+            }
+          }
+        }
+
         closeModal();
+        
         if (currentUser.role === "admin") {
           goTo("/admin");
         } else {
           goTo("/home");
         }
       } else {
-        showToast({text: "Correo electrónico o contraseña incorrectos", type: "error"});
+        showToast({text: "Correo electrónico o contraseña incorrectos", type: "error",
+        });
       }
-    } catch {
+    } catch (error) {
       console.error("Login request failed", error);
     }
   });
