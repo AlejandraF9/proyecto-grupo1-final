@@ -25,7 +25,7 @@ function crearBanner() {
   app.appendChild(banner);
 
   const logo = document.createElement("img");
-  logo.src = "..src/assets/images/logo_tienda.webp";
+  logo.src = "./src/assets/images/logo_tienda.webp";
   logo.className = "admin-logo";
   banner.appendChild(logo);
 
