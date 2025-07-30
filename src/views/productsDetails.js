@@ -1,6 +1,6 @@
 import { showToast } from "../utils/toastify";
 
-async function productDetails() {
+export async function productDetails() {
   const app = document.getElementById("app");
   app.innerHTML = "";
 
@@ -8,7 +8,7 @@ async function productDetails() {
   const basePrice = product.precio;
 
   if (!product) {
-    showToast({text: "Producto no encontrado.", type: "error"});
+    showToast({ text: "Producto no encontrado.", type: "error" });
     return;
   }
 
@@ -34,7 +34,9 @@ async function productDetails() {
   productDetailsContainer.appendChild(productPrice);
 
   const productCategory = document.createElement("p");
-  productCategory.textContent = `Categoría: ${product.categoria || "No especificada"}`;
+  productCategory.textContent = `Categoría: ${
+    product.categoria || "No especificada"
+  }`;
   productDetailsContainer.appendChild(productCategory);
 
   if (product.ingredientes) {
@@ -50,7 +52,7 @@ async function productDetails() {
   }
 
   const quantityContainer = document.createElement("div");
-  
+
   const quantityLabel = document.createElement("label");
   quantityLabel.setAttribute("for", "quantity");
   quantityLabel.textContent = "Cantidad:";
@@ -81,7 +83,7 @@ async function productDetails() {
 
   if (product.categoria?.toLowerCase().trim() === "tartas") {
     const sizeContainer = document.createElement("div");
- 
+
     const sizeText = document.createElement("p");
     sizeText.textContent = "Tamaño:";
     sizeContainer.appendChild(sizeText);
@@ -90,23 +92,23 @@ async function productDetails() {
     sizeOptionButtons.className = "size-buttons";
 
     const sizesOptions = ["Pequeña", "Mediana", "Grande"];
-    sizesOptions.forEach(size => {
+    sizesOptions.forEach((size) => {
       const sizesOptionsbutton = document.createElement("button");
       sizesOptionsbutton.dataset.size = size; //Se sabrá la opción que escogió el usuario
       sizesOptionsbutton.textContent = size;
       sizeOptionButtons.appendChild(sizesOptionsbutton);
     });
-    
+
     sizeContainer.appendChild(sizeOptionButtons);
     productDetailsContainer.appendChild(sizeContainer);
 
     const sizeButtons = sizeOptionButtons.querySelectorAll("button");
-    
+
     sizeButtons.forEach((button) => {
       button.addEventListener("click", () => {
         const alreadySelected = button.classList.contains("selected");
 
-        sizeButtons.forEach(b => b.classList.remove("selected"));
+        sizeButtons.forEach((b) => b.classList.remove("selected"));
 
         if (alreadySelected) {
           selectedSize = null;
@@ -118,30 +120,31 @@ async function productDetails() {
           quantitySpan.textContent = "1";
           switch (selectedSize) {
             case "Pequeña":
-            productPrice.textContent = formatPrice(basePrice);
-            break;
+              productPrice.textContent = formatPrice(basePrice);
+              break;
             case "Mediana":
-            productPrice.textContent = formatPrice(34);
-            break;
+              productPrice.textContent = formatPrice(34);
+              break;
             case "Grande":
-            productPrice.textContent = formatPrice(40);
-            break;
+              productPrice.textContent = formatPrice(40);
+              break;
           }
         }
       });
     });
   }
-    
+
   const dateContainer = document.createElement("div");
   dateContainer.className = "date-container";
-    
+
   const dateLabel = document.createElement("label");
   dateLabel.setAttribute("for", "delivery-date");
   dateLabel.textContent = "Selecciona fecha de entrega o recogida:";
   dateContainer.appendChild(dateLabel);
 
   const orderInfo = document.createElement("small");
-  orderInfo.textContent = "Recogida en local y envíos a domicilio disponibles en Tenerife, de lunes a viernes, en horario de 10:00 a 17:00.";
+  orderInfo.textContent =
+    "Recogida en local y envíos a domicilio disponibles en Tenerife, de lunes a viernes, en horario de 10:00 a 17:00.";
   dateContainer.appendChild(orderInfo);
 
   const dateInput = document.createElement("input");
@@ -156,7 +159,7 @@ async function productDetails() {
   dateContainer.appendChild(dateErrorMessage);
 
   productDetailsContainer.appendChild(dateContainer);
-    
+
   const nowDateTime = new Date();
   const todayDate = new Date();
 
@@ -174,18 +177,18 @@ async function productDetails() {
     let year = date.getFullYear();
     let month = date.getMonth() + 1;
     let day = date.getDate();
-      
+
     if (month < 10) {
       month = "0" + month;
     }
-      
+
     if (day < 10) {
       day = "0" + day;
     }
-      
+
     return year + "-" + month + "-" + day;
   }
-    
+
   dateInput.min = formatDate(todayDate);
   dateInput.max = formatDate(maxDate);
 
@@ -198,41 +201,58 @@ async function productDetails() {
     const dayDate = selectedDateInput.getDay();
 
     if (dayDate === 0 || dayDate === 6) {
-      showToast({text: "Solo se pueden seleccionar días laborables (lunes a viernes).", type: "info"});
+      showToast({
+        text: "Solo se pueden seleccionar días laborables (lunes a viernes).",
+        type: "info",
+      });
       dateErrorMessage.style.display = "block";
       dateInput.value = "";
     } else {
       dateErrorMessage.style.display = "none";
     }
   });
-    
+
   const getProductsLimit = (categoria, size = "") => {
     const cat = categoria?.toLowerCase().trim();
-    return (cat === "tartas" || cat === "combinados") ? 5 : 20;
+    return cat === "tartas" || cat === "combinados" ? 5 : 20;
   };
-    
+
   const validateQuantity = (quantityToValidate) => {
     const selectedDate = dateInput.value;
-    const sizeKey = selectedSize ? `${product.nombre} - ${selectedSize}` : product.nombre;
-    const productsByDate = JSON.parse(localStorage.getItem("productsByDate")) || {};
+    const sizeKey = selectedSize
+      ? `${product.nombre} - ${selectedSize}`
+      : product.nombre;
+    const productsByDate =
+      JSON.parse(localStorage.getItem("productsByDate")) || {};
     const dailyProducts = productsByDate[selectedDate] || {};
     const cartCount = dailyProducts[sizeKey] || 0;
 
-    const purchasedProducts = JSON.parse(localStorage.getItem("purchasedProductsByDate")) || {};
+    const purchasedProducts =
+      JSON.parse(localStorage.getItem("purchasedProductsByDate")) || {};
     const alreadyPurchased = purchasedProducts[selectedDate]?.[sizeKey] || 0;
 
     const maxProductsUnits = getProductsLimit(product.categoria, selectedSize);
     const currentTotal = cartCount + alreadyPurchased;
 
     if (currentTotal >= maxProductsUnits) {
-      showToast({text: `No quedan unidades disponibles de este producto${selectedSize ? ` (${selectedSize})` : ""} para el ${selectedDate}.`, type: "error"});
+      showToast({
+        text: `No quedan unidades disponibles de este producto${
+          selectedSize ? ` (${selectedSize})` : ""
+        } para el ${selectedDate}.`,
+        type: "error",
+      });
       return false;
     }
-    
+
     if (currentTotal + quantityToValidate > maxProductsUnits) {
       const availableUnits = maxProductsUnits - currentTotal;
       const unitOrUnits = availableUnits === 1 ? "unidad" : "unidades";
-      showToast({text: `Quedan ${availableUnits} ${unitOrUnits} disponibles para este producto${selectedSize ? ` (${selectedSize})` : ""} en la fecha seleccionada (${selectedDate}).`, type: "info"});
+      showToast({
+        text: `Quedan ${availableUnits} ${unitOrUnits} disponibles para este producto${
+          selectedSize ? ` (${selectedSize})` : ""
+        } en la fecha seleccionada (${selectedDate}).`,
+        type: "info",
+      });
       return false;
     }
     return true;
@@ -246,19 +266,32 @@ async function productDetails() {
   addToCartButton.addEventListener("click", () => {
     const selectedDate = dateInput.value;
     const quantity = parseInt(quantitySpan.textContent, 10);
-    
-    if (!selectedDate && (product.categoria?.toLowerCase().trim() === "tartas" && !selectedSize)) {
-      showToast({text: "Selecciona los detalles del producto antes de agregarlo al carrito.", type: "warning"});
+
+    if (
+      !selectedDate &&
+      product.categoria?.toLowerCase().trim() === "tartas" &&
+      !selectedSize
+    ) {
+      showToast({
+        text: "Selecciona los detalles del producto antes de agregarlo al carrito.",
+        type: "warning",
+      });
       return;
     }
 
     if (!selectedDate) {
-      showToast({text: "Selecciona una fecha válida antes de continuar.", type: "warning"});
+      showToast({
+        text: "Selecciona una fecha válida antes de continuar.",
+        type: "warning",
+      });
       return;
     }
 
     if (product.categoria?.toLowerCase().trim() === "tartas" && !selectedSize) {
-      showToast({text: "Selecciona un tamaño antes de agregar el producto al carrito.", type: "warning"});
+      showToast({
+        text: "Selecciona un tamaño antes de agregar el producto al carrito.",
+        type: "warning",
+      });
       return;
     }
 
@@ -266,10 +299,13 @@ async function productDetails() {
 
     localStorage.setItem("selectedDate", selectedDate);
 
-    const quantityByDate = JSON.parse(localStorage.getItem("productsByDate")) || {};
+    const quantityByDate =
+      JSON.parse(localStorage.getItem("productsByDate")) || {};
     const dailyQuantity = quantityByDate[selectedDate] || {};
 
-    const sizeKey = selectedSize ? `${product.nombre} - ${selectedSize}` : product.nombre;
+    const sizeKey = selectedSize
+      ? `${product.nombre} - ${selectedSize}`
+      : product.nombre;
     const productsQuantity = dailyQuantity[sizeKey] || 0;
 
     dailyQuantity[sizeKey] = productsQuantity + quantity;
@@ -284,8 +320,11 @@ async function productDetails() {
       shoppingCart[existingIndex].quantity += quantity;
     } else {
       let finalPrice = basePrice;
-      
-      if (product.categoria?.toLowerCase().trim() === "tartas" && selectedSize) {
+
+      if (
+        product.categoria?.toLowerCase().trim() === "tartas" &&
+        selectedSize
+      ) {
         switch (selectedSize) {
           case "Pequeña":
             finalPrice = product.precio;
@@ -304,7 +343,7 @@ async function productDetails() {
         precio: finalPrice,
         quantity,
         date: selectedDate,
-        ...(selectedSize && { size: selectedSize })
+        ...(selectedSize && { size: selectedSize }),
       };
       shoppingCart.push(cartItem);
     }
@@ -322,34 +361,45 @@ async function productDetails() {
         cartCounter.style.display = "none";
       }
     }
-    showToast({text: "¡Producto añadido correctamente al carrito!", type: "success"});
+    showToast({
+      text: "¡Producto añadido correctamente al carrito!",
+      type: "success",
+    });
     quantitySpan.textContent = "1";
   });
 
   const orderInfoContainer = document.createElement("div");
 
   const oderTimeLimit = document.createElement("p");
-  oderTimeLimit.textContent = "*Para garantizar una correcta gestión, los pedidos que se deseen recibir o recoger el mismo día deberán realizarse en nuestra web antes de las 16:30.";
+  oderTimeLimit.textContent =
+    "*Para garantizar una correcta gestión, los pedidos que se deseen recibir o recoger el mismo día deberán realizarse en nuestra web antes de las 16:30.";
   orderInfoContainer.appendChild(oderTimeLimit);
 
   const orderDetails = document.createElement("p");
-  orderDetails.textContent = "*Los gastos de envío se seleccionan en la plataforma de pago.";
+  orderDetails.textContent =
+    "*Los gastos de envío se seleccionan en la plataforma de pago.";
   orderInfoContainer.appendChild(orderDetails);
   productDetailsContainer.appendChild(orderInfoContainer);
 
   productSection.appendChild(productDetailsContainer);
   app.appendChild(productSection);
-    
+
   increaseButton.addEventListener("click", () => {
     let quantity = parseInt(quantitySpan.textContent, 10);
 
     if (!dateInput.value) {
-      showToast({text: "Selecciona una fecha antes de elegir la cantidad del producto.", type: "warning"});
+      showToast({
+        text: "Selecciona una fecha antes de elegir la cantidad del producto.",
+        type: "warning",
+      });
       return;
     }
 
     if (product.categoria?.toLowerCase().trim() === "tartas" && !selectedSize) {
-      showToast({text: "Selecciona un tamaño antes de elegir la cantidad.", type: "warning"});
+      showToast({
+        text: "Selecciona un tamaño antes de elegir la cantidad.",
+        type: "warning",
+      });
       return;
     }
 
@@ -359,7 +409,7 @@ async function productDetails() {
 
     quantitySpan.textContent = quantity;
   });
-  
+
   decreaseButton.addEventListener("click", () => {
     let quantity = parseInt(quantitySpan.textContent, 10);
     if (quantity > 1) {
@@ -373,5 +423,5 @@ export default {
   init() {
     console.log("Product Details init executed");
     productDetails();
-  }
+  },
 };

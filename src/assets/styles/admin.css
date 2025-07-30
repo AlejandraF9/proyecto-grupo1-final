@@ -1,135 +1,334 @@
-/* ========== ADMIN INTERFAZ ========== */
+/*////////////////
+// MOBILE      //
+//////////////*/
 
-.admin-body {
-  margin: 0;
-  background-color: #f9f6f7;
-  font-family: var(
-    --text-font,
-    "Segoe UI",
-    Tahoma,
-    Geneva,
-    Verdana,
-    sans-serif
-  );
-}
+@media screen and (orientation: portrait) and (max-width: 760px) {
+  /* Admin Panel - Usuarios Styles */
 
-.admin-app {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 10px;
-}
+  /* ========== ADMIN INTERFAZ ========== */
 
-/* ========== BANNER ========== */
-.admin-banner {
-  position: relative;
-  height: 60vh;
-  display: flex;
-  align-items: center;
-  padding: 0 2.5rem;
-  background: url("https://images.unsplash.com/photo-1715605127473-da686692a801?q=80&w=1009&auto=format&fit=crop")
-    no-repeat center center / cover;
-  color: var(--color);
-  box-sizing: border-box;
-}
+  .admin-body {
+    margin: 0;
+    background-color: rgba(0, 0, 0, 0.05);
+    font-family: var(--text-font);
+    display: flex;
+  }
 
-.admin-logo {
-  height: 5rem;
-  width: auto;
-  margin-right: 2rem;
-  opacity: 0.85;
-}
+  .admin-app {
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 0.5rem;
+    align-items: center;
+  }
 
-.admin-logo-text {
-  font-size: 3rem;
-  font-weight: 700;
-  text-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
-  font-family: var(--text-title);
-  color: var(--color);
-}
-
-.admin-logout-button {
-  position: absolute;
-  top: 2rem;
-  right: 2rem;
-  background-color: var(--pink);
-  color: var(--white);
-  border: none;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  text-transform: uppercase;
-}
-
-/* ========== MENU ========== */
-.admin-menu {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  background-color: var(--blue-color);
-  padding: 1rem 0;
-  gap: 1.5rem;
-  margin-top: 1rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-.admin-tab-button {
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-  color: var(--color);
-  padding: 0.5rem 1rem;
-  text-transform: uppercase;
-  font-family: var(--text-font);
-  transition: all 0.3s ease;
-}
-
-.admin-tab-button.active {
-  border-bottom: 2px solid var(--pink);
-  color: var(--pink);
-  font-weight: 600;
-}
-
-/* ========== CONTENIDO ========== */
-.admin-content {
-  margin-top: 2rem;
-  padding: 1rem;
-  background-color: var(--white);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  border-radius: 8px;
-  font-family: var(--text-font);
-  color: var(--color);
-}
-
-/* ========== RESPONSIVE ========== */
-@media screen and (max-width: 768px) {
+  /* ========== BANNER ========== */
   .admin-banner {
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
+    position: relative;
+    height: 4.25rem;
+    display: flex;
+    align-items: flex-start;
+    padding: 0 2.5rem;
+    color: var(--color);
+    box-sizing: border-box;
   }
 
   .admin-logo {
-    margin-bottom: 1rem;
+    position: relative;
+    height: 3.5rem;
+    width: auto;
+    margin-right: 2rem;
+    top: 0.5rem;
+    opacity: 0.8;
   }
 
-  .admin-logo-text {
-    font-size: 2rem;
-  }
+  /*.admin-logo-text {
+    font-size: 3rem;
+    font-weight: 700;
+    text-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+    font-family: var(--text-title);
+    color: var(--color);
+  }*/
 
   .admin-logout-button {
+    position: absolute;
     top: 1rem;
-    right: 1rem;
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
+    right: 0.5rem;
+    background-color: var(--pink);
+    color: var(--color);
+    border: none;
+    padding: 0.75rem 1rem;
+    font-size: 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+
+  /* ========== MENU ========== */
+  .admin-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: var(--blue-color);
+    padding: 1rem 0;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   }
 
   .admin-tab-button {
-    font-size: 1rem;
-    padding: 0.4rem 0.75rem;
+    background: none;
+    border: none;
+    font-size: 0.6rem;
+    cursor: pointer;
+    color: var(--color);
+    padding: 0.2rem 0.2rem;
+    text-transform: uppercase;
+    font-family: var(--text-font);
+    transition: all 0.3s ease;
+  }
+
+  .admin-tab-button.active {
+    border-bottom: 1px solid var(--color);
+    color: var(--color);
+    font-weight: 600;
+  }
+
+  /* ========== CONTENIDO ========== */
+  .admin-content {
+    width: 100%;
+    margin-right: 1rem;
+    margin-top: 2rem;
+    background-color: var(--white);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    font-family: var(--text-font);
+    color: var(--color);
   }
 }
 
-/* Asegúrate de tener definidas las variables CSS:
-   --text-font, --text-title, --white, --color, --pink, --blue-color */
+/*////////////////
+// TABLET      //
+//////////////*/
+
+@media screen and (min-width: 761px) and (max-width: 1028px) {
+  /* Admin Panel - Usuarios Styles */
+
+  /* ========== ADMIN INTERFAZ ========== */
+
+  .admin-body {
+    margin: 0;
+    background-color: rgba(0, 0, 0, 0.05);
+    font-family: var(--text-font);
+  }
+
+  .admin-app {
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+  }
+
+  /* ========== BANNER ========== */
+  .admin-banner {
+    position: relative;
+    width: 90%;
+    height: 4.25rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 0 2.5rem;
+    color: var(--color);
+    box-sizing: border-box;
+  }
+
+  .admin-logo {
+    position: relative;
+    height: 3.5rem;
+    width: auto;
+    margin-right: 2rem;
+    top: 0.5rem;
+    opacity: 0.8;
+  }
+
+  /*.admin-logo-text {
+    font-size: 3rem;
+    font-weight: 700;
+    text-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+    font-family: var(--text-title);
+    color: var(--color);
+  }*/
+
+  .admin-logout-button {
+    position: absolute;
+    top: 1rem;
+    right: 0rem;
+    background-color: var(--pink);
+    color: var(--color);
+    border: none;
+    padding: 0.75rem 1rem;
+    font-size: 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+
+  /* ========== MENU ========== */
+  .admin-menu {
+    width: 92%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: var(--blue-color);
+    padding: 1rem 0;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+
+  .admin-tab-button {
+    background: none;
+    border: none;
+    font-size: 0.8rem;
+    cursor: pointer;
+    color: var(--color);
+    padding: 0.5rem 1rem;
+    text-transform: uppercase;
+    font-family: var(--text-font);
+    transition: all 0.3s ease;
+  }
+
+  .admin-tab-button.active {
+    border-bottom: 1px solid var(--color);
+    color: var(--color);
+    font-weight: 600;
+  }
+
+  /* ========== CONTENIDO ========== */
+  .admin-content {
+    width: 90%;
+    margin-top: 2rem;
+    background-color: var(--white);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    font-family: var(--text-font);
+    color: var(--color);
+  }
+}
+
+/*////////////////
+// MONITOR      //
+//////////////*/
+
+@media screen and (min-width: 1029px) {
+  /* Admin Panel - Usuarios Styles */
+
+  /* ========== ADMIN INTERFAZ ========== */
+
+  .admin-body {
+    margin: 0;
+    background-color: rgba(0, 0, 0, 0.05);
+    font-family: var(--text-font);
+  }
+
+  .admin-app {
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+  }
+
+  /* ========== BANNER ========== */
+  .admin-banner {
+    position: relative;
+    width: 90%;
+    height: 4.25rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 0 2.5rem;
+    color: var(--color);
+    box-sizing: border-box;
+  }
+
+  .admin-logo {
+    position: relative;
+    height: 3.5rem;
+    width: auto;
+    margin-right: 2rem;
+    top: 0.5rem;
+    opacity: 0.8;
+  }
+
+  /*.admin-logo-text {
+    font-size: 3rem;
+    font-weight: 700;
+    text-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+    font-family: var(--text-title);
+    color: var(--color);
+  }*/
+
+  .admin-logout-button {
+    position: absolute;
+    top: 1rem;
+    right: 0rem;
+    background-color: var(--pink);
+    color: var(--color);
+    border: none;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+
+  /* ========== MENU ========== */
+  .admin-menu {
+    width: 92%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: var(--blue-color);
+    padding: 1rem 0;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+
+  .admin-tab-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--color);
+    padding: 0.5rem 1rem;
+    text-transform: uppercase;
+    font-family: var(--text-font);
+    transition: all 0.3s ease;
+  }
+
+  .admin-tab-button.active {
+    border-bottom: 1px solid var(--color);
+    color: var(--color);
+    font-weight: 600;
+  }
+
+  /* ========== CONTENIDO ========== */
+  .admin-content {
+    width: 90%;
+    margin-top: 2rem;
+    background-color: var(--white);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    font-family: var(--text-font);
+    color: var(--color);
+  }
+}
