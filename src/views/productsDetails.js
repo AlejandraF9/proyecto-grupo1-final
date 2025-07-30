@@ -314,12 +314,7 @@ export async function productDetails() {
 
     let shoppingCart = JSON.parse(localStorage.getItem("cartItems")) || [];
 
-    const existingIndex = shoppingCart.findIndex(
-      (item) =>
-        item.nombre === product.nombre &&
-        item.date === selectedDate &&
-        item.size === selectedSize
-    );
+    const existingIndex = shoppingCart.findIndex(item => item.nombre === product.nombre && item.date === selectedDate && ((item.size || null) === (selectedSize || null)));
 
     if (existingIndex !== -1) {
       shoppingCart[existingIndex].quantity += quantity;
@@ -356,7 +351,7 @@ export async function productDetails() {
     localStorage.setItem("cartItems", JSON.stringify(shoppingCart));
 
     const cartCounter = document.querySelector(".cart-counter");
-    const cartProductCounter = shoppingCart.length;
+    const cartProductCounter = shoppingCart.reduce((acc, item) => acc + item.quantity, 0);
 
     if (cartCounter) {
       if (cartProductCounter > 0) {

@@ -121,10 +121,21 @@ export async function renderForm(
     logoutBtn.type = "button";
     logoutBtn.style.marginTop = "1rem";
     logoutBtn.addEventListener("click", () => {
+      const user = JSON.parse(localStorage.getItem("current-user"));
+      if (user) {
+        const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+        localStorage.setItem(`cart-${user._id}`, JSON.stringify(cartItems));
+      }
+      
       localStorage.removeItem("current-user");
+      localStorage.removeItem("cartItems");
+      localStorage.removeItem("productsByDate");
+      localStorage.removeItem("discountCode");
+
       closeModal();
       goTo("/");
     });
+    
     container.appendChild(logoutBtn);
   }
 

@@ -325,33 +325,45 @@ export function shoppingCart() {
     const code = discountInput.value.trim().toUpperCase();
 
     if (cartItems.length === 0) {
-      showToast({
-        text: "Debes tener productos en el carrito para aplicar un código de descuento.",
-        type: "warning",
-
-    const alreadyUsed = localStorage.getItem("discountUsed");
-
-    if (cartItems.length === 0) {
-      showToast({ text: "Debes tener productos en el carrito para aplicar un código de descuento.", type: "warning" });
+      showToast({text: "Debes tener productos en el carrito para aplicar un código de descuento.", type: "warning"});
       discountInput.value = "";
       return;
     }
 
     if (!code) {
-      showToast({ text: "Introduce un código de descuento.", type: "warning" });
+      showToast({text: "Introduce un código de descuento.", type: "warning"});
       return;
     }
 
-    if (alreadyUsed) {
-      showToast({
-        text: "Ya has utilizado un código de descuento en tu primera compra. No puedes aplicar otro.",
-        type: "warning"
-      });
+    if (code !== "BVNDA10") {
+      showToast({text: "Código no válido.", type: "error"});
       discountInput.value = "";
       return;
     }
+
+    const currentUser = JSON.parse(localStorage.getItem("current-user"));
+    let userEmail = currentUser?.email;
+
+    if (!userEmail) {
+      userEmail = prompt("Introduce tu email para aplicar el descuento:");
+      if (!userEmail || !userEmail.includes("@")) {
+        showToast({ text: "Por favor introduce un email válido.", type: "error" });
+        return;
+      }
     }
-    discountInput.value = "";
+
+    const usedDiscounts = JSON.parse(localStorage.getItem("usedDiscountsByEmail")) || {};
+
+    if (usedDiscounts[userEmail]) {
+      showToast({text: "Ya has utilizado un código de descuento en tu primera compra. No puedes aplicar otro.", type: "warning"});
+      discountInput.value = "";
+      return;
+    }
+    localStorage.setItem("discountCode", code);
+    usedDiscounts[userEmail] = true;
+    localStorage.setItem("usedDiscountsByEmail", JSON.stringify(usedDiscounts));
+    showToast({text: "¡Descuento aplicado correctamente!", type: "success"});
+    shoppingCart();
   });
 
   discountContainer.appendChild(discountInput);
@@ -384,8 +396,7 @@ export function shoppingCart() {
       return;
     }
 
-    const purchasedProducts =
-      JSON.parse(localStorage.getItem("purchasedProductsByDate")) || {};
+    const purchasedProducts = JSON.parse(localStorage.getItem("purchasedProductsByDate")) || {};
 
     cartItems.forEach((item) => {
       const date = item.date;
@@ -402,14 +413,7 @@ export function shoppingCart() {
       purchasedProducts[date][sizeKey] += item.quantity;
     });
 
-    localStorage.setItem(
-      "purchasedProductsByDate",
-      JSON.stringify(purchasedProducts)
-    );
-
-    // localStorage.removeItem("cartItems");
-    // localStorage.removeItem("productsByDate");
-    // localStorage.removeItem("discountCode");
+    localStorage.setItem("purchasedProductsByDate", JSON.stringify(purchasedProducts));
 
     const cartCounter = document.querySelector(".cart-counter");
     if (cartCounter) {
@@ -431,8 +435,44 @@ export function shoppingCart() {
       }
     }
 
-    await procesarPedido(cartItems, total, discountValue);
+    const hoy = new Date().toISOString().slice(0, 10);
+    const categoria = cartItems.every((item) => item.date === hoy)
+      ? "al día"
+      : "encargo";
 
+    const order = {
+      productos: cartItems,
+      total: Number((total - discountValue).toFixed(2)),
+      categoria,
+      email: currentUser ? currentUser.email : userEmail,
+      user: currentUser ? currentUser._id : null,
+    };
+
+    console.log("Productos del carrito:");
+
+    cartItems.forEach((item) => console.log(item.nombre, item.url));
+    console.log("Pedido a enviar:", order);
+
+    fetch("https://api-bakery-production.up.railway.app/orders", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(order),
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error("Error al enviar el pedido.");
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Pedido enviado correctamente:", data);
+      })
+      .catch((error) => {
+        console.error("Error al crear el pedido:", error);
+        showToast({text: "Hubo un problema al enviar el pedido. Intenta de nuevo más tarde.", type: "error"});
+      });
+
+    await procesarPedido(cartItems, total, discountValue);
     shoppingCart();
     
     const paymentContainer = document.createElement("div");
