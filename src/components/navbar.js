@@ -303,6 +303,21 @@ export function renderNavbar() {
   cartCounter.className = "cart-counter";
 
   // Obtengo los productos del carrito
+  function updateCartCounter() {
+    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    const cartCounter = document.querySelector(".cart-counter");
+    if (!cartCounter) return;
+
+    const cartProductCounter = cartItems.length;
+
+    if (cartProductCounter > 0) {
+      cartCounter.textContent = cartProductCounter;
+      cartCounter.classList.add("visible");
+    } else {
+      cartCounter.classList.remove("visible");
+    }
+  }
+
   const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
   const cartProductCounter = cartItems.length;
 
@@ -314,6 +329,7 @@ export function renderNavbar() {
   }
 
   cartIconNavbar.appendChild(cartCounter);
+  updateCartCounter();
 
   //Creo el tercer container
 

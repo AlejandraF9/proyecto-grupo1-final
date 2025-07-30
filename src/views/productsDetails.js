@@ -314,6 +314,12 @@ export async function productDetails() {
 
     let shoppingCart = JSON.parse(localStorage.getItem("cartItems")) || [];
 
+    console.log("Buscando coincidencia con:", {
+  nombre: product.nombre,
+  date: selectedDate,
+  size: selectedSize,
+});
+console.log("Carrito actual:", shoppingCart);
     const existingIndex = shoppingCart.findIndex(item => item.nombre === product.nombre && item.date === selectedDate && ((item.size || null) === (selectedSize || null)));
 
     if (existingIndex !== -1) {
@@ -351,20 +357,13 @@ export async function productDetails() {
     localStorage.setItem("cartItems", JSON.stringify(shoppingCart));
 
     const cartCounter = document.querySelector(".cart-counter");
-    const cartProductCounter = shoppingCart.reduce((acc, item) => acc + item.quantity, 0);
-
     if (cartCounter) {
-      if (cartProductCounter > 0) {
-        cartCounter.textContent = cartProductCounter;
-        cartCounter.style.display = "inline-block";
-      } else {
-        cartCounter.style.display = "none";
-      }
+      const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+      const uniqueProductCount = cartItems.length;
+      cartCounter.textContent = uniqueProductCount;
+      cartCounter.classList.add("visible");
     }
-    showToast({
-      text: "¡Producto añadido correctamente al carrito!",
-      type: "success",
-    });
+    showToast({text: "¡Producto añadido correctamente al carrito!", type: "success",});
     quantitySpan.textContent = "1";
   });
 
