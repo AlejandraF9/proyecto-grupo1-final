@@ -67,62 +67,13 @@ export function shoppingCart() {
   }
 
   cartItems.forEach((item, index) => {
-  const itemCard = document.createElement("div");
-  itemCard.className = "item-card";
+    const itemCard = document.createElement("div");
+    itemCard.className = "item-card";
 
-  const imgCard = document.createElement("img");
-  imgCard.className = "image-card";
-  imgCard.src = item.url;
-  imgCard.alt = item.nombre;
-
-  const itemDetails = document.createElement("div");
-  itemDetails.className = "item-details";
-
-  const nameCard = document.createElement("p");
-  nameCard.className = "name-card";
-  nameCard.textContent = item.nombre;
-
-  const priceCard = document.createElement("p");
-  priceCard.className = "price-card";
-  priceCard.textContent = `${item.precio.toFixed(2)}€`;
-
-  const quantityContainer = document.createElement("div");
-  quantityContainer.className = "quantity-container";
-
-  const decreaseButtonCard = document.createElement("button");
-  decreaseButtonCard.className = "decrease-button-card";
-  decreaseButtonCard.textContent = "-";
-
-  const quantitySpanCard = document.createElement("span");
-  quantitySpanCard.className = "quantity-span-card";
-  quantitySpanCard.textContent = item.quantity;
-
-  const increaseButtonCard = document.createElement("button");
-  increaseButtonCard.className = "increase-button-card";
-  increaseButtonCard.textContent = "+";
-
-  const getProductsLimit = (categoria) => {
-    const cat = categoria?.toLowerCase().trim();
-    return (cat === "tartas" || cat === "combinados") ? 5 : 20;
-  };
-
-  const sizeKey = item.size ? `${item.nombre} - ${item.size}` : item.nombre;
-  const purchasedProducts = JSON.parse(localStorage.getItem("purchasedProductsByDate")) || {};
-  const purchased = purchasedProducts[item.date]?.[sizeKey] || 0;
-
-  increaseButtonCard.addEventListener("click", () => {
-    const increaseDate = item.date;
-    const limit = getProductsLimit(item.categoria);
-    const dailyProducts = productsByDate[increaseDate] || {};
-    const alreadyPurchased = purchasedProducts[increaseDate]?.[sizeKey] || 0;
-    const currentInCart = cartItems.filter(i => i.date === increaseDate && (i.size ? `${i.nombre} - ${i.size}` : i.nombre) === sizeKey).reduce((sum, i) => sum + i.quantity, 0);
-
-    const availableUnits = limit - alreadyPurchased - currentInCart;
-  
-    if (availableUnits <= 0) {
-        showToast({text: `No quedan más unidades disponibles de este producto${item.size ? ` (${item.size})` : ""} para el ${increaseDate}.`, type: "warning"});
-        return;
-    }
+    const imgCard = document.createElement("img");
+    imgCard.className = "image-card";
+    imgCard.src = item.url;
+    imgCard.alt = item.nombre;
 
     const itemDetails = document.createElement("div");
     itemDetails.className = "item-details";
@@ -152,48 +103,32 @@ export function shoppingCart() {
 
     const getProductsLimit = (categoria) => {
       const cat = categoria?.toLowerCase().trim();
-      return cat === "tartas" || cat === "combinados" ? 5 : 20;
+      return (cat === "tartas" || cat === "combinados") ? 5 : 20;
     };
 
     const sizeKey = item.size ? `${item.nombre} - ${item.size}` : item.nombre;
-    const purchasedProducts =
-      JSON.parse(localStorage.getItem("purchasedProductsByDate")) || {};
+    const purchasedProducts = JSON.parse(localStorage.getItem("purchasedProductsByDate")) || {};
     const purchased = purchasedProducts[item.date]?.[sizeKey] || 0;
-    const limit = getProductsLimit(item.categoria);
-    const isFullyPaid = purchased >= limit;
-
-    if (isFullyPaid) {
-      increaseButtonCard.disabled = true;
-      decreaseButtonCard.disabled = true;
-      increaseButtonCard.classList.add("disabled");
-      decreaseButtonCard.classList.add("disabled");
-
-      const notice = document.createElement("p");
-      notice.className = "reserved-notice";
-      notice.textContent =
-        "Este producto ya ha sido reservado por completo para ese día.";
-      itemDetails.appendChild(notice);
-    }
 
     increaseButtonCard.addEventListener("click", () => {
       const increaseDate = item.date;
       const limit = getProductsLimit(item.categoria);
-      const dailyProducts = productsByDate[increaseDate] || {};
+
+      const sizeKey = item.size ? `${item.nombre} - ${item.size}` : item.nombre;
+
+      const purchasedProducts = JSON.parse(localStorage.getItem("purchasedProductsByDate")) || {};
       const alreadyPurchased = purchasedProducts[increaseDate]?.[sizeKey] || 0;
+
       const currentInCart = cartItems
-        .filter(
-          (i) =>
-            i.date === increaseDate &&
-            (i.size ? `${i.nombre} - ${i.size}` : i.nombre) === sizeKey
-        )
+        .filter(i => i.date === increaseDate && (i.size ? `${i.nombre} - ${i.size}` : i.nombre) === sizeKey)
         .reduce((sum, i) => sum + i.quantity, 0);
 
       const availableUnits = limit - alreadyPurchased - currentInCart;
 
       if (availableUnits <= 0) {
         showToast({
-          text: `“${item.nombre}” ha sido eliminado del carrito.`,
-          type: "info",
+          text: `No quedan más unidades disponibles de este producto${item.size ? ` (${item.size})` : ""} para el ${increaseDate}.`,
+          type: "warning"
         });
         return;
       }
@@ -201,6 +136,7 @@ export function shoppingCart() {
       item.quantity++;
       quantitySpanCard.textContent = item.quantity;
 
+      const dailyProducts = productsByDate[increaseDate] || {};
       const currentTotal = dailyProducts[sizeKey] || 0;
       dailyProducts[sizeKey] = currentTotal + 1;
       productsByDate[increaseDate] = dailyProducts;
@@ -222,83 +158,77 @@ export function shoppingCart() {
         updateCart(index, item, productsByDate);
       }
     });
+  
+  quantityContainer.appendChild(decreaseButtonCard);
+  quantityContainer.appendChild(quantitySpanCard);
+  quantityContainer.appendChild(increaseButtonCard);
 
-    quantityContainer.appendChild(decreaseButtonCard);
-    quantityContainer.appendChild(quantitySpanCard);
-    quantityContainer.appendChild(increaseButtonCard);
+  const productRemoveButton = document.createElement("button");
+  productRemoveButton.className = "remove-button";
+  productRemoveButton.textContent = "✖";
 
-    const productRemoveButton = document.createElement("button");
-    productRemoveButton.className = "remove-button";
-    productRemoveButton.textContent = "✖";
+  productRemoveButton.addEventListener("click", () => {
+    const confirmDelete = confirm(`¿Estás seguro de que quieres eliminar \"${item.nombre}\" del carrito?`);
+    if (!confirmDelete) return;
 
-    productRemoveButton.addEventListener("click", () => {
-      const confirmDelete = confirm(
-        `¿Estás seguro de que quieres eliminar \"${item.nombre}\" del carrito?`
-      );
-      if (!confirmDelete) return;
+    cartItems.splice(index, 1);
 
-      cartItems.splice(index, 1);
-
-      if (productsByDate[item.date]) {
-        delete productsByDate[item.date][sizeKey];
-      }
-
-      localStorage.setItem("cartItems", JSON.stringify(cartItems));
-      localStorage.setItem("productsByDate", JSON.stringify(productsByDate));
-
-      const cartCounter = document.querySelector(".cart-counter");
-      const updatedCartItems =
-        JSON.parse(localStorage.getItem("cartItems")) || [];
-      const newCount = updatedCartItems.length;
-
-      if (cartCounter) {
-        if (newCount > 0) {
-          cartCounter.textContent = newCount;
-          cartCounter.classList.add("visible");
-        } else {
-          cartCounter.textContent = "";
-          cartCounter.classList.remove("visible");
-        }
-      }
-
-      showToast({
-        text: `“${item.nombre}” ha sido eliminado del carrito.`,
-        type: "info",
-      });
-      shoppingCart();
-    });
-
-    itemCard.appendChild(imgCard);
-    itemCard.appendChild(itemDetails);
-    itemDetails.appendChild(nameCard);
-    itemDetails.appendChild(priceCard);
-
-    const deliveryDate = document.createElement("p");
-    deliveryDate.className = "delivery-date";
-    deliveryDate.textContent = `Fecha seleccionada: ${item.date}`;
-    itemDetails.appendChild(deliveryDate);
-
-    if (purchased > 0) {
-      const purchasedInfo = document.createElement("p");
-      purchasedInfo.className = "purchased-info";
-      purchasedInfo.textContent = `Unidades ya reservadas para ese día: ${purchased}`;
-      itemDetails.appendChild(purchasedInfo);
+    if (productsByDate[item.date]) {
+      delete productsByDate[item.date][sizeKey];
     }
 
-    if (item.size) {
-      const size = document.createElement("p");
-      size.className = "cart-item-size";
-      size.textContent = `Tamaño: ${item.size}`;
-      itemDetails.appendChild(size);
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    localStorage.setItem("productsByDate", JSON.stringify(productsByDate));
+
+    const cartCounter = document.querySelector(".cart-counter");
+    const updatedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    const newCount = updatedCartItems.length;
+
+    if (cartCounter) {
+      if (newCount > 0) {
+        cartCounter.textContent = newCount;
+        cartCounter.classList.add("visible");
+      } else {
+        cartCounter.textContent = "";
+        cartCounter.classList.remove("visible");
+      }
     }
 
-    itemDetails.appendChild(quantityContainer);
-    itemCard.appendChild(productRemoveButton);
-    cartList.appendChild(itemCard);
-
-    total += item.precio * item.quantity;
+    showToast({text: `“${item.nombre}” ha sido eliminado del carrito.`, type: "info"});
+    shoppingCart();
   });
 
+  itemCard.appendChild(imgCard);
+  itemCard.appendChild(itemDetails);
+  itemDetails.appendChild(nameCard);
+  itemDetails.appendChild(priceCard);
+
+  const deliveryDate = document.createElement("p");
+  deliveryDate.className = "delivery-date";
+  deliveryDate.textContent = `Fecha seleccionada: ${item.date}`;
+  itemDetails.appendChild(deliveryDate);
+
+  if (purchased > 0) {
+    const purchasedInfo = document.createElement("p");
+    purchasedInfo.className = "purchased-info";
+    purchasedInfo.textContent = `Unidades ya reservadas para ese día: ${purchased}`;
+    itemDetails.appendChild(purchasedInfo);
+  }
+
+  if (item.size) {
+    const size = document.createElement("p");
+    size.className = "cart-item-size";
+    size.textContent = `Tamaño: ${item.size}`;
+    itemDetails.appendChild(size);
+  }
+
+  itemDetails.appendChild(quantityContainer);
+  itemCard.appendChild(productRemoveButton);
+  cartList.appendChild(itemCard);
+
+  total += item.precio * item.quantity;
+  });
+  
   cartSection.appendChild(cartList);
 
   let discountValue = 0;
