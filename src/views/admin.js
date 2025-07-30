@@ -24,14 +24,14 @@ function crearBanner() {
   app.appendChild(banner);
 
   const logo = document.createElement("img");
-  logo.src = "./../../assets/logo_tienda.webp";
+  logo.src = "./src/assets/images/logo_tienda.webp"; 
   logo.className = "admin-logo";
   banner.appendChild(logo);
 
-  const logoText = document.createElement("div");
-  logoText.textContent = "DUMMIE bakery";
-  logoText.className = "admin-logo-text";
-  banner.appendChild(logoText);
+  //const logoText = document.createElement("div");
+  //logoText.textContent = "DUMMIE bakery";
+  //logoText.className = "admin-logo-text";
+  //banner.appendChild(logoText);
 
   const closeSession = document.createElement("button");
   closeSession.textContent = "Cerrar sesión";
