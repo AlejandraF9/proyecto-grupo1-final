@@ -58,7 +58,6 @@ import insta_icon from "../assets/images/insta_icon.png";
 import youtube_icon from "../assets/images/youtube_icon.png";
 import { renderForm } from "../views/profile";
 import { userLogin } from "../views/login";
-//Sintra importa goTo
 import { goTo } from "../router";
 
 export function renderNavbar() {
@@ -109,6 +108,11 @@ export function renderNavbar() {
   logoImg.src = logo_tienda;
   logoImg.alt = "Logo de la tienda";
   logoDiv.append(logoImg);
+  logoImg.style.cursor = "pointer";
+  logoImg.addEventListener("click", (e) => {
+    e.preventDefault();
+    goTo("/home");
+  });
 
   //vamos a ver si el logo es lo que está creando el parpadeo en el navbar al renderizarlo
   logoImg.onload = () => {
@@ -262,7 +266,7 @@ export function renderNavbar() {
     } else {
       renderForm(
         {
-          nombre: currentUser.nombre,
+          nombre: currentUser.name,
           email: currentUser.email,
         },
         {
@@ -320,8 +324,12 @@ export function renderNavbar() {
   //creo el enlace de Home
   const homeNavbar = document.createElement("a");
   homeNavbar.className = "navbar-text";
-  homeNavbar.href = "/home";
+  homeNavbar.href = "#";
   homeNavbar.textContent = "Productos";
+  homeNavbar.addEventListener("click", (e) => {
+    e.preventDefault();
+    goTo("/shop");
+  });
   navbarContainerC.appendChild(homeNavbar);
 
   //creo el enlace del conócenos

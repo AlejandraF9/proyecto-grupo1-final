@@ -2,19 +2,16 @@ import { goTo } from "../router.js";
 
 const API_URL = "https://api-bakery-production.up.railway.app";
 
-export async function renderShop() {
+export async function renderShop({ clean = false } = {}) {
   const seccionTienda = document.createElement("section");
   seccionTienda.setAttribute("id", "tienda");
 
-  // Contenedor de filtros
   const contenedorFiltros = document.createElement("div");
   contenedorFiltros.setAttribute("id", "filtros");
 
-  // Contenedor de productos
   const contenedorProductos = document.createElement("div");
   contenedorProductos.setAttribute("id", "contenedor-productos");
 
-  // Filtros
   const categorias = [
     { texto: "Todo", valor: null },
     { texto: "Individuales", valor: "individuales" },
@@ -48,22 +45,23 @@ export async function renderShop() {
     contenedorFiltros.appendChild(btn);
   });
 
-  // Estructura
   seccionTienda.appendChild(contenedorFiltros);
   seccionTienda.appendChild(contenedorProductos);
 
-  app.appendChild(seccionTienda);
-
-  // Insertar debajo de "De temporada"
-  const categoriaSection = document.querySelector(".categorys-container");
-  if (categoriaSection && categoriaSection.parentNode) {
-    categoriaSection.parentNode.insertBefore(
-      seccionTienda,
-      categoriaSection.nextSibling
-    );
+  if (clean) {
+    const app = document.querySelector("#app");
+    app.innerHTML = "";
+    app.appendChild(seccionTienda);
+  } else {
+    const categoriaSection = document.querySelector(".categorys-container");
+    if (categoriaSection && categoriaSection.parentNode) {
+      categoriaSection.parentNode.insertBefore(
+        seccionTienda,
+        categoriaSection.nextSibling
+      );
+    }
   }
 
-  // Mostrar todos al cargar
   const productos = await fetchProductos();
   renderizarProductos(productos, contenedorProductos);
 
@@ -105,7 +103,6 @@ function renderizarProductos(productos, contenedor) {
     const precio = document.createElement("p");
     precio.textContent = `€${p.precio?.toFixed(2) ?? "0.00"}`;
 
-    // Evento click para acceder a cada producto
     card.addEventListener("click", () => {
       localStorage.setItem("selectedProduct", JSON.stringify(p));
       goTo("/productsDetails");
@@ -117,3 +114,10 @@ function renderizarProductos(productos, contenedor) {
     contenedor.appendChild(card);
   });
 }
+
+export default {
+  init: async () => {
+    console.log("Shop ejecutando");
+    await renderShop({ clean: true });
+  },
+};

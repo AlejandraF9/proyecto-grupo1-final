@@ -1,6 +1,11 @@
+import productDetails from "../views/productsDetails.js";
+
 export function renderCategorys(container) {
   const categorysSection = document.createElement("div");
   categorysSection.classList.add("categorys-section");
+
+  const temporada = document.createElement("h1");
+  temporada.textContent = "De temporada";
 
   const containerCategorys = document.createElement("div");
   containerCategorys.classList.add("categorys-container");
@@ -85,5 +90,53 @@ export function renderCategorys(container) {
   containerCategorys.appendChild(categorysWrapper);
 
   container.appendChild(containerCategorys);
+  const pavlova = {
+    nombre: "Pavlova",
+    precio: 4.8,
+    categoria: "Individuales",
+    url: imgIndividual.src,
+  };
+
+  const tarta = {
+    nombre: "Tarta arándanos y limón",
+    precio: 28.5,
+    categoria: "Tartas",
+    url: imgCake.src,
+  };
+
+  const rollitos = {
+    nombre: "Rollitos de canela box especial temporada",
+    precio: 12.5,
+    categoria: "Combinados",
+    url: imgCombinations.src,
+  };
+
+  const granizado = {
+    nombre: "Granizado lima-limón",
+    precio: 2.5,
+    categoria: "Bebidas",
+    url: imgDrinks.src,
+  };
+
+  individualCategory.addEventListener("click", () => {
+    localStorage.setItem("selectedProduct", JSON.stringify(pavlova));
+    productDetails.init();
+  });
+
+  cakeCategory.addEventListener("click", () => {
+    localStorage.setItem("selectedProduct", JSON.stringify(tarta));
+    productDetails.init();
+  });
+
+  combinationsCategory.addEventListener("click", () => {
+    localStorage.setItem("selectedProduct", JSON.stringify(rollitos));
+    productDetails.init();
+  });
+
+  drinksCategory.addEventListener("click", () => {
+    localStorage.setItem("selectedProduct", JSON.stringify(granizado));
+    productDetails.init();
+  });
+
   return containerCategorys;
 }

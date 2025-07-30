@@ -3,6 +3,7 @@ import { renderUsuarios } from "../interfaz-admin/front-usuario.js";
 import { renderProductos } from "../interfaz-admin/front-productos.js";
 import { renderBlog } from "../interfaz-admin/front-blog.js";
 import { renderPedidos } from "../interfaz-admin/front-pedidos.js";
+import { renderConfirmacionesEmail } from "../interfaz-admin/front-confirmacionesEmail.js";
 
 const API_BASE = "https://api-bakery-production.up.railway.app";
 
@@ -11,7 +12,7 @@ const tabs = [
   "Usuarios",
   "Productos",
   "Blog",
-  "Pedidos personalizados",
+  "Emails confirmación",
   "Pedidos",
 ];
 
@@ -24,7 +25,7 @@ function crearBanner() {
   app.appendChild(banner);
 
   const logo = document.createElement("img");
-  logo.src = "./src/assets/images/logo_tienda.webp"; 
+  logo.src = "..src/assets/images/logo_tienda.webp";
   logo.className = "admin-logo";
   banner.appendChild(logo);
 
@@ -91,8 +92,8 @@ function renderContent() {
     case "Blog":
       renderBlog(content);
       break;
-    case "Pedidos personalizados":
-      renderPedidosPersonalizados(content);
+    case "Emails confirmación":
+      renderConfirmacionesEmail(content);
       break;
     case "Pedidos":
       renderPedidos(content);

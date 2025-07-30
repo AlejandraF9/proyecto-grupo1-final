@@ -162,6 +162,22 @@
     display: block;
   }
 
+.admin-blog-titulo {
+  color: var(--blue-color);
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+.admin-blog-contenido {
+  margin-top: 0;
+  padding: 5px;
+  font-size: 0.95rem;
+  white-space: pre-line;
+}
+  
   .admin-btn-guardar-blog:hover {
     background-color: var(--blue-color);
   }
@@ -175,19 +191,6 @@
     padding-left: 10px;
     padding-right: 10px;
     box-sizing: border-box;
-  }
-
-  .admin-blog-titulo {
-    color: var(--blue-color);
-    font-weight: bold;
-    font-size: 0.5rem;
-    cursor: pointer;
-    margin-bottom: 5px;
-  }
-
-  .admin-blog-contenido {
-    margin-top: 5px;
-    font-size: 0.95rem;
   }
 
   .admin-blog-imagen {

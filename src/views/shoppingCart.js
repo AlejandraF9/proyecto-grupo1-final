@@ -1,13 +1,20 @@
 import { openModal } from "../utils/modal&overlay";
 import { generatePaymentForm } from "../views/payment";
 import { showToast } from "../utils/toastify";
+import {
+  getUserEmail,
+  getOrderObject,
+  enviarPedido,
+  procesarPedido,
+} from "../utils/email";
 
 export function shoppingCart() {
   const app = document.getElementById("app");
   app.innerHTML = "";
 
   const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-  const productsByDate = JSON.parse(localStorage.getItem("productsByDate")) || {};
+  const productsByDate =
+    JSON.parse(localStorage.getItem("productsByDate")) || {};
 
   const cartSection = document.createElement("section");
   cartSection.className = "cart-section";
@@ -16,7 +23,7 @@ export function shoppingCart() {
   cartTitle.className = "cart-title";
   cartTitle.textContent = "Tu selección dulce";
   cartSection.appendChild(cartTitle);
-  
+
   const clearCartButton = document.createElement("button");
   clearCartButton.className = "clear-cart-button";
   clearCartButton.innerHTML = `<span>Vaciar carrito</span>
@@ -25,7 +32,9 @@ export function shoppingCart() {
   clearCartButton.addEventListener("click", () => {
     if (cartItems.length === 0) return;
 
-    const confirmClear = confirm("¿Estás seguro de que quieres eliminar todos los productos?");
+    const confirmClear = confirm(
+      "¿Estás seguro de que quieres eliminar todos los productos?"
+    );
     if (!confirmClear) return;
 
     localStorage.removeItem("cartItems");
@@ -34,11 +43,11 @@ export function shoppingCart() {
 
     const cartCounter = document.querySelector(".cart-counter");
     if (cartCounter) {
-        cartCounter.classList.remove("visible");
-        cartCounter.textContent = "";
+      cartCounter.classList.remove("visible");
+      cartCounter.textContent = "";
     }
-    
-    showToast({text: "Tu carrito se ha quedado vacío.", type: "info"});
+
+    showToast({ text: "Tu carrito se ha quedado vacío.", type: "info" });
     shoppingCart();
   });
 
@@ -115,105 +124,186 @@ export function shoppingCart() {
         return;
     }
 
-    item.quantity++;
+    const itemDetails = document.createElement("div");
+    itemDetails.className = "item-details";
+
+    const nameCard = document.createElement("p");
+    nameCard.className = "name-card";
+    nameCard.textContent = item.nombre;
+
+    const priceCard = document.createElement("p");
+    priceCard.className = "price-card";
+    priceCard.textContent = `${item.precio.toFixed(2)}€`;
+
+    const quantityContainer = document.createElement("div");
+    quantityContainer.className = "quantity-container";
+
+    const decreaseButtonCard = document.createElement("button");
+    decreaseButtonCard.className = "decrease-button-card";
+    decreaseButtonCard.textContent = "-";
+
+    const quantitySpanCard = document.createElement("span");
+    quantitySpanCard.className = "quantity-span-card";
     quantitySpanCard.textContent = item.quantity;
 
-    const currentTotal = dailyProducts[sizeKey] || 0;
-    dailyProducts[sizeKey] = currentTotal + 1;
-    productsByDate[increaseDate] = dailyProducts;
+    const increaseButtonCard = document.createElement("button");
+    increaseButtonCard.className = "increase-button-card";
+    increaseButtonCard.textContent = "+";
 
-    updateCart(index, item, productsByDate);
-  });
+    const getProductsLimit = (categoria) => {
+      const cat = categoria?.toLowerCase().trim();
+      return cat === "tartas" || cat === "combinados" ? 5 : 20;
+    };
 
-  decreaseButtonCard.addEventListener("click", () => {
-    const decreaseDate = item.date;
+    const sizeKey = item.size ? `${item.nombre} - ${item.size}` : item.nombre;
+    const purchasedProducts =
+      JSON.parse(localStorage.getItem("purchasedProductsByDate")) || {};
+    const purchased = purchasedProducts[item.date]?.[sizeKey] || 0;
+    const limit = getProductsLimit(item.categoria);
+    const isFullyPaid = purchased >= limit;
 
-    if (item.quantity > 1) {
-      item.quantity--;
+    if (isFullyPaid) {
+      increaseButtonCard.disabled = true;
+      decreaseButtonCard.disabled = true;
+      increaseButtonCard.classList.add("disabled");
+      decreaseButtonCard.classList.add("disabled");
 
-      const dailyProducts = productsByDate[decreaseDate] || {};
+      const notice = document.createElement("p");
+      notice.className = "reserved-notice";
+      notice.textContent =
+        "Este producto ya ha sido reservado por completo para ese día.";
+      itemDetails.appendChild(notice);
+    }
+
+    increaseButtonCard.addEventListener("click", () => {
+      const increaseDate = item.date;
+      const limit = getProductsLimit(item.categoria);
+      const dailyProducts = productsByDate[increaseDate] || {};
+      const alreadyPurchased = purchasedProducts[increaseDate]?.[sizeKey] || 0;
+      const currentInCart = cartItems
+        .filter(
+          (i) =>
+            i.date === increaseDate &&
+            (i.size ? `${i.nombre} - ${i.size}` : i.nombre) === sizeKey
+        )
+        .reduce((sum, i) => sum + i.quantity, 0);
+
+      const availableUnits = limit - alreadyPurchased - currentInCart;
+
+      if (availableUnits <= 0) {
+        showToast({
+          text: `“${item.nombre}” ha sido eliminado del carrito.`,
+          type: "info",
+        });
+        return;
+      }
+
+      item.quantity++;
+      quantitySpanCard.textContent = item.quantity;
+
       const currentTotal = dailyProducts[sizeKey] || 0;
-      dailyProducts[sizeKey] = Math.max(0, currentTotal - 1);
-      productsByDate[decreaseDate] = dailyProducts;
+      dailyProducts[sizeKey] = currentTotal + 1;
+      productsByDate[increaseDate] = dailyProducts;
 
       updateCart(index, item, productsByDate);
-    }
-  });
+    });
 
-  quantityContainer.appendChild(decreaseButtonCard);
-  quantityContainer.appendChild(quantitySpanCard);
-  quantityContainer.appendChild(increaseButtonCard);
+    decreaseButtonCard.addEventListener("click", () => {
+      const decreaseDate = item.date;
 
-  const productRemoveButton = document.createElement("button");
-  productRemoveButton.className = "remove-button";
-  productRemoveButton.textContent = "✖";
+      if (item.quantity > 1) {
+        item.quantity--;
 
-  productRemoveButton.addEventListener("click", () => {
-    const confirmDelete = confirm(`¿Estás seguro de que quieres eliminar \"${item.nombre}\" del carrito?`);
-    if (!confirmDelete) return;
+        const dailyProducts = productsByDate[decreaseDate] || {};
+        const currentTotal = dailyProducts[sizeKey] || 0;
+        dailyProducts[sizeKey] = Math.max(0, currentTotal - 1);
+        productsByDate[decreaseDate] = dailyProducts;
 
-    cartItems.splice(index, 1);
-
-    if (productsByDate[item.date]) {
-      delete productsByDate[item.date][sizeKey];
-    }
-
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    localStorage.setItem("productsByDate", JSON.stringify(productsByDate));
-
-    const cartCounter = document.querySelector(".cart-counter");
-    const updatedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    const newCount = updatedCartItems.length;
-
-    if (cartCounter) {
-      if (newCount > 0) {
-        cartCounter.textContent = newCount;
-        cartCounter.classList.add("visible");
-      } else {
-        cartCounter.textContent = "";
-        cartCounter.classList.remove("visible");
+        updateCart(index, item, productsByDate);
       }
+    });
+
+    quantityContainer.appendChild(decreaseButtonCard);
+    quantityContainer.appendChild(quantitySpanCard);
+    quantityContainer.appendChild(increaseButtonCard);
+
+    const productRemoveButton = document.createElement("button");
+    productRemoveButton.className = "remove-button";
+    productRemoveButton.textContent = "✖";
+
+    productRemoveButton.addEventListener("click", () => {
+      const confirmDelete = confirm(
+        `¿Estás seguro de que quieres eliminar \"${item.nombre}\" del carrito?`
+      );
+      if (!confirmDelete) return;
+
+      cartItems.splice(index, 1);
+
+      if (productsByDate[item.date]) {
+        delete productsByDate[item.date][sizeKey];
+      }
+
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+      localStorage.setItem("productsByDate", JSON.stringify(productsByDate));
+
+      const cartCounter = document.querySelector(".cart-counter");
+      const updatedCartItems =
+        JSON.parse(localStorage.getItem("cartItems")) || [];
+      const newCount = updatedCartItems.length;
+
+      if (cartCounter) {
+        if (newCount > 0) {
+          cartCounter.textContent = newCount;
+          cartCounter.classList.add("visible");
+        } else {
+          cartCounter.textContent = "";
+          cartCounter.classList.remove("visible");
+        }
+      }
+
+      showToast({
+        text: `“${item.nombre}” ha sido eliminado del carrito.`,
+        type: "info",
+      });
+      shoppingCart();
+    });
+
+    itemCard.appendChild(imgCard);
+    itemCard.appendChild(itemDetails);
+    itemDetails.appendChild(nameCard);
+    itemDetails.appendChild(priceCard);
+
+    const deliveryDate = document.createElement("p");
+    deliveryDate.className = "delivery-date";
+    deliveryDate.textContent = `Fecha seleccionada: ${item.date}`;
+    itemDetails.appendChild(deliveryDate);
+
+    if (purchased > 0) {
+      const purchasedInfo = document.createElement("p");
+      purchasedInfo.className = "purchased-info";
+      purchasedInfo.textContent = `Unidades ya reservadas para ese día: ${purchased}`;
+      itemDetails.appendChild(purchasedInfo);
     }
 
-    showToast({text: `“${item.nombre}” ha sido eliminado del carrito.`, type: "info"});
-    shoppingCart();
+    if (item.size) {
+      const size = document.createElement("p");
+      size.className = "cart-item-size";
+      size.textContent = `Tamaño: ${item.size}`;
+      itemDetails.appendChild(size);
+    }
+
+    itemDetails.appendChild(quantityContainer);
+    itemCard.appendChild(productRemoveButton);
+    cartList.appendChild(itemCard);
+
+    total += item.precio * item.quantity;
   });
 
-  itemCard.appendChild(imgCard);
-  itemCard.appendChild(itemDetails);
-  itemDetails.appendChild(nameCard);
-  itemDetails.appendChild(priceCard);
-
-  const deliveryDate = document.createElement("p");
-  deliveryDate.className = "delivery-date";
-  deliveryDate.textContent = `Fecha seleccionada: ${item.date}`;
-  itemDetails.appendChild(deliveryDate);
-
-  if (purchased > 0) {
-    const purchasedInfo = document.createElement("p");
-    purchasedInfo.className = "purchased-info";
-    purchasedInfo.textContent = `Unidades ya reservadas para ese día: ${purchased}`;
-    itemDetails.appendChild(purchasedInfo);
-  }
-
-  if (item.size) {
-    const size = document.createElement("p");
-    size.className = "cart-item-size";
-    size.textContent = `Tamaño: ${item.size}`;
-    itemDetails.appendChild(size);
-  }
-
-  itemDetails.appendChild(quantityContainer);
-  itemCard.appendChild(productRemoveButton);
-  cartList.appendChild(itemCard);
-
-  total += item.precio * item.quantity;
-  });
-  
   cartSection.appendChild(cartList);
 
   let discountValue = 0;
   const savedCode = localStorage.getItem("discountCode") || "";
+
   if (cartItems.length > 0 && savedCode === "BVNDA10") {
     discountValue = total * 0.10;
   }
@@ -233,6 +323,12 @@ export function shoppingCart() {
 
   applyDiscountButton.addEventListener("click", () => {
     const code = discountInput.value.trim().toUpperCase();
+
+    if (cartItems.length === 0) {
+      showToast({
+        text: "Debes tener productos en el carrito para aplicar un código de descuento.",
+        type: "warning",
+
     const alreadyUsed = localStorage.getItem("discountUsed");
 
     if (cartItems.length === 0) {
@@ -254,23 +350,14 @@ export function shoppingCart() {
       discountInput.value = "";
       return;
     }
-
-    if (code === "BVNDA10") {
-      localStorage.setItem("discountCode", code);
-      localStorage.setItem("discountUsed", "true");
-      showToast({ text: "¡Descuento aplicado correctamente!", type: "success" });
-      shoppingCart();
-    } else {
-      showToast({ text: "Código no válido.", type: "error" });
     }
-
     discountInput.value = "";
   });
-    
+
   discountContainer.appendChild(discountInput);
   discountContainer.appendChild(applyDiscountButton);
   cartSection.appendChild(discountContainer);
-    
+
   const totalPrice = document.createElement("p");
   totalPrice.className = "total-price";
   totalPrice.textContent = `Total: ${(total - discountValue).toFixed(2)}€`;
@@ -288,9 +375,12 @@ export function shoppingCart() {
   checkoutButton.className = "checkout-button";
   checkoutButton.textContent = "Proceder al pago";
 
-  checkoutButton.addEventListener("click", () => {
+  checkoutButton.addEventListener("click", async () => {
     if (cartItems.length === 0) {
-      showToast({text: "Tu carrito está vacío. Añade productos antes de continuar.", type: "warning"});
+      showToast({
+        text: "Tu carrito está vacío. Añade productos antes de continuar.",
+        type: "warning",
+      });
       return;
     }
 
@@ -327,6 +417,7 @@ export function shoppingCart() {
       cartCounter.classList.remove("visible");
     }
 
+
     showToast({text: "¡Gracias por tu confianza! Tus productos han sido reservados. Finaliza tu pago para completar la compra.", type: "success"});
 
     const currentUser = JSON.parse(localStorage.getItem("current-user"));
@@ -340,40 +431,7 @@ export function shoppingCart() {
       }
     }
 
-    const hoy = new Date().toISOString().slice(0, 10);
-    const categoria = cartItems.every((item) => item.date === hoy)
-      ? "al día"
-      : "encargo";
-
-    const order = {
-      productos: cartItems,
-      total: Number((total - discountValue).toFixed(2)),
-      categoria,
-      email: currentUser ? currentUser.email : userEmail,
-      user: currentUser ? currentUser._id : null,
-    };
-    console.log("Productos del carrito:");
-    cartItems.forEach((item) => console.log(item.nombre, item.url));
-    console.log("Pedido a enviar:", order);
-
-    fetch("https://api-bakery-production.up.railway.app/orders", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(order),
-    })
-      .then((response) => {
-        if (!response.ok) throw new Error("Error al enviar el pedido.");
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Pedido enviado correctamente:", data);
-      })
-      .catch((error) => {
-        console.error("Error al crear el pedido:", error);
-        showToast({text: "Hubo un problema al enviar el pedido. Intenta de nuevo más tarde.", type: "error"});
-      });
+    await procesarPedido(cartItems, total, discountValue);
 
     shoppingCart();
     
@@ -383,11 +441,11 @@ export function shoppingCart() {
     generatePaymentForm(paymentContainer);
     openModal(paymentContainer);
   });
-        
+
   cartSection.appendChild(checkoutButton);
   app.appendChild(cartSection);
 }
-    
+
 function updateCart(index, updatedItem, productsByDate) {
   const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
   cartItems[index] = updatedItem;
@@ -395,10 +453,10 @@ function updateCart(index, updatedItem, productsByDate) {
   localStorage.setItem("productsByDate", JSON.stringify(productsByDate));
   shoppingCart();
 }
-    
+
 export default {
   init() {
     console.log("Shopping Cart init ejecutado");
     shoppingCart();
-  }
+  },
 };
