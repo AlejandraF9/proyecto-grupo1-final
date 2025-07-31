@@ -1,5 +1,6 @@
-import { openModal, closeModal } from "../utils/modal&overlay";
-import { showToast } from "../utils/toastify";
+import { openModal, closeModal } from "../utils/modal&overlay.js";
+import { showToast } from "../utils/toastify.js";
+import { crearTablaConPaginacion } from "../utils/paginacion.js";
 
 const API_BASE = "https://api-bakery-production.up.railway.app";
 
@@ -47,33 +48,11 @@ export async function renderProductos(content) {
 
   content.appendChild(filtrosDiv);
 
-  const tabla = document.createElement("table");
-  tabla.classList.add("admin-table");
-
-  const thead = document.createElement("thead");
-  const headRow = document.createElement("tr");
-  [
-    "Nombre",
-    "Precio",
-    "Categoría",
-    "Ingredientes",
-    "Alérgenos",
-    "Especial Semanal",
-    "Acciones",
-  ].forEach((text) => {
-    const th = document.createElement("th");
-    th.textContent = text;
-    headRow.appendChild(th);
-  });
-  thead.appendChild(headRow);
-  tabla.appendChild(thead);
-
-  const tbody = document.createElement("tbody");
-  tabla.appendChild(tbody);
-  content.appendChild(tabla);
+  const tablaContenedor = document.createElement("div");
+  content.appendChild(tablaContenedor);
 
   async function filtrarYRenderizar() {
-    tbody.innerHTML = "";
+    tablaContenedor.innerHTML = "";
     try {
       let productos = await fetchProductos();
 
@@ -89,38 +68,19 @@ export async function renderProductos(content) {
       });
 
       if (productos.length === 0) {
-        tbody.innerHTML =
-          '<tr><td colspan="7">No se encontraron productos.</td></tr>';
+        tablaContenedor.innerHTML =
+          '<p class="admin-mensaje-vacio">No se encontraron productos.</p>';
         return;
       }
 
-      productos.forEach((p) => {
-        const row = document.createElement("tr");
-
-        [
-          "nombre",
-          "precio",
-          "categoria",
-          "ingredientes",
-          "alergenos",
-          "especialSemanal",
-        ].forEach((prop) => {
-          const td = document.createElement("td");
-          td.textContent =
-            prop === "precio" ? `$${p[prop].toFixed(2)}` : p[prop] || "";
-          row.appendChild(td);
-        });
-
-        const tdAcc = document.createElement("td");
+      const filas = productos.map((p) => {
+        const acciones = document.createElement("div");
 
         const btnModificar = document.createElement("button");
         btnModificar.textContent = "Modificar";
         btnModificar.classList.add("admin-btn-modificar");
-        btnModificar.onclick = () => {
-          modifyData(p);
-        };
-
-        tdAcc.appendChild(btnModificar);
+        btnModificar.onclick = () => modifyData(p);
+        acciones.appendChild(btnModificar);
 
         const btnEliminar = document.createElement("button");
         btnEliminar.textContent = "Eliminar";
@@ -131,14 +91,38 @@ export async function renderProductos(content) {
             filtrarYRenderizar();
           }
         };
-        tdAcc.appendChild(btnEliminar);
+        acciones.appendChild(btnEliminar);
 
-        row.appendChild(tdAcc);
-        tbody.appendChild(row);
+        return [
+          p.nombre,
+          `$${p.precio.toFixed(2)}`,
+          p.categoria,
+          p.ingredientes,
+          p.alergenos,
+          p.especialSemanal ? "Sí" : "No",
+          acciones,
+        ];
+      });
+
+      crearTablaConPaginacion({
+        titulo: "Lista de productos",
+        lista: filas,
+        columnas: [
+          "Nombre",
+          "Precio",
+          "Categoría",
+          "Ingredientes",
+          "Alérgenos",
+          "Especial Semanal",
+          "Acciones",
+        ],
+        renderFila: (fila) => fila,
+        contenedorDestino: tablaContenedor,
+        itemsPorPagina: 10,
       });
     } catch (error) {
-      tbody.innerHTML =
-        '<tr><td colspan="7">Error cargando productos.</td></tr>';
+      tablaContenedor.innerHTML =
+        "<p class='admin-error-texto'>Error cargando productos.</p>";
       console.error(error);
     }
   }
@@ -221,11 +205,17 @@ function modifyData(p) {
 
       if (!response.ok) throw new Error("Error al guardar cambios");
 
-      showToast({text: "Producto guardado correctamente",type: "success"});
+      showToast({
+        text: "Producto guardado correctamente",
+        type: "success",
+      });
       closeModal();
     } catch (error) {
       console.error("Error en la actualización:", error);
-      showToast({text: "Hubo un problema al guardar los cambios", type: "error"});
+      showToast({
+        text: "Hubo un problema al guardar los cambios",
+        type: "error",
+      });
     }
   };
 

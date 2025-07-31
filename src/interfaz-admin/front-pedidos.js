@@ -1,4 +1,5 @@
-import { showToast } from "../utils/toastify";
+import { showToast } from "../utils/toastify.js";
+import { crearTablaConPaginacion } from "../utils/paginacion.js";
 
 const API_BASE = "https://api-bakery-production.up.railway.app";
 
@@ -47,95 +48,75 @@ export async function renderPedidos(content) {
         p.categoria?.toLowerCase() === "encargo"
     );
 
-    const crearTablaPedidos = (titulo, listaPedidos) => {
-      const section = document.createElement("section");
-      section.classList.add("admin-pedidos-section");
+    const renderFilaPedido = (pedido) => {
+      const filas = [];
 
-      const heading = document.createElement("h3");
-      heading.textContent = titulo;
-      heading.classList.add("admin-pedidos-subtitulo");
-      section.appendChild(heading);
+      pedido.productos.forEach((producto) => {
+        const estadoSelect = document.createElement("select");
+        estadoSelect.classList.add("admin-pedidos-select");
 
-      const tabla = document.createElement("table");
-      tabla.classList.add("admin-pedidos-tabla");
-
-      const thead = document.createElement("thead");
-      const headRow = document.createElement("tr");
-      ["Nombre", "Precio", "Cantidad", "Email", "Fecha", "Estado"].forEach(
-        (text) => {
-          const th = document.createElement("th");
-          th.textContent = text;
-          th.classList.add("admin-pedidos-th");
-          headRow.appendChild(th);
-        }
-      );
-      thead.appendChild(headRow);
-      tabla.appendChild(thead);
-
-      const tbody = document.createElement("tbody");
-
-      listaPedidos.forEach((pedido) => {
-        pedido.productos.forEach((producto) => {
-          const row = document.createElement("tr");
-          row.classList.add("admin-pedidos-tr");
-
-          const nombre = producto.nombre || "—";
-          const precio = producto.precio != null ? `$${producto.precio}` : "—";
-          const cantidad = producto.quantity ?? "—";
-          const email = pedido.email ?? "—";
-          const fecha = pedido.fechaCreacion
-            ? new Date(pedido.fechaCreacion).toLocaleDateString()
-            : "—";
-
-          const estadoSelect = document.createElement("select");
-          estadoSelect.classList.add("admin-pedidos-select");
-          [
-            "pendiente",
-            "procesando",
-            "enviado",
-            "entregado",
-            "cancelado",
-          ].forEach((estado) => {
-            const option = document.createElement("option");
-            option.value = estado;
-            option.textContent = estado;
-            if (estado === pedido.status) option.selected = true;
-            estadoSelect.appendChild(option);
-          });
-
-          estadoSelect.addEventListener("change", async () => {
-            try {
-              await updatePedidoStatus(pedido._id, estadoSelect.value);
-              showToast({text: "Estado actualizado correctamente", type: "success"});
-            } catch (error) {
-              console.error(error);
-              showToast({text: "Error al actualizar estado", type: "error"});
-            }
-          });
-
-          [nombre, precio, cantidad, email, fecha].forEach((text) => {
-            const td = document.createElement("td");
-            td.textContent = text;
-            td.classList.add("admin-pedidos-td");
-            row.appendChild(td);
-          });
-
-          const estadoTd = document.createElement("td");
-          estadoTd.classList.add("admin-pedidos-td");
-          estadoTd.appendChild(estadoSelect);
-          row.appendChild(estadoTd);
-
-          tbody.appendChild(row);
+        [
+          "pendiente",
+          "procesando",
+          "enviado",
+          "entregado",
+          "cancelado",
+        ].forEach((estado) => {
+          const option = document.createElement("option");
+          option.value = estado;
+          option.textContent = estado;
+          if (estado === pedido.status) option.selected = true;
+          estadoSelect.appendChild(option);
         });
+
+        estadoSelect.addEventListener("change", async () => {
+          try {
+            await updatePedidoStatus(pedido._id, estadoSelect.value);
+            showToast({
+              text: "Estado actualizado correctamente",
+              type: "success",
+            });
+          } catch (error) {
+            console.error(error);
+            showToast({
+              text: "Error al actualizar estado",
+              type: "error",
+            });
+          }
+        });
+
+        filas.push([
+          producto.nombre || "—",
+          producto.precio != null ? `$${producto.precio}` : "—",
+          producto.quantity ?? "—",
+          pedido.email ?? "—",
+          pedido.fechaCreacion
+            ? new Date(pedido.fechaCreacion).toLocaleDateString()
+            : "—",
+          estadoSelect,
+        ]);
       });
 
-      tabla.appendChild(tbody);
-      section.appendChild(tabla);
-      content.appendChild(section);
+      return filas;
     };
 
-    crearTablaPedidos("Pedidos al día", pedidosAlDia);
-    crearTablaPedidos("Pedidos por encargo", pedidosPorEncargo);
+    const renderTablaPedidos = (titulo, lista) => {
+      const filasExpandidas = lista.flatMap((pedido) =>
+        renderFilaPedido(pedido)
+      );
+
+      crearTablaConPaginacion({
+        titulo,
+        lista: filasExpandidas,
+        columnas: ["Nombre", "Precio", "Cantidad", "Email", "Fecha", "Estado"],
+        renderFila: (fila) => fila,
+        contenedorDestino: content,
+        itemsPorPagina: 10,
+      });
+    };
+
+    renderTablaPedidos("Pedidos al día", pedidosAlDia);
+    renderTablaPedidos("Pedidos por encargo", pedidosPorEncargo);
   } catch (error) {
     content.innerHTML =
       "<p class='admin-error-texto'>Error cargando pedidos.</p>";
