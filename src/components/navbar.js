@@ -59,6 +59,7 @@ import youtube_icon from "../assets/images/youtube_icon.png";
 import { renderForm } from "../views/profile";
 import { userLogin } from "../views/login";
 import { goTo } from "../router";
+import { updateNavBarProfile } from "../views/profile";
 
 export function renderNavbar() {
   //me traigo el div del HTML
@@ -147,8 +148,6 @@ export function renderNavbar() {
   </g>
 </svg>`;
   navbarContainerA.appendChild(blueskyLinkNavBar);
-
-
 
   //creo el segundo contenedor que subdivide el navbar
 
@@ -337,6 +336,7 @@ export function renderNavbar() {
   loginIconNavbar.className = "login-icon-navbar";
   loginIconNavbar.innerHTML = userIcon;
   loginNavbarLink.appendChild(loginIconNavbar);
+  updateNavBarProfile();
 
   //creo el link para meter el enlace de carrito
   const cartNavbarLink = document.createElement("a");

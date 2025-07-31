@@ -3,6 +3,7 @@ import { closeModal, openModal } from "../utils/modal&overlay";
 import { loginValidations } from "../utils/validations";
 import { goTo } from "../router";
 import { showToast } from "../utils/toastify";
+import { updateNavBarProfile } from "./profile";
 
 export function userLogin() {
   const app = document.getElementById("app");
@@ -80,12 +81,14 @@ export function userLogin() {
 
       if (currentUser) {
         localStorage.setItem("current-user", JSON.stringify(currentUser));
-        showToast({text: "Sesión iniciada correctamente", type: "success"});
+        updateNavBarProfile();
+        showToast({ text: "Sesión iniciada correctamente", type: "success" });
         app.innerHTML = "";
 
         const user = currentUser;
         if (user) {
-          const userCart = JSON.parse(localStorage.getItem(`cart-${user._id}`)) || [];
+          const userCart =
+            JSON.parse(localStorage.getItem(`cart-${user._id}`)) || [];
           localStorage.setItem("cartItems", JSON.stringify(userCart));
 
           const cartCounter = document.querySelector(".cart-counter");
@@ -101,14 +104,16 @@ export function userLogin() {
         }
 
         closeModal();
-        
+
         if (currentUser.role === "admin") {
           goTo("/admin");
         } else {
           goTo("/home");
         }
       } else {
-        showToast({text: "Correo electrónico o contraseña incorrectos", type: "error",
+        showToast({
+          text: "Correo electrónico o contraseña incorrectos",
+          type: "error",
         });
       }
     } catch (error) {

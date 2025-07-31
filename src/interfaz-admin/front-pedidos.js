@@ -87,7 +87,7 @@ export async function renderPedidos(content) {
 
         filas.push([
           producto.nombre || "—",
-          producto.precio != null ? `$${producto.precio}` : "—",
+          producto.precio != null ? `€${producto.precio}` : "—",
           producto.quantity ?? "—",
           pedido.email ?? "—",
           pedido.fechaCreacion

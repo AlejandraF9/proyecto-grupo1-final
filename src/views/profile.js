@@ -1,6 +1,7 @@
 import { openModal, closeModal } from "../utils/modal&overlay.js";
 import { goTo } from "../router.js";
 import { showToast } from "../utils/toastify";
+import { userIcon } from "../assets/images/icons.js";
 
 export async function renderForm(
   fieldsObj,
@@ -16,11 +17,9 @@ export async function renderForm(
   const form = document.createElement("form");
   form.classList.add("formModify");
 
-  // 1. Crear imagen de preview
   const imgPreview = document.createElement("img");
   imgPreview.id = "avatar-preview";
 
-  // 2. Establecer avatar por defecto si no hay uno seleccionado
   const currentUser = JSON.parse(localStorage.getItem("current-user"));
   const defaultAvatar = "src/assets/images/avatar/avatarPredeterminado2.png";
   const currentAvatar = currentUser?.avatar ?? defaultAvatar;
@@ -30,11 +29,51 @@ export async function renderForm(
 
   form.appendChild(imgPreview);
 
-  // 3. Crear opciones de avatar y agregarlas al formulario
   const avatarOptions = createAvatarOptions(imgPreview);
   form.appendChild(avatarOptions);
 
-  // 4. Agregar campos del formulario
+  // 🔔 Sección de notificaciones
+  const notificationsSection = document.createElement("div");
+  notificationsSection.classList.add("notifications-section");
+
+  const notificationsTitle = document.createElement("h3");
+  notificationsTitle.textContent = "Notificaciones";
+  notificationsSection.appendChild(notificationsTitle);
+
+  const notificationsList = document.createElement("ul");
+  notificationsList.classList.add("notifications-list");
+  notificationsSection.appendChild(notificationsList);
+
+  form.appendChild(notificationsSection);
+
+  // 🔄 Cargar notificaciones desde API
+  if (currentUser?._id) {
+    try {
+      const res = await fetch(
+        `https://api-bakery-production.up.railway.app/api/notifications/${currentUser._id}`
+      );
+      const notificaciones = await res.json();
+
+      if (!Array.isArray(notificaciones) || notificaciones.length === 0) {
+        const empty = document.createElement("li");
+        empty.textContent = "Sin notificaciones por ahora.";
+        notificationsList.appendChild(empty);
+      } else {
+        notificaciones.forEach((n) => {
+          const item = document.createElement("li");
+          item.textContent = `${new Date(n.createdAt).toLocaleDateString(
+            "es-ES"
+          )} - ${n.message}`;
+          item.classList.add("notification-item");
+          if (!n.read) item.classList.add("unread");
+          notificationsList.appendChild(item);
+        });
+      }
+    } catch (err) {
+      console.error("Error al cargar notificaciones:", err);
+    }
+  }
+
   Object.entries(fieldsObj).forEach(([key, value]) => {
     const fieldWrapper = document.createElement("div");
 
@@ -56,7 +95,6 @@ export async function renderForm(
     form.appendChild(fieldWrapper);
   });
 
-  // 5. Enlace a historial
   const historyOrders = document.createElement("a");
   historyOrders.href = "#";
   historyOrders.textContent = "Historial de pedidos";
@@ -68,42 +106,27 @@ export async function renderForm(
   });
   form.appendChild(historyOrders);
 
-  // 6. Botón de enviar
   const submitBtn = document.createElement("button");
   submitBtn.type = "submit";
   submitBtn.textContent = "Guardar";
   form.appendChild(submitBtn);
 
-  // 7. Manejo del submit
   form.onsubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
-    // ✅ CAMBIO CLAVE: Si existe "nombre", convertir a "name"
     if (data.nombre && !data.name) {
       data.name = data.nombre;
       delete data.nombre;
     }
 
-    // Añadir el avatar seleccionado al objeto a enviar
     data.avatar = imgPreview.getAttribute("data-selected-avatar");
 
     try {
       if (onSubmit) {
         await onSubmit(data);
       } else {
-        console.log("DATA ENVIADA", data);
-        console.log(
-          "AVATAR SELECCIONADO:",
-          imgPreview.getAttribute("data-selected-avatar")
-        );
-        console.log("➡ Ejecutando fetch con estos datos:", data);
-        console.log(
-          "➡ URL del fetch:",
-          `https://api-bakery-production.up.railway.app/users/${currentUser._id}`
-        );
-
         const response = await fetch(
           `https://api-bakery-production.up.railway.app/users/${currentUser._id}`,
           {
@@ -117,6 +140,7 @@ export async function renderForm(
 
         const updatedUser = await response.json();
         localStorage.setItem("current-user", JSON.stringify(updatedUser));
+        updateNavBarProfile();
         showToast({
           text: "Perfil actualizado correctamente.",
           type: "success",
@@ -131,7 +155,6 @@ export async function renderForm(
 
   container.appendChild(form);
 
-  // 8. Logout
   if (showLogout) {
     const logoutBtn = document.createElement("button");
     logoutBtn.textContent = "Cerrar sesión";
@@ -148,6 +171,8 @@ export async function renderForm(
       localStorage.removeItem("cartItems");
       localStorage.removeItem("productsByDate");
       localStorage.removeItem("discountCode");
+
+      updateNavBarProfile();
 
       const cartCounterProducts = document.querySelector(".cart-counter");
       if (cartCounterProducts) {
@@ -199,4 +224,36 @@ export function createAvatarOptions(imgPreview) {
   });
 
   return avatarSection;
+}
+
+export function updateNavBarProfile() {
+  const loginLink = document.querySelector(".login-div-navbar a");
+
+  if (!loginLink) return;
+
+  const currentUser = JSON.parse(localStorage.getItem("current-user"));
+
+  loginLink.innerHTML = "";
+
+  if (currentUser) {
+    const avatarImg = document.createElement("img");
+    avatarImg.src =
+      currentUser.avatar ||
+      "src/assets/images/avatar/avatarPredeterminado2.png";
+    avatarImg.alt = "Avatar";
+    avatarImg.classList.add("avatar-navbar");
+
+    const userNameSpan = document.createElement("span");
+    userNameSpan.textContent = currentUser.name?.split(" ")[0] || "Usuario";
+    userNameSpan.classList.add("username-navbar");
+
+    loginLink.appendChild(avatarImg);
+    loginLink.appendChild(userNameSpan);
+  } else {
+    const loginIconNavbar = document.createElement("div");
+    loginIconNavbar.className = "login-icon-navbar";
+    loginIconNavbar.innerHTML = userIcon;
+
+    loginLink.appendChild(loginIconNavbar);
+  }
 }
