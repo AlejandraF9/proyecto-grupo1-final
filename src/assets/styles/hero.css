@@ -100,6 +100,12 @@
   text-transform: uppercase;
   font-weight: 400;
   font-family: var(--font-primary);
+  transition: 0.3s ease;
+}
+
+.hero-button-text:hover {
+  color: var(--pink);
+  font-weight: 600;
 }
 
 }
@@ -207,6 +213,12 @@
   text-transform: uppercase;
   font-weight: 400;
   font-family: var(--text-font);
+  transition: 0.3s ease;
+}
+
+.hero-button-text:hover {
+  color: var(--pink);
+  font-weight: 600;
 }
 
 }
@@ -313,6 +325,13 @@
   text-transform: uppercase;
   font-weight: 400;
   font-family: var(--text-font);
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.hero-button-text:hover {
+  color: var(--pink);
+  font-weight: 600;
 }
 
 }
