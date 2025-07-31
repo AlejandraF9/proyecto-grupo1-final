@@ -189,65 +189,59 @@ export function renderNavbar() {
   searchDiv.appendChild(searchNavbar);
 
   searchNavbar.addEventListener("search", () => {
-  goTo("/home");
+    goTo("/home");
   });
 
   searchNavbar.addEventListener("input", async (e) => {
     console.log("Se está escribiendo en el buscador");
-  const query = searchNavbar.value.toLowerCase().trim();
+    const query = searchNavbar.value.toLowerCase().trim();
     if (query === "") {
-    goTo("/home");
-    return;
-  }
+      goTo("/home");
+      return;
+    }
 
+    //-----------------------------------
+    const appShowHome = document.getElementById("app");
+    appShowHome.innerHTML = "";
+    const appContainer = document.createElement("div");
+    appContainer.className = "search-div-style";
+    //carol necesito por fa que este div tenga el mismo estilo de lo que se muestra en la tienda para que no se rompa el estilo
+    appShowHome.appendChild(appContainer);
+    //-------------------
 
-  //-----------------------------------
-  const appShowHome = document.getElementById("app");
-  appShowHome.innerHTML ="";
-  const appContainer = document.createElement("div");
-  appContainer.className ="search-div-style";
-//carol necesito por fa que este div tenga el mismo estilo de lo que se muestra en la tienda para que no se rompa el estilo
-  appShowHome.appendChild(appContainer);
-  //-------------------
-  
+    if (!appContainer) {
+      console.warn(" No se encontró el contenedor #app");
 
-  if (!appContainer){
-          console.warn(" No se encontró el contenedor #app");
+      return;
+    }
 
-    return;
-  }
-
-
-  const productos = await getAllProducts();
+    const productos = await getAllProducts();
     console.log(" Productos cargados:", productos);
 
     const productosFiltrados = productos.filter((producto) => {
-  const nombre = String(producto.nombre || "").toLowerCase();
-  let ingredientes = "";
+      const nombre = String(producto.nombre || "").toLowerCase();
+      let ingredientes = "";
 
-  if (Array.isArray(producto.ingredientes)) {
-    ingredientes = producto.ingredientes.join(", ").toLowerCase();
-  } else {
-    ingredientes = String(producto.ingredientes || "").toLowerCase();
-  }
+      if (Array.isArray(producto.ingredientes)) {
+        ingredientes = producto.ingredientes.join(", ").toLowerCase();
+      } else {
+        ingredientes = String(producto.ingredientes || "").toLowerCase();
+      }
 
-  const alergeno = String(producto.alergeno || "").toLowerCase();
+      const alergeno = String(producto.alergeno || "").toLowerCase();
 
-  return (
-    nombre.includes(query) ||
-    ingredientes.includes(query) ||
-    alergeno.includes(query)
-  );
-});
+      return (
+        nombre.includes(query) ||
+        ingredientes.includes(query) ||
+        alergeno.includes(query)
+      );
+    });
 
+    appContainer.innerHTML = "";
+    renderizarProductos(productosFiltrados, appContainer);
+  });
 
-
-   appContainer.innerHTML = "";
-     renderizarProductos(productosFiltrados, appContainer);
-
-  })
-
-//---------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   //creo un div para meter iconos de usuario y carrito
   const logCartDivNavbar = document.createElement("div");
   logCartDivNavbar.className = "login-div-navbar";
@@ -266,14 +260,11 @@ export function renderNavbar() {
     } else {
       renderForm(
         {
-          nombre: currentUser.name,
+          name: currentUser.name,
           email: currentUser.email,
         },
         {
           title: "Tu perfil",
-          onSubmit: (data) => {
-            console.log("Actualizar perfil con:", data);
-          },
           showLogout: true,
         }
       );
@@ -392,4 +383,3 @@ export function renderNavbar() {
     navbarContainerC.classList.toggle("visible");
   });
 }
-

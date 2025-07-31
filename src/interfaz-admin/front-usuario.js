@@ -1,3 +1,5 @@
+import { crearTablaConPaginacion } from "../utils/paginacion";
+
 const API_BASE = "https://api-bakery-production.up.railway.app";
 
 async function fetchUsuarios() {
@@ -13,33 +15,11 @@ async function eliminarUsuario(id) {
 
 export async function renderUsuarios(content) {
   content.innerHTML = "";
+
   try {
     const usuariosData = await fetchUsuarios();
-    const tabla = document.createElement("table");
-    tabla.classList.add("admin-content");
 
-    const thead = document.createElement("thead");
-    const headRow = document.createElement("tr");
-    ["ID", "Nombre", "Role", "Eliminar"].forEach((text) => {
-      const th = document.createElement("th");
-      th.textContent = text;
-      headRow.appendChild(th);
-    });
-    thead.appendChild(headRow);
-    tabla.appendChild(thead);
-
-    const tbody = document.createElement("tbody");
-
-    usuariosData.forEach((u) => {
-      const row = document.createElement("tr");
-
-      [u._id, u.name, u.role].forEach((text) => {
-        const td = document.createElement("td");
-        td.textContent = text;
-        row.appendChild(td);
-      });
-
-      const tdEliminar = document.createElement("td");
+    const filas = usuariosData.map((u) => {
       const btnEliminar = document.createElement("button");
       btnEliminar.textContent = "Eliminar";
       btnEliminar.classList.add("btnEliminar");
@@ -49,14 +29,18 @@ export async function renderUsuarios(content) {
           renderUsuarios(content);
         }
       };
-      tdEliminar.appendChild(btnEliminar);
-      row.appendChild(tdEliminar);
 
-      tbody.appendChild(row);
+      return [u._id, u.name, u.role, btnEliminar];
     });
 
-    tabla.appendChild(tbody);
-    content.appendChild(tabla);
+    crearTablaConPaginacion({
+      titulo: "Usuarios registrados",
+      lista: filas,
+      columnas: ["ID", "Nombre", "Role", "Eliminar"],
+      renderFila: (fila) => fila,
+      contenedorDestino: content,
+      itemsPorPagina: 10,
+    });
   } catch (error) {
     content.textContent = "Error cargando usuarios.";
     console.error(error);

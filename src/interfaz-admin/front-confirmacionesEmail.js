@@ -1,4 +1,5 @@
-import { showToast } from "../utils/toastify";
+import { showToast } from "../utils/toastify.js";
+import { crearTablaConPaginacion } from "../utils/paginacion.js";
 
 const API_BASE = "https://api-bakery-production.up.railway.app";
 
@@ -16,6 +17,14 @@ async function reintentarEnvio(id) {
   return await res.json();
 }
 
+async function eliminarConfirmacion(id) {
+  const res = await fetch(`${API_BASE}/email/${id}`, {
+    method: "DELETE",
+  });
+  if (!res.ok) throw new Error("No se pudo eliminar la confirmación");
+  return await res.json();
+}
+
 export async function renderConfirmacionesEmail(content) {
   content.innerHTML =
     "<h2 class='admin-pedidos-titulo'>Confirmaciones de Email</h2>";
@@ -23,83 +32,70 @@ export async function renderConfirmacionesEmail(content) {
   try {
     const confirmaciones = await fetchConfirmaciones();
 
-    const tabla = document.createElement("table");
-    tabla.classList.add("admin-pedidos-tabla");
-
-    const thead = document.createElement("thead");
-    const headRow = document.createElement("tr");
-    ["Email", "Estado", "Fecha de Envío", "Total Pedido", "Reintentar"].forEach(
-      (text) => {
-        const th = document.createElement("th");
-        th.textContent = text;
-        th.classList.add("admin-pedidos-th");
-        headRow.appendChild(th);
-      }
-    );
-    thead.appendChild(headRow);
-    tabla.appendChild(thead);
-
-    const tbody = document.createElement("tbody");
-
-    confirmaciones.forEach((conf) => {
-      const row = document.createElement("tr");
-      row.classList.add("admin-pedidos-tr");
-
-      const tdEmail = document.createElement("td");
-      tdEmail.textContent = conf.email;
-      tdEmail.classList.add("admin-pedidos-td");
-
-      const tdEstado = document.createElement("td");
-      tdEstado.textContent = conf.enviado ? "✅ Enviado" : "❌ Fallido";
-      tdEstado.classList.add("admin-pedidos-td");
-
-      const tdFecha = document.createElement("td");
-      tdFecha.textContent = conf.fechaEnvio
+    const filas = confirmaciones.map((conf) => {
+      const estado = conf.enviado ? "✅ Enviado" : "❌ Fallido";
+      const fecha = conf.fechaEnvio
         ? new Date(conf.fechaEnvio).toLocaleString()
         : "—";
-      tdFecha.classList.add("admin-pedidos-td");
-
-      const tdTotal = document.createElement("td");
-      tdTotal.textContent = conf.orderId?.total
+      const total = conf.orderId?.total
         ? `${conf.orderId.total.toFixed(2)}€`
         : "—";
-      tdTotal.classList.add("admin-pedidos-td");
 
-      const tdBoton = document.createElement("td");
-      tdBoton.classList.add("admin-pedidos-td");
+      // Columna de botones (Reintentar / Eliminar)
+      const contenedorAcciones = document.createElement("div");
+      contenedorAcciones.classList.add("acciones-confirmacion");
 
       if (!conf.enviado) {
         const btnReintentar = document.createElement("button");
         btnReintentar.textContent = "Reintentar";
         btnReintentar.classList.add("admin-btn-reintentar");
-
         btnReintentar.addEventListener("click", async () => {
           try {
             await reintentarEnvio(conf._id);
             showToast({ text: "Correo reenviado con éxito", type: "success" });
-            renderConfirmacionesEmail(content); // recargar
+            renderConfirmacionesEmail(content);
           } catch (err) {
             showToast({ text: "Error al reenviar correo", type: "error" });
             console.error(err);
           }
         });
-
-        tdBoton.appendChild(btnReintentar);
-      } else {
-        tdBoton.textContent = "—";
+        contenedorAcciones.appendChild(btnReintentar);
       }
 
-      row.appendChild(tdEmail);
-      row.appendChild(tdEstado);
-      row.appendChild(tdFecha);
-      row.appendChild(tdTotal);
-      row.appendChild(tdBoton);
+      const btnEliminar = document.createElement("button");
+      btnEliminar.textContent = "Eliminar";
+      btnEliminar.classList.add("admin-btn-eliminar");
+      btnEliminar.addEventListener("click", async () => {
+        if (confirm("¿Seguro que quieres eliminar esta confirmación?")) {
+          try {
+            await eliminarConfirmacion(conf._id);
+            showToast({ text: "Eliminado correctamente", type: "success" });
+            renderConfirmacionesEmail(content);
+          } catch (err) {
+            showToast({ text: "Error al eliminar", type: "error" });
+            console.error(err);
+          }
+        }
+      });
+      contenedorAcciones.appendChild(btnEliminar);
 
-      tbody.appendChild(row);
+      return [conf.email, estado, fecha, total, contenedorAcciones];
     });
 
-    tabla.appendChild(tbody);
-    content.appendChild(tabla);
+    crearTablaConPaginacion({
+      titulo: "Confirmaciones de Email",
+      lista: filas,
+      columnas: [
+        "Email",
+        "Estado",
+        "Fecha de Envío",
+        "Total Pedido",
+        "Acciones",
+      ],
+      renderFila: (fila) => fila,
+      contenedorDestino: content,
+      itemsPorPagina: 10,
+    });
   } catch (error) {
     console.error(error);
     content.innerHTML =

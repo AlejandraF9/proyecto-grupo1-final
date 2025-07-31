@@ -80,6 +80,12 @@ export async function renderForm(
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
+    // ✅ CAMBIO CLAVE: Si existe "nombre", convertir a "name"
+    if (data.nombre && !data.name) {
+      data.name = data.nombre;
+      delete data.nombre;
+    }
+
     // Añadir el avatar seleccionado al objeto a enviar
     data.avatar = imgPreview.getAttribute("data-selected-avatar");
 
@@ -87,8 +93,19 @@ export async function renderForm(
       if (onSubmit) {
         await onSubmit(data);
       } else {
+        console.log("DATA ENVIADA", data);
+        console.log(
+          "AVATAR SELECCIONADO:",
+          imgPreview.getAttribute("data-selected-avatar")
+        );
+        console.log("➡ Ejecutando fetch con estos datos:", data);
+        console.log(
+          "➡ URL del fetch:",
+          `https://api-bakery-production.up.railway.app/users/${currentUser._id}`
+        );
+
         const response = await fetch(
-          `https://6874d617dd06792b9c95731e.mockapi.io/users/${currentUser.id}`,
+          `https://api-bakery-production.up.railway.app/users/${currentUser._id}`,
           {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
@@ -126,7 +143,7 @@ export async function renderForm(
         const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
         localStorage.setItem(`cart-${user._id}`, JSON.stringify(cartItems));
       }
-      
+
       localStorage.removeItem("current-user");
       localStorage.removeItem("cartItems");
       localStorage.removeItem("productsByDate");
@@ -138,12 +155,12 @@ export async function renderForm(
         cartCounterProducts.textContent = "";
       }
 
-      showToast({text: "Has cerrado sesión.", type: "success"});
+      showToast({ text: "Has cerrado sesión.", type: "success" });
 
       closeModal();
       goTo("/");
     });
-    
+
     container.appendChild(logoutBtn);
   }
 

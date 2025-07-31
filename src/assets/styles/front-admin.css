@@ -162,22 +162,22 @@
     display: block;
   }
 
-.admin-blog-titulo {
-  color: var(--blue-color);
-  font-weight: bold;
-  font-size: 1rem;
-  cursor: pointer;
-  margin-bottom: 0;
-  padding: 5px;
-}
+  .admin-blog-titulo {
+    color: var(--blue-color);
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 0;
+    padding: 5px;
+  }
 
-.admin-blog-contenido {
-  margin-top: 0;
-  padding: 5px;
-  font-size: 0.95rem;
-  white-space: pre-line;
-}
-  
+  .admin-blog-contenido {
+    margin-top: 0;
+    padding: 5px;
+    font-size: 0.95rem;
+    white-space: pre-line;
+  }
+
   .admin-btn-guardar-blog:hover {
     background-color: var(--blue-color);
   }
@@ -477,8 +477,8 @@
 // MONITOR P   //
 //////////////*/
 
-@media screen and (min-width:761px) and (max-width: 1028px) {
-/* Admin Panel - Usuarios Styles */
+@media screen and (min-width: 761px) and (max-width: 1028px) {
+  /* Admin Panel - Usuarios Styles */
 
   .admin-content table {
     width: 100%;
@@ -950,7 +950,7 @@
 //////////////*/
 
 @media screen and (min-width: 1029px) {
-/* Admin Panel - Usuarios Styles */
+  /* Admin Panel - Usuarios Styles */
 
   .admin-content table {
     width: 100%;
@@ -1417,4 +1417,29 @@
   }
 }
 
+.admin-paginacion {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
 
+.admin-paginacion button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #333;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.admin-paginacion button:hover:not(:disabled) {
+  background-color: #555;
+}
+
+.admin-paginacion button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

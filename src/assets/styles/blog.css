@@ -63,6 +63,7 @@
   .blog-text {
     font-size: 0.95rem;
     line-height: 1.4;
+    white-space: pre-line;
   }
 
   .blog-button-text {
@@ -326,6 +327,7 @@
     line-height: 1.6;
     margin-bottom: 1rem;
     color: var(--color);
+    white-space: pre-line;
   }
 
   /* Fecha */
