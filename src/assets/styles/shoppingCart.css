@@ -1,6 +1,6 @@
-/*//////////////
-// MOBILE /////
-////////////*/
+/*/////////////////////
+// MOBILE          ///
+///////////////////*/
 
 @media screen and (orientation: portrait) and (max-width: 760px) {
 
@@ -140,9 +140,6 @@
     cursor: pointer;
     }
 }
-/*.remove-button:hover {
-  color: #c82333;
-}*/
 
 /* Carrito VACÍO */
 .empty-cart {
@@ -211,15 +208,9 @@
   width: 100%;
 }
 
-/*.checkout-button:hover {
-  background-color: #218838;
-}*/
-
-
-
-/*//////////////
-// MONITOR P //
-////////////*/
+/*/////////////////////
+// TABLET          ///
+///////////////////*/
 
 @media screen and (min-width: 731px) and (max-width: 1028px) {
     /*Carrito*/
@@ -432,9 +423,9 @@
 
 }
 
-/*//////////////
-// MONITOR G //
-////////////*/
+/*/////////////////////
+// MONITOR         ///
+///////////////////*/
 
 @media screen and (min-width: 1029px) {
 /*Carrito*/

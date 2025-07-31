@@ -1,6 +1,6 @@
-/*////////////////
-// MOBILE      //
-//////////////*/
+/*/////////////////////
+// MOBILE          ///
+///////////////////*/
 
 @media screen and (orientation: portrait) and (max-width: 760px) {
   /* Admin Panel - Usuarios Styles */
@@ -473,9 +473,9 @@
   }
 }
 
-/*////////////////
-// MONITOR P   //
-//////////////*/
+/*/////////////////////
+// TABLET          ///
+///////////////////*/
 
 @media screen and (min-width: 761px) and (max-width: 1028px) {
   /* Admin Panel - Usuarios Styles */
@@ -945,9 +945,9 @@
   }
 }
 
-/*////////////////
-// MONITOR G   //
-//////////////*/
+/*/////////////////////
+// MONITOR         ///
+///////////////////*/
 
 @media screen and (min-width: 1029px) {
   /* Admin Panel - Usuarios Styles */

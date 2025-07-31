@@ -1,6 +1,6 @@
-/* ==========================
-   MOBILE (max 760px)
-========================== */
+/*/////////////////////
+// MOBILE          ///
+///////////////////*/
 @media screen and (max-width: 760px) {
   #blog-section {
     display: flex;
@@ -84,9 +84,9 @@
   }
 }
 
-/* ==========================
-   MONITOR (761px - 1028px)
-========================== */
+/*/////////////////////
+// TABLET          ///
+///////////////////*/
 @media screen and (min-width: 761px) and (max-width: 1028px) {
   /* ==========================
     SECCIÓN DEL BLOG
@@ -214,10 +214,6 @@
     font-family: var(--text-font, sans-serif);
   }
 
-  /*.blog-button:hover {
-    background-color: #e0f4ff;
-  }*/
-
   .blog-button .blog-button-bg {
     position: absolute;
     top: 0;
@@ -239,9 +235,10 @@
     padding: 1rem 2rem;
   }
 }
-/* ==========================
-   MONITOR (1029px - 1920px)
-========================== */
+
+/*/////////////////////
+// MONITOR         ///
+///////////////////*/
 @media screen and (min-width: 1029px) {
   /* ==========================
     SECCIÓN DEL BLOG
@@ -366,9 +363,6 @@
     font-family: var(--text-font, sans-serif);
   }
 
-  /*.blog-button:hover {
-    background-color: #e0f4ff;
-  }*/
 
   .blog-button .blog-button-bg {
     position: absolute;
