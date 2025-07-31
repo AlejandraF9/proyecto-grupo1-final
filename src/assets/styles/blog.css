@@ -66,6 +66,19 @@
     white-space: pre-line;
   }
 
+  .blog-button {
+    position: relative;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 2rem auto 5rem;
+    border-radius: 0;
+    overflow: hidden;
+    display: block;
+    font-family: var(--text-font, sans-serif);
+  }
+
   .blog-button-text {
     font-size: 1.25rem;
   }
