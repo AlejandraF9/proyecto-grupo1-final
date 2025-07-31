@@ -1,5 +1,3 @@
-import { goTo } from "../router";
-import { openModal, closeModal } from "../utils/modal&overlay";
 import { showToast } from "../utils/toastify";
 
 export async function getOrdersUser() {
@@ -64,7 +62,6 @@ export function createViewHistoryOrders(orders) {
         <p>Precio: ${prod.precio} €</p>
         ${prod.size ? `<p>Tamaño: ${prod.size}</p>` : ""}
       `;
-      console.log("imagen del producto:", prod.url);
       productsList.appendChild(productDiv);
     });
 
@@ -78,7 +75,6 @@ export function createViewHistoryOrders(orders) {
 }
 
 async function init() {
-  console.log("View history orders ejecutando");
   const orders = await getOrdersUser();
   createViewHistoryOrders(orders);
 }

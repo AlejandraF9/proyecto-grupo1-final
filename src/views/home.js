@@ -9,13 +9,11 @@ export default {
     const app = document.getElementById("app");
 
     if (!app) {
-      console.error("❌ Elemento con id='app' no encontrado en el DOM.");
+      console.error("Elemento con id='app' no encontrado en el DOM.");
       return;
     }
 
     app.innerHTML = "";
-
-    console.log("Home view initialized");
 
     const container = document.createElement("div");
     container.id = "container";
@@ -32,8 +30,6 @@ export default {
     tienda.parentNode.insertBefore(blogSection, tienda.nextSibling);
     renderBlogHome(blogSection);
 
-    //que la newsletter solo salga una vez
-
     setTimeout(() => {
   const alreadyShown = localStorage.getItem("newsletter-shown");
 
@@ -42,8 +38,5 @@ export default {
     localStorage.setItem("newsletter-shown", "true");
   }
 }, 8000);
-
-    //setTimeout(renderNewsletterForm, 8000);
-
   },
 };

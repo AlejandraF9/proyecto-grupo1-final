@@ -8,20 +8,16 @@ export function renderSignupView() {
   const app = document.getElementById("app");
   app.innerHTML = ""; 
 
-  // Modal
   const signupContainer = document.createElement("div");
   signupContainer.id = "signup-container";
 
-  // Header
   const heading = document.createElement("h2");
   heading.textContent = "Registro";
   signupContainer.appendChild(heading);
 
-  // Formulario de registro
   const form = document.createElement("form");
   form.id = "signupForm";
 
-  // Nombre
   const labelName = document.createElement("label");
   labelName.setAttribute("for", "name");
   const inputName = document.createElement("input");
@@ -30,7 +26,6 @@ export function renderSignupView() {
   inputName.required = true;
   inputName.placeholder = "Tu nombre";
 
-  // Email
   const labelEmail = document.createElement("label");
   labelEmail.setAttribute("for", "email");
   const inputEmail = document.createElement("input");
@@ -39,7 +34,6 @@ export function renderSignupView() {
   inputEmail.required = true;
   inputEmail.placeholder = "Tu correo electrónico";
 
-  // Contraseña
   const labelPassword = document.createElement("label");
   labelPassword.setAttribute("for", "password");
   const inputPassword = document.createElement("input");
@@ -48,7 +42,6 @@ export function renderSignupView() {
   inputPassword.required = true;
   inputPassword.placeholder = "Contraseña";
 
-  // Confirmar contraseña
   const labelConfirm = document.createElement("label");
   labelConfirm.setAttribute("for", "confirmPassword");
   const inputConfirm = document.createElement("input");
@@ -57,7 +50,6 @@ export function renderSignupView() {
   inputConfirm.required = true;
   inputConfirm.placeholder = "Repite la contraseña";
 
-  // Botón de envío
   const submitBtn = document.createElement("button");
   submitBtn.type = "submit";
   submitBtn.textContent = "Regístrate";
@@ -72,14 +64,10 @@ export function renderSignupView() {
   form.appendChild(inputConfirm);
   form.appendChild(submitBtn);
 
-
-  // Meter form y link dentro del modal
   signupContainer.appendChild(form);
 
-  // Mostrar modal
   openModal(signupContainer);
 
-  // Submit del formulario
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
@@ -113,7 +101,6 @@ export function renderSignupView() {
 
 export default {
   init() {
-    console.log("Login init ejecutado");
     renderSignupView();
   },
 };

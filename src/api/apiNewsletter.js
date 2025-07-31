@@ -1,7 +1,5 @@
 const baseUrl = "https://api-bakery-production.up.railway.app";
 
-//function para traer todos los usuarios de la newsletter
-
 export async function getAllNewsletterEmails() {
   try {
     const response = await fetch(`${baseUrl}/newsletters`);
@@ -16,10 +14,6 @@ export async function getAllNewsletterEmails() {
     throw error;
   }
 }
-
-//function para crear el nuevo usuario de la newsletter
-
-
 
 export async function createUserFromNewsletter(parametro) {
     const url =`${baseUrl}/newsletters`;
@@ -42,4 +36,3 @@ export async function createUserFromNewsletter(parametro) {
         throw error;
     }   
 }
-

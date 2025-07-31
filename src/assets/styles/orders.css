@@ -1,13 +1,8 @@
-/*/////////////////////
-// MOBILE          ///
-///////////////////*/
-
 @media screen and (orientation: portrait) and (max-width: 760px) {
     body {
         font-family: var(--text-font);
     }
-    
-    /* Historial de Pedidos */
+
     .containerHistoryOrders {
     width: 95%;
     margin: 2rem auto;
@@ -47,7 +42,6 @@
     justify-content: center;
     }
 
-    /* Producto individual */
     .productsList > div {
     width: 75%;
     border: 1px solid var(--gray-color);
@@ -73,10 +67,6 @@
 
 }
 
-/*/////////////////////
-// TABLET          ///
-///////////////////*/
-
 @media screen and (min-width: 761px) and (max-width: 1028px) {
     body {
     font-family: var(--text-font);
@@ -91,13 +81,11 @@
     font-family: var(--text-font);
     }
 
-    /* Cada pedido */
     .order {
     border-bottom: 1px solid var(--gray-color);
     padding: 1.5rem 0;
     }
 
-    /* Título del pedido */
     .order h3 {
     font-size: 1.6rem;
     color: var(--color);
@@ -105,14 +93,12 @@
     margin-bottom: 0.5rem;
     }
 
-    /* Detalles generales del pedido */
     .order p {
     font-size: 1rem;
     color: var(--color);
     margin-bottom: 0.4rem;
     }
 
-    /* Lista de productos dentro del pedido */
     .productsList {
     display: flex;
     flex-direction: column;
@@ -121,7 +107,6 @@
     padding-left: 1rem;
     }
 
-    /* Estilo de cada producto */
     .productsList > div {
     display: flex;
     align-items: flex-start;
@@ -130,29 +115,22 @@
     padding-left: 1rem;
     }
 
-    /* Imagen del producto */
     .product-image {
     width: 6rem;
     height: 6rem;
     object-fit: cover;
     }
 
-    /* Información textual del producto */
     .productsList p {
     margin: 0.2rem 0;
     font-size: 1rem;
     }
 
-    /* Nombre destacado del producto */
     .productsList p strong {
     font-size: 1.05rem;
     color: var(--color);
     }
 }
-
-/*/////////////////////
-// MONITOR         ///
-///////////////////*/
 
 @media screen and (min-width: 1029px) {
     body {
@@ -168,13 +146,11 @@
     font-family: var(--text-font);
     }
 
-    /* Cada pedido */
     .order {
     border-bottom: 1px solid var(--gray-color);
     padding: 1.5rem 0;
     }
 
-    /* Título del pedido */
     .order h3 {
     font-size: 2.2rem;
     color: var(--color);
@@ -182,14 +158,12 @@
     margin-bottom: 0.5rem;
     }
 
-    /* Detalles generales del pedido */
     .order p {
     font-size: 1rem;
     color: var(--color);
     margin-bottom: 0.4rem;
     }
 
-    /* Lista de productos dentro del pedido */
     .productsList {
     display: flex;
     flex-direction: column;
@@ -198,7 +172,6 @@
     padding-left: 1rem;
     }
 
-    /* Estilo de cada producto */
     .productsList > div {
     display: flex;
     align-items: flex-start;
@@ -207,20 +180,17 @@
     padding-left: 1rem;
     }
 
-    /* Imagen del producto */
     .product-image {
     width: 10.5rem;
     height: 10.5rem;
     object-fit: cover;
     }
 
-    /* Información textual del producto */
     .productsList p {
     margin: 0.2rem 0;
     font-size: 1.3rem;
     }
 
-    /* Nombre destacado del producto */
     .productsList p strong {
     font-size: 1.35rem;
     color: var(--color);

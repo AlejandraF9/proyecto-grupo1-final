@@ -1,12 +1,8 @@
 export default{
 
 init() {
-
-    console.log("arcvhivo importa correctamente");
- 
-
   const salesConditionsContainer = document.getElementById("app");
-  salesConditionsContainer.innerHTML = ""; // para que el texto no se acumule uno encima de otro
+  salesConditionsContainer.innerHTML = "";
 
   const salesConditionsTextDiv = document.createElement("div");
   salesConditionsContainer.appendChild(salesConditionsTextDiv);

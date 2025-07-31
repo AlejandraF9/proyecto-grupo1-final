@@ -10,7 +10,6 @@ export function renderCategorys(container) {
   const containerCategorys = document.createElement("div");
   containerCategorys.classList.add("categorys-container");
 
-  // CATEGORÍA: Individuales
   const individualCategory = document.createElement("div");
   individualCategory.classList.add("category-individual");
 
@@ -27,7 +26,6 @@ export function renderCategorys(container) {
   individualCategory.appendChild(imgIndividual);
   individualCategory.appendChild(textIndividual);
 
-  // CATEGORÍA: Tartas
   const cakeCategory = document.createElement("div");
   cakeCategory.classList.add("category-cake");
 
@@ -44,7 +42,6 @@ export function renderCategorys(container) {
   cakeCategory.appendChild(imgCake);
   cakeCategory.appendChild(textCake);
 
-  // CATEGORÍA: Combinaciones
   const combinationsCategory = document.createElement("div");
   combinationsCategory.classList.add("category-combinations");
 
@@ -61,7 +58,6 @@ export function renderCategorys(container) {
   combinationsCategory.appendChild(imgCombinations);
   combinationsCategory.appendChild(textCombinations);
 
-  // CATEGORÍA: Bebidas
   const drinksCategory = document.createElement("div");
   drinksCategory.classList.add("category-drinks");
 
@@ -78,7 +74,6 @@ export function renderCategorys(container) {
   drinksCategory.appendChild(imgDrinks);
   drinksCategory.appendChild(textDrinks);
 
-  // MONTAJE FINAL
   const categorysWrapper = document.createElement("div");
   categorysWrapper.classList.add("categorys-wrapper");
 

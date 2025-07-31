@@ -1,12 +1,7 @@
 import { openModal } from "../utils/modal&overlay";
 import { generatePaymentForm } from "../views/payment";
 import { showToast } from "../utils/toastify";
-import {
-  getUserEmail,
-  getOrderObject,
-  enviarPedido,
-  procesarPedido,
-} from "../utils/email";
+import { procesarPedido } from "../utils/email";
 
 export function shoppingCart() {
   const app = document.getElementById("app");
@@ -409,7 +404,6 @@ function updateCart(index, updatedItem, productsByDate) {
 
 export default {
   init() {
-    console.log("Shopping Cart init ejecutado");
     shoppingCart();
   },
 };

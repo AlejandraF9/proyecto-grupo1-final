@@ -1,8 +1,6 @@
 export function init() {
- 
-
   const cookiesContainer = document.getElementById("app");
-  cookiesContainer.innerHTML = ""; // para que el texto no se acumule uno encima de otro
+  cookiesContainer.innerHTML = "";
 
   const cookiesTextDiv = document.createElement("div");
   cookiesContainer.appendChild(cookiesTextDiv);

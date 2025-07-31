@@ -7,12 +7,8 @@ import { showToast } from "./utils/toastify";
 import emailjs from '@emailjs/browser';
 emailjs.init('nZaP1NAVYfbs2Z14i'); 
 
-
-
-
 const newsl = document.getElementById("newsl");
 export function renderNewsletterForm (){
-   
 
 const newsletterDiv = document.createElement("div");
 newsletterDiv.className = "newsletter-div";
@@ -60,7 +56,7 @@ checkboxNewsletter.required = true;
 checkboxNewsletter.name = "acepta";
 newsletterCheckboxLabel.appendChild(checkboxNewsletter);
 
-const textCheckboxNewsletter = document.createElement("a"); //mejor span que p
+const textCheckboxNewsletter = document.createElement("a");
 textCheckboxNewsletter.className = "text-checkbox-newsletter"
 textCheckboxNewsletter.innerHTML = "He leído y acepto los términos y condiciones";
 textCheckboxNewsletter.href = "/privacy-policy";
@@ -72,17 +68,13 @@ newsletterButton. className = "newsletter-button";
 newsletterButton.textContent = "¡Quiero suscribirme!";
 newsletterForm.appendChild(newsletterButton);
 
-
 newsletterForm.addEventListener('submit', async  (event)=> {
   event.preventDefault();
-
-  
 
   const inputs = event.target.querySelectorAll('input');
   inputs.forEach(input => {
   });
 
- // validaciones de formulario
   const nameNewsletter = newsletterFormName.value.trim();
   const emailNewsletter = newsletterFormEmail.value.trim();
   const aceptNewsletter = checkboxNewsletter.checked;
@@ -103,20 +95,17 @@ newsletterForm.addEventListener('submit', async  (event)=> {
     return;
   }
   
-  
   await createUserFromNewsletter({ nombre: nameNewsletter, email: emailNewsletter });
-
-    
- console.log ("voy a llamar a emailjs.send");
-await emailjs.send(
-  'service_g2s97a6',
-  'template_xvh27rf',
-  {
-    nombre: nameNewsletter,
-    email: emailNewsletter
-  },
-  'nZaP1NAVYfbs2Z14i'  
-);
+  
+  await emailjs.send(
+    'service_g2s97a6',
+    'template_xvh27rf',
+    {
+      nombre: nameNewsletter,
+      email: emailNewsletter
+    },
+    'nZaP1NAVYfbs2Z14i'  
+  );
 
     showToast({ text: "¡Formulario enviado correctamente! Gracias por suscribirte.", type: "success" });
     event.target.reset();
@@ -127,9 +116,6 @@ await emailjs.send(
   }
 });
 
-
-
-//evento del botón de cierre del formulario
 const closeButton = document.createElement("button");
 closeButton.className = "newsletter-close-button";
 closeButton.innerHTML = "&times;"; 

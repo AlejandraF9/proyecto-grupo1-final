@@ -1,8 +1,6 @@
 export function init() {
-  
-
   const legalNoticeContainer = document.getElementById("app");
-  legalNoticeContainer.innerHTML = ""; // para que el texto no se acumule uno encima de otro
+  legalNoticeContainer.innerHTML = "";
 
   const legalTextDiv = document.createElement("div");
   legalNoticeContainer.appendChild(legalTextDiv);

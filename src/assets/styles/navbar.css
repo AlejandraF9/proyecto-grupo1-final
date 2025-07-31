@@ -1,9 +1,7 @@
 .burger-button {
-  display: none; /*vamos a ocultar el botón por defecto*/
+  display: none;
 }
-/*/////////////////////
-// MOBILE          ///
-///////////////////*/
+
 @media screen and (orientation: portrait) and (max-width: 760px) {
   body {
     font-family: var(--text-font);
@@ -26,7 +24,6 @@
     width: 100%;
   }
 
-  /*Header navbar layout en una sola fila */
   .second-navbar-container {
     display: flex;
     flex-direction: row;
@@ -76,9 +73,8 @@
     height: auto;
   }
 
-  /* Aplica SOLO al icono del carrito */
   .cart-icon-navbar {
-    position: relative; /* clave para que el contador se posicione respecto a este */
+    position: relative;
     width: auto;
     height: 2.5rem;
     display: flex;
@@ -86,7 +82,7 @@
     justify-content: center;
     cursor: pointer;
   }
-  /* Contador de productos en icono de carrito*/
+
   .cart-counter {
     position: absolute;
     top: -0.6rem;
@@ -99,13 +95,12 @@
     font-weight: bold;
     display: none;
   }
-  /* Mostrarlo solo si hay productos */
+
   .cart-counter.visible {
     display: inline-block;
   }
 }
 
-/*Menú desplegable*/
 .third-navbar-container {
   display: flex;
   flex-direction: column;
@@ -149,10 +144,6 @@
   display: none;
 }
 
-/*/////////////////////
-// TABLET          ///
-///////////////////*/
-
 @media screen and (min-width: 761px) and (max-width: 1028px) {
   #container-navbar {
     display: flex;
@@ -160,7 +151,6 @@
     align-items: center;
   }
 
-  /*REDES SOCIALES*/
   .first-navbar-container {
     display: flex;
     justify-content: flex-end;
@@ -179,7 +169,6 @@
     padding-right: 0.5rem;
   }
 
-  /*LOGO + SEARCH + (LOGIN/CART) */
   .second-navbar-container {
     display: flex;
     justify-content: space-between;
@@ -273,7 +262,6 @@
     display: inline-block;
   }
 
-  /*MENÚ DE NAVEGACIÓN*/
   .third-navbar-container {
     display: flex;
     flex-direction: row;
@@ -301,7 +289,6 @@
     text-decoration: none;
     color: var(--color);
     background-color: transparent;
-    /*Transición suave para cambio de fondo*/
     transition: background-color 0.5s ease, color 0.5s ease;
     border-radius: 4px;
     cursor: pointer;
@@ -312,9 +299,6 @@
   }
 }
 
-/*/////////////////////
-// MONITOR         ///
-///////////////////*/
 @media screen and (min-width: 1029px) {
   #container-navbar {
     display: flex;
@@ -322,7 +306,6 @@
     align-items: center;
   }
 
-  /*REDES SOCIALES*/
   .first-navbar-container {
     display: flex;
     justify-content: flex-end;
@@ -341,7 +324,6 @@
     padding-right: 0.5rem;
   }
 
-  /*LOGO + SEARCH + (LOGIN/CART) */
   .second-navbar-container {
     display: flex;
     justify-content: space-between;
@@ -437,7 +419,6 @@
     display: inline-block;
   }
 
-  /*MENÚ DE NAVEGACIÓN*/
   .third-navbar-container {
     display: flex;
     flex-direction: row;
@@ -465,7 +446,6 @@
     text-decoration: none;
     color: var(--color);
     background-color: transparent;
-    /*Transición suave para cambio de fondo*/
     transition: background-color 0.5s ease, color 0.5s ease;
     border-radius: 4px;
     cursor: pointer;

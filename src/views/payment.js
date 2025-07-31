@@ -296,7 +296,6 @@ export function generatePaymentForm(container) {
     localStorage.setItem("lastUserId", newUserId);
 
     try {
-      console.log("Pago procesado");
       await sendPaymentRequest(userData, newUserId);
       showToast({ text: "¡Pago realizado con éxito!", type: "success" });
 
@@ -306,15 +305,14 @@ export function generatePaymentForm(container) {
       if (orderId && email) {
         try {
           const res = await enviarEmailConfirmacion(orderId, email);
-          console.log("Correo enviado:", res.message);
           showToast({
-            text: "Te hemos enviado un email con los detalles de tu pedido 📧",
+            text: "Te hemos enviado un email con los detalles de tu pedido",
             type: "success",
           });
         } catch (err) {
           console.error("Error al enviar el correo:", err);
           showToast({
-            text: "No se pudo enviar el correo de confirmación 😓",
+            text: "No se pudo enviar el correo de confirmación",
             type: "warning",
           });
         } finally {

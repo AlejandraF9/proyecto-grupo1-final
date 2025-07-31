@@ -1,10 +1,4 @@
-/*/////////////////////
-// MOBILE          ///
-///////////////////*/
-
 @media screen and (orientation: portrait) and (max-width: 760px) {
-  /* Admin Panel - Usuarios Styles */
-
   .admin-content table {
     width: 70%;
     border-collapse: collapse;
@@ -45,8 +39,6 @@
   .admin-content button:hover {
     background-color: var(--blue-color);
   }
-
-  /* Admin Panel - Productos Styles */
 
   .admin-filtros {
     display: flex;
@@ -118,8 +110,6 @@
   .admin-btn-eliminar:hover {
     background-color: #b02a37;
   }
-
-  /* Admin Panel - Blog Styles */
 
   .admin-blog-form {
     margin: 0.2rem;
@@ -208,8 +198,6 @@
     box-sizing: border-box;
   }
 
-  /* Admin Panel - Pedidos Styles */
-
   .admin-pedidos-titulo {
     font-family: var(--text-title);
     color: var(--blue-color);
@@ -266,8 +254,6 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   }
 
-  /* Admin Panel - Blog Modificar (Modal) */
-
   .containerForm {
     position: fixed;
     inset: 0;
@@ -336,8 +322,6 @@
     background-color: var(--blue-color);
   }
 
-  /* Contenedor de acciones en entradas del blog */
-
   .admin-blog-acciones {
     margin-top: 10px;
     display: flex;
@@ -360,8 +344,6 @@
   .modal-close-button:hover {
     color: #000;
   }
-
-  /* MODAL PERSONALIZADO - PRODUCTOS */
 
   .modal-productos-overlay {
     position: fixed;
@@ -410,8 +392,6 @@
     box-sizing: border-box;
   }
 
-  /* MODAL PERSONALIZADO - BLOG */
-
   .modal-blog-overlay {
     position: fixed;
     inset: 0;
@@ -474,13 +454,8 @@
     }
   }
 }
-
-/*/////////////////////
-// TABLET          ///
-///////////////////*/
 
 @media screen and (min-width: 761px) and (max-width: 1028px) {
-  /* Admin Panel - Usuarios Styles */
 
   .admin-content table {
     width: 100%;
@@ -522,8 +497,6 @@
   .admin-content button:hover {
     background-color: var(--blue-color);
   }
-
-  /* Admin Panel - Productos Styles */
 
   .admin-filtros {
     display: flex;
@@ -594,8 +567,6 @@
   .admin-btn-eliminar:hover {
     background-color: #b02a37;
   }
-
-  /* Admin Panel - Blog Styles */
 
   .admin-blog-form {
     margin: 0.2rem;
@@ -681,8 +652,6 @@
     box-sizing: border-box;
   }
 
-  /* Admin Panel - Pedidos Styles */
-
   .admin-pedidos-titulo {
     font-family: var(--text-title);
     color: var(--blue-color);
@@ -738,8 +707,6 @@
     background-color: var(--color-blanco);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   }
-
-  /* Admin Panel - Blog Modificar (Modal) */
 
   .containerForm {
     position: fixed;
@@ -810,8 +777,6 @@
     background-color: var(--blue-color);
   }
 
-  /* Contenedor de acciones en entradas del blog */
-
   .admin-blog-acciones {
     margin-top: 10px;
     display: flex;
@@ -834,8 +799,6 @@
   .modal-close-button:hover {
     color: #000;
   }
-
-  /* MODAL PERSONALIZADO - PRODUCTOS */
 
   .modal-productos-overlay {
     position: fixed;
@@ -881,8 +844,6 @@
     width: 100%;
     box-sizing: border-box;
   }
-
-  /* MODAL PERSONALIZADO - BLOG */
 
   .modal-blog-overlay {
     position: fixed;
@@ -947,13 +908,7 @@
   }
 }
 
-/*/////////////////////
-// MONITOR         ///
-///////////////////*/
-
 @media screen and (min-width: 1029px) {
-  /* Admin Panel - Usuarios Styles */
-
   .admin-content table {
     width: 100%;
     border-collapse: collapse;
@@ -994,8 +949,6 @@
   .admin-content button:hover {
     background-color: var(--blue-color);
   }
-
-  /* Admin Panel - Productos Styles */
 
   .admin-filtros {
     display: flex;
@@ -1066,8 +1019,6 @@
   .admin-btn-eliminar:hover {
     background-color: #b02a37;
   }
-
-  /* Admin Panel - Blog Styles */
 
   .admin-blog-form {
     margin: 0.2rem;
@@ -1153,8 +1104,6 @@
     box-sizing: border-box;
   }
 
-  /* Admin Panel - Pedidos Styles */
-
   .admin-pedidos-titulo {
     font-family: var(--text-title);
     color: var(--blue-color);
@@ -1210,8 +1159,6 @@
     background-color: var(--color-blanco);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   }
-
-  /* Admin Panel - Blog Modificar (Modal) */
 
   .containerForm {
     position: fixed;
@@ -1282,8 +1229,6 @@
     background-color: var(--blue-color);
   }
 
-  /* Contenedor de acciones en entradas del blog */
-
   .admin-blog-acciones {
     margin-top: 10px;
     display: flex;
@@ -1306,8 +1251,6 @@
   .modal-close-button:hover {
     color: #000;
   }
-
-  /* MODAL PERSONALIZADO - PRODUCTOS */
 
   .modal-productos-overlay {
     position: fixed;
@@ -1353,8 +1296,6 @@
     width: 100%;
     box-sizing: border-box;
   }
-
-  /* MODAL PERSONALIZADO - BLOG */
 
   .modal-blog-overlay {
     position: fixed;

@@ -1,10 +1,4 @@
-/*/////////////////////
-// MOBILE          ///
-///////////////////*/
 @media screen and (max-width: 760px) {
-  /* ===========================
-   CONTENEDOR GENERAL
-=========================== */
   .categorys-container {
     position: relative;
     width: 100%;
@@ -15,9 +9,6 @@
     align-items: center;
   }
 
-  /* ===========================
-   TÍTULO: DE TEMPORADA
-=========================== */
   .season-title {
     font-size: 45px;
     font-weight: 600;
@@ -28,9 +19,6 @@
     font-family: var(--font-primary);
   }
 
-  /* ===========================
-   CATEGORÍAS
-=========================== */
   .category-individual,
   .category-cake,
   .category-combinations,
@@ -41,9 +29,6 @@
     text-align: center;
   }
 
-  /* ===========================
-   IMÁGENES CIRCULARES
-=========================== */
   .individual-image,
   .cake-image,
   .combinations-image,
@@ -56,9 +41,6 @@
     margin-bottom: 10px;
   }
 
-  /* ===========================
-   TEXTOS DE CATEGORÍAS
-=========================== */
   .individual-text,
   .cake-text,
   .combinations-text,
@@ -74,17 +56,11 @@
     display: flex;
     justify-content: center;
     gap: 50px;
-    flex-wrap: wrap; /* para mantener responsividad si la pantalla es estrecha */
+    flex-wrap: wrap;
   }
 }
 
-/*/////////////////////
-// TABLET          ///
-///////////////////*/
 @media screen and (min-width: 761px) and (max-width: 1028px) {
-  /* ===========================
-   CONTENEDOR GENERAL
-=========================== */
   .categorys-container {
     position: relative;
     width: 100%;
@@ -95,9 +71,6 @@
     align-items: center;
   }
 
-  /* ===========================
-   TÍTULO: DE TEMPORADA
-=========================== */
   .season-title {
     font-size: 45px;
     font-weight: 600;
@@ -108,9 +81,6 @@
     font-family: var(--font-primary);
   }
 
-  /* ===========================
-   CATEGORÍAS
-=========================== */
   .category-individual,
   .category-cake,
   .category-combinations,
@@ -121,9 +91,6 @@
     text-align: center;
   }
 
-  /* ===========================
-   IMÁGENES CIRCULARES
-=========================== */
   .individual-image,
   .cake-image,
   .combinations-image,
@@ -136,9 +103,6 @@
     margin-bottom: 10px;
   }
 
-  /* ===========================
-   TEXTOS DE CATEGORÍAS
-=========================== */
   .individual-text,
   .cake-text,
   .combinations-text,
@@ -154,16 +118,11 @@
     display: flex;
     justify-content: center;
     gap: 50px;
-    flex-wrap: wrap; /* para mantener responsividad si la pantalla es estrecha */
+    flex-wrap: wrap;
   }
 }
-/*/////////////////////
-// MONITOR         ///
-///////////////////*/
+
 @media screen and (min-width: 1029px) {
-  /* ===========================
-   CONTENEDOR GENERAL
-=========================== */
   .categorys-container {
     position: relative;
     width: 100%;
@@ -174,9 +133,6 @@
     align-items: center;
   }
 
-  /* ===========================
-   TÍTULO: DE TEMPORADA
-=========================== */
   .season-title {
     font-size: 45px;
     font-weight: 600;
@@ -187,9 +143,6 @@
     font-family: var(--text-title, sans-serif);
   }
 
-  /* ===========================
-   CATEGORÍAS
-=========================== */
   .category-individual,
   .category-cake,
   .category-combinations,
@@ -200,9 +153,6 @@
     text-align: center;
   }
 
-  /* ===========================
-   IMÁGENES CIRCULARES
-=========================== */
   .individual-image,
   .cake-image,
   .combinations-image,
@@ -215,9 +165,6 @@
     margin-bottom: 10px;
   }
 
-  /* ===========================
-   TEXTOS DE CATEGORÍAS
-=========================== */
   .individual-text,
   .cake-text,
   .combinations-text,
@@ -233,7 +180,7 @@
     display: flex;
     justify-content: center;
     gap: 50px;
-    flex-wrap: wrap; /* para mantener responsividad si la pantalla es estrecha */
+    flex-wrap: wrap;
   }
 }
 

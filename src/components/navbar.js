@@ -1,4 +1,3 @@
-//Search
 async function getAllProducts() {
   const API_URL = "https://api-bakery-production.up.railway.app";
   try {
@@ -11,7 +10,6 @@ async function getAllProducts() {
   }
 }
 
-//Cards
 function renderizarProductos(productos, contenedor) {
   contenedor.innerHTML = "";
 
@@ -57,10 +55,8 @@ import { goTo } from "../router";
 import { updateNavBarProfile } from "../views/profile";
 
 export function renderNavbar() {
-  //Div HTML
   const navbarContainer = document.getElementById("container-navbar");
 
-  //Div UNO
   const navbarContainerA = document.createElement("div");
   navbarContainerA.className = "first-navbar-container";
   navbarContainer.appendChild(navbarContainerA);
@@ -127,7 +123,6 @@ export function renderNavbar() {
   navbarContainerB.className = "second-navbar-container";
   navbarContainer.appendChild(navbarContainerB);
 
-  //Logo
   const logoDiv = document.createElement("div");
   logoDiv.className = "logo-div";
   navbarContainerB.appendChild(logoDiv);
@@ -143,7 +138,6 @@ export function renderNavbar() {
     goTo("/home");
   });
 
-  //Search div
   const searchDiv = document.createElement("div");
   searchDiv.className = "search-div";
   navbarContainerB.appendChild(searchDiv);
@@ -196,7 +190,6 @@ export function renderNavbar() {
   categoriesIcon.appendChild(svgElement);
   searchDiv.appendChild(categoriesIcon);
 
-  //Search
   const searchNavbar = document.createElement("input");
   searchNavbar.className = "search-box-navbar";
   searchNavbar.type = "search";
@@ -215,13 +208,11 @@ export function renderNavbar() {
       return;
     }
 
-
     const appShowHome = document.getElementById("app");
     appShowHome.innerHTML = "";
     const appContainer = document.createElement("div");
     appContainer.className = "search-div-style";
     appShowHome.appendChild(appContainer);
-
 
     if (!appContainer) {
       console.warn(" No se encontró el contenedor #app");
@@ -230,7 +221,6 @@ export function renderNavbar() {
     }
 
     const productos = await getAllProducts();
-    console.log(" Productos cargados:", productos);
 
     const productosFiltrados = productos.filter((producto) => {
       const nombre = String(producto.nombre || "").toLowerCase();
@@ -255,7 +245,6 @@ export function renderNavbar() {
     renderizarProductos(productosFiltrados, appContainer);
   });
 
-  //Usuario
   const logCartDivNavbar = document.createElement("div");
   logCartDivNavbar.className = "login-div-navbar";
   navbarContainerB.appendChild(logCartDivNavbar);
@@ -268,7 +257,7 @@ export function renderNavbar() {
     const currentUser = JSON.parse(localStorage.getItem("current-user"));
 
     if (!currentUser) {
-      userLogin(); // abre el modal de login
+      userLogin();
     } else {
       renderForm(
         {
@@ -290,7 +279,6 @@ export function renderNavbar() {
   loginNavbarLink.appendChild(loginIconNavbar);
   updateNavBarProfile();
 
-  //Shopping Cart
   const cartNavbarLink = document.createElement("a");
   cartNavbarLink.href = "/shoppingCart";
   logCartDivNavbar.appendChild(cartNavbarLink);
@@ -331,7 +319,6 @@ export function renderNavbar() {
   cartIconNavbar.appendChild(cartCounter);
   updateCartCounter();
 
-  //Div tres
   const navbarContainerC = document.createElement("div");
   navbarContainerC.className = "third-navbar-container";
   navbarContainer.appendChild(navbarContainerC);
@@ -366,7 +353,6 @@ export function renderNavbar() {
   contactNavbar.textContent = "Contacto";
   navbarContainerC.appendChild(contactNavbar);
 
-  /////////MENÚ HAMBURGUESA////////////
   const burgerButton = document.createElement("button");
   burgerButton.className = "burger-button";
   burgerButton.setAttribute("aria-label", "Abrir menú");
@@ -382,7 +368,6 @@ export function renderNavbar() {
 
   navbarContainerB.appendChild(burgerButton);
 
-  //mostrar/ocultar el tercer div
   burgerButton.addEventListener("click", () => {
     navbarContainerC.classList.toggle("visible");
   });

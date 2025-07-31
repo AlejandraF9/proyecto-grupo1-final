@@ -1,13 +1,8 @@
-/*/////////////////////
-// MOBILE          ///
-///////////////////*/
 @media screen and (max-width: 760px) {
-/* Estilos generales */
 body {
     font-family: var(--text-font);
 }
 
-/* Sección principal del producto */
 .product-section-detail {
   display: flex;
   flex-wrap: nowrap;
@@ -21,7 +16,6 @@ body {
   margin-bottom: 2rem;
 }
 
-/* Imagen del producto */
 .product-section-detail img {
   width: 100%;
   height: 17.5rem;
@@ -29,27 +23,23 @@ body {
   position: relative;
 }
 
-/* Contenedor de detalles */
 .product-details-container {
   flex: 1;
   min-width: 2rem;
 }
 
-/* Título del producto */
 .product-details-container h2 {
   margin-top: 0;
   font-size: 1.8rem;
   font-family: var(--text-title);
 }
 
-/* Precio y categoría */
 .product-details-container p {
   margin: 0.5rem 0;
   font-size: 1rem;
   font-family: var(--text-font);
 }
 
-/* Selector de cantidad */
 .quantity-selector {
   display: inline-flex;
   align-items: center;
@@ -78,7 +68,6 @@ body {
   font-family: var(--text-font);
 }
 
-/* Botones de tamaño */
 .size-buttons {
   display: flex;
   gap: 0.5rem;
@@ -100,7 +89,6 @@ body {
   font-weight: bold;
 }
 
-/* Contenedor de fecha */
 .date-container {
   margin: 1rem 0;
 }
@@ -132,7 +120,6 @@ body {
   margin-bottom: 0.5rem;
 }
 
-/* Botón agregar al carrito */
 .btn-agregar {
   margin-top: 0.5rem;
   background-color: var(--pink);
@@ -143,7 +130,6 @@ body {
   cursor: pointer;
 }
 
-/* Información adicional del pedido */
 .product-details-container > div:last-child {
   margin-top: 1.5rem;
   font-size: 0.95rem;
@@ -152,15 +138,11 @@ body {
 
 }
 
-/*/////////////////////
-// TABLET          ///
-///////////////////*/
 @media screen and (min-width: 761px) and (max-width: 1028px) {
 body {
     font-family: var(--text-font);
 }
 
-/* Sección principal del producto */
 .product-section-detail {
   display: flex;
   flex-wrap: wrap;
@@ -175,34 +157,29 @@ body {
   margin-bottom: 2rem;
 }
 
-/* Imagen del producto */
 .product-section-detail img {
   width: 17.5rem;
   height: 41rem;
   object-fit: cover;
 }
 
-/* Contenedor de detalles */
 .product-details-container {
   flex: 1;
   min-width: 2rem;
 }
 
-/* Título del producto */
 .product-details-container h2 {
   margin-top: 0;
   font-size: 1.8rem;
   font-family: var(--text-title);
 }
 
-/* Precio y categoría */
 .product-details-container p {
   margin: 0.5rem 0;
   font-size: 1rem;
   font-family: var(--text-font);
 }
 
-/* Selector de cantidad */
 .quantity-selector {
   display: inline-flex;
   align-items: center;
@@ -221,7 +198,6 @@ body {
   background-color: var(--blue-color);
   border: none;
   font-family: var(--text-font);
-  
 }
 
 .quantity-selector span {
@@ -231,7 +207,6 @@ body {
   font-family: var(--text-font);
 }
 
-/* Botones de tamaño */
 .size-buttons {
   display: flex;
   gap: 0.5rem;
@@ -253,7 +228,6 @@ body {
   font-weight: bold;
 }
 
-/* Contenedor de fecha */
 .date-container {
   margin: 1rem 0;
 }
@@ -285,7 +259,6 @@ body {
   margin-bottom: 0.5rem;
 }
 
-/* Botón agregar al carrito */
 .btn-agregar {
   margin-top: 0.5rem;
   background-color: var(--pink);
@@ -296,7 +269,6 @@ body {
   cursor: pointer;
 }
 
-/* Información adicional del pedido */
 .product-details-container > div:last-child {
   margin-top: 1.5rem;
   font-size: 0.95rem;
@@ -304,15 +276,11 @@ body {
 }
 }
 
-/*/////////////////////
-// MONITOR         ///
-///////////////////*/
 @media screen and (min-width: 1029px) {
 body {
     font-family: var(--text-font);
 }
 
-/* Sección principal del producto */
 .product-section-detail {
   display: flex;
   flex-wrap: wrap;
@@ -327,34 +295,29 @@ body {
   margin-bottom: 2rem;
 }
 
-/* Imagen del producto */
 .product-section-detail img {
   width: 25rem;
   height: 41rem;
   object-fit: cover;
 }
 
-/* Contenedor de detalles */
 .product-details-container {
   flex: 1;
   min-width: 2rem;
 }
 
-/* Título del producto */
 .product-details-container h2 {
   margin-top: 0;
   font-size: 1.8rem;
   font-family: var(--text-title);
 }
 
-/* Precio y categoría */
 .product-details-container p {
   margin: 0.5rem 0;
   font-size: 1rem;
   font-family: var(--text-font);
 }
 
-/* Selector de cantidad */
 .quantity-selector {
   display: inline-flex;
   align-items: center;
@@ -383,7 +346,6 @@ body {
   font-family: var(--text-font);
 }
 
-/* Botones de tamaño */
 .size-buttons {
   display: flex;
   gap: 0.5rem;
@@ -405,7 +367,6 @@ body {
   font-weight: bold;
 }
 
-/* Contenedor de fecha */
 .date-container {
   margin: 1rem 0;
 }
@@ -437,7 +398,6 @@ body {
   margin-bottom: 0.5rem;
 }
 
-/* Botón agregar al carrito */
 .btn-agregar {
   margin-top: 0.5rem;
   background-color: var(--pink);
@@ -448,7 +408,6 @@ body {
   cursor: pointer;
 }
 
-/* Información adicional del pedido */
 .product-details-container > div:last-child {
   margin-top: 1.5rem;
   font-size: 0.95rem;

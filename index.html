@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
     <link
       rel="icon"
       type="image/png"
@@ -46,7 +45,6 @@
     <main>
       <div id="app"></div>
       <div id="newsl"></div>
-      <!--<div id="contactContainer"></div>-->
     </main>
 
     <footer>
@@ -54,15 +52,10 @@
     </footer>
 
     <script type="module" src="/src/main.js" defer></script>
-    <!--ahora viene el script de la librería emailjs IMPORTANTE. TODAS LAS PÁGINAS O MÓDULOS EN LOS QUE ESTÉ LA NEWSLETTER QUE TIENE EMAIL JS DEBEN COLOCARSE DESPUÉS PARA QUE LA LIBRERÍA SE CARGUE ANTES-->
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <!--esto hay que cambiarlo porque ya no está en el formulario de la newsletter-->
     <script>
       emailjs.init("nZaP1NAVYfbs2Z14i");
     </script>
 
-    <!-- POR ESO CAMBIO LOS MÓDULOS DE LUGAR Y LOS PONGO DEBAJO DE LA LIBRERÍA DE EMAILJS CUANDO SEPAMOS DÓNDE VA A ESTAR LA NEWSLETTER ORDENAMOS ESTO. YO AHORA LA VOY A PONER EN EL HOME -->
-
-    <!-------------------------------------------------------------------->
   </body>
 </html>

@@ -41,7 +41,6 @@ export async function renderConfirmacionesEmail(content) {
         ? `${conf.orderId.total.toFixed(2)}€`
         : "—";
 
-      // Columna de botones (Reintentar / Eliminar)
       const contenedorAcciones = document.createElement("div");
       contenedorAcciones.classList.add("acciones-confirmacion");
 

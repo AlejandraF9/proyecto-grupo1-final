@@ -1,9 +1,4 @@
-/*/////////////////////
-// MOBILE          ///
-///////////////////*/
 @media screen and (orientation: portrait) and (max-width: 760px) {
-  
-  /* Contenedor general */
   .footer-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -16,13 +11,11 @@
     font-family: var(--text-font);
   }
 
-  /* Columnas dentro del footer */
   .footer-div-all {
     flex: 1 1 15rem;
     margin: 1rem;
   }
 
-  /* Encabezados */
   .footer-header {
     font-size: 1rem;
     font-weight: bold;
@@ -30,13 +23,11 @@
     color: var(--white);
   }
 
-  /* Logo */
   .footer-logo svg {
     width: 8.5rem;
     height: auto;
   }
 
-  /* Enlaces */
   .footer-link,
   .footer-text {
     display: block;
@@ -52,7 +43,6 @@
     color: var(--pink);
   }
 
-  /* RRSS */
   .rrss-footer-div {
     display: flex;
     gap: 1rem;
@@ -60,7 +50,6 @@
     margin-bottom: 1rem;
   }
 
-  /* Íconos RRSS */
   .footer-rrss {
     width: 1.3rem;
     height: 1.3rem;
@@ -78,7 +67,6 @@
     fill: var(--pink);
   }
 
-  /* Copyright */
   .copyright-footer {
     width: 100%;
     text-align: center;
@@ -97,11 +85,7 @@
 
 }
 
-/*/////////////////////
-// TABLET          ///
-///////////////////*/
 @media screen and (min-width: 761px) and (max-width: 1028px) {
-    /* Contenedor general */
   .footer-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -114,13 +98,11 @@
     font-family: var(--text-font);
   }
 
-  /* Columnas dentro del footer */
   .footer-div-all {
     flex: 1 1 15rem;
     margin: 1rem;
   }
 
-  /* Encabezados */
   .footer-header {
     font-size: 1.3rem;
     font-weight: bold;
@@ -128,13 +110,11 @@
     color: var(--white);
   }
 
-  /* Logo */
   .footer-logo svg {
     width: 12.5rem;
     height: auto;
   }
 
-  /* Enlaces */
   .footer-link,
   .footer-text {
     display: block;
@@ -151,7 +131,6 @@
     color: var(--pink);
   }
 
-  /* RRSS */
   .rrss-footer-div {
     display: flex;
     gap: 1rem;
@@ -159,7 +138,6 @@
     margin-bottom: 1rem;
   }
 
-  /* Íconos RRSS */
   .footer-rrss {
     width: 1.8rem;
     height: 1.8rem;
@@ -177,7 +155,6 @@
     fill: var(--pink);
   }
 
-  /* Copyright */
   .copyright-footer {
     width: 100%;
     text-align: center;
@@ -196,11 +173,7 @@
 
 }
 
-/*/////////////////////
-// MONITOR         ///
-///////////////////*/
 @media screen and (min-width: 1029px) {
-    /* Contenedor general */
   .footer-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -213,13 +186,11 @@
     font-family: var(--text-font);
   }
 
-  /* Columnas dentro del footer */
   .footer-div-all {
     flex: 1 1 15rem;
     margin: 1rem;
   }
 
-  /* Encabezados */
   .footer-header {
     font-size: 1rem;
     font-weight: bold;
@@ -227,13 +198,11 @@
     color: var(--white);
   }
 
-  /* Logo */
   .footer-logo svg {
     max-width: 12.5rem;
     height: auto;
   }
 
-  /* Enlaces */
   .footer-link,
   .footer-text {
     display: block;
@@ -242,7 +211,6 @@
     margin-bottom: 0.8rem;
     font-size: 1rem;
     cursor: pointer;
-    /*transition: color 0.3s ease;*/
   }
 
   .footer-link:hover,
@@ -250,7 +218,6 @@
     color: var(--pink);
   }
 
-  /* RRSS */
   .rrss-footer-div {
     display: flex;
     gap: 1rem;
@@ -258,7 +225,6 @@
     margin-bottom: 1rem;
   }
 
-  /* Íconos RRSS */
   .footer-rrss {
     width: 1.3rem;
     height: 1.3rem;
@@ -276,7 +242,6 @@
     fill: var(--pink);
   }
 
-  /* Copyright */
   .copyright-footer {
     width: 100%;
     text-align: center;

@@ -117,7 +117,6 @@ function renderizarProductos(productos, contenedor) {
 
 export default {
   init: async () => {
-    console.log("Shop ejecutando");
     await renderShop({ clean: true });
   },
 };

@@ -86,7 +86,6 @@ export async function procesarPedido(cartItems, total, discountValue) {
     currentUser ? currentUser._id : null
   );
 
-  console.log("Productos del carrito:");
   cartItems.forEach((item) => console.log(item.nombre, item.url));
   console.log("Pedido a enviar:", order);
 
@@ -99,7 +98,7 @@ export async function procesarPedido(cartItems, total, discountValue) {
       localStorage.setItem("pendingEmail", email);
     }
     showToast({
-      text: "Tu pedido ha sido registrado correctamente 🎉",
+      text: "Tu pedido ha sido registrado correctamente",
       type: "success",
     });
     return true;

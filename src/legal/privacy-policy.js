@@ -1,8 +1,6 @@
 export function init() {
- 
-
   const privacyContainer = document.getElementById("app");
-  privacyContainer.innerHTML = ""; // para que el texto no se acumule uno encima de otro
+  privacyContainer.innerHTML = "";
 
   const privacyTextDiv = document.createElement("div");
   privacyContainer.appendChild(privacyTextDiv);

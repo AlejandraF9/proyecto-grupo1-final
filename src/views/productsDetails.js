@@ -94,7 +94,7 @@ export async function productDetails() {
     const sizesOptions = ["Pequeña", "Mediana", "Grande"];
     sizesOptions.forEach((size) => {
       const sizesOptionsbutton = document.createElement("button");
-      sizesOptionsbutton.dataset.size = size; //Se sabrá la opción que escogió el usuario
+      sizesOptionsbutton.dataset.size = size;
       sizesOptionsbutton.textContent = size;
       sizeOptionButtons.appendChild(sizesOptionsbutton);
     });
@@ -314,12 +314,6 @@ export async function productDetails() {
 
     let shoppingCart = JSON.parse(localStorage.getItem("cartItems")) || [];
 
-    console.log("Buscando coincidencia con:", {
-  nombre: product.nombre,
-  date: selectedDate,
-  size: selectedSize,
-});
-console.log("Carrito actual:", shoppingCart);
     const existingIndex = shoppingCart.findIndex(item => item.nombre === product.nombre && item.date === selectedDate && ((item.size || null) === (selectedSize || null)));
 
     if (existingIndex !== -1) {
@@ -420,7 +414,6 @@ console.log("Carrito actual:", shoppingCart);
 
 export default {
   init() {
-    console.log("Product Details init executed");
     productDetails();
   },
 };

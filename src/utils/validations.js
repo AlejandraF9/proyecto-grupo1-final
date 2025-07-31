@@ -1,6 +1,5 @@
 import { showToast } from "../utils/toastify";
 
-//validaciones de newsletter
 export function validationName(name, inputElement){
 if (name.length <=2) {
     showToast({text: "Nombre no válido. Requiere más de 2 caracteres.", type: "error"});
@@ -26,7 +25,6 @@ export function validationChecked(checkbox){
     }return true;
 }
 
-//Validaciones signup y profile
 export function infoValidations({name, email, password, repeatPassword}) {
     
     const regexName = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,}$/;
@@ -68,8 +66,6 @@ export function infoValidations({name, email, password, repeatPassword}) {
     return true;
 }
     
-    
-//Validaciones login
 export function loginValidations(loginEmailInput, loginPasswordInput) {
     if (!loginEmailInput) {
         showToast({text: "Por favor, introduce tu correo electrónico.", type: "error"});
@@ -90,8 +86,6 @@ export function loginValidations(loginEmailInput, loginPasswordInput) {
     return true;
 }
 
-    
-//validación del formulario de contacto
 export function validacteContactform(nameContactFormFooter, emailContactFormFooter, phoneContactFormFooter, messageContactFormFooter, checkedContactFormFooter){
 
     let formOK = true;
@@ -107,7 +101,7 @@ export function validacteContactform(nameContactFormFooter, emailContactFormFoot
     }
 
     if (phoneContactFormFooter && phoneContactFormFooter !== "") {
-        const phoneRegex = /^[0-9]{9}$/; // Que sea un número de 9 dígitos
+        const phoneRegex = /^[0-9]{9}$/;
         if (!phoneRegex.test(phoneContactFormFooter)) {
             showToast({text: "Por favor, introduce un número de teléfono válido (9 dígitos).", type: "error"});
             formOK = false;
@@ -126,7 +120,6 @@ export function validacteContactform(nameContactFormFooter, emailContactFormFoot
     return formOK;
 }
 
-//Validaciones pasarela de pago
 export function paymentValidations({
   name,
   cardNumber,

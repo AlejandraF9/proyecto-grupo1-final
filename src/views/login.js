@@ -136,7 +136,6 @@ export function userLogin() {
 
 export default {
   init() {
-    console.log("Login init ejecutado");
     userLogin();
   },
 };

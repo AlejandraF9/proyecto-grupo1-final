@@ -6,7 +6,6 @@ export function renderFooter(){
 const footerContainer = document.getElementById("footer")
 footerContainer.className="footer-container";;
 
-//Div uno
 const footerDivOneLogo = document.createElement("div");
 footerDivOneLogo.className ="footer-logo footer-div-all";
 footerDivOneLogo.innerHTML = 
@@ -29,7 +28,6 @@ footerDivOneLogo.innerHTML =
 `
 footerContainer.appendChild(footerDivOneLogo);
 
-//Div dos
 const footerDivTwo = document.createElement ("div");
 footerDivTwo.className = "footer-div-all";
 footerContainer.appendChild(footerDivTwo);
@@ -43,7 +41,6 @@ const rrssFooterDiv = document.createElement("div");
 rrssFooterDiv.className = "rrss-footer-div";
 footerDivTwo.appendChild(rrssFooterDiv);
 
-//Facebook
 const facebookLinkFooter = document.createElement("a");
 facebookLinkFooter.href = "#"; 
 facebookLinkFooter.rel = "noopener noreferrer";
@@ -61,8 +58,6 @@ facebookFooter.innerHTML =`<svg width="30" xmlns="http://www.w3.org/2000/svg" he
 facebookFooter.alt = "logo de facebook Dummie bakery";
 facebookLinkFooter.appendChild(facebookFooter);
 
-
-//Instagram
 const instagramLinkFooter = document.createElement("a");
 instagramLinkFooter.href = "#"; 
 instagramLinkFooter.rel = "noopener noreferrer";
@@ -89,7 +84,6 @@ instagramFooter.innerHTML=
 instagramFooter.alt = "logo de instagram Dummie bakery";
 instagramLinkFooter.appendChild(instagramFooter);
 
-//Bluesky
 const blueskyLinkFooter = document.createElement("a");
 blueskyLinkFooter.href = "#"; 
 blueskyLinkFooter.rel = "noopener noreferrer";
@@ -116,8 +110,6 @@ blueskyFooter.innerHTML=
 blueskyFooter.alt = "logo de bluesky Dummie bakery";
 blueskyLinkFooter.appendChild(blueskyFooter);
 
-
-//Aviso legal
 const legalNoticeFooter = document.createElement("a");
 legalNoticeFooter.className= "footer-text";
 legalNoticeFooter.textContent = "Aviso legal";
@@ -127,7 +119,7 @@ legalNoticeFooter.addEventListener("click", (e) => {
   goTo("/legal-notice");
 });
 footerDivTwo.append(legalNoticeFooter);
-//política de cookies
+
 const cookiesFooter = document.createElement("a");
 cookiesFooter.className= "footer-text";
 cookiesFooter.textContent = "Política de cookies";
@@ -138,8 +130,6 @@ cookiesFooter.addEventListener("click", (e) => {
 });
 footerDivTwo.append(cookiesFooter);
 
-
-//Política de privacidad
 const privacyPolicy = document.createElement("a");
 privacyPolicy.className= "footer-text";
 privacyPolicy.textContent = "Política de privacidad";
@@ -150,8 +140,6 @@ privacyPolicy.addEventListener("click", (e) => {
 });
 footerDivTwo.append(privacyPolicy);
 
-
-//Condiciones generales de venta
 const salesConditionsFooter = document.createElement("a");
 salesConditionsFooter.className= "footer-text";
 salesConditionsFooter.textContent = "Condiciones generales de venta";
@@ -167,9 +155,6 @@ salesConditionsFooter.addEventListener("click", (e) => {
 });
 footerDivTwo.append(salesConditionsFooter);
 
-
-
-//Div tres
 const footerDivThree = document.createElement ("div");
 footerDivThree.className = "footer-div-all";
 footerContainer.appendChild(footerDivThree);
@@ -205,9 +190,6 @@ allergens.textContent= "Alérgenos";
 allergens.href = "#";
 footerDivThree.append(allergens);
 
-
-
-//Div cuatro
 const footerDivFour = document.createElement ("div");
 footerDivFour.className = "footer-div-all"
 footerContainer.appendChild(footerDivFour);
@@ -246,9 +228,6 @@ onlineShop.className = "footer-link";
 onlineShop.textContent= "Tienda online";
 footerDivFour.appendChild(onlineShop);
 
-
-
-//Div cinco
 const footerDivFive = document.createElement ("div");
 footerDivFive.className = "footer-full-row";
 footerContainer.appendChild(footerDivFive);

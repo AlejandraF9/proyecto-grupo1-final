@@ -1,10 +1,5 @@
-/*/////////////////////
-// MOBILE          ///
-///////////////////*/
-
 @media screen and (orientation: portrait) and (max-width: 760px) {
 
-/*Carrito*/
 .cart-section {
   width: 95%;
   margin: 2rem auto;
@@ -22,7 +17,6 @@
   font-family: var(--text-title);
 }
 
-/* Botón "VACIAR CARRITO" */
 .clear-cart-button {
   background-color: var(--blue-color);
   color: #fff;
@@ -44,14 +38,12 @@
   background-color: var(--gray-color);
 }
 
-/* Lista de productos */
 .cart-list {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-/* Producto */
 .item-card {
   display: flex;
   gap: 1rem;
@@ -94,7 +86,6 @@
     font-weight: bold;
     }
 
-    /* Botón cantidad */
     .quantity-container {
     display: flex;
     align-items: center;
@@ -127,7 +118,6 @@
     text-align: center;
     }
 
-    /* Botón Eliminar */
     .remove-button {
     position: static;
     margin-top: 0.5rem;
@@ -141,7 +131,6 @@
     }
 }
 
-/* Carrito VACÍO */
 .empty-cart {
   text-align: center;
   font-size: 1.2rem;
@@ -149,7 +138,6 @@
   margin-top: 2rem;
 }
 
-/* Código descuento */
 .discount-container {
   margin-top: 2rem;
   display: flex;
@@ -186,7 +174,6 @@
   margin-top: 1rem;
 }
 
-/* Total y checkout */
 .total-price {
   font-size: 1.5rem;
   font-weight: bold;
@@ -208,12 +195,7 @@
   width: 100%;
 }
 
-/*/////////////////////
-// TABLET          ///
-///////////////////*/
-
 @media screen and (min-width: 731px) and (max-width: 1028px) {
-    /*Carrito*/
     .cart-section {
     width: 90%;
     margin: 2rem auto;
@@ -231,7 +213,6 @@
     font-family: var(--text-title);
     }
 
-    /* Botón "VACIAR CARRITO" */
     .clear-cart-button {
     background-color: var(--blue-color);
     color: var(--color);
@@ -253,14 +234,12 @@
     background-color: var(--gray-color);
     }
 
-    /* Lista de productos */
     .cart-list {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
     }
 
-    /* Producto */
     .item-card {
     display: flex;
     gap: 1rem;
@@ -300,7 +279,6 @@
     font-weight: bold;
     }
 
-    /* Botón cantidad */
     .quantity-container {
     display: flex;
     align-items: center;
@@ -333,7 +311,6 @@
     text-align: center;
     }
 
-    /* Botón Eliminar */
     .remove-button {
     position: absolute;
     right: 0;
@@ -349,7 +326,6 @@
     color: var(--blue-color);
     }
 
-    /* Carrito VACÍO */
     .empty-cart {
     text-align: center;
     font-size: 1.2rem;
@@ -357,7 +333,6 @@
     margin-top: 2rem;
     }
 
-    /* Código descuento */
     .discount-container {
     margin-top: 2rem;
     display: flex;
@@ -393,7 +368,6 @@
     margin-top: 1rem;
     }
 
-    /* Total y checkout */
     .total-price {
     text-align: right;
     font-size: 1.5rem;
@@ -423,12 +397,7 @@
 
 }
 
-/*/////////////////////
-// MONITOR         ///
-///////////////////*/
-
 @media screen and (min-width: 1029px) {
-/*Carrito*/
     .cart-section {
     width: 85%;
     margin: 2rem auto;
@@ -446,7 +415,6 @@
     font-family: var(--text-title);
     }
 
-    /* Botón "VACIAR CARRITO" */
     .clear-cart-button {
     background-color: var(--blue-color);
     color: var(--color);
@@ -468,14 +436,12 @@
     background-color: var(--gray-color);
     }
 
-    /* Lista de productos */
     .cart-list {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
     }
 
-    /* Producto */
     .item-card {
     display: flex;
     gap: 1rem;
@@ -515,7 +481,6 @@
     font-weight: bold;
     }
 
-    /* Botón cantidad */
     .quantity-container {
     display: flex;
     align-items: center;
@@ -548,7 +513,6 @@
     text-align: center;
     }
 
-    /* Botón Eliminar */
     .remove-button {
     position: absolute;
     right: 0;
@@ -564,7 +528,6 @@
     color: var(--blue-color);
     }
 
-    /* Carrito VACÍO */
     .empty-cart {
     text-align: center;
     font-size: 1.2rem;
@@ -572,7 +535,6 @@
     margin-top: 2rem;
     }
 
-    /* Código descuento */
     .discount-container {
     margin-top: 2rem;
     display: flex;
@@ -608,7 +570,6 @@
     margin-top: 1rem;
     }
 
-    /* Total y checkout */
     .total-price {
     text-align: right;
     font-size: 1.5rem;

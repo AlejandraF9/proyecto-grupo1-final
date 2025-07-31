@@ -1,6 +1,3 @@
-/*/////////////////////
-// MOBILE          ///
-///////////////////*/
  @media screen and (max-width: 730px) {
 
   #newsl {
@@ -75,10 +72,6 @@
     background-color: var(--pink);
   }
 }  
-
-/*/////////////////////
-// MONITOR         ///
-///////////////////*/
 
 @media screen and (min-width: 731px) {
   #newsl {

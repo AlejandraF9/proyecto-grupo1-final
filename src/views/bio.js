@@ -89,12 +89,10 @@ export function renderBio() {
 
     buttonElement.appendChild(buttonText);
 
-    //Dirección a la que lleva el botón (carrito)
     buttonElement.addEventListener("click", () => {
       goTo("/shop");
     });
 
-    // Agrupar los textos
     const texts = [title, text];
     texts.forEach((text) => container.appendChild(text));
 
@@ -114,7 +112,6 @@ export function renderBio() {
     const quienesSomos = createSectionQuienesSomos();
     const queTenemos = createSectionQueTenemos();
 
-    //Crear imagen
     const image = document.createElement("div");
     image.className = "bio-img";
 
@@ -147,7 +144,6 @@ export default {
   init() {
     const app = document.getElementById("app");
     app.innerHTML = "";
-    console.log("Bio init ejecutado");
     const bioContent = renderBio();
     app.appendChild(bioContent);
   },
