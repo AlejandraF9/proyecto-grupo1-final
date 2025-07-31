@@ -3,7 +3,6 @@
 ///////////////////*/
 
 @media screen and (orientation: portrait) and (max-width: 730px) {
-  
   /* Contenedor principal del formulario */
   .containerForm {
     width: 100%;
@@ -142,7 +141,6 @@
 ///////////////////*/
 
 @media screen and (min-width: 731px) {
-
   /* Contenedor principal del formulario */
   .containerForm {
     width: 100%;
@@ -274,4 +272,45 @@
     background-color: var(--blue-color);
     color: var(--blue-color);
   }
+}
+
+/* 🔔 Estilo sección de notificaciones */
+
+.notifications-section {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.notifications-section h3 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--color);
+  text-align: center;
+}
+
+.notifications-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.notification-item {
+  font-size: 0.85rem;
+  padding: 0.5rem;
+  border-bottom: 1px solid #eee;
+  color: #333;
+}
+
+.notification-item.unread {
+  background-color: #fffaf0;
+  font-weight: bold;
+}
+
+.notification-item:last-child {
+  border-bottom: none;
 }

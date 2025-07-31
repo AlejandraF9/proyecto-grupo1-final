@@ -390,6 +390,8 @@
     gap: 20px;
     position: relative;
     animation: fadeInScale 0.3s ease;
+    max-height: 90vh;
+    overflow-y: auto;
   }
 
   .modal-productos-form label {
@@ -1442,4 +1444,14 @@
 .admin-paginacion button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+}
+
+.input-file-visible {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  background-color: #fff;
+  cursor: pointer;
 }

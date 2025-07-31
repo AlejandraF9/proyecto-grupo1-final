@@ -9,6 +9,13 @@ export function openModal(contentNode) {
   const modal = document.createElement("div");
   modal.classList.add("modal-container");
 
+  // Botón de cerrar con la cruz
+  const closeButton = document.createElement("button");
+  closeButton.classList.add("modal-close-button");
+  closeButton.innerHTML = "&times;"; // el símbolo ×
+  closeButton.addEventListener("click", closeModal);
+
+  modal.appendChild(closeButton);
   modal.appendChild(contentNode);
 
   overlay.addEventListener("click", (e) => {

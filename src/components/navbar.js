@@ -54,6 +54,7 @@ import { cartIcon } from "../assets/images/icons";
 import { renderForm } from "../views/profile";
 import { userLogin } from "../views/login";
 import { goTo } from "../router";
+import { updateNavBarProfile } from "../views/profile";
 
 export function renderNavbar() {
   //Div HTML
@@ -122,9 +123,6 @@ export function renderNavbar() {
 </svg>`;
   navbarContainerA.appendChild(blueskyLinkNavBar);
 
-
-
-  //Div dos
   const navbarContainerB = document.createElement("div");
   navbarContainerB.className = "second-navbar-container";
   navbarContainer.appendChild(navbarContainerB);
@@ -290,6 +288,7 @@ export function renderNavbar() {
   loginIconNavbar.className = "login-icon-navbar";
   loginIconNavbar.innerHTML = userIcon;
   loginNavbarLink.appendChild(loginIconNavbar);
+  updateNavBarProfile();
 
   //Shopping Cart
   const cartNavbarLink = document.createElement("a");
