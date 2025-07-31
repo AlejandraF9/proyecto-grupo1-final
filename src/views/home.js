@@ -34,11 +34,5 @@ export default {
 
     setTimeout(renderNewsletterForm, 2000);
 
-    /*if (!localStorage.getItem("newsletterShown")) {
-      setTimeout(() => {
-        renderNewsletterForm();
-        localStorage.setItem("newsletterShown", "true");
-      }, 8000);
-    }*/
   },
 };

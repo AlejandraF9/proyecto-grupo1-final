@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Botones del navegador (atrás / adelante). El enrutado cambia la url pero no la vista, por eso usamos el popstate (ahora lee URL y carga vista correspondiente)
+// Botones del navegador (atrás / adelante). El enrutado cambia la url pero no la vista, por eso usamos el popstate
 window.addEventListener("popstate", () => {
   loadView(window.location.pathname);
 });
