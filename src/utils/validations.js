@@ -27,7 +27,6 @@ export function validationChecked(checkbox){
 }
 
 //Validaciones signup y profile
-
 export function infoValidations({name, email, password, repeatPassword}) {
     
     const regexName = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,}$/;
@@ -108,7 +107,7 @@ export function validacteContactform(nameContactFormFooter, emailContactFormFoot
     }
 
     if (phoneContactFormFooter && phoneContactFormFooter !== "") {
-        const phoneRegex = /^[0-9]{9}$/; // Validamos que sea un número de 9 dígitos
+        const phoneRegex = /^[0-9]{9}$/; // Que sea un número de 9 dígitos
         if (!phoneRegex.test(phoneContactFormFooter)) {
             showToast({text: "Por favor, introduce un número de teléfono válido (9 dígitos).", type: "error"});
             formOK = false;
@@ -128,7 +127,6 @@ export function validacteContactform(nameContactFormFooter, emailContactFormFoot
 }
 
 //Validaciones pasarela de pago
-
 export function paymentValidations({
   name,
   cardNumber,

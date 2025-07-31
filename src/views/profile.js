@@ -32,7 +32,6 @@ export async function renderForm(
   const avatarOptions = createAvatarOptions(imgPreview);
   form.appendChild(avatarOptions);
 
-  // 🔔 Sección de notificaciones
   const notificationsSection = document.createElement("div");
   notificationsSection.classList.add("notifications-section");
 
@@ -46,7 +45,6 @@ export async function renderForm(
 
   form.appendChild(notificationsSection);
 
-  // 🔄 Cargar notificaciones desde API
   if (currentUser?._id) {
     try {
       const res = await fetch(

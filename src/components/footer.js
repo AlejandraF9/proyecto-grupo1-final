@@ -5,8 +5,8 @@ export function renderFooter(){
 
 const footerContainer = document.getElementById("footer")
 footerContainer.className="footer-container";;
-//div uno
 
+//Div uno
 const footerDivOneLogo = document.createElement("div");
 footerDivOneLogo.className ="footer-logo footer-div-all";
 footerDivOneLogo.innerHTML = 
@@ -29,7 +29,7 @@ footerDivOneLogo.innerHTML =
 `
 footerContainer.appendChild(footerDivOneLogo);
 
-//div dos
+//Div dos
 const footerDivTwo = document.createElement ("div");
 footerDivTwo.className = "footer-div-all";
 footerContainer.appendChild(footerDivTwo);
@@ -43,7 +43,7 @@ const rrssFooterDiv = document.createElement("div");
 rrssFooterDiv.className = "rrss-footer-div";
 footerDivTwo.appendChild(rrssFooterDiv);
 
-//facebook
+//Facebook
 const facebookLinkFooter = document.createElement("a");
 facebookLinkFooter.href = "#"; 
 facebookLinkFooter.rel = "noopener noreferrer";
@@ -89,7 +89,7 @@ instagramFooter.innerHTML=
 instagramFooter.alt = "logo de instagram Dummie bakery";
 instagramLinkFooter.appendChild(instagramFooter);
 
-//bluesky
+//Bluesky
 const blueskyLinkFooter = document.createElement("a");
 blueskyLinkFooter.href = "#"; 
 blueskyLinkFooter.rel = "noopener noreferrer";
@@ -117,7 +117,7 @@ blueskyFooter.alt = "logo de bluesky Dummie bakery";
 blueskyLinkFooter.appendChild(blueskyFooter);
 
 
-//aviso legal
+//Aviso legal
 const legalNoticeFooter = document.createElement("a");
 legalNoticeFooter.className= "footer-text";
 legalNoticeFooter.textContent = "Aviso legal";
@@ -137,7 +137,9 @@ cookiesFooter.addEventListener("click", (e) => {
   goTo("/cookie-policy");
 });
 footerDivTwo.append(cookiesFooter);
-//política de privacidad
+
+
+//Política de privacidad
 const privacyPolicy = document.createElement("a");
 privacyPolicy.className= "footer-text";
 privacyPolicy.textContent = "Política de privacidad";
@@ -147,7 +149,9 @@ privacyPolicy.addEventListener("click", (e) => {
   goTo("/privacy-policy");
 });
 footerDivTwo.append(privacyPolicy);
-//condiciones generales de venta
+
+
+//Condiciones generales de venta
 const salesConditionsFooter = document.createElement("a");
 salesConditionsFooter.className= "footer-text";
 salesConditionsFooter.textContent = "Condiciones generales de venta";
@@ -165,8 +169,7 @@ footerDivTwo.append(salesConditionsFooter);
 
 
 
-
-//div tres
+//Div tres
 const footerDivThree = document.createElement ("div");
 footerDivThree.className = "footer-div-all";
 footerContainer.appendChild(footerDivThree);
@@ -203,7 +206,8 @@ allergens.href = "#";
 footerDivThree.append(allergens);
 
 
-//div cuatro
+
+//Div cuatro
 const footerDivFour = document.createElement ("div");
 footerDivFour.className = "footer-div-all"
 footerContainer.appendChild(footerDivFour);
@@ -244,7 +248,7 @@ footerDivFour.appendChild(onlineShop);
 
 
 
-//div cinco
+//Div cinco
 const footerDivFive = document.createElement ("div");
 footerDivFive.className = "footer-full-row";
 footerContainer.appendChild(footerDivFive);

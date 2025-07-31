@@ -3,7 +3,6 @@ import { goTo } from "../router.js";
 export async function renderBlogHome(container) {
   container.innerHTML = "";
 
-  // CAROLINA - He añadido un contenedor para el título del blog para el CSS
   const titleContainer = document.createElement("div");
   titleContainer.classList.add("blog-title-container");
 
@@ -13,8 +12,6 @@ export async function renderBlogHome(container) {
 
   titleContainer.appendChild(title);
   container.appendChild(titleContainer);
-
-  //container.appendChild(title);
 
 
   try {
@@ -82,7 +79,6 @@ export function createCardBlog(imagen, titulo, texto, fecha) {
 export async function renderBlogView(container) {
   container.innerHTML = "";
 
-  //Contenedor del título añadido para el CSS
   const titleContainer = document.createElement("div");
   titleContainer.classList.add("blog-title-container");
 
@@ -98,7 +94,7 @@ export async function renderBlogView(container) {
       "https://api-bakery-production.up.railway.app/blog"
     );
     if (!res.ok) throw new Error("No se pudo cargar el blog");
-    const entradas = await res.json().then((r) => r.reverse()); // más recientes primero
+    const entradas = await res.json().then((r) => r.reverse()); 
 
     entradas.forEach((e) => {
       const card = createCardBlog(e.imagen, e.nombre, e.contenido, e.fecha);

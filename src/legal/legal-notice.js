@@ -1,5 +1,3 @@
-///tengo que crearla como una function porque no me deja enlazarla como se haría con un texto html
-
 export function init() {
   
 

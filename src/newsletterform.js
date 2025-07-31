@@ -14,8 +14,6 @@ const newsl = document.getElementById("newsl");
 export function renderNewsletterForm (){
    
 
-//creo el div en el que voy a meter el form. Este div que creo es el que anclo a "newsl"
-
 const newsletterDiv = document.createElement("div");
 newsletterDiv.className = "newsletter-div";
 newsl.appendChild(newsletterDiv);
@@ -51,8 +49,6 @@ newsletterFormEmail.name = "email";
 newsletterForm.appendChild(newsletterFormEmail);
 
 
-
-//el checkbox es mejor "envolverlo en un label"
 const newsletterCheckboxLabel = document.createElement("label");
 newsletterCheckboxLabel.className = "newsletter-checkbox-label";
 newsletterForm.appendChild(newsletterCheckboxLabel);
@@ -77,13 +73,9 @@ newsletterButton.textContent = "¡Quiero suscribirme!";
 newsletterForm.appendChild(newsletterButton);
 
 
-//creamos el evento en el botón
-
 newsletterForm.addEventListener('submit', async  (event)=> {
   event.preventDefault();
- 
 
-  //-------------------------------------------
   
 
   const inputs = event.target.querySelectorAll('input');

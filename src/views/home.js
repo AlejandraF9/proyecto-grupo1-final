@@ -32,13 +32,18 @@ export default {
     tienda.parentNode.insertBefore(blogSection, tienda.nextSibling);
     renderBlogHome(blogSection);
 
-    setTimeout(renderNewsletterForm, 2000);
+    //que la newsletter solo salga una vez
 
-    /*if (!localStorage.getItem("newsletterShown")) {
-      setTimeout(() => {
-        renderNewsletterForm();
-        localStorage.setItem("newsletterShown", "true");
-      }, 8000);
-    }*/
+    setTimeout(() => {
+  const alreadyShown = localStorage.getItem("newsletter-shown");
+
+  if (!alreadyShown) {
+    renderNewsletterForm();
+    localStorage.setItem("newsletter-shown", "true");
+  }
+}, 8000);
+
+    //setTimeout(renderNewsletterForm, 8000);
+
   },
 };
