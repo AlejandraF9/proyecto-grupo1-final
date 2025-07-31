@@ -1,3 +1,5 @@
+import productDetails from "../views/productsDetails";
+
 export function renderHero(container) {
   const heroSection = document.createElement("div");
   heroSection.classList.add("hero-section");
@@ -7,7 +9,7 @@ export function renderHero(container) {
 
   const promoText = document.createElement("h2");
   promoText.classList.add("hero-promo-text");
-  promoText.textContent = "¡PROMO #DummieRosquis!";
+  promoText.textContent = "¡NUEVO #DummieRosquis!";
   containerHero.appendChild(promoText);
 
   const esloganText = document.createElement("h1");
@@ -34,8 +36,21 @@ export function renderHero(container) {
   buttonText.classList.add("hero-button-text");
   buttonText.textContent = "SHOP NOW";
 
+  buttonBox.appendChild(buttonText);
+
+  const rosquis = {
+    nombre: "Rosquis Box",
+    precio: 10.0,
+    categoria: "Combinados",
+    url: "https://images.pexels.com/photos/4686958/pexels-photo-4686958.jpeg",
+  };
+
+  buttonBox.addEventListener("click", () => {
+    localStorage.setItem("selectedProduct", JSON.stringify(rosquis));
+    productDetails.init();
+  });
+
   buttonGroup.appendChild(buttonBox);
-  buttonGroup.appendChild(buttonText);
   buttonFrame.appendChild(buttonGroup);
   containerHero.appendChild(buttonFrame);
 
