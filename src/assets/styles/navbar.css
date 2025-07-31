@@ -1,9 +1,9 @@
 .burger-button {
     display: none; /*vamos a ocultar el botón por defecto*/
 }
-/* ==========================
-   NAVBAR MOBILE
-========================== */
+/*/////////////////////
+// MOBILE          ///
+///////////////////*/
 @media screen and (orientation: portrait) and (max-width: 760px) {
     body {
         font-family: var(--text-font);
@@ -30,13 +30,9 @@
     .second-navbar-container {
         display: flex;
         flex-direction: row;
-        /*flex-wrap: wrap;*/
         align-items: center;
         justify-content: space-around;
-        /*align-content: flex-end;*/
         padding: 0;
-        /*gap: 1rem;
-        flex: 1;*/
         height: 5.5rem;
         width: 90%;
     }  
@@ -45,12 +41,9 @@
     .burger-button {
         order: 1;
         display: block;
-        /*flex-shrink: 0;*/
         background: none;
         border: none;
         cursor: pointer;
-        /*padding: 0.5rem;*/
-        /*z-index: 1000;*/
         width: 2rem;
         height: 2rem;
         opacity: 0.2;
@@ -80,7 +73,6 @@
         display: flex;
         gap: 1rem;
         align-items: center;
-        /*flex-shrink: 0;*/
         padding-top: 0;
     }
 
@@ -164,13 +156,11 @@
     }
 
 
-/* ==========================
-   NAVBAR MONITOR-PEQUEÑO
-========================== */
+/*/////////////////////
+// TABLET          ///
+///////////////////*/
+
 @media screen and (min-width: 761px) and (max-width: 1028px) {
-    /*.burger-button {
-        display: none;
-    }*/
 
     #container-navbar {
         display: flex;
@@ -200,12 +190,10 @@
     /*LOGO + SEARCH + (LOGIN/CART) */
     .second-navbar-container {
         display: flex;
-        /*flex-direction: row;*/
         justify-content: space-between;
         align-items: center;
         width: 100%;
         height: 3%;
-        /*height: 25%;*/
         background-color: var(--gray-color);
     }
 
@@ -218,17 +206,14 @@
     .logo-img {
         height: 5rem;
         width: auto;
-        /*object-fit: contain;*/
     }
 
     .search-div {
         display: flex;
         width: 45%;
         height: 15%;
-        /*border: 1px solid black;*/
         justify-content: center;
         align-items: center;
-        /*flex: 2 1 30rem;*/
     }
   
     .categories-icon {
@@ -259,12 +244,6 @@
         align-items: center;
         gap: 25px;
     }
-
-    /*.login-div-navbar a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }*/
 
     .login-icon-navbar {
         width: 2.5rem;
@@ -343,13 +322,10 @@
     }
 }
 
-/* ==========================
-   NAVBAR MONITOR-GRANDE
-========================== */
+/*/////////////////////
+// MONITOR         ///
+///////////////////*/
 @media screen and (min-width: 1029px) {
-    /*.burger-button {
-        display: none;
-    }*/
 
     #container-navbar {
         display: flex;
@@ -379,12 +355,10 @@
     /*LOGO + SEARCH + (LOGIN/CART) */
     .second-navbar-container {
         display: flex;
-        /*flex-direction: row;*/
         justify-content: space-between;
         align-items: center;
         width: 100%;
         height: 3%;
-        /*height: 25%;*/
         background-color: var(--gray-color);
     }
 
@@ -397,7 +371,6 @@
     .logo-img {
         height: 5rem;
         width: auto;
-        /*object-fit: contain;*/
     }
 
     .search-div {
@@ -438,12 +411,6 @@
         align-items: center;
         gap: 25px;
     }
-
-    /*.login-div-navbar a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }*/
 
     .login-icon-navbar {
         width: 2.5rem;

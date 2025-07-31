@@ -41,14 +41,6 @@
     opacity: 0.8;
   }
 
-  /*.admin-logo-text {
-    font-size: 3rem;
-    font-weight: 700;
-    text-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
-    font-family: var(--text-title);
-    color: var(--color);
-  }*/
-
   .admin-logout-button {
     position: absolute;
     top: 1rem;
@@ -154,14 +146,6 @@
     opacity: 0.8;
   }
 
-  /*.admin-logo-text {
-    font-size: 3rem;
-    font-weight: 700;
-    text-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
-    font-family: var(--text-title);
-    color: var(--color);
-  }*/
-
   .admin-logout-button {
     position: absolute;
     top: 1rem;
@@ -221,7 +205,7 @@
 }
 
 /*////////////////
-// MONITOR      //
+// MONITOR     //
 //////////////*/
 
 @media screen and (min-width: 1029px) {
@@ -266,14 +250,6 @@
     top: 0.5rem;
     opacity: 0.8;
   }
-
-  /*.admin-logo-text {
-    font-size: 3rem;
-    font-weight: 700;
-    text-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
-    font-family: var(--text-title);
-    color: var(--color);
-  }*/
 
   .admin-logout-button {
     position: absolute;

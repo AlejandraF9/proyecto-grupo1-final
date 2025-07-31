@@ -120,9 +120,9 @@
 }
 
 
-/* ==========================
-   SECCIÓN DE BIO MONITOR-PEQUEÑO
-========================== */
+/*/////////////////////
+// TABLET          ///
+///////////////////*/
 @media screen and (min-width: 761px) and (max-width: 1028px) {
 
    /* Estilos generales */
@@ -246,9 +246,9 @@
    
 }
 
-/* ==========================
-   SECCIÓN DE BIO MONITOR-GRANDE
-========================== */
+/*/////////////////////
+// MONITOR         ///
+///////////////////*/
 @media screen and (min-width: 1029px) {
 
    /* Estilos generales */

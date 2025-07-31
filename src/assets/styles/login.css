@@ -1,6 +1,6 @@
-/*///////////
-// MOBILE //
-/////////*/
+/*/////////////////////
+// MOBILE          ///
+///////////////////*/
 
 @media screen and (orientation: portrait) and (max-width: 730px) {
 
@@ -61,7 +61,6 @@
     color: var(--color);
     border: none;
     font-size: 0.9rem;
-    /*cursor: pointer;*/
     transition: background-color 0.3s ease;
     }
 
@@ -90,13 +89,9 @@
 }
 
 
-
-
-
-/*////////////
-// MONITOR //
-//////////*/
-
+/*/////////////////////
+// MONITOR         ///
+///////////////////*/
 @media screen and (min-width: 731px) {
 
     /* Contenedor principal del login */
@@ -155,7 +150,6 @@
     color: var(--color);
     border: none;
     font-size: 1rem;
-    /*cursor: pointer;*/
     transition: background-color 0.3s ease;
     }
 

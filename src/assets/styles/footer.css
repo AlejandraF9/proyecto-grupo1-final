@@ -1,6 +1,6 @@
-  /*///////////////
- //// MOBILE /////
-///////////////*/
+/*/////////////////////
+// MOBILE          ///
+///////////////////*/
 @media screen and (orientation: portrait) and (max-width: 760px) {
   
   /* Contenedor general */
@@ -45,7 +45,6 @@
     margin-bottom: 0.8rem;
     font-size: 0.8rem;
     cursor: pointer;
-    /*transition: color 0.3s ease;*/
   }
 
   .footer-link:hover,
@@ -98,9 +97,9 @@
 
 }
 
-  /*///////////////
- //// MONITOR P //
-///////////////*/
+/*/////////////////////
+// TABLET          ///
+///////////////////*/
 @media screen and (min-width: 761px) and (max-width: 1028px) {
     /* Contenedor general */
   .footer-container {
@@ -197,9 +196,9 @@
 
 }
 
-  /*///////////////
- //// MONITOR G //
-///////////////*/
+/*/////////////////////
+// MONITOR         ///
+///////////////////*/
 @media screen and (min-width: 1029px) {
     /* Contenedor general */
   .footer-container {
