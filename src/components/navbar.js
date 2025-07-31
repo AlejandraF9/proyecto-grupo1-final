@@ -77,11 +77,25 @@ export function renderNavbar() {
   navbarContainerA.appendChild(instaNavbar);
 
   //creo el enlace de bluesky
-  const blueskykaNavbar = document.createElement("img");
+  /* const blueskykaNavbar = document.createElement("img");
   blueskykaNavbar.className = "rrss-icons";
   blueskykaNavbar.src = bluesky_icon;
   blueskykaNavbar.alt = "logo de Bluesky";
-  navbarContainerA.appendChild(blueskykaNavbar);
+  navbarContainerA.appendChild(blueskykaNavbar);*/
+
+  const facebookLinkNavBar = document.createElement("a");
+  facebookLinkNavBar.href = "#";
+  facebookLinkNavBar.rel = "noopener noreferrer";
+  facebookLinkNavBar.className = "footer-rrss";
+  facebookLinkNavBar.innerHTML = `<svg width="30" xmlns="http://www.w3.org/2000/svg" height="30" id="screenshot-1a2ad72a-1d06-8080-8006-80379f5371e9" viewBox="660 2620 20 19.95" style="-webkit-print-color-adjust::exact" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none" version="1.1">
+  <g id="shape-1a2ad72a-1d06-8080-8006-80379f5371e9">
+    <g class="fills" id="fills-1a2ad72a-1d06-8080-8006-80379f5371e9">
+      <path d="M680,2630C680,2624.47998046875,675.52001953125,2620,670,2620C664.47998046875,2620,660,2624.47998046875,660,2630C660,2634.83984375,663.43994140625,2638.8701171875,668,2639.800048828125L668,2633L666,2633L666,2630L668,2630L668,2627.5C668,2625.56982421875,669.570068359375,2624,671.5,2624L674,2624L674,2627L672,2627C671.449951171875,2627,671,2627.449951171875,671,2628L671,2630L674,2630L674,2633L671,2633L671,2639.949951171875C676.050048828125,2639.449951171875,680,2635.18994140625,680,2630" style="fill:#ffffff">
+      </path>
+    </g>
+  </g>
+</svg>`;
+  navbarContainerA.appendChild(facebookLinkNavBar);
 
   //creo el enlace de youTube
   const youtubeNavbar = document.createElement("img");
