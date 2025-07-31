@@ -1,0 +1,372 @@
+/*/////////////////////
+// MOBILE          ///
+///////////////////*/
+
+@media screen and (orientation: portrait) and (max-width: 760px) {
+   
+   /* Estilos generales */
+   body {
+    font-family: var(--text-font);
+   }
+   
+   /* Contenedor general */
+   .bio-container {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      align-content: stretch;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem;
+      color: var(--color);
+      background-color: var(--white);
+      margin-bottom: 2rem;
+   }
+
+   /* Vista principal */
+   .bio-view {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+   }
+
+   /* Secciones principales */
+   .bioSection,
+   .paraTi {
+      background-color: var(--white);
+      padding: 0rem 1.5rem;
+   }
+
+   /* Imagen */
+   .bio-img {
+      width: 20rem;
+      height: 10rem;
+      object-fit: cover;
+      overflow: hidden;
+      margin: 0rem 1rem;
+   }
+
+   /* Grupos internos */
+   .bioSectionGroup001 {
+      display: flex;
+      flex-direction: row;
+      gap: 2rem;
+      justify-content: center;
+
+   }
+   .bioSectionGroup002,
+   .paraTi-group {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   flex-wrap: nowrap;
+   align-items: center;
+   }
+
+   .bioSectionGroup002 {
+      margin-top: 1.5rem;
+   }
+
+   .bio-text-001,
+   .bio-text-003 {
+   color: var(--color);
+   background-color: var(--blue-color);
+   }
+
+   .bio-text-001 {
+      text-transform: uppercase;
+      font-size: 1.5rem;
+      font-family: var(--text-title);
+      margin: 1rem;
+
+   }
+
+   .bio-text-001 > p {
+   margin-bottom: 0rem;
+   }
+
+   .bio-text-003 {
+      font-size: 1.2rem;
+      margin: 1rem;
+   }
+
+   /* Texto secundario */
+   .bio-text-002,
+   .bio-text-004 {
+   font-size: 1rem;
+   color: var(--color);
+   }
+
+   .bio-text-002 > .text-node-html > .rich-text > .paragraph-set > p {
+   margin-bottom: 1rem;
+   }
+
+   .bio-text-004 > .text-node-html > .rich-text > .paragraph-set > p {
+   margin-bottom: 1rem;
+   }
+
+
+   /* Botón */
+   .bio-button {
+   padding: 0.75rem 1.5rem;
+   background-color: var(--pink);
+   color: var(--color);
+   font-size: 1rem;
+   border: none;
+   cursor: pointer;
+   align-self: center;
+   }
+
+}
+
+
+/*/////////////////////
+// TABLET          ///
+///////////////////*/
+@media screen and (min-width: 761px) and (max-width: 1028px) {
+
+   /* Estilos generales */
+   body {
+    font-family: var(--text-font);
+   }
+   
+   /* Contenedor general */
+   .bio-container {
+      gap: 2rem;
+      padding: 2rem;
+      color: var(--color);
+      background-color: var(--white);
+      margin-bottom: 2rem;
+   }
+
+   /* Vista principal */
+   .bio-view {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: center;
+      gap: 1.5rem;
+   }
+
+   /* Secciones principales */
+   .bioSection,
+   .paraTi {
+      background-color: var(--white);
+      padding: 0rem 1.5rem;
+   }
+
+   /* Imagen */
+   .bio-img {
+      width: fit-content;
+      height: fit-content;
+      object-fit: cover;
+      overflow: hidden;
+      margin: 0rem 1rem;
+   }
+
+   /* Grupos internos */
+   .bioSectionGroup001 {
+      display: flex;
+      flex-direction: row;
+      gap: 2rem;
+      justify-content: center;
+
+   }
+   .bioSectionGroup002,
+   .paraTi-group {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   flex-wrap: nowrap;
+   align-items: center;
+   }
+
+   .bioSectionGroup002 {
+      margin-top: 1.5rem;
+   }
+
+   .bio-text-001,
+   .bio-text-003 {
+   color: var(--color);
+   background-color: var(--blue-color);
+   }
+
+   .bio-text-001 {
+      text-transform: uppercase;
+      font-size: 1.8rem;
+      font-family: var(--text-title);
+      margin: 1rem;
+
+   }
+
+   .bio-text-001 > p {
+   margin-bottom: 0rem;
+   }
+
+   .bio-text-003 {
+      font-size: 1.5rem;
+      margin: 1rem;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+   }
+
+   /* Texto secundario */
+   .bio-text-002,
+   .bio-text-004 {
+   font-size: 1rem;
+   color: var(--color);
+   margin: 0.5rem 0;
+   }
+
+   .bio-text-002 > .text-node-html > .rich-text > .paragraph-set > p {
+   margin-bottom: 1rem;
+   }
+
+   .bio-text-004 > .text-node-html > .rich-text > .paragraph-set > p {
+   margin-bottom: 1rem;
+   }
+
+
+   /* Botón */
+   .bio-button {
+   padding: 0.75rem 1.5rem;
+   background-color: var(--blue-color);
+   color: var(--color);
+   font-size: 1.5rem;
+   border: none;
+   cursor: pointer;
+   align-self: center;
+   transition: background-color 0.3s ease;
+   margin: 1.5rem;
+   }
+
+   .bio-button:hover {
+   background-color: var(--pink);
+   }
+   
+}
+
+/*/////////////////////
+// MONITOR         ///
+///////////////////*/
+@media screen and (min-width: 1029px) {
+
+   /* Estilos generales */
+   body {
+    font-family: var(--text-font);
+   }
+   
+   /* Contenedor general */
+   .bio-container {
+      gap: 3rem;
+      padding: 3rem;
+      color: var(--color);
+      background-color: var(--white);
+      margin-bottom: 3rem;
+   }
+
+   /* Vista principal */
+   .bio-view {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: center;
+      gap: 2rem;
+   }
+
+   /* Secciones principales */
+   .bioSection,
+   .paraTi {
+      background-color: var(--white);
+      padding: 0rem 2rem;
+   }
+
+   /* Imagen */
+   .bio-img {
+      width: fit-content;
+      height: fit-content;
+      object-fit: cover;
+      overflow: hidden;
+      margin: 0rem 1.5rem;
+   }
+
+   /* Grupos internos */
+   .bioSectionGroup001 {
+      display: flex;
+      flex-direction: row;
+      gap: 2.5rem;
+      justify-content: center;
+
+   }
+   .bioSectionGroup002,
+   .paraTi-group {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   flex-wrap: nowrap;
+   align-items: center;
+   }
+
+   .bioSectionGroup002 {
+      margin-top: 2rem;
+   }
+
+   .bio-text-001,
+   .bio-text-003 {
+   color: var(--color);
+   background-color: var(--blue-color);
+   }
+
+   .bio-text-001 {
+      text-transform: uppercase;
+      font-size: 1.8rem;
+      font-family: var(--text-title);
+      margin: 1rem;
+
+   }
+
+   .bio-text-001 > p {
+   margin-bottom: 0rem;
+   }
+
+   .bio-text-003 {
+      font-size: 1.6rem;
+      margin: 1rem;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+   }
+
+   /* Texto secundario */
+   .bio-text-002,
+   .bio-text-004 {
+   font-size: 1.3rem;
+   color: var(--color);
+   margin: 0.5rem 0;
+   }
+
+   .bio-text-002 > .text-node-html > .rich-text > .paragraph-set > p {
+   margin-bottom: 1rem;
+   }
+
+   .bio-text-004 > .text-node-html > .rich-text > .paragraph-set > p {
+   margin-bottom: 1rem;
+   }
+
+
+   /* Botón */
+   .bio-button {
+   padding: 0.75rem 1.5rem;
+   background-color: var(--blue-color);
+   color: var(--color);
+   font-size: 1.5rem;
+   border: none;
+   cursor: pointer;
+   align-self: center;
+   transition: background-color 0.3s ease;
+   margin: 1.5rem;
+   }
+
+   .bio-button:hover {
+   background-color: var(--pink);
+   }
+}

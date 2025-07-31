@@ -1,0 +1,155 @@
+/*/////////////////////
+// MOBILE          ///
+///////////////////*/
+ @media screen and (max-width: 730px) {
+
+  #newsl {
+    width: 95%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    z-index: 1000;
+  }
+  .newsletter-div {
+    position: relative;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--pink);
+    padding: 1.5rem;
+    margin-right: 0.4rem;
+    font-size: 0.6rem;
+    justify-content: center;
+    border: 1px solid var(--pink);
+    .newsletter-form {
+      padding-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      .newsletter-form-input,
+      .newsletter-button {
+        height: 1rem;
+        border: none;
+        outline: none;
+        border: none;
+      }
+      .newsletter-button {
+        background-color: var(--color);
+        color: var(--white);
+      }
+
+      .newsletter-form-input::placeholder {
+        padding-left: 0.6rem;
+      }
+    }
+  }
+
+  .newsletter-close-button {
+    position: absolute;
+    background-color: var(--gray-color);
+    width: 1.5rem;
+    height: 1.5rem;
+    top: 0.5rem;
+    right: 0.5rem;
+    border: none;
+    font-weight: bold;
+    color: var(--color);
+    cursor: pointer;
+    z-index: 1001;
+    font-size: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .newsletter-close-button:hover {
+    color: var(--white);
+    background-color: var(--pink);
+  }
+}  
+
+/*/////////////////////
+// MONITOR         ///
+///////////////////*/
+
+@media screen and (min-width: 731px) {
+  #newsl {
+    width: 95%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    z-index: 1000;
+  }
+  .newsletter-div {
+    position: relative;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--pink);
+    padding: 1.5rem;
+    margin-right: 0.4rem;
+    font-size: 1rem;
+    justify-content: center;
+    border: 1px solid var(--pink);
+    .newsletter-form {
+      padding-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      .newsletter-form-input,
+      .newsletter-button {
+        height: 1.7rem;
+        border: none;
+        outline: none;
+        border: none;
+      }
+      .newsletter-button {
+        background-color: var(--color);
+        color: var(--white);
+      }
+
+      .newsletter-form-input::placeholder {
+        padding-left: 0.6rem;
+      }
+    }
+  }
+
+  .newsletter-close-button {
+    position: absolute;
+    background-color: var(--gray-color);
+    width: 1.5rem;
+    height: 1.5rem;
+    top: 0.5rem;
+    right: 0.5rem;
+    border: none;
+    font-weight: bold;
+    color: var(--color);
+    cursor: pointer;
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .newsletter-close-button:hover {
+    color: var(--white);
+    background-color: var(--pink);
+  }
+}  
+

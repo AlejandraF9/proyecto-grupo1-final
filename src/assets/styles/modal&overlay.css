@@ -1,0 +1,54 @@
+/* Overlay oscuro de fondo */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(2px); /* Suave desenfoque opcional */
+}
+
+/* Contenedor del modal */
+.modal-container {
+  background-color: var(--white);
+  padding: 0rem;
+  max-width: 19rem;
+  width: 90%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  position: relative;
+  animation: fadeInScale 0.3s ease;
+}
+
+/* Animación suave de entrada */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Botón de cerrar (opcional) */
+.modal-close-button {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: #888;
+}
+
+.modal-close-button:hover {
+  color: #000;
+}

@@ -1,0 +1,14 @@
+:root {
+    --blue-color: #D4DFE0;
+    --gray-color: #E3E1D6;
+    --dark-gray: #B1B2B5;
+    --pink: #f9e3ea;
+    --white: #ffffff;
+    --background-color: #ffffff;
+    --color: #111111;
+    --border-radius: 18px;
+    --text-font: 'sourcesanspro', sans-serif;
+    --text-title: 'Arial Narrow Bold', sans-serif;
+    --text-alternative: 'sourcesanspro';
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,316 @@
+/*/////////////////////
+// MOBILE          ///
+///////////////////*/
+
+@media screen and (orientation: portrait) and (max-width: 730px) {
+  /* Contenedor principal del formulario */
+  .containerForm {
+    width: 100%;
+    margin: auto;
+    padding: 2rem;
+    background-color: #fff;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    font-family: var(--text-title);
+  }
+
+  /* Título */
+  .containerForm h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--color);
+    visibility: hidden;
+  }
+
+  /* Formulario */
+  .formModify {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  /* Imagen de avatar */
+  #avatar-preview {
+    display: block;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 1rem auto;
+    border: 2px solid var(--pink);
+  }
+
+  /* Sección de avatares */
+  #avatar-options {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .avatar-option {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+    opacity: 0.7;
+    border: 2px solid transparent;
+    transition: opacity 0.3s ease, border-color 0.3s ease;
+  }
+
+  .avatar-option:hover {
+    opacity: 1;
+  }
+
+  .avatar-option.selected {
+    border-color: var(--blue-color);
+    opacity: 1;
+  }
+
+  /* Etiquetas e inputs */
+  .formModify label {
+    font-weight: bold;
+    color: var(--color);
+    font-size: 0.85rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .formModify input {
+    padding: 0.6rem;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+
+  .formModify input:focus {
+    border-color: var(--blue-color);
+  }
+
+  /* Botón de enviar */
+  .formModify button[type="submit"] {
+    margin-top: 0.8rem;
+    padding: 0.5rem;
+    background-color: var(--blue-color);
+    color: var(--color);
+    border: none;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+  }
+
+  .formModify button[type="submit"]:hover {
+    background-color: var(--pink);
+  }
+
+  /* Enlace al historial */
+  .link-historyOrders {
+    margin-top: 0.8rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--color);
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .link-historyOrders:hover {
+    text-decoration: underline;
+  }
+
+  /* Botón cerrar sesión (insertado en containerForm directamente) */
+  .containerForm button[type="button"] {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    background-color: transparent;
+    color: var(--white);
+    border: 1px solid var(--white);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .containerForm button[type="button"]:hover {
+    background-color: var(--blue-color);
+    color: var(--blue-color);
+  }
+}
+
+/*/////////////////////
+// MONITOR         ///
+///////////////////*/
+
+@media screen and (min-width: 731px) {
+  /* Contenedor principal del formulario */
+  .containerForm {
+    width: 100%;
+    margin: auto;
+    padding: 2rem;
+    background-color: #fff;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    font-family: var(--text-title);
+  }
+
+  /* Título */
+  .containerForm h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--color);
+    visibility: hidden;
+  }
+
+  /* Formulario */
+  .formModify {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  /* Imagen de avatar */
+  #avatar-preview {
+    display: block;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 1rem auto;
+    border: 2px solid var(--pink);
+  }
+
+  /* Sección de avatares */
+  #avatar-options {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .avatar-option {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+    opacity: 0.7;
+    border: 2px solid transparent;
+    transition: opacity 0.3s ease, border-color 0.3s ease;
+  }
+
+  .avatar-option:hover {
+    opacity: 1;
+  }
+
+  .avatar-option.selected {
+    border-color: var(--blue-color);
+    opacity: 1;
+  }
+
+  /* Etiquetas e inputs */
+  .formModify label {
+    font-weight: bold;
+    color: var(--color);
+    font-size: 0.85rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .formModify input {
+    padding: 0.6rem;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+
+  .formModify input:focus {
+    border-color: var(--blue-color);
+  }
+
+  /* Botón de enviar */
+  .formModify button[type="submit"] {
+    margin-top: 0.8rem;
+    padding: 0.5rem;
+    background-color: var(--blue-color);
+    color: var(--color);
+    border: none;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+  }
+
+  .formModify button[type="submit"]:hover {
+    background-color: var(--pink);
+  }
+
+  /* Enlace al historial */
+  .link-historyOrders {
+    margin-top: 0.8rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--color);
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .link-historyOrders:hover {
+    text-decoration: underline;
+  }
+
+  /* Botón cerrar sesión (insertado en containerForm directamente) */
+  .containerForm button[type="button"] {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    background-color: transparent;
+    color: var(--white);
+    border: 1px solid var(--white);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .containerForm button[type="button"]:hover {
+    background-color: var(--blue-color);
+    color: var(--blue-color);
+  }
+}
+
+/* 🔔 Estilo sección de notificaciones */
+
+.notifications-section {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.notifications-section h3 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--color);
+  text-align: center;
+}
+
+.notifications-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.notification-item {
+  font-size: 0.85rem;
+  padding: 0.5rem;
+  border-bottom: 1px solid #eee;
+  color: #333;
+}
+
+.notification-item.unread {
+  background-color: #fffaf0;
+  font-weight: bold;
+}
+
+.notification-item:last-child {
+  border-bottom: none;
+}

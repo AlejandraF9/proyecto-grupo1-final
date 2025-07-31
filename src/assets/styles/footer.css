@@ -1,0 +1,300 @@
+/*/////////////////////
+// MOBILE          ///
+///////////////////*/
+@media screen and (orientation: portrait) and (max-width: 760px) {
+  
+  /* Contenedor general */
+  .footer-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: space-between;
+    align-items: start;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: var(--white);
+    margin: 1rem 0rem;
+    padding: 1rem 1rem;
+    font-family: var(--text-font);
+  }
+
+  /* Columnas dentro del footer */
+  .footer-div-all {
+    flex: 1 1 15rem;
+    margin: 1rem;
+  }
+
+  /* Encabezados */
+  .footer-header {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: var(--white);
+  }
+
+  /* Logo */
+  .footer-logo svg {
+    width: 8.5rem;
+    height: auto;
+  }
+
+  /* Enlaces */
+  .footer-link,
+  .footer-text {
+    display: block;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 0.8rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+
+  .footer-link:hover,
+  .footer-text:hover {
+    color: var(--pink);
+  }
+
+  /* RRSS */
+  .rrss-footer-div {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Íconos RRSS */
+  .footer-rrss {
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+
+  .footer-rrss svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--white);
+    transition: transform 0.2s ease;
+  }
+
+  .footer-rrss:hover svg {
+    transform: scale(1.1);
+    fill: var(--pink);
+  }
+
+  /* Copyright */
+  .copyright-footer {
+    width: 100%;
+    text-align: center;
+    justify-items: center;
+    font-size: 0.8rem;
+    margin-top: 1rem;
+    border-top: 0.1rem solid var(--white);
+    padding-top: 1rem;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+
+  .footer-full-row {
+    grid-column: 1 / -1;
+  }
+
+}
+
+/*/////////////////////
+// TABLET          ///
+///////////////////*/
+@media screen and (min-width: 761px) and (max-width: 1028px) {
+    /* Contenedor general */
+  .footer-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: space-between;
+    align-items: start;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: var(--white);
+    margin: 1rem 0rem;
+    padding: 1rem 1rem;
+    font-family: var(--text-font);
+  }
+
+  /* Columnas dentro del footer */
+  .footer-div-all {
+    flex: 1 1 15rem;
+    margin: 1rem;
+  }
+
+  /* Encabezados */
+  .footer-header {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: var(--white);
+  }
+
+  /* Logo */
+  .footer-logo svg {
+    width: 12.5rem;
+    height: auto;
+  }
+
+  /* Enlaces */
+  .footer-link,
+  .footer-text {
+    display: block;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 0.8rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  .footer-link:hover,
+  .footer-text:hover {
+    color: var(--pink);
+  }
+
+  /* RRSS */
+  .rrss-footer-div {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Íconos RRSS */
+  .footer-rrss {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  .footer-rrss svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--white);
+    transition: transform 0.2s ease;
+  }
+
+  .footer-rrss:hover svg {
+    transform: scale(1.1);
+    fill: var(--pink);
+  }
+
+  /* Copyright */
+  .copyright-footer {
+    width: 100%;
+    text-align: center;
+    justify-items: center;
+    font-size: 1rem;
+    margin-top: 1rem;
+    border-top: 0.1rem solid var(--white);
+    padding-top: 1rem;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+
+  .footer-full-row {
+    grid-column: 1 / -1;
+  }
+
+}
+
+/*/////////////////////
+// MONITOR         ///
+///////////////////*/
+@media screen and (min-width: 1029px) {
+    /* Contenedor general */
+  .footer-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: space-between;
+    align-items: start;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: var(--white);
+    margin: 1rem 0rem;
+    padding: 1rem 1rem;
+    font-family: var(--text-font);
+  }
+
+  /* Columnas dentro del footer */
+  .footer-div-all {
+    flex: 1 1 15rem;
+    margin: 1rem;
+  }
+
+  /* Encabezados */
+  .footer-header {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: var(--white);
+  }
+
+  /* Logo */
+  .footer-logo svg {
+    max-width: 12.5rem;
+    height: auto;
+  }
+
+  /* Enlaces */
+  .footer-link,
+  .footer-text {
+    display: block;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 0.8rem;
+    font-size: 1rem;
+    cursor: pointer;
+    /*transition: color 0.3s ease;*/
+  }
+
+  .footer-link:hover,
+  .footer-text:hover {
+    color: var(--pink);
+  }
+
+  /* RRSS */
+  .rrss-footer-div {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Íconos RRSS */
+  .footer-rrss {
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+
+  .footer-rrss svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--white);
+    transition: transform 0.2s ease;
+  }
+
+  .footer-rrss:hover svg {
+    transform: scale(1.1);
+    fill: var(--pink);
+  }
+
+  /* Copyright */
+  .copyright-footer {
+    width: 100%;
+    text-align: center;
+    justify-items: center;
+    font-size: 1rem;
+    margin-top: 1rem;
+    border-top: 0.1rem solid var(--white);
+    padding-top: 1rem;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+
+  .footer-full-row {
+    grid-column: 1 / -1;
+  }
+
+}
+
+
+
+
