@@ -90,7 +90,7 @@ export async function renderProductos(content) {
         const btnModificar = document.createElement("button");
         btnModificar.textContent = "Modificar";
         btnModificar.classList.add("admin-btn-modificar");
-        btnModificar.onclick = () => modifyData(p);
+        btnModificar.onclick = () => modifyData(p, filtrarYRenderizar);
         acciones.appendChild(btnModificar);
 
         const btnEliminar = document.createElement("button");
@@ -154,7 +154,7 @@ function debounce(fn, delay) {
   };
 }
 
-function modifyData(p) {
+function modifyData(p, filtrarYRenderizar) {
   const containerFormModify = document.createElement("div");
   containerFormModify.classList.add("modal-productos-overlay");
 
