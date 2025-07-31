@@ -16,11 +16,11 @@ export async function renderForm(
   const form = document.createElement("form");
   form.classList.add("formModify");
 
-  // 1. Crear imagen de preview
+  // Preview
   const imgPreview = document.createElement("img");
   imgPreview.id = "avatar-preview";
 
-  // 2. Establecer avatar por defecto si no hay uno seleccionado
+  // Avatar default
   const currentUser = JSON.parse(localStorage.getItem("current-user"));
   const defaultAvatar = "src/assets/images/avatar/avatarPredeterminado2.png";
   const currentAvatar = currentUser?.avatar ?? defaultAvatar;
@@ -30,11 +30,11 @@ export async function renderForm(
 
   form.appendChild(imgPreview);
 
-  // 3. Crear opciones de avatar y agregarlas al formulario
+  // Opciones de avatar
   const avatarOptions = createAvatarOptions(imgPreview);
   form.appendChild(avatarOptions);
 
-  // 4. Agregar campos del formulario
+  // Formulario
   Object.entries(fieldsObj).forEach(([key, value]) => {
     const fieldWrapper = document.createElement("div");
 
@@ -56,7 +56,7 @@ export async function renderForm(
     form.appendChild(fieldWrapper);
   });
 
-  // 5. Enlace a historial
+  // Historial
   const historyOrders = document.createElement("a");
   historyOrders.href = "#";
   historyOrders.textContent = "Historial de pedidos";
@@ -68,13 +68,13 @@ export async function renderForm(
   });
   form.appendChild(historyOrders);
 
-  // 6. Botón de enviar
+  // Botón de enviar
   const submitBtn = document.createElement("button");
   submitBtn.type = "submit";
   submitBtn.textContent = "Guardar";
   form.appendChild(submitBtn);
 
-  // 7. Manejo del submit
+  // Manejo del submit
   form.onsubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(form);
@@ -131,7 +131,7 @@ export async function renderForm(
 
   container.appendChild(form);
 
-  // 8. Logout
+  // Logout
   if (showLogout) {
     const logoutBtn = document.createElement("button");
     logoutBtn.textContent = "Cerrar sesión";

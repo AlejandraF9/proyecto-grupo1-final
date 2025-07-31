@@ -45,7 +45,7 @@ export function crearTablaConPaginacion({
       const tr = document.createElement("tr");
       tr.classList.add("admin-tr");
 
-      const celdas = renderFila(item); // ← aquí estaba el error
+      const celdas = renderFila(item); 
 
       celdas.forEach((celda) => {
         const td = document.createElement("td");

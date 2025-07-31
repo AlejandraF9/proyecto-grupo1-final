@@ -5,7 +5,6 @@ import { showToast } from "../utils/toastify";
 
 export function renderContact (){
 
-//(me guié estructuralmente por la página de contacto de Decor internacional: dos bloques. por una lado direcciones y por otro formulario. Un div contenedor engloba a esos dos div, que a su vez luego tienen otro pequeños div)
 //container madre
 const showContact = document.getElementById("app");
 showContact.className = "contact-container"
@@ -17,10 +16,11 @@ contactTitle.className = "title-h2";
 contactTitle.textContent = "Contacto";
 showContact.appendChild(contactTitle);
 
-//div que tengrá a los dos 
+//div que tendrá a los dos 
 const divDivider = document.createElement("div");
 divDivider.className = "div-divider";
 showContact.appendChild(divDivider);
+
 //div direcciones
 const contactOneDiv = document.createElement("div");
 contactOneDiv.className = "primary-div-contact";
@@ -36,6 +36,7 @@ contactOneDiv.appendChild(contactH3);
 const contactOneDivLaguna = document.createElement("div");
 contactOneDivLaguna.className = "secondary-div-contact";
 contactOneDiv.appendChild(contactOneDivLaguna);
+
 //Contenido la Laguna
 const titleLaguna = document.createElement("h4");
 titleLaguna.className = "title-h4";
@@ -60,6 +61,7 @@ contactOneDivLaguna.appendChild(lagunaMap);
 const contactOneDivTacoronte = document.createElement("div");
 contactOneDivTacoronte.className = "secondary-div-contact";
 contactOneDiv.appendChild(contactOneDivTacoronte);
+
 //Contenido Tacoronte
 const titleTacoronte = document.createElement("h4");
 titleTacoronte.className = "title-h4";
@@ -84,6 +86,7 @@ contactOneDivTacoronte.appendChild(tacoronteMap);
 const contactOneDivUrsula = document.createElement("div");
 contactOneDivUrsula.className = "secondary-div-contact";
 contactOneDiv.appendChild(contactOneDivUrsula);
+
 //Contenido Santa Úrsula
 const titleUrsula = document.createElement("h4");
 titleUrsula.className = "title-h4";
@@ -108,6 +111,7 @@ contactOneDivUrsula.appendChild(ursulaMap);
 const contactOneDivIcod = document.createElement("div");
 contactOneDivIcod.className = "secondary-div-contact";
 contactOneDiv.appendChild(contactOneDivIcod);
+
 //Contenido Icod
 const titleIcod = document.createElement("h4");
 titleIcod.className = "title-h4";
@@ -128,38 +132,38 @@ icodMap.href =
   "https://www.google.es/maps/place/Ayuntamiento+de+Icod+de+los+Vinos/@28.3676579,-16.7217858,17z/data=!3m1!4b1!4m6!3m5!1s0xc6a7d5500000001:0xfab654561418de8c!8m2!3d28.3676579!4d-16.7192109!16s%2Fg%2F1wk4f9dd?entry=ttu&g_ep=EgoyMDI1MDcyMC4wIKXMDSoASAFQAw%3D%3D";
 contactOneDivIcod.appendChild(icodMap);
 
-//div 2
+//Div dos
 const contactTwoDiv = document.createElement("div");
 contactTwoDiv.className = "form-info";
 divDivider.appendChild(contactTwoDiv);
 
-//div para separar la info email
+//Div para separar la info/email
 const emailContactDiv = document.createElement("div");
 emailContactDiv.className = "email-contact-div";
 contactTwoDiv.appendChild(emailContactDiv);
-//título para email
+
+//Email
 const emailContactDivH4 = document.createElement("h4");
 emailContactDivH4.className = "title-h4";
 emailContactDivH4.textContent = "Escríbenos a:";
 emailContactDiv.appendChild(emailContactDivH4);
-//texto email
+
 const emailContactDivText = document.createElement("p");
 emailContactDivText.className = "email-text";
 emailContactDivText.textContent = "dummiebakery@gmail.com";
 emailContactDiv.appendChild(emailContactDivText);
 
-//título para el formulario
+//Form
 const contactFormH4 = document.createElement("h4");
 contactFormH4.className = "contact-form-h4";
 contactFormH4.textContent =
   "O si lo prefieres, rellena este formulario y nos pondremos en contacto en la mayor brevedad";
 contactTwoDiv.appendChild(contactFormH4);
 
-//form (contact-form)
 const contactFormFooter = document.createElement("form");
-contactFormFooter.className = "contact-form"; //todos los form tienen la misma clase para facilitar el estilado
+contactFormFooter.className = "contact-form"; 
 contactTwoDiv.appendChild(contactFormFooter);
-//interior del form
+
 const contactFormFooterName = document.createElement("input");
 contactFormFooterName.className = "contact-form-input";
 contactFormFooterName.type = "text";
@@ -194,30 +198,24 @@ contactFormFooterMessage.required = true;
 contactFormFooterMessage.name = "mensaje";
 contactFormFooter.appendChild(contactFormFooterMessage);
 
-//evento para que el text área crezca más si así lo necesita el mensaje
+
 contactFormFooterMessage.addEventListener("input", function () {
-  this.style.height = "auto"; // Reinicia la altura
-  this.style.height = this.scrollHeight + "px"; // Ajusta a la altura necesaria
+  this.style.height = "auto"; 
+  this.style.height = this.scrollHeight + "px"; 
 });
 
-//luego en CSS hay que darle una altura máxima para que no se desmadre
-//max-height: loque consideres;
 
-//el checkbox es mejor "envolverlo en un label.
-// en algunos mantengo la misma clase que en el newsletter para unificar estilos. Cambié otros por si es necesatrio otro estilo. Si van a ser los mismo estilos mejor unificarlos.
-
-//creo el label
 const contactCheckboxLabel = document.createElement("label");
 contactCheckboxLabel.className = "contact-checkbox-label";
 contactFormFooter.appendChild(contactCheckboxLabel);
-//creo el checkbox
+
 const checkboxContact = document.createElement("input");
 checkboxContact.type = "checkbox";
 checkboxContact.className = "checkbox-contact-form";
 checkboxContact.required = true;
 checkboxContact.name = "acepta";
 contactCheckboxLabel.appendChild(checkboxContact);
-//creo el enlace
+
 const termsChedexLink = document.createElement("a");
 termsChedexLink.href = "/privacy-policy";
 termsChedexLink.target = "_blank";
@@ -225,14 +223,14 @@ termsChedexLink.innerHTML =
   "Marca la casilla para aceptar la políticas de privacidad";
 contactCheckboxLabel.appendChild(termsChedexLink);
 
-//botón enviar
+
 const contactFormFooterButton = document.createElement("button");
 contactFormFooterButton.type = "submit";
 contactFormFooterButton.className = "contact-form-button";
 contactFormFooterButton.textContent = "Enviar";
 contactFormFooter.appendChild(contactFormFooterButton);
 
-//evento
+
 contactFormFooter.addEventListener("submit", function (event) {
   event.preventDefault();
 
@@ -242,7 +240,6 @@ contactFormFooter.addEventListener("submit", function (event) {
   const messageContactFormFooter = contactFormFooterMessage.value.trim();
   const checkedContactFormFooter = checkboxContact.checked;
 
-  ///me falta meter las validaciones
 
   if(!validacteContactform(nameContactFormFooter, emailContactFormFooter, phoneContactFormFooter, messageContactFormFooter, checkedContactFormFooter)) return;
 

@@ -29,11 +29,6 @@ function crearBanner() {
   logo.className = "admin-logo";
   banner.appendChild(logo);
 
-  //const logoText = document.createElement("div");
-  //logoText.textContent = "DUMMIE bakery";
-  //logoText.className = "admin-logo-text";
-  //banner.appendChild(logoText);
-
   const closeSession = document.createElement("button");
   closeSession.textContent = "Cerrar sesión";
   closeSession.className = "admin-logout-button";

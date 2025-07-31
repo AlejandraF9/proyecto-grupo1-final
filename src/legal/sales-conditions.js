@@ -1,6 +1,3 @@
-
-//tengo que poner el default porque de la otra mane4ra no sé pero no me deja. Me deja en las cookies y en la política legal pero aquí no.
-
 export default{
 
 init() {

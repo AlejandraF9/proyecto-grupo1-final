@@ -1,5 +1,4 @@
-//creo las function que van a usarse en el search
-
+//Search
 async function getAllProducts() {
   const API_URL = "https://api-bakery-production.up.railway.app";
   try {
@@ -12,8 +11,7 @@ async function getAllProducts() {
   }
 }
 
-//la que pinta las carts
-
+//Cards
 function renderizarProductos(productos, contenedor) {
   contenedor.innerHTML = "";
 
@@ -40,7 +38,7 @@ function renderizarProductos(productos, contenedor) {
 
     card.addEventListener("click", () => {
       localStorage.setItem("selectedProduct", JSON.stringify(p));
-      window.location.href = "/productsDetails"; // o usa goTo("/productsDetails") si tenés router
+      window.location.href = "/productsDetails"; 
     });
 
     card.appendChild(img);
@@ -53,42 +51,18 @@ function renderizarProductos(productos, contenedor) {
 import logo_tienda from "../assets/images/logo_tienda.webp";
 import { userIcon } from "../assets/images/icons";
 import { cartIcon } from "../assets/images/icons";
-import bluesky_icon from "../assets/images/bluesky_icon.png";
-import insta_icon from "../assets/images/insta_icon.png";
-import youtube_icon from "../assets/images/youtube_icon.png";
 import { renderForm } from "../views/profile";
 import { userLogin } from "../views/login";
 import { goTo } from "../router";
 
 export function renderNavbar() {
-  //me traigo el div del HTML
+  //Div HTML
   const navbarContainer = document.getElementById("container-navbar");
 
-  //creo el primer div contenedor
+  //Div UNO
   const navbarContainerA = document.createElement("div");
   navbarContainerA.className = "first-navbar-container";
   navbarContainer.appendChild(navbarContainerA);
-
-  //creo el enlace de instagram
-  //const instaNavbar = document.createElement("img");
-  //instaNavbar.className = "rrss-icons";
-  //instaNavbar.src = insta_icon;
-  //instaNavbar.alt = "logo de instagram";
-  //navbarContainerA.appendChild(instaNavbar);
-
-  //creo el enlace de bluesky
-  /* const blueskykaNavbar = document.createElement("img");
-  blueskykaNavbar.className = "rrss-icons";
-  blueskykaNavbar.src = bluesky_icon;
-  blueskykaNavbar.alt = "logo de Bluesky";
-  navbarContainerA.appendChild(blueskykaNavbar);*/
-
-  //creo el enlace de youTube
-  //const youtubeNavbar = document.createElement("img");
-  //youtubeNavbar.className = "rrss-icons";
-  //youtubeNavbar.src = youtube_icon;
-  //youtubeNavbar.alt = "logo de youTube";
-  //navbarContainerA.appendChild(youtubeNavbar);
 
   const facebookLinkNavBar = document.createElement("a");
   facebookLinkNavBar.href = "#";
@@ -150,18 +124,15 @@ export function renderNavbar() {
 
 
 
-  //creo el segundo contenedor que subdivide el navbar
-
+  //Div dos
   const navbarContainerB = document.createElement("div");
   navbarContainerB.className = "second-navbar-container";
   navbarContainer.appendChild(navbarContainerB);
 
-  //Creo un div para luego meter el logo
+  //Logo
   const logoDiv = document.createElement("div");
   logoDiv.className = "logo-div";
   navbarContainerB.appendChild(logoDiv);
-
-  //creo la img del logo
 
   const logoImg = document.createElement("img");
   logoImg.className = "logo-img";
@@ -174,22 +145,11 @@ export function renderNavbar() {
     goTo("/home");
   });
 
-  //vamos a ver si el logo es lo que está creando el parpadeo en el navbar al renderizarlo
-  logoImg.onload = () => {
-    console.log("Logo cargado completamente");
-  };
-
-  //creo un div para meter el button categories y el search
+  //Search div
   const searchDiv = document.createElement("div");
   searchDiv.className = "search-div";
   navbarContainerB.appendChild(searchDiv);
 
-  //creo el botón de categorías
-  //const categoriesnavbar = document.createElement ("button");
-  //categoriesnavbar.className = "categories-navbar-button"
-  //categoriesnavbar.textContent= "Todas las categorías";
-
-  //Cambiar el botón por una imagen SVG
   const categoriesIcon = document.createElement("div");
   categoriesIcon.className = "categories-icon";
 
@@ -238,10 +198,7 @@ export function renderNavbar() {
   categoriesIcon.appendChild(svgElement);
   searchDiv.appendChild(categoriesIcon);
 
-  //aquí hay que poner un enlace a categorías
-  //searchDiv.appendChild(categoriesnavbar);
-
-  //creo el buscador
+  //Search
   const searchNavbar = document.createElement("input");
   searchNavbar.className = "search-box-navbar";
   searchNavbar.type = "search";
@@ -260,14 +217,13 @@ export function renderNavbar() {
       return;
     }
 
-    //-----------------------------------
+
     const appShowHome = document.getElementById("app");
     appShowHome.innerHTML = "";
     const appContainer = document.createElement("div");
     appContainer.className = "search-div-style";
-    //carol necesito por fa que este div tenga el mismo estilo de lo que se muestra en la tienda para que no se rompa el estilo
     appShowHome.appendChild(appContainer);
-    //-------------------
+
 
     if (!appContainer) {
       console.warn(" No se encontró el contenedor #app");
@@ -301,13 +257,11 @@ export function renderNavbar() {
     renderizarProductos(productosFiltrados, appContainer);
   });
 
-  //---------------------------------------------------------------------------
-  //creo un div para meter iconos de usuario y carrito
+  //Usuario
   const logCartDivNavbar = document.createElement("div");
   logCartDivNavbar.className = "login-div-navbar";
   navbarContainerB.appendChild(logCartDivNavbar);
 
-  //creo el link para el icono de usuario.Tengo que crear el link primero porque el link envuelve el div del svg
   const loginNavbarLink = document.createElement("a");
   loginNavbarLink.href = "#";
   loginNavbarLink.addEventListener("click", (e) => {
@@ -332,28 +286,24 @@ export function renderNavbar() {
   });
   logCartDivNavbar.appendChild(loginNavbarLink);
 
-  //creo un div para meter el svg que es la imagen de usuario
   const loginIconNavbar = document.createElement("div");
   loginIconNavbar.className = "login-icon-navbar";
   loginIconNavbar.innerHTML = userIcon;
   loginNavbarLink.appendChild(loginIconNavbar);
 
-  //creo el link para meter el enlace de carrito
+  //Shopping Cart
   const cartNavbarLink = document.createElement("a");
   cartNavbarLink.href = "/shoppingCart";
   logCartDivNavbar.appendChild(cartNavbarLink);
 
-  //creo el div para meter el svg del carrito
   const cartIconNavbar = document.createElement("div");
   cartIconNavbar.className = "cart-icon-navbar";
   cartIconNavbar.innerHTML = cartIcon;
   cartNavbarLink.appendChild(cartIconNavbar);
 
-  // Creo el circulito del número
   const cartCounter = document.createElement("span");
   cartCounter.className = "cart-counter";
 
-  // Obtengo los productos del carrito
   function updateCartCounter() {
     const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     const cartCounter = document.querySelector(".cart-counter");
@@ -382,13 +332,12 @@ export function renderNavbar() {
   cartIconNavbar.appendChild(cartCounter);
   updateCartCounter();
 
-  //Creo el tercer container
-
+  //Div tres
   const navbarContainerC = document.createElement("div");
   navbarContainerC.className = "third-navbar-container";
   navbarContainer.appendChild(navbarContainerC);
 
-  //creo el enlace de Home
+
   const homeNavbar = document.createElement("a");
   homeNavbar.className = "navbar-text";
   homeNavbar.href = "#";
@@ -399,7 +348,6 @@ export function renderNavbar() {
   });
   navbarContainerC.appendChild(homeNavbar);
 
-  //creo el enlace del conócenos
   const KnowUsNavbar = document.createElement("a");
   KnowUsNavbar.className = "navbar-text";
   KnowUsNavbar.href = "/bio";
@@ -407,14 +355,12 @@ export function renderNavbar() {
   KnowUsNavbar.textContent = "¿Quiénes somos?";
   navbarContainerC.appendChild(KnowUsNavbar);
 
-  //creo el enlace del blog
   const blogNavbar = document.createElement("a");
   blogNavbar.className = "navbar-text";
   blogNavbar.href = "/blog";
   blogNavbar.textContent = "Blog";
   navbarContainerC.appendChild(blogNavbar);
 
-  //creo el enlace del contacto
   const contactNavbar = document.createElement("a");
   contactNavbar.className = "navbar-text";
   contactNavbar.href = "/contact";
@@ -435,10 +381,9 @@ export function renderNavbar() {
   </svg>
 `;
 
-  //Agrego el botón al navbar
   navbarContainerB.appendChild(burgerButton);
 
-  //Función para mostrar/ocultar el tercer contenedor
+  //mostrar/ocultar el tercer div
   burgerButton.addEventListener("click", () => {
     navbarContainerC.classList.toggle("visible");
   });

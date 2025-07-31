@@ -39,9 +39,6 @@ export function renderBio() {
     const group = document.createElement("div");
     group.className = "bioSectionGroup001";
 
-    //const rectangle = document.createElement('div');
-    //rectangle.className = 'shape rect bio-rectangle-001';
-
     const title = createTextDiv("bio-text-001", ["¿Quiénes somos?"]);
 
     const text = createTextDiv("bio-text-002", [
@@ -56,7 +53,6 @@ export function renderBio() {
       "",
     ]);
 
-    //group.appendChild(rectangle);
     group.appendChild(title);
     section.appendChild(group);
     section.appendChild(text);
@@ -82,8 +78,6 @@ export function renderBio() {
       "",
       "",
     ]);
-    //const phrase2 = createTextDiv('bio-text-005', ['Contamos con especialidades por temporada,', '¡experiencias únicas e irrepetibles!']);
-    //const phrase3 = createTextDiv('bio-text-006', ['Un equipo cercano que te hará sentir como parte de la familia Dummie.']);
 
     const buttonText = document.createElement("span");
     buttonText.className = "bio-text-007";
@@ -93,28 +87,12 @@ export function renderBio() {
     buttonElement.className = "group bio-button";
     buttonElement.type = "button";
 
-    //const buttonRect = document.createElement('div');
-    //buttonRect.className = 'shape rect bio-rectangle-002';
-
-    //buttonElement.appendChild(buttonRect);
     buttonElement.appendChild(buttonText);
-
-    //Accesibilidad botón NO ES NECESARIO AHORA QUE ES UN BUTTON QUE ES ACCESIBLE DE FORMA NATIVA
-    //buttonContainer.setAttribute('role', 'button');
-    //buttonContainer.setAttribute('tabindex', '0');
 
     //Dirección a la que lleva el botón (carrito)
     buttonElement.addEventListener("click", () => {
       goTo("/shop");
     });
-
-    //Soporte para teclado (Enter y Space)
-    //buttonContainer.addEventListener('keydown', (e) => {
-    //if (e.key === 'Enter' || e.key === ' ') {
-    //e.preventDefault(); //para evitar scroll en Space
-    //goTo('/carrito');
-    //}
-    //});
 
     // Agrupar los textos
     const texts = [title, text];
@@ -149,7 +127,6 @@ export function renderBio() {
 
     image.appendChild(bioImg);
 
-    //NECESITO UN CONTENEDOR NUEVO PARA QUE FUNCIONE EL CSS
     const imageSectionGroupBio = document.createElement("div");
     imageSectionGroupBio.className = "";
 
@@ -158,8 +135,6 @@ export function renderBio() {
 
     bioView.appendChild(quienesSomos);
     bioView.appendChild(imageSectionGroupBio);
-    //bioView.appendChild(image);
-    //bioView.appendChild(queTenemos);
     bioContainer.appendChild(bioView);
 
     return bioContainer;
